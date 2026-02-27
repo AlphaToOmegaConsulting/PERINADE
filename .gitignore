@@ -2,3 +2,9 @@ dist/
 .astro/
 node_modules/
 npm-debug.log*
+.DS_Store
+.codex-*.png
+.post-fix-*.png
+PERINADE_Make.png
+PERINADE_Make.zip
+output/
