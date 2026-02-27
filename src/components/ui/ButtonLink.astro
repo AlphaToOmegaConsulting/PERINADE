@@ -1,4 +1,6 @@
 ---
+import { isPlaceholderLink } from "../../utils/link";
+
 interface Props {
   href: string;
   label: string;
@@ -7,7 +9,7 @@ interface Props {
 }
 
 const { href, label, variant = "pill", class: className = "" } = Astro.props;
-const isPlaceholder = href.startsWith("TODO_");
+const isPlaceholder = isPlaceholderLink(href);
 ---
 
 {
@@ -117,6 +119,39 @@ const isPlaceholder = href.startsWith("TODO_");
     transition: transform 180ms ease, background 180ms ease;
   }
 
+  .pill-link.site-header__cta {
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 20px rgba(196, 106, 0, 0.25);
+    letter-spacing: 0.11em;
+    min-height: 2.6rem;
+    overflow: hidden;
+    padding: 0 1rem;
+    position: relative;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, background 180ms ease;
+  }
+
+  .pill-link.site-header__cta::after {
+    background: linear-gradient(120deg, transparent 25%, rgba(255, 255, 255, 0.28) 50%, transparent 75%);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    transform: translateX(-120%);
+    transition: transform 280ms ease;
+  }
+
+  a.pill-link.site-header__cta:hover {
+    background: linear-gradient(180deg, #dc7f0a 0%, #c86d00 100%);
+    box-shadow: 0 12px 28px rgba(196, 106, 0, 0.42);
+    filter: saturate(1.08);
+    transform: translateY(-2px);
+  }
+
+  a.pill-link.site-header__cta:hover::after {
+    transform: translateX(120%);
+  }
+
   .text-link {
     border-bottom: 1px solid rgba(196, 156, 110, 0.35);
     color: var(--color-accent);
@@ -188,6 +223,11 @@ const isPlaceholder = href.startsWith("TODO_");
     .pill-link {
       min-height: 3.5rem;
       padding: 0 1.3rem;
+    }
+
+    .pill-link.site-header__cta {
+      min-height: 2.4rem;
+      padding: 0 0.9rem;
     }
 
     .form-link {

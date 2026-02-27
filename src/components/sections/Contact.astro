@@ -1,21 +1,12 @@
 ---
 import type { SiteData } from "../../types/site";
+import Icon from "../ui/Icon.astro";
 
 interface Props {
   contact: SiteData["contact"];
 }
 
 const { contact } = Astro.props;
-
-function iconSvg(icon: string) {
-  const icons: Record<string, string> = {
-    phone: `<svg viewBox="0 0 24 24" fill="none"><path d="M7.5 5.5c.4-.4 1-.5 1.5-.2l2 1c.6.3.8 1 .5 1.6l-.7 1.4c1 1.9 2.5 3.4 4.4 4.4l1.4-.7c.6-.3 1.3-.1 1.6.5l1 2c.3.5.2 1.1-.2 1.5l-1.2 1.2c-.7.7-1.7.9-2.6.6A17.6 17.6 0 0 1 4.4 8.1c-.3-.9-.1-1.9.6-2.6l1.2-1.2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
-    mail: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 7.5h16v9H4v-9Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path><path d="m5 8.5 7 5 7-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
-    globe: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.6"></circle><path d="M4.5 9.5h15M4.5 14.5h15M12 4c2 2.2 3 5 3 8s-1 5.8-3 8c-2-2.2-3-5-3-8s1-5.8 3-8Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
-    pin: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 20s5-4.8 5-9a5 5 0 1 0-10 0c0 4.2 5 9 5 9Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="11" r="1.8" fill="currentColor"></circle></svg>`
-  };
-  return icons[icon] ?? icons.phone;
-}
 ---
 
 <section class="contact section" id="contact">
@@ -28,7 +19,7 @@ function iconSvg(icon: string) {
       <ul class="contact__list">
         {contact.info.map((item) => (
           <li>
-            <span class="contact__icon" set:html={iconSvg(item.icon)}></span>
+            <Icon name={item.icon} class="contact__icon" />
             <div class="contact__details">
               <strong>{item.label}</strong>
               <span>{item.value}</span>
@@ -67,14 +58,6 @@ function iconSvg(icon: string) {
     </form>
   </div>
 </section>
-
-<script is:inline>
-  document.querySelectorAll("[data-ui-form]").forEach((form) => {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
-    });
-  });
-</script>
 
 <style>
   .contact {
@@ -120,7 +103,7 @@ function iconSvg(icon: string) {
   }
 
   .contact__list li {
-    align-items: center;
+    align-items: start;
     display: grid;
     gap: 1rem;
     grid-template-columns: auto 1fr;
@@ -128,23 +111,21 @@ function iconSvg(icon: string) {
 
   .contact__icon {
     align-items: center;
-    border: 1px solid var(--color-accent);
-    border-radius: 999px;
-    color: var(--color-text);
+    color: var(--color-accent);
     display: flex;
     flex-shrink: 0;
-    height: 2.5rem;
+    height: 1.35rem;
     justify-content: center;
     line-height: 0;
-    overflow: hidden;
-    width: 2.5rem;
+    margin-top: 0.2rem;
+    width: 1.35rem;
   }
 
   .contact__icon :global(svg) {
     display: block;
     flex: none;
-    height: 1rem;
-    width: 1rem;
+    height: 1.2rem;
+    width: 1.2rem;
   }
 
   .contact__details strong,

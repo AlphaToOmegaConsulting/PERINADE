@@ -1,0 +1,138 @@
+---
+import ButtonLink from "../ui/ButtonLink.astro";
+import type { DomaineContactData } from "../../types/domaine";
+import { isPlaceholderLink } from "../../utils/link";
+
+interface Props {
+  contact: DomaineContactData;
+}
+
+const { contact } = Astro.props;
+---
+
+<section class="domain-contact section section--soft" id="domaine-contact">
+  <div class="shell">
+    <header class="domain-contact__head">
+      <p>{contact.eyebrow}</p>
+      <h2>{contact.title}</h2>
+      <p class="domain-contact__body">{contact.body}</p>
+    </header>
+
+    <div class="domain-contact__cards">
+      {contact.cards.map((card) => (
+        <article class="domain-contact__card">
+          <span class="domain-contact__icon" aria-hidden="true"></span>
+          <p class="domain-contact__label">{card.label}</p>
+          {
+            card.href ? (
+              isPlaceholderLink(card.href) ? (
+                <span class="domain-contact__value domain-contact__value--link" data-todo={card.href}>{card.value}</span>
+              ) : (
+                <a class="domain-contact__value domain-contact__value--link" href={card.href}>{card.value}</a>
+              )
+            ) : (
+              <p class="domain-contact__value">{card.value}</p>
+            )
+          }
+        </article>
+      ))}
+    </div>
+
+    <div class="domain-contact__cta">
+      <ButtonLink href={contact.cta.href} label={contact.cta.label} variant="form" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .domain-contact {
+    border-top: 1px solid rgba(44, 44, 44, 0.06);
+  }
+
+  .domain-contact__head {
+    display: grid;
+    gap: 0.7rem;
+    text-align: center;
+  }
+
+  .domain-contact__head > p:first-child {
+    color: var(--color-accent);
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .domain-contact__head h2 {
+    margin: 0;
+  }
+
+  .domain-contact__body {
+    color: var(--color-muted);
+    margin: 0 auto;
+    max-width: 41rem;
+  }
+
+  .domain-contact__cards {
+    display: grid;
+    gap: 0.95rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1.4rem;
+  }
+
+  .domain-contact__card {
+    align-items: center;
+    background: var(--color-white);
+    border: 1px solid rgba(44, 44, 44, 0.09);
+    border-radius: 1rem;
+    display: grid;
+    justify-items: center;
+    padding: 1.2rem 1rem;
+    text-align: center;
+  }
+
+  .domain-contact__icon {
+    background: rgba(214, 116, 0, 0.08);
+    border-radius: 999px;
+    display: inline-flex;
+    height: 2.5rem;
+    margin-bottom: 0.65rem;
+    width: 2.5rem;
+  }
+
+  .domain-contact__label {
+    color: var(--color-muted);
+    font-size: 0.77rem;
+    letter-spacing: 0.13em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .domain-contact__value {
+    color: var(--color-text-strong);
+    margin: 0.45rem 0 0;
+  }
+
+  .domain-contact__value--link {
+    border-bottom: 1px solid rgba(196, 156, 110, 0.45);
+    color: var(--color-text-strong);
+    padding-bottom: 0.1rem;
+    text-decoration: none;
+  }
+
+  [data-todo] {
+    cursor: not-allowed;
+  }
+
+  .domain-contact__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.3rem;
+  }
+
+  @media (max-width: 1023px) {
+    .domain-contact__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

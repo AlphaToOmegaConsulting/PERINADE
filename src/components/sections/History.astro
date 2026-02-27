@@ -1,5 +1,6 @@
 ---
 import type { SiteData } from "../../types/site";
+import { Image } from "astro:assets";
 import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
@@ -9,11 +10,11 @@ interface Props {
 const { history } = Astro.props;
 ---
 
-<section class="history section" id="histoire" style={`--history-image: url('${history.imagePrimary}')`}>
+<section class="history section" id="histoire" style={`--history-image: url('${history.imagePrimary.src}')`}>
   <div class="history__overlay" aria-hidden="true"></div>
   <div class="shell history__inner">
     <div class="history__media">
-      <img src={history.imagePrimary} alt="Domaine de la Périnade" loading="lazy" />
+      <Image src={history.imagePrimary} alt="Domaine de la Périnade" loading="lazy" />
     </div>
 
     <div class="history__content">
@@ -45,16 +46,17 @@ const { history } = Astro.props;
     align-items: center;
     display: grid;
     gap: 2.15rem;
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.92fr);
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
     position: relative;
   }
 
   .history__media {
+    aspect-ratio: 3 / 4;
     border-radius: 1.3rem;
     box-shadow: 0 28px 55px rgba(15, 10, 7, 0.22);
-    max-height: 31rem;
+    max-width: 20rem;
     overflow: clip;
-    width: 100%;
+    width: min(100%, 20rem);
   }
 
   .history__media img {
@@ -69,7 +71,7 @@ const { history } = Astro.props;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: var(--radius-panel);
     color: rgba(255, 255, 255, 0.78);
-    padding: 1.75rem 1.85rem 1.7rem;
+    padding: 2rem 2.15rem 1.95rem;
     backdrop-filter: blur(4px);
   }
 
@@ -103,6 +105,10 @@ const { history } = Astro.props;
   @media (max-width: 1023px) {
     .history__inner {
       grid-template-columns: 1fr;
+    }
+
+    .history__media {
+      margin-inline: auto;
     }
   }
 </style>

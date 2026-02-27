@@ -1,0 +1,166 @@
+---
+import ButtonLink from "../ui/ButtonLink.astro";
+import { Image } from "astro:assets";
+import type { DomaineWinesData } from "../../types/domaine";
+import { isPlaceholderLink } from "../../utils/link";
+
+interface Props {
+  wines: DomaineWinesData;
+}
+
+const { wines } = Astro.props;
+---
+
+<section class="domain-wines section section--white">
+  <div class="shell">
+    <div class="domain-wines__head">
+      <div>
+        <p class="domain-wines__eyebrow">{wines.eyebrow}</p>
+        <h2>{wines.title}</h2>
+      </div>
+      <ButtonLink href={wines.allHref} label={wines.allLabel} variant="text" />
+    </div>
+
+    <div class="domain-wines__grid">
+      {wines.items.map((item) => (
+        <article class="domain-wines__card">
+          {
+            isPlaceholderLink(item.ctaHref) ? (
+              <figure class="domain-wines__media" data-todo={item.ctaHref}>
+                <Image src={item.image} alt={item.alt} loading="lazy" />
+              </figure>
+            ) : (
+              <a class="domain-wines__media" href={item.ctaHref}>
+                <Image src={item.image} alt={item.alt} loading="lazy" />
+              </a>
+            )
+          }
+          <div class="domain-wines__meta">{item.meta}</div>
+          {
+            isPlaceholderLink(item.ctaHref) ? (
+              <h3>{item.title}</h3>
+            ) : (
+              <h3><a href={item.ctaHref}>{item.title}</a></h3>
+            )
+          }
+          <p>{item.body}</p>
+          <div class="domain-wines__bottom">
+            <strong>{item.price}</strong>
+            <ButtonLink href={item.ctaHref} label={item.ctaLabel} />
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .domain-wines__head {
+    align-items: end;
+    display: flex;
+    gap: 1.1rem;
+    justify-content: space-between;
+  }
+
+  .domain-wines__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .domain-wines__head h2 {
+    margin: 0.6rem 0 0;
+  }
+
+  .domain-wines__grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1.5rem;
+  }
+
+  .domain-wines__card {
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 0.9rem;
+    display: grid;
+    gap: 0.8rem;
+    padding: 0.8rem 0.8rem 1rem;
+  }
+
+  .domain-wines__media {
+    border-radius: 0.7rem;
+    display: block;
+    overflow: hidden;
+  }
+
+  .domain-wines__card figure,
+  .domain-wines__card a {
+    border-radius: 0.7rem;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .domain-wines__card img {
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .domain-wines__meta {
+    color: var(--color-muted);
+    font-size: 0.73rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .domain-wines__card h3 {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+
+  .domain-wines__card h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .domain-wines__card p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .domain-wines__bottom {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .domain-wines__bottom strong {
+    color: var(--color-text-strong);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+
+  @media (max-width: 1023px) {
+    .domain-wines__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .domain-wines__card img {
+      aspect-ratio: 16/10;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .domain-wines__head {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+
+  [data-todo] {
+    cursor: not-allowed;
+  }
+</style>

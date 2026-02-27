@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/sections/Header.astro";
+import Footer from "../components/sections/Footer.astro";
+import ShopHero from "../components/shop/ShopHero.astro";
+import ShopProductGrid from "../components/shop/ShopProductGrid.astro";
+import ShopDomainSelection from "../components/shop/ShopDomainSelection.astro";
+import ShopCaseComposer from "../components/shop/ShopCaseComposer.astro";
+import ShopFinalCtaBand from "../components/shop/ShopFinalCtaBand.astro";
+import ShopFaq from "../components/shop/ShopFaq.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout title="Boutique | Domaine de la Périnade" description="Commandez les cuvées du Domaine de la Périnade en ligne.">
+  <Header nav={site.nav} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
+  <main class="shop-page">
+    <ShopHero />
+    <ShopProductGrid />
+    <ShopDomainSelection />
+    <ShopCaseComposer />
+    <ShopFinalCtaBand />
+    <ShopFaq />
+  </main>
+  <Footer footer={site.footer} />
+</BaseLayout>
+
+<style>
+  .shop-page {
+    background: #fff;
+    --shop-shell-max: 76rem;
+    --shop-shell-narrow-max: 64rem;
+  }
+
+  .shop-page :global(.shop-shell) {
+    margin-inline: auto;
+    max-width: var(--shop-shell-max);
+  }
+
+  .shop-page :global(.shop-shell--narrow) {
+    margin-inline: auto;
+    max-width: var(--shop-shell-narrow-max);
+  }
+
+  .shop-page :global(.section) {
+    padding-block: clamp(3.5rem, 6vw, 6rem);
+  }
+
+  @media (max-width: 1023px) {
+    .shop-page :global(.section) {
+      padding-block: clamp(3rem, 5vw, 4.8rem);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .shop-page {
+      --shop-shell-max: 100%;
+      --shop-shell-narrow-max: 100%;
+    }
+
+    .shop-page :global(.section) {
+      padding-block: 2.8rem;
+    }
+  }
+</style>

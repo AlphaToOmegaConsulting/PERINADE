@@ -1,0 +1,73 @@
+---
+const cta = { label: "Découvrir les vins", href: "/boutique#produits" };
+---
+
+<section class="shop-band" aria-label="Appel à l'action boutique">
+  <div class="shell shop-shell shop-band__shell">
+    <div>
+      <h2>Prêt à déguster ?</h2>
+      <p>Ajoutez vos cuvées préférées et profitez de la livraison gratuite dès 80 €.</p>
+    </div>
+
+    <a class="shop-band__cta" href={cta.href}>{cta.label}</a>
+  </div>
+</section>
+
+<style>
+  .shop-band {
+    background: #283a2c;
+    padding: 3.25rem 0;
+  }
+
+  .shop-band__shell {
+    align-items: center;
+    display: flex;
+    gap: 1.4rem;
+    justify-content: space-between;
+  }
+
+  .shop-band h2 {
+    color: var(--color-white);
+    font-size: clamp(1.9rem, 3.1vw, 2.9rem);
+    margin: 0;
+  }
+
+  .shop-band p {
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0.6rem 0 0;
+    max-width: 38rem;
+  }
+
+  .shop-band__cta {
+    align-items: center;
+    background: var(--color-white);
+    border-radius: 999px;
+    color: var(--color-cta);
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    min-height: 4rem;
+    padding: 0 2.1rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1023px) {
+    .shop-band__shell {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .shop-band {
+      padding: 2.25rem 0;
+    }
+
+    .shop-band__cta {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>

@@ -1,0 +1,171 @@
+---
+import ButtonLink from "../ui/ButtonLink.astro";
+import { Image } from "astro:assets";
+import type { DomaineVisitCtaData } from "../../types/domaine";
+import { isPlaceholderLink } from "../../utils/link";
+
+interface Props {
+  visitCta: DomaineVisitCtaData;
+}
+
+const { visitCta } = Astro.props;
+---
+
+<section class="visit-cta section">
+  <div class="shell visit-cta__inner">
+    <figure class="visit-cta__media">
+      <Image src={visitCta.image} alt={visitCta.imageAlt} loading="lazy" />
+    </figure>
+
+    <div class="visit-cta__content">
+      <p class="visit-cta__eyebrow">{visitCta.eyebrow}</p>
+      <h2 class="visit-cta__title">
+        {visitCta.title}
+        <span>{visitCta.titleHighlight}</span>
+      </h2>
+      <p class="visit-cta__body">{visitCta.body}</p>
+
+      <ul class="visit-cta__details">
+        {visitCta.details.map((detail) => (
+          <li>{detail}</li>
+        ))}
+      </ul>
+
+      <div class="visit-cta__actions">
+        <ButtonLink href={visitCta.primaryCta.href} label={visitCta.primaryCta.label} />
+        {
+          isPlaceholderLink(visitCta.secondaryCta.href) ? (
+            <span class="visit-cta__ghost" data-todo={visitCta.secondaryCta.href}>{visitCta.secondaryCta.label}</span>
+          ) : (
+            <a class="visit-cta__ghost" href={visitCta.secondaryCta.href}>{visitCta.secondaryCta.label}</a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .visit-cta {
+    background: #1a1a1a;
+    color: var(--color-white);
+  }
+
+  .visit-cta__inner {
+    align-items: center;
+    display: grid;
+    gap: 2.6rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  .visit-cta__media {
+    border-radius: 1.2rem;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .visit-cta__media img {
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .visit-cta__content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .visit-cta__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .visit-cta__title {
+    color: var(--color-white);
+    display: grid;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    line-height: 1.05;
+    margin: 0;
+  }
+
+  .visit-cta__title span {
+    color: var(--color-cta);
+  }
+
+  .visit-cta__body {
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+    max-width: 33rem;
+  }
+
+  .visit-cta__details {
+    display: grid;
+    gap: 0.55rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    list-style: none;
+    margin: 0.35rem 0 0;
+    padding: 0;
+  }
+
+  .visit-cta__details li {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 0.75rem;
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.83rem;
+    padding: 0.66rem 0.85rem;
+  }
+
+  .visit-cta__actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.35rem;
+  }
+
+  .visit-cta__ghost {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    color: var(--color-white);
+    display: inline-flex;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    min-height: 3.4rem;
+    padding-inline: 1.35rem;
+    text-transform: uppercase;
+  }
+
+  [data-todo] {
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 1023px) {
+    .visit-cta__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .visit-cta__media {
+      max-width: 27rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .visit-cta__details {
+      grid-template-columns: 1fr;
+    }
+
+    .visit-cta__actions {
+      display: grid;
+      width: 100%;
+    }
+
+    .visit-cta__ghost {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>

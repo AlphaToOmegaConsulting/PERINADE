@@ -10,7 +10,7 @@ interface Props {
 const { hero } = Astro.props;
 ---
 
-<section class="hero" id="hero" style={`--hero-image: url('${hero.backgroundImage}')`}>
+<section class="hero" id="hero" style={`--hero-image: url('${hero.backgroundImage.src}')`}>
   <div class="hero__background" aria-hidden="true"></div>
   <div class="shell hero__shell">
     <div class="hero__content">

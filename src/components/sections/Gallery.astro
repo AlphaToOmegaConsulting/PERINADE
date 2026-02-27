@@ -1,5 +1,6 @@
 ---
 import type { SiteData } from "../../types/site";
+import { Image } from "astro:assets";
 import SectionHeading from "../ui/SectionHeading.astro";
 
 interface Props {
@@ -26,7 +27,7 @@ const galleryItems = gallery.items.slice(0, 3);
       <div class="gallery__track">
         {galleryItems.map((item) => (
           <figure class="gallery__item">
-            <img src={item.src} alt={item.alt} loading="lazy" />
+            <Image src={item.src} alt={item.alt} loading="lazy" />
           </figure>
         ))}
       </div>
@@ -36,14 +37,17 @@ const galleryItems = gallery.items.slice(0, 3);
 
 <style>
   .gallery {
+    --tiger-sticky-top: calc(var(--header-height) - 0.75rem);
+    --tiger-preroll: clamp(4rem, 11vh, 7rem);
+    --tiger-postroll: clamp(6rem, 14vh, 10rem);
     background: linear-gradient(180deg, rgba(248, 246, 243, 0.36) 0%, rgba(248, 246, 243, 0.62) 40%, rgba(255, 255, 255, 0.92) 100%);
     isolation: isolate;
-    overflow: clip;
+    overflow: visible;
     position: relative;
   }
 
   .gallery__tiger-layer {
-    inset: 0;
+    inset: calc(-1 * var(--tiger-preroll)) 0 calc(-1 * var(--tiger-postroll)) 0;
     pointer-events: none;
     position: absolute;
     z-index: 0;
@@ -53,9 +57,11 @@ const galleryItems = gallery.items.slice(0, 3);
     aspect-ratio: 1536 / 1024;
     background: url("/assets/perinade/gallery-tiger.png") center top / contain no-repeat;
     margin-inline: auto;
-    opacity: 0.36;
+    opacity: 0.33;
     position: sticky;
-    top: calc(var(--header-height) + 0.8rem);
+    top: var(--tiger-sticky-top);
+    transform-origin: center top;
+    will-change: transform;
     width: min(62rem, 90vw);
   }
 
@@ -66,7 +72,7 @@ const galleryItems = gallery.items.slice(0, 3);
 
   .gallery__intro {
     display: grid;
-    padding-block: clamp(5rem, 10vw, 7rem) clamp(1.5rem, 4.2vw, 2.6rem);
+    padding-block: clamp(2.2rem, 5.5vw, 4rem) clamp(0.6rem, 2vw, 1.4rem);
     place-items: end center;
     position: relative;
     text-align: center;
@@ -140,9 +146,13 @@ const galleryItems = gallery.items.slice(0, 3);
   }
 
   @media (max-width: 1023px) {
+    .gallery {
+      --tiger-sticky-top: calc(var(--header-height) - 0.55rem);
+      --tiger-preroll: clamp(3.2rem, 8vh, 5rem);
+      --tiger-postroll: clamp(4.5rem, 11vh, 7rem);
+    }
+
     .gallery__tiger-art {
-      opacity: 0.32;
-      top: calc(var(--header-height) + 0.7rem);
       width: min(49rem, 102vw);
     }
 
@@ -156,14 +166,18 @@ const galleryItems = gallery.items.slice(0, 3);
   }
 
   @media (max-width: 767px) {
+    .gallery {
+      --tiger-sticky-top: calc(var(--header-height) - 0.35rem);
+      --tiger-preroll: 2rem;
+      --tiger-postroll: 3rem;
+    }
+
     .gallery__tiger-art {
-      opacity: 0.28;
-      top: calc(var(--header-height) + 0.5rem);
       width: min(33rem, 132vw);
     }
 
     .gallery__intro {
-      padding-block: 4.5rem 1.6rem;
+      padding-block: 2rem 0.9rem;
     }
 
     .gallery__composition {

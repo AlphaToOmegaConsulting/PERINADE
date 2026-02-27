@@ -1,0 +1,129 @@
+---
+import type { DomaineTimelineData } from "../../types/domaine";
+import { Image } from "astro:assets";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  timeline: DomaineTimelineData;
+}
+
+const { timeline } = Astro.props;
+---
+
+<section class="timeline section section--white">
+  <div class="shell">
+    <SectionHeading eyebrow={timeline.eyebrow} title={timeline.title} class="timeline__heading" />
+
+    <div class="timeline__table-wrap">
+      <table class="timeline__table">
+        <tbody>
+          {timeline.rows.map((row) => (
+            <tr>
+              <th scope="row">{row.year}</th>
+              <td>
+                <strong>{row.title}</strong>
+                <p>{row.detail}</p>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="timeline__media-grid">
+      {timeline.images.map((image) => (
+        <figure>
+          <Image src={image.src} alt={image.alt} loading="lazy" />
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline__heading {
+    margin-bottom: 1.7rem;
+  }
+
+  .timeline__table-wrap {
+    background: var(--color-soft);
+    border: 1px solid rgba(44, 44, 44, 0.09);
+    border-radius: 1rem;
+    overflow: hidden;
+  }
+
+  .timeline__table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .timeline__table tr + tr {
+    border-top: 1px solid rgba(44, 44, 44, 0.09);
+  }
+
+  .timeline__table th,
+  .timeline__table td {
+    padding: 1rem 1.3rem;
+    vertical-align: top;
+  }
+
+  .timeline__table th {
+    color: var(--color-accent);
+    font-family: var(--font-display);
+    font-size: 1.04rem;
+    font-weight: 500;
+    text-align: left;
+    white-space: nowrap;
+    width: 8rem;
+  }
+
+  .timeline__table strong {
+    color: var(--color-text-strong);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline__table p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .timeline__media-grid {
+    display: grid;
+    gap: 0.95rem;
+    grid-template-columns: 1.08fr 0.92fr;
+    margin-top: 1.25rem;
+  }
+
+  .timeline__media-grid figure {
+    border-radius: 0.85rem;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .timeline__media-grid img {
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    .timeline__table th,
+    .timeline__table td {
+      display: block;
+      width: auto;
+    }
+
+    .timeline__table th {
+      padding-bottom: 0;
+    }
+
+    .timeline__table td {
+      padding-top: 0.45rem;
+    }
+
+    .timeline__media-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

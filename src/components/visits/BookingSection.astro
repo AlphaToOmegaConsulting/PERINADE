@@ -1,0 +1,368 @@
+---
+import type { VisitPageData } from "../../types/visits";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  booking: VisitPageData["booking"];
+}
+
+const { booking } = Astro.props;
+const bookingConfig = JSON.stringify(booking.config);
+---
+
+<section class="booking section section--soft" id="booking">
+  <div class="shell">
+    <SectionHeading eyebrow={booking.eyebrow} title={booking.title} body={booking.body} centered />
+
+    <div
+      class="booking__panel"
+      data-booking
+      data-config={bookingConfig}
+      style={`--booking-calendar-ratio:${booking.layout.calendarWidthRatio}; --booking-controls-ratio:${booking.layout.controlsWidthRatio}; --booking-panel-max:${booking.layout.panelMaxWidth}; --booking-calendar-cell-height:${booking.layout.calendarCellHeight}; --booking-control-row-height:${booking.layout.controlRowHeight};`}
+    >
+      <div class="booking__calendar">
+        <header>
+          <button type="button" data-calendar-prev aria-label="Mois précédent">‹</button>
+          <h3 data-calendar-month>{booking.config.monthLabel}</h3>
+          <button type="button" data-calendar-next aria-label="Mois suivant">›</button>
+        </header>
+
+        <div class="booking__days-row">
+          {booking.config.dayLabels.map((day) => (
+            <span>{day}</span>
+          ))}
+        </div>
+
+        <div class="booking__grid" data-calendar-days>
+          {booking.config.selectableDays.map((day) => (
+            <button type="button" data-day={day} class:list={[day === booking.config.defaultDay && "is-active"]}>{day}</button>
+          ))}
+        </div>
+      </div>
+
+      <div class="booking__controls">
+        <section>
+          <h4>Créneau</h4>
+          <div class="booking__slot-grid" data-slot-grid>
+            {booking.config.slots.map((slot) => (
+              <button type="button" data-slot={slot.id} class:list={[slot.id === booking.config.defaultSlotId && "is-active"]}>{slot.label}</button>
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h4>Participants</h4>
+          <div class="booking__counter">
+            <button type="button" data-count-dec aria-label="Diminuer">−</button>
+            <output data-count-value>{booking.config.defaultParticipants}</output>
+            <button type="button" data-count-inc aria-label="Augmenter">+</button>
+          </div>
+        </section>
+
+        <label class="booking__addon">
+          <input type="checkbox" data-addon />
+          <span>{booking.config.addonLabel}</span>
+        </label>
+
+        <p class="booking__price">
+          <span>From</span>
+          <strong data-price-label>{booking.config.basePricePerPerson}€ <small>/ person</small></strong>
+        </p>
+
+        <a class="booking__cta" href={booking.config.ctaHref}>{booking.config.ctaLabel}</a>
+        <a class="booking__call" href="tel:+33468000000">{booking.config.callLabel}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ bookingConfig }}>
+  const root = document.querySelector("[data-booking]");
+  if (root) {
+    const config = JSON.parse(bookingConfig);
+    let participants = config.defaultParticipants;
+    let selectedDay = config.defaultDay;
+    let selectedSlot = config.defaultSlotId;
+    let addon = false;
+
+    const countValue = root.querySelector("[data-count-value]");
+    const priceLabel = root.querySelector("[data-price-label]");
+    const addonInput = root.querySelector("[data-addon]");
+
+    const refresh = () => {
+      const base = config.basePricePerPerson;
+      const addonFee = addon ? config.addonPricePerPerson : 0;
+      const total = base + addonFee;
+      if (countValue) countValue.textContent = String(participants);
+      if (priceLabel) priceLabel.innerHTML = `${total}€ <small>/ person</small>`;
+
+      root.querySelectorAll("[data-day]").forEach((button) => {
+        button.classList.toggle("is-active", Number(button.getAttribute("data-day")) === selectedDay);
+      });
+
+      root.querySelectorAll("[data-slot]").forEach((button) => {
+        button.classList.toggle("is-active", button.getAttribute("data-slot") === selectedSlot);
+      });
+    };
+
+    root.querySelector("[data-count-dec]")?.addEventListener("click", () => {
+      participants = Math.max(config.minParticipants, participants - 1);
+      refresh();
+    });
+
+    root.querySelector("[data-count-inc]")?.addEventListener("click", () => {
+      participants = Math.min(config.maxParticipants, participants + 1);
+      refresh();
+    });
+
+    root.querySelectorAll("[data-day]").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedDay = Number(button.getAttribute("data-day"));
+        refresh();
+      });
+    });
+
+    root.querySelectorAll("[data-slot]").forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedSlot = button.getAttribute("data-slot");
+        refresh();
+      });
+    });
+
+    addonInput?.addEventListener("change", () => {
+      addon = Boolean(addonInput.checked);
+      refresh();
+    });
+
+    refresh();
+  }
+</script>
+
+<style>
+  .booking__panel {
+    background: #fff;
+    border: 1px solid var(--visit-stroke-subtle);
+    border-radius: var(--visit-radius-xl);
+    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: minmax(0, var(--booking-calendar-ratio)) minmax(0, var(--booking-controls-ratio));
+    margin-top: 2.3rem;
+    max-width: var(--booking-panel-max);
+    margin-inline: auto;
+    overflow: hidden;
+  }
+
+  .booking__calendar {
+    padding: 2rem;
+  }
+
+  .booking__calendar header {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    margin-bottom: 1.1rem;
+  }
+
+  .booking__calendar header h3 {
+    font-size: clamp(1.6rem, 2.1vw, 1.85rem);
+    margin: 0;
+    text-align: center;
+  }
+
+  .booking__calendar header button {
+    background: transparent;
+    border: 1px solid var(--visit-stroke-subtle);
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  .booking__days-row {
+    display: grid;
+    gap: 0.35rem;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    margin-bottom: 0.6rem;
+  }
+
+  .booking__days-row span {
+    color: var(--color-muted);
+    font-size: var(--visit-type-caption-size);
+    letter-spacing: var(--visit-type-caption-track);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .booking__grid {
+    display: grid;
+    gap: 0.35rem;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .booking__grid button {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--visit-radius-sm);
+    color: #b7b7b7;
+    cursor: pointer;
+    font-size: 0.95rem;
+    min-height: var(--booking-calendar-cell-height);
+  }
+
+  .booking__grid button.is-active {
+    border: 1px solid var(--visit-accent-primary);
+    color: var(--visit-accent-primary);
+    font-weight: 600;
+  }
+
+  .booking__controls {
+    border-left: 1px solid var(--visit-stroke-subtle);
+    display: grid;
+    gap: 0.95rem;
+    padding: 1.35rem;
+  }
+
+  .booking__controls h4 {
+    font-size: var(--visit-type-caption-size);
+    letter-spacing: var(--visit-type-caption-track);
+    margin: 0 0 0.55rem;
+    text-transform: uppercase;
+  }
+
+  .booking__slot-grid {
+    display: grid;
+    gap: 0.7rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking__slot-grid button {
+    background: #fff;
+    border: 1px solid var(--visit-stroke-subtle);
+    border-radius: var(--visit-radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    min-height: var(--booking-control-row-height);
+  }
+
+  .booking__slot-grid button.is-active {
+    border-color: var(--visit-accent-primary);
+    color: var(--visit-accent-primary);
+    font-weight: 600;
+  }
+
+  .booking__counter {
+    display: grid;
+    gap: 0.8rem;
+    grid-template-columns: 1fr auto 1fr;
+  }
+
+  .booking__counter button {
+    background: #fff;
+    border: 1px solid var(--visit-stroke-subtle);
+    border-radius: var(--visit-radius-sm);
+    cursor: pointer;
+    font-size: 1.6rem;
+    min-height: var(--booking-control-row-height);
+  }
+
+  .booking__counter output {
+    align-items: center;
+    display: inline-flex;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    justify-content: center;
+    min-width: 3rem;
+  }
+
+  .booking__addon {
+    align-items: center;
+    border: 1px solid var(--visit-stroke-subtle);
+    border-radius: var(--visit-radius-md);
+    cursor: pointer;
+    display: flex;
+    gap: 0.7rem;
+    min-height: calc(var(--booking-control-row-height) + 0.4rem);
+    padding: 0 1rem;
+  }
+
+  .booking__addon input {
+    accent-color: var(--visit-accent-primary);
+    height: 1.15rem;
+    width: 1.15rem;
+  }
+
+  .booking__price {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  .booking__price > span {
+    color: var(--color-muted);
+  }
+
+  .booking__price strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 2.7vw, 2rem);
+    line-height: 1;
+  }
+
+  .booking__price small {
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+
+  .booking__cta {
+    align-items: center;
+    background: var(--visit-accent-primary);
+    border-radius: var(--visit-radius-xl);
+    color: #ffffff;
+    display: inline-flex;
+    font-size: var(--visit-type-caption-size);
+    justify-content: center;
+    letter-spacing: var(--visit-type-caption-track);
+    min-height: calc(var(--booking-control-row-height) + 0.6rem);
+    text-transform: uppercase;
+  }
+
+  .booking__call {
+    color: #6b6b6b;
+    font-size: var(--visit-type-caption-size);
+    letter-spacing: var(--visit-type-caption-track);
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1100px) {
+    .booking__panel {
+      grid-template-columns: 1fr;
+    }
+
+    .booking__controls {
+      border-left: 0;
+      border-top: 1px solid var(--visit-stroke-subtle);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .booking__calendar {
+      padding: 1rem;
+    }
+
+    .booking__controls {
+      padding: 1rem;
+    }
+
+    .booking__grid button {
+      min-height: 2.5rem;
+    }
+
+    .booking__slot-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

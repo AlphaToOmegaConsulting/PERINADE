@@ -1,0 +1,123 @@
+---
+import type { VisitPageData } from "../../types/visits";
+import { Image } from "astro:assets";
+
+interface Props {
+  pairing: VisitPageData["pairing"];
+}
+
+const { pairing } = Astro.props;
+---
+
+<section class="pairing section section--white" id="pairing">
+  <div class="shell pairing__inner">
+    <figure>
+      <Image src={pairing.image} alt={pairing.imageAlt} loading="lazy" />
+    </figure>
+
+    <div class="pairing__content">
+      <p class="pairing__eyebrow">+ {pairing.eyebrow}</p>
+      <h2>
+        {pairing.title[0]}
+        <span>{pairing.title[1]}</span>
+      </h2>
+      <p class="pairing__body">{pairing.body}</p>
+
+      <ul>
+        {pairing.bullets.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+
+      <p class="pairing__note">{pairing.note}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .pairing__inner {
+    align-items: center;
+    display: grid;
+    gap: 3.75rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .pairing figure {
+    border-radius: var(--visit-radius-lg);
+    box-shadow: var(--shadow-card);
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .pairing figure img {
+    aspect-ratio: 617 / 545;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .pairing__eyebrow {
+    color: var(--visit-accent-primary);
+    font-size: var(--visit-type-eyebrow-size);
+    font-weight: var(--visit-type-eyebrow-weight);
+    letter-spacing: var(--visit-type-eyebrow-track);
+    line-height: var(--visit-type-eyebrow-lh);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .pairing__content h2 {
+    font-size: var(--visit-type-section-size);
+    font-weight: var(--visit-type-section-weight);
+    letter-spacing: var(--visit-type-section-track);
+    line-height: var(--visit-type-section-lh);
+    margin: 0.75rem 0 0;
+  }
+
+  .pairing__content h2 span {
+    display: block;
+  }
+
+  .pairing__body {
+    color: var(--color-muted);
+    font-size: var(--visit-type-body-size);
+    line-height: var(--visit-type-body-lh);
+    margin: 1.05rem 0 0;
+  }
+
+  .pairing__content ul {
+    list-style: none;
+    margin: 1.35rem 0 0;
+    padding: 0;
+  }
+
+  .pairing__content li {
+    color: var(--color-text);
+    margin: 0.8rem 0;
+    padding-left: 1.3rem;
+    position: relative;
+  }
+
+  .pairing__content li::before {
+    background: var(--visit-accent-primary);
+    border-radius: 50%;
+    content: "";
+    height: 0.4rem;
+    left: 0;
+    position: absolute;
+    top: 0.62rem;
+    width: 0.4rem;
+  }
+
+  .pairing__note {
+    color: #7f7a73;
+    font-style: italic;
+    margin: 1.2rem 0 0;
+  }
+
+  @media (max-width: 1023px) {
+    .pairing__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

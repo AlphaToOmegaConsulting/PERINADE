@@ -1,8 +1,13 @@
+import type { ImageMetadata } from "astro";
+
 export type LinkTarget = string;
 
 export interface NavItem {
   label: string;
   href: LinkTarget;
+  desktopSlot?: "left" | "right";
+  desktopLabel?: string;
+  mobile?: boolean;
 }
 
 export interface HeroData {
@@ -12,14 +17,14 @@ export interface HeroData {
   ctaLabel: string;
   ctaHref: LinkTarget;
   meta: string[];
-  backgroundImage: string;
+  backgroundImage: ImageMetadata;
   featuredCards: HeroFeatureCard[];
 }
 
 export interface HeroFeatureCard {
   kicker: string;
   title: string;
-  image: string;
+  image: ImageMetadata;
   alt: string;
   href: LinkTarget;
 }
@@ -37,7 +42,7 @@ export interface VisitDetail {
 }
 
 export interface GalleryItem {
-  src: string;
+  src: ImageMetadata;
   alt: string;
 }
 
@@ -52,12 +57,12 @@ export interface HistoryBlock {
   eyebrow: string;
   title: string;
   body: string[];
-  imagePrimary: string;
-  imageSecondary?: string;
+  imagePrimary: ImageMetadata;
+  imageSecondary?: ImageMetadata;
 }
 
 export interface WineCard {
-  image: string;
+  image: ImageMetadata;
   title: string;
   subtitle: string;
   description: string;
@@ -87,7 +92,7 @@ export interface SiteData {
     details: VisitDetail[];
     ctaLabel: string;
     ctaHref: LinkTarget;
-    backgroundImage: string;
+    backgroundImage: ImageMetadata;
   };
   gallery: {
     eyebrow: string;

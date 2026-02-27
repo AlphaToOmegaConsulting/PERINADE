@@ -1,0 +1,95 @@
+---
+import type { DomaineStatItem } from "../../types/domaine";
+
+interface Props {
+  stats: DomaineStatItem[];
+}
+
+const { stats } = Astro.props;
+---
+
+<section class="domain-stats section">
+  <div class="shell">
+    <ul class="domain-stats__grid" aria-label="Indicateurs du domaine">
+      {stats.map((item) => (
+        <li class="domain-stats__card">
+          <span class="domain-stats__dot" aria-hidden="true"></span>
+          <strong>{item.value}</strong>
+          <p>{item.label}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .domain-stats {
+    background: #1a1a1a;
+    color: var(--color-white);
+  }
+
+  .domain-stats__grid {
+    display: grid;
+    gap: 0.7rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .domain-stats__card {
+    align-items: center;
+    display: grid;
+    gap: 0.45rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .domain-stats__dot {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    display: block;
+    height: 2.2rem;
+    position: relative;
+    width: 2.2rem;
+  }
+
+  .domain-stats__dot::after {
+    background: var(--color-accent);
+    border-radius: 999px;
+    content: "";
+    height: 0.35rem;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.35rem;
+  }
+
+  .domain-stats strong {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .domain-stats p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.73rem;
+    letter-spacing: 0.12em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1023px) {
+    .domain-stats__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      row-gap: 1.25rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .domain-stats__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

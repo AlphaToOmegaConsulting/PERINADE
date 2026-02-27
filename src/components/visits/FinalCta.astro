@@ -1,0 +1,75 @@
+---
+import type { VisitPageData } from "../../types/visits";
+
+interface Props {
+  finalCta: VisitPageData["finalCta"];
+}
+
+const { finalCta } = Astro.props;
+---
+
+<section
+  class="visits-final-cta"
+  style={`--visits-final-bg: url('${finalCta.image.src}'); --visits-final-min-h:${finalCta.layout.sectionMinHeight}; --visits-final-content-max:${finalCta.layout.contentMaxWidth}; --visits-final-gap-eyebrow-title:${finalCta.layout.eyebrowToTitleGap}; --visits-final-gap-title-body:${finalCta.layout.titleToBodyGap};`}
+>
+  <div class="visits-final-cta__overlay" aria-hidden="true"></div>
+  <div class="shell visits-final-cta__inner">
+    <p>{finalCta.eyebrow}</p>
+    <h2>{finalCta.title}</h2>
+    <p class="visits-final-cta__body">{finalCta.body}</p>
+  </div>
+</section>
+
+<style>
+  .visits-final-cta {
+    background-image: var(--visits-final-bg);
+    background-position: center;
+    background-size: cover;
+    min-height: var(--visits-final-min-h);
+    position: relative;
+  }
+
+  .visits-final-cta__overlay {
+    background: rgba(0, 0, 0, 0.6);
+    inset: 0;
+    position: absolute;
+  }
+
+  .visits-final-cta__inner {
+    color: var(--color-white);
+    display: grid;
+    justify-items: center;
+    max-width: var(--visits-final-content-max);
+    margin-inline: auto;
+    padding: 4.8rem 1rem;
+    position: relative;
+    text-align: center;
+  }
+
+  .visits-final-cta__inner > p {
+    color: var(--visit-accent-primary);
+    font-size: var(--visit-type-eyebrow-size);
+    font-weight: var(--visit-type-eyebrow-weight);
+    letter-spacing: var(--visit-type-eyebrow-track);
+    line-height: var(--visit-type-eyebrow-lh);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .visits-final-cta h2 {
+    color: var(--color-white);
+    font-size: var(--visit-type-display-size);
+    font-weight: var(--visit-type-display-weight);
+    letter-spacing: var(--visit-type-display-track);
+    line-height: var(--visit-type-display-lh);
+    margin: var(--visits-final-gap-eyebrow-title) 0 0;
+  }
+
+  .visits-final-cta__body {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: var(--visit-type-body-size);
+    line-height: var(--visit-type-body-lh);
+    margin: var(--visits-final-gap-title-body) 0 0;
+    max-width: 31rem;
+  }
+</style>

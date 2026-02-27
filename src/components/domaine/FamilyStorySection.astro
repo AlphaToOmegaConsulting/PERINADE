@@ -1,0 +1,119 @@
+---
+import type { DomaineFamilyData } from "../../types/domaine";
+import { Image } from "astro:assets";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  family: DomaineFamilyData;
+}
+
+const { family } = Astro.props;
+---
+
+<section class="family section section--soft">
+  <div class="shell family__inner">
+    <div class="family__content">
+      <SectionHeading eyebrow={family.eyebrow} title={family.title} />
+      <div class="family__paragraphs">
+        {family.body.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+
+      <ul class="family__milestones">
+        {family.milestones.map((item) => (
+          <li>
+            <strong>{item.year}</strong>
+            <span>{item.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <figure class="family__media">
+      <Image src={family.image} alt={family.imageAlt} loading="lazy" />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .family__inner {
+    align-items: center;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+  }
+
+  .family__content {
+    display: grid;
+    gap: 1.45rem;
+  }
+
+  .family__paragraphs {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .family__paragraphs p {
+    color: var(--color-muted);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .family__milestones {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin: 0.25rem 0 0;
+    padding: 0;
+  }
+
+  .family__milestones li {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .family__milestones strong {
+    color: var(--color-cta);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+  }
+
+  .family__milestones span {
+    color: var(--color-muted);
+    font-size: 0.84rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .family__media {
+    border-radius: 1.35rem;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .family__media img {
+    aspect-ratio: 4/5;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  @media (max-width: 1023px) {
+    .family__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .family__media {
+      max-width: 24rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .family__milestones {
+      flex-wrap: wrap;
+      gap: 0.95rem 1.35rem;
+    }
+  }
+</style>

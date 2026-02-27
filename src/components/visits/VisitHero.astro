@@ -1,0 +1,204 @@
+---
+import type { VisitPageData } from "../../types/visits";
+import { Image } from "astro:assets";
+import Icon from "../ui/Icon.astro";
+
+interface Props {
+  hero: VisitPageData["hero"];
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="visit-hero" id="visit-hero">
+  <div class="shell visit-hero__inner">
+    <div class="visit-hero__content">
+      <p class="visit-hero__eyebrow">{hero.eyebrow}</p>
+      <h1>
+        {hero.titleLines[0]}
+        <span>{hero.titleLines[1]}</span>
+      </h1>
+      <p class="visit-hero__body">{hero.body}</p>
+
+      <ul class="visit-hero__badges">
+        {hero.badges.map((badge) => (
+          <li>
+            <Icon name={badge.icon} class="visit-hero__badge-icon" />
+            <span>{badge.label}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="visit-hero__actions">
+        <a class="visit-hero__cta visit-hero__cta--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+        <a class="visit-hero__cta visit-hero__cta--secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+      </div>
+
+      <p class="visit-hero__helper">{hero.helper}</p>
+    </div>
+
+    <figure class="visit-hero__media">
+      <Image src={hero.image} alt={hero.imageAlt} loading="eager" />
+    </figure>
+  </div>
+</section>
+
+<style>
+  .visit-hero {
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    padding: calc(var(--header-height) + 2rem) 0 4rem;
+  }
+
+  .visit-hero__inner {
+    align-items: center;
+    display: grid;
+    gap: 3.75rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .visit-hero__eyebrow {
+    color: var(--visit-accent-primary);
+    font-size: var(--visit-type-eyebrow-size);
+    font-weight: var(--visit-type-eyebrow-weight);
+    letter-spacing: var(--visit-type-eyebrow-track);
+    line-height: var(--visit-type-eyebrow-lh);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .visit-hero__content h1 {
+    color: var(--color-white);
+    font-size: var(--visit-type-display-size);
+    font-weight: var(--visit-type-display-weight);
+    letter-spacing: var(--visit-type-display-track);
+    line-height: var(--visit-type-display-lh);
+    margin: 1.15rem 0 0;
+  }
+
+  .visit-hero__content h1 span {
+    color: var(--visit-accent-on-dark);
+    display: block;
+  }
+
+  .visit-hero__body {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: var(--visit-type-body-size);
+    line-height: var(--visit-type-body-lh);
+    margin: 1.55rem 0 0;
+    max-width: 34rem;
+  }
+
+  .visit-hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    list-style: none;
+    margin: 1.6rem 0 0;
+    padding: 0;
+  }
+
+  .visit-hero__badges li {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.84);
+    display: inline-flex;
+    font-size: var(--visit-type-caption-size);
+    gap: 0.55rem;
+    min-height: 2.55rem;
+    padding: 0.4rem 1.05rem;
+  }
+
+  .visit-hero__badge-icon {
+    color: var(--visit-accent-on-dark);
+    display: inline-flex;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .visit-hero__badge-icon :global(svg) {
+    height: 100%;
+    width: 100%;
+  }
+
+  .visit-hero__actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .visit-hero__cta {
+    align-items: center;
+    border-radius: var(--visit-radius-xl);
+    display: inline-flex;
+    font-size: var(--visit-type-caption-size);
+    justify-content: center;
+    letter-spacing: var(--visit-type-caption-track);
+    min-height: 3.3rem;
+    min-width: 12.5rem;
+    padding: 0 1.6rem;
+    text-transform: uppercase;
+  }
+
+  .visit-hero__cta--primary {
+    background: var(--visit-accent-primary);
+    color: var(--color-white);
+  }
+
+  .visit-hero__cta--secondary {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    color: var(--color-white);
+  }
+
+  .visit-hero__helper {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 0.92rem;
+    margin: 1rem 0 0;
+  }
+
+  .visit-hero__media {
+    border-radius: var(--visit-radius-xl);
+    box-shadow: 0 30px 72px rgba(0, 0, 0, 0.35);
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .visit-hero__media img {
+    aspect-ratio: 577 / 868;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  @media (max-width: 1023px) {
+    .visit-hero {
+      padding-top: calc(var(--header-height) + 1.5rem);
+    }
+
+    .visit-hero__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .visit-hero__media {
+      max-width: 38rem;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .visit-hero__actions {
+      flex-direction: column;
+    }
+
+    .visit-hero__cta {
+      width: 100%;
+    }
+
+    .visit-hero__badges li {
+      font-size: 0.9rem;
+      min-height: 2.7rem;
+    }
+  }
+</style>

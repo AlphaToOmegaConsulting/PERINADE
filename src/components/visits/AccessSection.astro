@@ -1,0 +1,144 @@
+---
+import type { VisitPageData } from "../../types/visits";
+import Icon from "../ui/Icon.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  access: VisitPageData["access"];
+}
+
+const { access } = Astro.props;
+---
+
+<section class="access section section--white" id="access">
+  <div class="shell shell--narrow">
+    <SectionHeading eyebrow={access.eyebrow} title={access.title} body={access.body} centered />
+
+    <div class="access__grid">
+      <article class="access__card access__card--main">
+        {access.leftCard.tag && <p class="access__tag">{access.leftCard.tag}</p>}
+        <h3>{access.leftCard.title}</h3>
+        <p class="access__subtitle">{access.leftCard.subtitle}</p>
+        <ul>
+          {access.leftCard.content.map((line) => (
+            <li>{line}</li>
+          ))}
+        </ul>
+        {access.leftCard.ctaLabel && access.leftCard.ctaHref && (
+          <a class="access__cta" href={access.leftCard.ctaHref}>{access.leftCard.ctaLabel}</a>
+        )}
+      </article>
+
+      <div class="access__stack">
+        {access.rightCards.map((card) => (
+          <article class="access__card">
+            <div class="access__card-head">
+              {card.icon && <Icon name={card.icon} class="access__icon" />}
+              {card.tag && <p class="access__tag">{card.tag}</p>}
+            </div>
+            <h3>{card.title}</h3>
+            <p class="access__subtitle">{card.subtitle}</p>
+            <ul>
+              {card.content.map((line) => (
+                <li>{line}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .access__grid {
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    margin-top: 2.35rem;
+  }
+
+  .access__stack {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .access__card {
+    background: #fcfaf6;
+    border: 1px solid var(--visit-stroke-subtle);
+    border-radius: var(--visit-radius-md);
+    padding: 1.1rem 1.1rem 1rem;
+  }
+
+  .access__card--main {
+    display: grid;
+    place-content: center;
+    text-align: center;
+  }
+
+  .access__card-head {
+    align-items: center;
+    display: flex;
+    gap: 0.55rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .access__icon {
+    color: var(--visit-accent-primary);
+    display: inline-flex;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .access__icon :global(svg) {
+    height: 100%;
+    width: 100%;
+  }
+
+  .access__tag {
+    color: var(--visit-accent-primary);
+    font-size: var(--visit-type-caption-size);
+    letter-spacing: var(--visit-type-caption-track);
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .access__card h3 {
+    font-size: 1.2rem;
+    margin: 0;
+  }
+
+  .access__subtitle {
+    color: var(--color-muted);
+    font-size: var(--visit-type-caption-size);
+    letter-spacing: 0.03em;
+    margin: 0.25rem 0 0.55rem;
+  }
+
+  .access__card ul {
+    color: var(--color-text);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .access__card li {
+    font-size: var(--visit-type-body-size);
+    line-height: var(--visit-type-body-lh);
+    margin: 0.35rem 0;
+  }
+
+  .access__cta {
+    border-bottom: 1px solid var(--visit-accent-primary);
+    color: var(--visit-accent-primary);
+    justify-self: center;
+    margin-top: 0.6rem;
+    width: fit-content;
+  }
+
+  @media (max-width: 900px) {
+    .access__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

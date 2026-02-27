@@ -1,5 +1,7 @@
 ---
 import type { HeroFeatureCard } from "../../types/site";
+import { Image } from "astro:assets";
+import { isPlaceholderLink } from "../../utils/link";
 
 interface Props {
   cards: HeroFeatureCard[];
@@ -15,11 +17,11 @@ const visibleCards = cards.slice(0, 3);
       <div class="hero-deck__stage">
         {visibleCards.map((card, index) => {
           const slot = index === 0 ? "left" : index === 1 ? "center" : "right";
-          const isPlaceholder = card.href.startsWith("TODO_");
+          const isPlaceholder = isPlaceholderLink(card.href);
 
           const content = (
             <>
-              <img class="hero-deck__image" src={card.image} alt={card.alt} loading={index === 1 ? "eager" : "lazy"} />
+              <Image class="hero-deck__image" src={card.image} alt={card.alt} loading={index === 1 ? "eager" : "lazy"} />
               <div class="hero-deck__overlay" aria-hidden="true"></div>
               <div class="hero-deck__copy">
                 <p class="hero-deck__kicker">{card.kicker}</p>

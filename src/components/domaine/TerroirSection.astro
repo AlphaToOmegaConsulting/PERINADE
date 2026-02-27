@@ -1,0 +1,147 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import { Image } from "astro:assets";
+import type { DomaineTerroirData } from "../../types/domaine";
+
+interface Props {
+  terroir: DomaineTerroirData;
+}
+
+const { terroir } = Astro.props;
+---
+
+<section class="terroir section section--white">
+  <div class="shell terroir__inner">
+    <figure class="terroir__media">
+      <Image src={terroir.image} alt={terroir.imageAlt} loading="lazy" />
+    </figure>
+
+    <div class="terroir__content">
+      <SectionHeading eyebrow={terroir.eyebrow} title={terroir.title} body={terroir.body} />
+
+      <div class="terroir__block">
+        <h3>Cépages cultivés</h3>
+        <ul class="terroir__chips">
+          {terroir.grapes.map((grape) => (
+            <li>{grape}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="terroir__block">
+        <h3>Engagements environnementaux</h3>
+        <ul class="terroir__commitments">
+          {terroir.commitments.map((item) => (
+            <li>
+              <p>{item.title}</p>
+              <span>{item.body}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .terroir__inner {
+    align-items: center;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+  }
+
+  .terroir__media {
+    border-radius: 1.35rem;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .terroir__media img {
+    aspect-ratio: 3/4;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .terroir__content {
+    display: grid;
+    gap: 1.7rem;
+  }
+
+  .terroir__block {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .terroir__block h3 {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .terroir__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .terroir__chips li {
+    border: 1px solid rgba(44, 44, 44, 0.18);
+    border-radius: 999px;
+    color: var(--color-text);
+    font-size: 0.85rem;
+    padding: 0.62rem 1rem;
+  }
+
+  .terroir__commitments {
+    display: grid;
+    gap: 0.9rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .terroir__commitments li {
+    display: grid;
+    gap: 0.24rem;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .terroir__commitments li::before {
+    background: var(--color-accent);
+    border-radius: 999px;
+    content: "";
+    height: 0.5rem;
+    left: 0;
+    position: absolute;
+    top: 0.58rem;
+    width: 0.5rem;
+  }
+
+  .terroir__commitments p {
+    color: var(--color-text-strong);
+    margin: 0;
+  }
+
+  .terroir__commitments span {
+    color: var(--color-muted);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 1023px) {
+    .terroir__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .terroir__media {
+      max-width: 26rem;
+    }
+  }
+</style>

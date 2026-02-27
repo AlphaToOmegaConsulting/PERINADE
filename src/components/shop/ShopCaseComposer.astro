@@ -1,0 +1,261 @@
+---
+import { Image } from "astro:assets";
+import shopBackdropImage from "../../assets/perinade/shop/img-4.png";
+import shopCrateImage from "../../assets/perinade/shop/img-7.png";
+
+const offers = [
+  {
+    title: "Coffret Découverte",
+    saving: "Économie: 8,00 €",
+    lines: [
+      "Blanc de Périnade 2023 ×2",
+      "Grande Réserve 2020 ×1",
+      "Rosé d'Été 2024 ×2"
+    ],
+    price: "62,00 €",
+    strikePrice: "70,00 €",
+    details: "5 bouteilles · 75 cl chacune",
+    cta: "/boutique#coffrets"
+  },
+  {
+    title: "Coffret Prestige",
+    saving: "Économie: 17,00 €",
+    lines: [
+      "Grande Réserve 2020 ×2",
+      "Blanc Réserve 2022 ×2",
+      "Rosé Prestige 2024 ×2"
+    ],
+    price: "85,00 €",
+    strikePrice: "102,00 €",
+    details: "6 bouteilles · 75 cl chacune",
+    cta: "/boutique#coffrets"
+  }
+];
+
+---
+
+<section
+  id="coffrets"
+  class="shop-composer section"
+  aria-labelledby="shop-composer-title"
+  style={`--shop-composer-bg:url('${shopBackdropImage.src}')`}
+>
+  <div class="shop-composer__backdrop" aria-hidden="true"></div>
+  <div class="shell shop-shell shop-composer__shell">
+    <figure class="shop-composer__crate">
+      <Image src={shopCrateImage} alt="Panier de dégustation" loading="lazy" />
+    </figure>
+
+    <div class="shop-composer__content">
+      <p class="shop-composer__eyebrow">Coffrets & lots</p>
+      <h2 id="shop-composer-title">Composez votre caisse</h2>
+      <p class="shop-composer__intro">
+        Nos coffrets sont composés de cuvées sélectionnées, en quantité limitée pour offrir ou découvrir toute la
+        gamme, avec une remise immédiate.
+      </p>
+
+      <div class="shop-composer__offers">
+        {offers.map((offer) => (
+          <article class="shop-offer">
+            <h3>{offer.title}</h3>
+            <p class="shop-offer__saving">{offer.saving}</p>
+            <ul>
+              {offer.lines.map((line) => (
+                <li>{line}</li>
+              ))}
+            </ul>
+            <div class="shop-offer__price">
+              <p>{offer.price}</p>
+              <span>{offer.strikePrice}</span>
+            </div>
+            <p class="shop-offer__details">{offer.details}</p>
+
+            <a class="shop-offer__cta" href={offer.cta}>Composer ma caisse</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shop-composer {
+    background: #121212;
+    overflow: clip;
+    position: relative;
+  }
+
+  .shop-composer__backdrop {
+    background:
+      linear-gradient(180deg, rgba(18, 18, 18, 0.82), rgba(18, 18, 18, 0.94)),
+      var(--shop-composer-bg) center / cover no-repeat;
+    inset: 0;
+    position: absolute;
+  }
+
+  .shop-composer__shell {
+    align-items: end;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+    position: relative;
+    z-index: 1;
+  }
+
+  .shop-composer__crate {
+    border-radius: 1.25rem;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .shop-composer__crate img {
+    aspect-ratio: 0.8;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    width: 100%;
+  }
+
+  .shop-composer__content {
+    color: rgba(255, 255, 255, 0.84);
+    padding-bottom: 0.5rem;
+  }
+
+  .shop-composer__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .shop-composer h2 {
+    color: var(--color-white);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin: 0.8rem 0;
+  }
+
+  .shop-composer__intro {
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.6;
+    margin: 0;
+    max-width: 34rem;
+  }
+
+  .shop-composer__offers {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1.4rem;
+  }
+
+  .shop-offer {
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1.25rem;
+    padding: 1.35rem;
+  }
+
+  .shop-offer h3 {
+    color: var(--color-white);
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .shop-offer__saving {
+    color: var(--color-cta);
+    font-size: 0.77rem;
+    letter-spacing: 0.12em;
+    margin: 0.45rem 0 0;
+    text-transform: uppercase;
+  }
+
+  .shop-offer ul {
+    display: grid;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0.85rem 0 0;
+    padding: 0;
+  }
+
+  .shop-offer li {
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .shop-offer li::before {
+    color: var(--color-accent);
+    content: "›";
+    left: 0;
+    position: absolute;
+  }
+
+  .shop-offer__price {
+    align-items: center;
+    display: flex;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+  }
+
+  .shop-offer__price p {
+    color: var(--color-white);
+    font-family: var(--font-display);
+    font-size: 1.85rem;
+    margin: 0;
+  }
+
+  .shop-offer__price span {
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.98rem;
+    text-decoration: line-through;
+  }
+
+  .shop-offer__details {
+    color: rgba(255, 255, 255, 0.66);
+    font-size: 0.84rem;
+    margin: 0.15rem 0 0;
+  }
+
+  .shop-offer__cta {
+    align-items: center;
+    border: 2px solid var(--color-cta);
+    border-radius: 999px;
+    color: var(--color-cta);
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    margin-top: 1rem;
+    min-height: 3rem;
+    padding: 0 1.2rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1023px) {
+    .shop-composer__shell {
+      align-items: start;
+      grid-template-columns: 1fr;
+    }
+
+    .shop-composer__crate {
+      max-height: 22rem;
+    }
+
+    .shop-composer__crate img {
+      aspect-ratio: 1.8;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .shop-offer {
+      padding: 1.1rem;
+    }
+
+    .shop-offer__cta {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>

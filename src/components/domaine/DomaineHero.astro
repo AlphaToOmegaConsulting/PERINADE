@@ -1,0 +1,194 @@
+---
+import ButtonLink from "../ui/ButtonLink.astro";
+import { Image } from "astro:assets";
+import type { DomaineHeroData } from "../../types/domaine";
+import { isPlaceholderLink } from "../../utils/link";
+
+interface Props {
+  hero: DomaineHeroData;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="domaine-hero section">
+  <div class="shell domaine-hero__inner">
+    <div class="domaine-hero__content">
+      <p class="domaine-hero__eyebrow">{hero.eyebrow}</p>
+      <h1 class="domaine-hero__title">
+        <span>{hero.titleLines[0]}</span>
+        <span class="is-accent">{hero.titleLines[1]}</span>
+      </h1>
+      <p class="domaine-hero__body">{hero.body}</p>
+
+      <div class="domaine-hero__cta-row">
+        <ButtonLink href={hero.primaryCta.href} label={hero.primaryCta.label} class="domaine-hero__cta-primary" />
+        {
+          isPlaceholderLink(hero.secondaryCta.href) ? (
+            <span class="domaine-hero__cta-secondary" data-todo={hero.secondaryCta.href}>{hero.secondaryCta.label}</span>
+          ) : (
+            <a class="domaine-hero__cta-secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+          )
+        }
+      </div>
+
+      <ul class="domaine-hero__badges" aria-label="Axes clés du domaine">
+        {hero.badges.map((badge) => (
+          <li>{badge}</li>
+        ))}
+      </ul>
+
+      <ul class="domaine-hero__highlights" aria-label="Chiffres et repères clés">
+        {hero.highlights.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="domaine-hero__media">
+      <Image src={hero.image} alt={hero.imageAlt} loading="eager" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .domaine-hero {
+    background: #1a1a1a;
+    color: var(--color-white);
+    padding-top: calc(var(--header-height) + 5.6rem);
+  }
+
+  .domaine-hero__inner {
+    align-items: center;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+  }
+
+  .domaine-hero__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.84rem;
+    letter-spacing: 0.22em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .domaine-hero__title {
+    display: grid;
+    font-size: clamp(2.5rem, 5.1vw, 4.35rem);
+    line-height: 0.98;
+    margin: 0.95rem 0 1.25rem;
+  }
+
+  .domaine-hero__title .is-accent {
+    color: var(--color-cta);
+  }
+
+  .domaine-hero__body {
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 1.08rem;
+    line-height: 1.72;
+    margin: 0;
+    max-width: 42rem;
+  }
+
+  .domaine-hero__cta-row {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 2rem;
+  }
+
+  .domaine-hero__cta-primary {
+    min-height: 3.9rem;
+    padding-inline: 1.8rem;
+  }
+
+  .domaine-hero__cta-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    color: var(--color-white);
+    display: inline-flex;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    min-height: 3.9rem;
+    padding: 0 1.45rem;
+    text-transform: uppercase;
+  }
+
+  .domaine-hero__badges,
+  .domaine-hero__highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    list-style: none;
+    margin: 1.05rem 0 0;
+    padding: 0;
+  }
+
+  .domaine-hero__badges li,
+  .domaine-hero__highlights li {
+    border-radius: 999px;
+    font-size: 0.73rem;
+    letter-spacing: 0.12em;
+    padding: 0.58rem 0.9rem;
+    text-transform: uppercase;
+  }
+
+  .domaine-hero__badges li {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .domaine-hero__highlights li {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .domaine-hero__media {
+    border-radius: 1.55rem;
+    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.32);
+    overflow: hidden;
+  }
+
+  .domaine-hero__media img {
+    aspect-ratio: 4/5;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  [data-todo] {
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 1023px) {
+    .domaine-hero__inner {
+      gap: 2.4rem;
+      grid-template-columns: 1fr;
+    }
+
+    .domaine-hero__media {
+      max-width: 33rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .domaine-hero {
+      padding-top: calc(var(--header-height) + 4rem);
+    }
+
+    .domaine-hero__body {
+      font-size: 1rem;
+    }
+
+    .domaine-hero__cta-primary,
+    .domaine-hero__cta-secondary {
+      min-height: 3.45rem;
+      width: 100%;
+    }
+  }
+</style>

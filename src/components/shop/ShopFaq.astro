@@ -1,0 +1,187 @@
+---
+const faqs = [
+  {
+    question: "Quels sont les délais de livraison ?",
+    answer:
+      "Les commandes sont expédiées sous 24h et livrées sous 48-72 h en France métropolitaine. Emballage isotherme inclus en période de chaleur."
+  },
+  {
+    question: "La livraison est-elle gratuite ?",
+    answer: "La livraison est offerte dès 80 € d'achat, sinon les frais sont calculés selon votre zone de livraison."
+  },
+  {
+    question: "Puis-je retourner ma commande ?",
+    answer: "Oui, vous disposez de 14 jours après réception. Les bouteilles doivent rester intactes et non ouvertes."
+  },
+  {
+    question: "Comment conserver les vins après réception ?",
+    answer: "Conservez les bouteilles couchées dans un endroit frais, sec et à l'abri de la lumière directe."
+  },
+  {
+    question: "Livrez-vous à l'étranger ?",
+    answer: "Oui, sur demande pour certaines destinations européennes. Contactez-nous avant validation de commande."
+  },
+  {
+    question: "Comment contacter le domaine ?",
+    answer: "Par téléphone au +33 4 68 XX XX XX ou par email via le formulaire de contact du site."
+  }
+];
+---
+
+<section class="shop-faq section section--soft" aria-labelledby="shop-faq-title">
+  <div class="shell shop-shell shop-shell--narrow">
+    <header class="shop-faq__heading">
+      <p>Questions fréquentes</p>
+      <h2 id="shop-faq-title">Tout savoir avant d'acheter</h2>
+    </header>
+
+    <div class="shop-faq__list" data-faq>
+      {faqs.map((faq, index) => {
+        const panelId = `shop-faq-panel-${index}`;
+        const triggerId = `shop-faq-trigger-${index}`;
+        const isOpen = index === 0;
+
+        return (
+          <article class:list={["shop-faq__item", isOpen && "is-open"]}>
+            <h3>
+              <button
+                id={triggerId}
+                class="shop-faq__trigger"
+                type="button"
+                aria-expanded={isOpen ? "true" : "false"}
+                aria-controls={panelId}
+                data-faq-trigger
+              >
+                <span>{faq.question}</span>
+                <span class="shop-faq__chevron" aria-hidden="true">⌄</span>
+              </button>
+            </h3>
+            <div
+              id={panelId}
+              class="shop-faq__panel"
+              role="region"
+              aria-labelledby={triggerId}
+              hidden={!isOpen}
+              data-faq-panel
+            >
+              <p>{faq.answer}</p>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  const faqRoot = document.querySelector("[data-faq]");
+
+  if (faqRoot) {
+    const triggers = Array.from(faqRoot.querySelectorAll("[data-faq-trigger]"));
+
+    const closeAll = () => {
+      triggers.forEach((trigger) => {
+        trigger.setAttribute("aria-expanded", "false");
+        const panel = document.getElementById(trigger.getAttribute("aria-controls"));
+        const item = trigger.closest(".shop-faq__item");
+        if (panel) panel.hidden = true;
+        item?.classList.remove("is-open");
+      });
+    };
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const expanded = trigger.getAttribute("aria-expanded") === "true";
+        closeAll();
+        if (!expanded) {
+          trigger.setAttribute("aria-expanded", "true");
+          const panel = document.getElementById(trigger.getAttribute("aria-controls"));
+          const item = trigger.closest(".shop-faq__item");
+          if (panel) panel.hidden = false;
+          item?.classList.add("is-open");
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .shop-faq__heading {
+    margin: 0 auto 2.35rem;
+    max-width: 42rem;
+    text-align: center;
+  }
+
+  .shop-faq__heading p {
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .shop-faq__heading h2 {
+    font-size: clamp(2rem, 4vw, 2.9rem);
+    margin: 0.75rem 0 0;
+  }
+
+  .shop-faq__list {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .shop-faq__item {
+    background: var(--color-white);
+    border: 1px solid rgba(44, 44, 44, 0.08);
+    border-radius: 1.125rem;
+    overflow: clip;
+  }
+
+  .shop-faq__trigger {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    color: var(--color-text-strong);
+    cursor: pointer;
+    display: flex;
+    font-size: 1.02rem;
+    font-weight: 500;
+    justify-content: space-between;
+    line-height: 1.5;
+    padding: 1rem 1.35rem;
+    text-align: left;
+    width: 100%;
+  }
+
+  .shop-faq__chevron {
+    color: var(--color-muted);
+    font-size: 1.2rem;
+    transition: transform 180ms ease;
+  }
+
+  .shop-faq__item.is-open .shop-faq__chevron {
+    transform: rotate(180deg);
+  }
+
+  .shop-faq__panel {
+    border-top: 1px solid rgba(44, 44, 44, 0.08);
+    padding: 1rem 1.35rem 1.2rem;
+  }
+
+  .shop-faq__panel p {
+    color: var(--color-muted);
+    line-height: 1.62;
+    margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    .shop-faq__trigger {
+      font-size: 0.95rem;
+      padding-inline: 1rem;
+    }
+
+    .shop-faq__panel {
+      padding-inline: 1rem;
+    }
+  }
+</style>

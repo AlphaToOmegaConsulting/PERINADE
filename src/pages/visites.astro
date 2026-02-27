@@ -1,0 +1,88 @@
+---
+import FinalCta from "../components/visits/FinalCta.astro";
+import PairingAddon from "../components/visits/PairingAddon.astro";
+import PricingPlans from "../components/visits/PricingPlans.astro";
+import BookingSection from "../components/visits/BookingSection.astro";
+import ExperienceTimeline from "../components/visits/ExperienceTimeline.astro";
+import VisitHero from "../components/visits/VisitHero.astro";
+import WinesShowcase from "../components/visits/WinesShowcase.astro";
+import AccessSection from "../components/visits/AccessSection.astro";
+import TrustBar from "../components/visits/TrustBar.astro";
+import ExtendedEscape from "../components/visits/ExtendedEscape.astro";
+import Footer from "../components/sections/Footer.astro";
+import Header from "../components/sections/Header.astro";
+import { site } from "../data/site";
+import { visitsPage } from "../data/visits";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const theme = visitsPage.theme;
+const visitsThemeStyle = [
+  `--visit-accent-primary:${theme.accent.primary}`,
+  `--visit-accent-soft:${theme.accent.soft}`,
+  `--visit-accent-on-dark:${theme.accent.onDark}`,
+  `--visit-radius-sm:${theme.radius.sm}`,
+  `--visit-radius-md:${theme.radius.md}`,
+  `--visit-radius-lg:${theme.radius.lg}`,
+  `--visit-radius-xl:${theme.radius.xl}`,
+  `--visit-section-space-desktop:${theme.spacing.sectionDesktop}`,
+  `--visit-section-space-tablet:${theme.spacing.sectionTablet}`,
+  `--visit-section-space-mobile:${theme.spacing.sectionMobile}`,
+  `--visit-type-eyebrow-size:${theme.typography.eyebrow.fontSize}`,
+  `--visit-type-eyebrow-lh:${theme.typography.eyebrow.lineHeight}`,
+  `--visit-type-eyebrow-track:${theme.typography.eyebrow.letterSpacing}`,
+  `--visit-type-eyebrow-weight:${theme.typography.eyebrow.fontWeight}`,
+  `--visit-type-display-size:${theme.typography.titleDisplay.fontSize}`,
+  `--visit-type-display-lh:${theme.typography.titleDisplay.lineHeight}`,
+  `--visit-type-display-track:${theme.typography.titleDisplay.letterSpacing}`,
+  `--visit-type-display-weight:${theme.typography.titleDisplay.fontWeight}`,
+  `--visit-type-section-size:${theme.typography.titleSection.fontSize}`,
+  `--visit-type-section-lh:${theme.typography.titleSection.lineHeight}`,
+  `--visit-type-section-track:${theme.typography.titleSection.letterSpacing}`,
+  `--visit-type-section-weight:${theme.typography.titleSection.fontWeight}`,
+  `--visit-type-body-size:${theme.typography.body.fontSize}`,
+  `--visit-type-body-lh:${theme.typography.body.lineHeight}`,
+  `--visit-type-body-track:${theme.typography.body.letterSpacing}`,
+  `--visit-type-body-weight:${theme.typography.body.fontWeight}`,
+  `--visit-type-caption-size:${theme.typography.caption.fontSize}`,
+  `--visit-type-caption-lh:${theme.typography.caption.lineHeight}`,
+  `--visit-type-caption-track:${theme.typography.caption.letterSpacing}`,
+  `--visit-type-caption-weight:${theme.typography.caption.fontWeight}`,
+  `--visit-stroke-subtle:${theme.stroke.subtle}`,
+  `--visit-stroke-strong:${theme.stroke.strong}`
+].join(";");
+---
+
+<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description}>
+  <Header nav={site.nav} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
+  <main class="visits-page" style={visitsThemeStyle}>
+    <VisitHero hero={visitsPage.hero} />
+    <TrustBar items={visitsPage.trustBar} />
+    <ExperienceTimeline timeline={visitsPage.timeline} />
+    <WinesShowcase wines={visitsPage.wines} />
+    <PairingAddon pairing={visitsPage.pairing} />
+    <PricingPlans pricing={visitsPage.pricing} />
+    <AccessSection access={visitsPage.access} />
+    <ExtendedEscape escape={visitsPage.escape} />
+    <BookingSection booking={visitsPage.booking} />
+    <FinalCta finalCta={visitsPage.finalCta} />
+  </main>
+  <Footer footer={site.footer} />
+</BaseLayout>
+
+<style>
+  .visits-page :global(.section) {
+    padding-block: var(--visit-section-space-desktop);
+  }
+
+  @media (max-width: 1023px) {
+    .visits-page :global(.section) {
+      padding-block: var(--visit-section-space-tablet);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .visits-page :global(.section) {
+      padding-block: var(--visit-section-space-mobile);
+    }
+  }
+</style>

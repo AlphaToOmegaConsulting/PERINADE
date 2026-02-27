@@ -1,12 +1,25 @@
 import type { SiteData } from "../types/site";
+import experienceBg from "../assets/perinade/experience-bg.png";
+import galleryCellar from "../assets/perinade/gallery-cellar.png";
+import galleryVinesClose from "../assets/perinade/gallery-vines-close.png";
+import heroDeckBaladeVignes from "../assets/perinade/hero-deck/balade-vignes.png";
+import heroDeckCuveesException from "../assets/perinade/hero-deck/cuvees-exception.png";
+import heroDeckVisiteCaveau from "../assets/perinade/hero-deck/visite-caveau.png";
+import heroVineyard from "../assets/perinade/hero-vineyard.png";
+import historyFamily from "../assets/perinade/history-family.png";
+import wineBlanc from "../assets/perinade/wine-blanc.png";
+import wineCuveeDomaine from "../assets/perinade/wine-cuvee-domaine.png";
+import wineGrandeReserve from "../assets/perinade/wine-grande-reserve.png";
+import wineRose from "../assets/perinade/wine-rose.png";
 
 export const site: SiteData = {
   nav: [
-    { label: "Accueil", href: "#hero" },
-    { label: "Visite", href: "#experience" },
-    { label: "Boutique", href: "TODO_LINK_SHOP" },
-    { label: "Le Domaine", href: "#histoire" },
-    { label: "Contact", href: "#contact" }
+    { label: "Accueil", href: "/", mobile: false },
+    { label: "Visites", href: "/visites", desktopSlot: "left", desktopLabel: "VISIT" },
+    { label: "Boutique", href: "/boutique", desktopSlot: "left", desktopLabel: "SHOP" },
+    { label: "Le Domaine", href: "/domaine", desktopSlot: "left", desktopLabel: "DOMAINE" },
+    { label: "News", href: "/news", desktopSlot: "right", desktopLabel: "NEWS" },
+    { label: "Contact", href: "/#contact" }
   ],
   hero: {
     eyebrow: "Près de Carcassonne",
@@ -14,30 +27,30 @@ export const site: SiteData = {
     body:
       "Un domaine familial d'exception, niché au cœur du Languedoc. Venez découvrir nos vins, notre terroir et notre histoire lors d'une visite personnalisée.",
     ctaLabel: "Visiter Boutique",
-    ctaHref: "TODO_LINK_SHOP",
+    ctaHref: "/boutique",
     meta: ["Sur rendez-vous", "Domaine familial", "Depuis 1987"],
-    backgroundImage: "/assets/perinade/hero-vineyard.png",
+    backgroundImage: heroVineyard,
     featuredCards: [
       {
         kicker: "Dégustation",
         title: "Visite du Caveau",
-        image: "/assets/perinade/hero-deck/visite-caveau.png",
+        image: heroDeckVisiteCaveau,
         alt: "Bouteilles et caveau du domaine",
         href: "#experience"
       },
       {
         kicker: "Terroir",
         title: "Balade dans les Vignes",
-        image: "/assets/perinade/hero-deck/balade-vignes.png",
+        image: heroDeckBaladeVignes,
         alt: "Vue des vignes du domaine",
         href: "#histoire"
       },
       {
         kicker: "Boutique",
         title: "Nos Cuvées d'Exception",
-        image: "/assets/perinade/hero-deck/cuvees-exception.png",
+        image: heroDeckCuveesException,
         alt: "Sélection de bouteilles du domaine",
-        href: "TODO_LINK_SHOP"
+        href: "/boutique"
       }
     ]
   },
@@ -71,16 +84,16 @@ export const site: SiteData = {
       { label: "Tarif", value: "15 € / personne", icon: "ticket" }
     ],
     ctaLabel: "Réserver une visite",
-    ctaHref: "TODO_LINK_BOOKING",
-    backgroundImage: "/assets/perinade/experience-bg.png"
+    ctaHref: "/visites#booking",
+    backgroundImage: experienceBg
   },
   gallery: {
     eyebrow: "Notre univers",
     title: "Galerie du Domaine",
     items: [
-      { src: "/assets/perinade/hero-vineyard.png", alt: "Vue du vignoble au coucher du soleil" },
-      { src: "/assets/perinade/gallery-cellar.png", alt: "Caveau et dégustation" },
-      { src: "/assets/perinade/gallery-vines-close.png", alt: "Détail d'une vigne du domaine" }
+      { src: heroVineyard, alt: "Vue du vignoble au coucher du soleil" },
+      { src: galleryCellar, alt: "Caveau et dégustation" },
+      { src: galleryVinesClose, alt: "Détail d'une vigne du domaine" }
     ]
   },
   testimonials: {
@@ -120,7 +133,7 @@ export const site: SiteData = {
       "Fondé en 1987, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes avec le respect des traditions et une attention particulière portée à l'environnement.",
       "Aujourd'hui, c'est la troisième génération qui perpétue ce savoir-faire, alliant méthodes ancestrales et vinification moderne pour produire des vins qui expriment la singularité de notre terroir."
     ],
-    imagePrimary: "/assets/perinade/history-family.png",
+    imagePrimary: historyFamily,
     ctaLabel: "Découvrir l'histoire complète",
     ctaHref: "#contact"
   },
@@ -128,43 +141,43 @@ export const site: SiteData = {
     eyebrow: "Nos vins",
     title: "Cuvées sélectionnées",
     allWinesLabel: "Voir toute la boutique",
-    allWinesHref: "TODO_LINK_SHOP",
+    allWinesHref: "/boutique",
     items: [
       {
-        image: "/assets/perinade/wine-cuvee-domaine.png",
+        image: wineCuveeDomaine,
         title: "Cuvée du Domaine",
         subtitle: "Rouge · AOP Minervois",
         description:
           "Un rouge soyeux aux notes de fruits noirs, de garrigue et d'épices douces, élevé pour accompagner les belles tables.",
         ctaLabel: "Voir le vin",
-        ctaHref: "TODO_LINK_SHOP"
+        ctaHref: "/boutique"
       },
       {
-        image: "/assets/perinade/wine-blanc.png",
+        image: wineBlanc,
         title: "Blanc de Périnade",
         subtitle: "Blanc · IGP Pays d'Oc",
         description:
           "Une cuvée fraîche et florale, portée par les agrumes, la tension minérale et une finale nette.",
         ctaLabel: "Voir le vin",
-        ctaHref: "TODO_LINK_SHOP"
+        ctaHref: "/boutique"
       },
       {
-        image: "/assets/perinade/wine-rose.png",
+        image: wineRose,
         title: "Rosé d'Été",
         subtitle: "Rosé · IGP Pays d'Oc",
         description:
           "Un rosé lumineux aux accents de pêche blanche et de fraise, pensé pour les repas d'été et l'apéritif.",
         ctaLabel: "Voir le vin",
-        ctaHref: "TODO_LINK_SHOP"
+        ctaHref: "/boutique"
       },
       {
-        image: "/assets/perinade/wine-grande-reserve.png",
+        image: wineGrandeReserve,
         title: "Grande Réserve",
         subtitle: "Rouge · AOP Minervois",
         description:
           "Une cuvée de caractère élevée en fût, ample et persistante, avec des tanins fondus et une matière profonde.",
         ctaLabel: "Voir le vin",
-        ctaHref: "TODO_LINK_SHOP"
+        ctaHref: "/boutique"
       }
     ]
   },
@@ -189,11 +202,12 @@ export const site: SiteData = {
       {
         title: "Navigation",
         links: [
-          { label: "Accueil", href: "#hero" },
-          { label: "Visite", href: "#experience" },
-          { label: "Boutique", href: "TODO_LINK_SHOP" },
-          { label: "Le Domaine", href: "#histoire" },
-          { label: "Contact", href: "#contact" }
+          { label: "Accueil", href: "/" },
+          { label: "Visites", href: "/visites" },
+          { label: "Boutique", href: "/boutique" },
+          { label: "Le Domaine", href: "/domaine" },
+          { label: "News", href: "/news" },
+          { label: "Contact", href: "/#contact" }
         ]
       },
       {

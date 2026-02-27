@@ -1,0 +1,111 @@
+---
+import type { VisitPageData } from "../../types/visits";
+import { Image } from "astro:assets";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  wines: VisitPageData["wines"];
+}
+
+const { wines } = Astro.props;
+---
+
+<section class="wines-showcase section" id="wines">
+  <div class="shell">
+    <SectionHeading eyebrow={wines.eyebrow} title={wines.title} body={wines.body} centered light />
+
+    <div class="wines-showcase__grid">
+      {wines.cards.map((card) => (
+        <article class="wine-card">
+          <div class="wine-card__media">
+            <Image src={card.image} alt={card.imageAlt} loading="lazy" />
+            <span class:list={["wine-card__tag", `wine-card__tag--${card.tagTone}`]}>{card.tag}</span>
+          </div>
+          <div class="wine-card__body">
+            <h3>{card.title}</h3>
+            {card.notes.map((note) => (
+              <p>{note}</p>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wines-showcase {
+    background: #17181b;
+  }
+
+  .wines-showcase__grid {
+    display: grid;
+    gap: 1.75rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 2.55rem;
+  }
+
+  .wine-card {
+    background: #ffffff;
+    border-radius: var(--visit-radius-md);
+    overflow: hidden;
+  }
+
+  .wine-card__media {
+    position: relative;
+  }
+
+  .wine-card__media img {
+    aspect-ratio: 376 / 396;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .wine-card__tag {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    font-size: var(--visit-type-caption-size);
+    letter-spacing: var(--visit-type-caption-track);
+    padding: 0.65rem 1rem;
+    position: absolute;
+    right: 1rem;
+    text-transform: uppercase;
+    top: 1rem;
+  }
+
+  .wine-card__tag--rose {
+    color: #a0404a;
+  }
+
+  .wine-card__tag--white {
+    color: #8b6f4e;
+  }
+
+  .wine-card__tag--red {
+    color: #6b3a3a;
+  }
+
+  .wine-card__body {
+    padding: 1.2rem 1.2rem 1.15rem;
+  }
+
+  .wine-card__body h3 {
+    font-size: clamp(1.5rem, 1.9vw, 1.75rem);
+    margin: 0 0 0.25rem;
+  }
+
+  .wine-card__body p {
+    color: var(--color-muted);
+    font-size: var(--visit-type-body-size);
+    line-height: var(--visit-type-body-lh);
+    margin: 0.12rem 0;
+  }
+
+  @media (max-width: 1023px) {
+    .wines-showcase__grid {
+      gap: 1.2rem;
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

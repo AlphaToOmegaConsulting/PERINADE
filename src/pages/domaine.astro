@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Footer from "../components/sections/Footer.astro";
+import Header from "../components/sections/Header.astro";
+import DomaineHero from "../components/domaine/DomaineHero.astro";
+import TerroirSection from "../components/domaine/TerroirSection.astro";
+import FamilyStorySection from "../components/domaine/FamilyStorySection.astro";
+import DomainStatsBar from "../components/domaine/DomainStatsBar.astro";
+import FamilyTimelineTable from "../components/domaine/FamilyTimelineTable.astro";
+import VisitDomainCta from "../components/domaine/VisitDomainCta.astro";
+import DomainWinesShowcase from "../components/domaine/DomainWinesShowcase.astro";
+import DomainContactSection from "../components/domaine/DomainContactSection.astro";
+import { site } from "../data/site";
+import { domainePage } from "../data/domaine";
+
+const themeVars = [
+  `--domaine-section-space-desktop:${domainePage.theme.sectionDesktop}`,
+  `--domaine-section-space-tablet:${domainePage.theme.sectionTablet}`,
+  `--domaine-section-space-mobile:${domainePage.theme.sectionMobile}`
+].join(";");
+---
+
+<BaseLayout title={domainePage.seo.title} description={domainePage.seo.description}>
+  <Header nav={site.nav} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
+  <main class="domaine-page" style={themeVars}>
+    <DomaineHero hero={domainePage.hero} />
+    <TerroirSection terroir={domainePage.terroir} />
+    <FamilyStorySection family={domainePage.family} />
+    <DomainStatsBar stats={domainePage.statsBar} />
+    <FamilyTimelineTable timeline={domainePage.timeline} />
+    <VisitDomainCta visitCta={domainePage.visitCta} />
+    <DomainWinesShowcase wines={domainePage.wines} />
+    <DomainContactSection contact={domainePage.contact} />
+  </main>
+  <Footer footer={site.footer} />
+</BaseLayout>
+
+<style>
+  .domaine-page :global(.section) {
+    padding-block: var(--domaine-section-space-desktop);
+  }
+
+  @media (max-width: 1023px) {
+    .domaine-page :global(.section) {
+      padding-block: var(--domaine-section-space-tablet);
+    }
+  }
+
+  @media (max-width: 767px) {
+    .domaine-page :global(.section) {
+      padding-block: var(--domaine-section-space-mobile);
+    }
+  }
+</style>

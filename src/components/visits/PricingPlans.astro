@@ -1,0 +1,188 @@
+---
+import type { VisitPageData } from "../../types/visits";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  pricing: VisitPageData["pricing"];
+}
+
+const { pricing } = Astro.props;
+---
+
+<section class="pricing section section--soft" id="pricing">
+  <div class="shell pricing__content" style={`--pricing-max:${pricing.layout.containerMaxWidth}; --pricing-card-min-height:${pricing.layout.cardMinHeight}; --pricing-card-padding:${pricing.layout.cardPadding}; --pricing-title-size:${pricing.layout.titleSize}; --pricing-price-size:${pricing.layout.priceSize};`}>
+    <SectionHeading eyebrow={pricing.eyebrow} title={pricing.title} body={pricing.body} centered />
+
+    <div class="pricing__plans">
+      {pricing.plans.map((plan) => (
+        <article class:list={["plan", plan.isHighlighted && "plan--highlighted"]}>
+          {plan.badge && <span class="plan__badge">{plan.badge}</span>}
+          <h3>{plan.title}</h3>
+          <p class="plan__subtitle">{plan.subtitle}</p>
+          <p class="plan__price">
+            <strong>{plan.price}</strong>
+            <span>{plan.perLabel}</span>
+          </p>
+
+          <ul>
+            {plan.features.map((feature) => (
+              <li>{feature}</li>
+            ))}
+          </ul>
+
+          <a href={plan.ctaHref} class="plan__cta">{plan.ctaLabel}</a>
+        </article>
+      ))}
+    </div>
+
+    <div class="pricing__meta">
+      {pricing.meta.map((item) => (
+        <p>{item}</p>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing__content {
+    max-width: var(--pricing-max);
+  }
+
+  .pricing__plans {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 2.5rem;
+  }
+
+  .plan {
+    background: var(--color-white);
+    border: 1px solid var(--visit-stroke-subtle);
+    border-radius: var(--visit-radius-lg);
+    min-height: var(--pricing-card-min-height);
+    padding: var(--pricing-card-padding);
+    position: relative;
+  }
+
+  .plan--highlighted {
+    background: #1a1a1a;
+    border-color: #1a1a1a;
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .plan__badge {
+    background: var(--visit-accent-primary);
+    border-radius: 999px;
+    color: var(--color-white);
+    font-size: 0.76rem;
+    letter-spacing: 0.16em;
+    padding: 0.5rem 0.85rem;
+    position: absolute;
+    right: 1.2rem;
+    text-transform: uppercase;
+    top: 1.2rem;
+  }
+
+  .plan h3 {
+    font-size: var(--pricing-title-size);
+    margin: 0;
+  }
+
+  .plan__subtitle {
+    color: var(--color-muted);
+    margin: 0.45rem 0 1rem;
+  }
+
+  .plan--highlighted .plan__subtitle,
+  .plan--highlighted li,
+  .plan--highlighted .plan__price span {
+    color: rgba(255, 255, 255, 0.66);
+  }
+
+  .plan__price {
+    align-items: flex-end;
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .plan__price strong {
+    font-family: var(--font-display);
+    font-size: var(--pricing-price-size);
+    line-height: 1;
+  }
+
+  .plan__price span {
+    color: var(--color-muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .plan ul {
+    border-top: 1px solid var(--visit-stroke-subtle);
+    list-style: none;
+    margin: 1.5rem 0 0;
+    padding: 1.2rem 0 0;
+  }
+
+  .plan li {
+    font-size: 0.93rem;
+    line-height: 1.46;
+    margin: 0.5rem 0;
+    padding-left: 1.45rem;
+    position: relative;
+  }
+
+  .plan li::before {
+    color: var(--visit-accent-primary);
+    content: "✓";
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  .plan__cta {
+    align-items: center;
+    border-radius: 999px;
+    display: inline-flex;
+    font-size: var(--visit-type-caption-size);
+    justify-content: center;
+    letter-spacing: var(--visit-type-caption-track);
+    margin-top: 1.2rem;
+    min-height: 3.1rem;
+    min-width: 100%;
+    text-transform: uppercase;
+  }
+
+  .plan:not(.plan--highlighted) .plan__cta {
+    border: 2px solid #1a1a1a;
+    color: #1a1a1a;
+  }
+
+  .plan--highlighted .plan__cta {
+    background: var(--visit-accent-primary);
+    color: var(--color-white);
+  }
+
+  .pricing__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    justify-content: center;
+    margin-top: 2.3rem;
+  }
+
+  .pricing__meta p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 1023px) {
+    .pricing__content {
+      max-width: none;
+    }
+
+    .pricing__plans {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
