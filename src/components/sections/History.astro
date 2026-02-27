@@ -1,0 +1,108 @@
+---
+import type { SiteData } from "../../types/site";
+import ButtonLink from "../ui/ButtonLink.astro";
+
+interface Props {
+  history: SiteData["history"];
+}
+
+const { history } = Astro.props;
+---
+
+<section class="history section" id="histoire" style={`--history-image: url('${history.imagePrimary}')`}>
+  <div class="history__overlay" aria-hidden="true"></div>
+  <div class="shell history__inner">
+    <div class="history__media">
+      <img src={history.imagePrimary} alt="Domaine de la Périnade" loading="lazy" />
+    </div>
+
+    <div class="history__content">
+      <p class="history__eyebrow">{history.eyebrow}</p>
+      <h2>{history.title} <span>{history.titleHighlight}</span></h2>
+      {history.body.map((paragraph) => <p>{paragraph}</p>)}
+      <ButtonLink href={history.ctaHref} label={history.ctaLabel} variant="text" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .history {
+    overflow: clip;
+    position: relative;
+  }
+
+  .history__overlay {
+    background-image:
+      var(--overlay-history),
+      var(--history-image);
+    background-position: center;
+    background-size: cover;
+    inset: 0;
+    position: absolute;
+  }
+
+  .history__inner {
+    align-items: center;
+    display: grid;
+    gap: 2.15rem;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 0.92fr);
+    position: relative;
+  }
+
+  .history__media {
+    border-radius: 1.3rem;
+    box-shadow: 0 28px 55px rgba(15, 10, 7, 0.22);
+    max-height: 31rem;
+    overflow: clip;
+    width: 100%;
+  }
+
+  .history__media img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .history__content {
+    background: rgba(45, 31, 19, 0.46);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-panel);
+    color: rgba(255, 255, 255, 0.78);
+    padding: 1.75rem 1.85rem 1.7rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .history__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.8125rem;
+    letter-spacing: 0.22em;
+    margin: 0 0 1.2rem;
+    text-transform: uppercase;
+  }
+
+  .history h2 {
+    color: var(--color-white);
+    font-size: clamp(2.75rem, 4.1vw, 3.85rem);
+    line-height: 1;
+    margin: 0 0 1.25rem;
+  }
+
+  .history h2 span {
+    color: var(--color-cta);
+  }
+
+  .history p {
+    line-height: 1.68;
+  }
+
+  .history__content > p:not(.history__eyebrow) {
+    margin: 0 0 0.9rem;
+  }
+
+  @media (max-width: 1023px) {
+    .history__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

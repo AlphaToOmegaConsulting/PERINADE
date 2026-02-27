@@ -1,0 +1,198 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: "hero" | "pill" | "text" | "form";
+  class?: string;
+}
+
+const { href, label, variant = "pill", class: className = "" } = Astro.props;
+const isPlaceholder = href.startsWith("TODO_");
+---
+
+{
+  variant === "hero" ? (
+    <Fragment>
+      {isPlaceholder ? (
+        <span class={`hero-cta ${className}`} data-todo={href}>
+          <span class="hero-cta__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span class="hero-cta__label">{label}</span>
+        </span>
+      ) : (
+        <a class={`hero-cta ${className}`} href={href}>
+          <span class="hero-cta__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </span>
+          <span class="hero-cta__label">{label}</span>
+        </a>
+      )}
+    </Fragment>
+  ) : variant === "text" ? (
+    isPlaceholder ? (
+      <span class={`text-link ${className}`} data-todo={href}>{label}</span>
+    ) : (
+      <a class={`text-link ${className}`} href={href}>{label}</a>
+    )
+  ) : variant === "form" ? (
+    isPlaceholder ? (
+      <span class={`form-link ${className}`} data-todo={href}>
+        <span class="form-link__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        <span>{label}</span>
+      </span>
+    ) : (
+      <a class={`form-link ${className}`} href={href}>
+        <span class="form-link__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        <span>{label}</span>
+      </a>
+    )
+  ) : isPlaceholder ? (
+    <span class={`pill-link ${className}`} data-todo={href}>{label}</span>
+  ) : (
+    <a class={`pill-link ${className}`} href={href}>{label}</a>
+  )
+}
+
+<style>
+  .hero-cta {
+    align-items: center;
+    color: var(--color-white);
+    display: inline-flex;
+    gap: 1rem;
+  }
+
+  .hero-cta__icon {
+    align-items: center;
+    background: var(--color-cta);
+    border-radius: 999px;
+    color: var(--color-white);
+    display: inline-flex;
+    height: 4rem;
+    justify-content: center;
+    transition: transform 180ms ease, background 180ms ease;
+    width: 4rem;
+  }
+
+  .hero-cta__icon svg {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+
+  .hero-cta__label {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.8125rem;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    padding-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .pill-link {
+    align-items: center;
+    background: var(--color-cta);
+    border-radius: 999px;
+    box-shadow: var(--shadow-soft);
+    color: var(--color-white);
+    display: inline-flex;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    justify-content: center;
+    letter-spacing: 0.16em;
+    min-height: 3.5rem;
+    padding: 0 1.5rem;
+    text-transform: uppercase;
+    transition: transform 180ms ease, background 180ms ease;
+  }
+
+  .text-link {
+    border-bottom: 1px solid rgba(196, 156, 110, 0.35);
+    color: var(--color-accent);
+    display: inline-flex;
+    font-size: 0.8125rem;
+    letter-spacing: 0.16em;
+    line-height: 1.4;
+    padding-bottom: 0.25rem;
+    text-transform: uppercase;
+  }
+
+  .form-link {
+    align-items: center;
+    background: var(--color-cta);
+    border-radius: 999px;
+    box-shadow: var(--shadow-card);
+    color: var(--color-white);
+    display: inline-flex;
+    gap: 0.9rem;
+    justify-content: center;
+    min-height: 4.25rem;
+    padding: 0 2rem;
+    text-transform: uppercase;
+  }
+
+  .form-link__icon {
+    align-items: center;
+    background: rgba(255, 255, 255, 0.24);
+    border-radius: 999px;
+    display: inline-flex;
+    height: 2rem;
+    justify-content: center;
+    width: 2rem;
+  }
+
+  .form-link__icon svg {
+    height: 1rem;
+    width: 1rem;
+  }
+
+  a.hero-cta:hover .hero-cta__icon,
+  a.pill-link:hover,
+  a.form-link:hover,
+  a.text-link:hover {
+    transform: translateY(-1px);
+  }
+
+  a.hero-cta:hover .hero-cta__icon,
+  a.pill-link:hover,
+  a.form-link:hover {
+    background: var(--color-cta-strong);
+  }
+
+  a.text-link:hover {
+    color: var(--color-cta);
+  }
+
+  [data-todo] {
+    cursor: not-allowed;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 767px) {
+    .hero-cta__icon {
+      height: 3.5rem;
+      width: 3.5rem;
+    }
+
+    .pill-link {
+      min-height: 3.5rem;
+      padding: 0 1.3rem;
+    }
+
+    .form-link {
+      min-height: 3.75rem;
+      padding-inline: 1.5rem;
+    }
+  }
+</style>

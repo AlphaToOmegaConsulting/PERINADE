@@ -1,0 +1,236 @@
+---
+import type { NavItem } from "../../types/site";
+
+interface Props {
+  nav: NavItem[];
+}
+
+const { nav } = Astro.props;
+const desktopNav = nav.filter((item) => item.href !== "#hero");
+const leftNav = desktopNav.slice(0, 2);
+const rightNav = desktopNav.slice(2);
+---
+
+<header class="site-header" data-header>
+  <div class="site-header__fade" aria-hidden="true"></div>
+  <nav class="shell site-header__nav" aria-label="Navigation principale">
+    <div class="site-header__group site-header__group--left">
+      {leftNav.map((item) => (
+        <a class="site-header__link" href={item.href}>{item.label}</a>
+      ))}
+    </div>
+
+    <a class="site-header__brand" href="#hero" aria-label="Accueil">
+      <img src="/assets/perinade/logo.png" alt="" width="48" height="48" />
+    </a>
+
+    <div class="site-header__group site-header__group--right">
+      {rightNav.map((item) => (
+        <a class="site-header__link" href={item.href}>{item.label}</a>
+      ))}
+    </div>
+
+    <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span class="sr-only">Ouvrir le menu</span>
+    </button>
+  </nav>
+
+  <div class="site-header__mobile" id="mobile-nav" data-mobile-nav hidden>
+    <div class="shell site-header__mobile-inner">
+      {nav.map((item) => (
+        <a class="site-header__mobile-link" href={item.href}>{item.label}</a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const header = document.querySelector("[data-header]");
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const mobileNav = document.querySelector("[data-mobile-nav]");
+
+  const syncHeader = () => {
+    if (!header) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 48);
+  };
+
+  syncHeader();
+  window.addEventListener("scroll", syncHeader, { passive: true });
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    mobileNav.hidden = isOpen;
+    header?.classList.toggle("is-open", !isOpen);
+  });
+
+  mobileNav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.setAttribute("aria-expanded", "false");
+      mobileNav.hidden = true;
+      header?.classList.remove("is-open");
+    });
+  });
+</script>
+
+<style>
+  .site-header {
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: background 180ms ease, box-shadow 180ms ease, backdrop-filter 180ms ease;
+    z-index: 50;
+  }
+
+  .site-header.is-scrolled,
+  .site-header.is-open {
+    backdrop-filter: blur(14px);
+    background: rgba(15, 15, 15, 0.9);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .site-header__fade {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .site-header.is-scrolled .site-header__fade,
+  .site-header.is-open .site-header__fade {
+    opacity: 0;
+  }
+
+  .site-header__nav {
+    align-items: center;
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      clamp(4rem, 9vw, 8.5rem)
+      auto
+      clamp(4rem, 9vw, 8.5rem)
+      auto
+      minmax(0, 1fr);
+    height: var(--header-height);
+    position: relative;
+  }
+
+  .site-header__group {
+    align-items: center;
+    display: flex;
+    white-space: nowrap;
+  }
+
+  .site-header__group--left {
+    grid-column: 2;
+    gap: clamp(2.4rem, 4vw, 4.8rem);
+    justify-self: end;
+  }
+
+  .site-header__group--right {
+    gap: clamp(2.4rem, 4vw, 4.8rem);
+    grid-column: 6;
+    justify-self: start;
+  }
+
+  .site-header__link {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .site-header__link:hover {
+    color: var(--color-white);
+  }
+
+  .site-header__brand {
+    align-items: center;
+    color: var(--color-white);
+    display: inline-flex;
+    grid-column: 4;
+    justify-items: center;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .site-header__brand img {
+    height: 3.2rem;
+    object-fit: contain;
+    width: 3.2rem;
+  }
+
+  .site-header__toggle,
+  .site-header__mobile {
+    display: none;
+  }
+
+  .site-header__toggle {
+    background: transparent;
+    border: 0;
+    justify-self: end;
+    padding: 0.5rem;
+  }
+
+  .site-header__toggle span:not(.sr-only) {
+    background: var(--color-white);
+    display: block;
+    height: 2px;
+    margin-block: 5px;
+    transition: transform 160ms ease, opacity 160ms ease;
+    width: 1.6rem;
+  }
+
+  .site-header__mobile {
+    background: rgba(15, 15, 15, 0.96);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .site-header__mobile[hidden] {
+    display: none;
+  }
+
+  .site-header__mobile-inner {
+    display: grid;
+    gap: 0.8rem;
+    padding-block: 1.1rem 1.4rem;
+  }
+
+  .site-header__mobile-link {
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    padding-block: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1023px) {
+    .site-header__nav {
+      grid-template-columns: auto 1fr auto;
+      height: var(--header-height);
+    }
+
+    .site-header__group {
+      display: none;
+    }
+
+    .site-header__brand {
+      justify-self: center;
+    }
+
+    .site-header__toggle,
+    .site-header__mobile:not([hidden]) {
+      display: block;
+    }
+
+    .site-header__brand img {
+      height: 2.6rem;
+      width: 2.6rem;
+    }
+  }
+</style>

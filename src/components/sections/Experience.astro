@@ -1,0 +1,148 @@
+---
+import type { SiteData } from "../../types/site";
+import ButtonLink from "../ui/ButtonLink.astro";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  experience: SiteData["experience"];
+}
+
+const { experience } = Astro.props;
+
+function iconSvg(icon: string) {
+  const icons: Record<string, string> = {
+    clock: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7"></circle><path d="M12 7.5v5l3 1.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
+    users: `<svg viewBox="0 0 24 24" fill="none"><path d="M8.5 12.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM4.5 18c.7-2 2.2-3 4-3h.5c1.8 0 3.3 1 4 3M14 18c.5-1.4 1.6-2.2 3.2-2.2h.3c1.1 0 2.1.4 3 1.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
+    globe: `<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.7"></circle><path d="M4.5 9.5h15M4.5 14.5h15M12 4c2 2.2 3 5 3 8s-1 5.8-3 8c-2-2.2-3-5-3-8s1-5.8 3-8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>`,
+    pin: `<svg viewBox="0 0 24 24" fill="none"><path d="M12 20s5-4.8 5-9a5 5 0 1 0-10 0c0 4.2 5 9 5 9Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="12" cy="11" r="1.8" fill="currentColor"></circle></svg>`,
+    ticket: `<svg viewBox="0 0 24 24" fill="none"><path d="M4 8.5A2.5 2.5 0 0 0 6.5 6H18v12H6.5A2.5 2.5 0 0 0 4 15.5v-7Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 9.5h3M11 14.5h2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path></svg>`
+  };
+  return icons[icon] ?? icons.clock;
+}
+---
+
+<section class="experience section" id="experience" style={`--experience-image: url('${experience.backgroundImage}')`}>
+  <div class="experience__bg" aria-hidden="true"></div>
+  <div class="shell shell--narrow experience__inner">
+    <SectionHeading
+      eyebrow={experience.eyebrow}
+      title={experience.title}
+      body={experience.body}
+      centered
+      light
+    />
+
+    <div class="experience__grid">
+      {experience.details.map((detail) => (
+        <article class="experience__card">
+          <span class="experience__icon" set:html={iconSvg(detail.icon)}></span>
+          <p class="experience__label">{detail.label}</p>
+          <p class="experience__value">{detail.value}</p>
+        </article>
+      ))}
+    </div>
+
+    <div class="experience__cta">
+      <ButtonLink href={experience.ctaHref} label={experience.ctaLabel} />
+      <p>Sur rendez-vous uniquement · Parking gratuit · Accès facile depuis Carcassonne</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    overflow: clip;
+    position: relative;
+  }
+
+  .experience__bg {
+    background-image:
+      linear-gradient(180deg, rgba(25, 43, 23, 0.9) 0%, rgba(25, 43, 23, 0.94) 100%),
+      var(--experience-image);
+    background-position: center 52%;
+    background-size: cover;
+    inset: 0;
+    opacity: 1;
+    position: absolute;
+  }
+
+  .experience__inner {
+    position: relative;
+  }
+
+  .experience__grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    margin-top: 2.5rem;
+  }
+
+  .experience__card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-card);
+    min-height: 8.5rem;
+    padding: 1.2rem 0.85rem 1.3rem;
+    text-align: center;
+  }
+
+  .experience__icon {
+    color: var(--color-accent);
+    display: inline-flex;
+    height: 1.6rem;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+    width: 1.6rem;
+  }
+
+  .experience__icon :global(svg) {
+    height: 100%;
+    width: 100%;
+  }
+
+  .experience__label,
+  .experience__value {
+    margin: 0;
+  }
+
+  .experience__label {
+    color: rgba(255, 255, 255, 0.56);
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+  }
+
+  .experience__value {
+    color: var(--color-white);
+    font-size: 0.95rem;
+    line-height: 1.45;
+  }
+
+  .experience__cta {
+    display: grid;
+    gap: 1.2rem;
+    justify-items: center;
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .experience__cta p {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.875rem;
+    margin: 0;
+  }
+
+  @media (max-width: 1023px) {
+    .experience__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .experience__grid {
+      grid-template-columns: 1fr;
+      margin-top: 2.5rem;
+    }
+  }
+</style>

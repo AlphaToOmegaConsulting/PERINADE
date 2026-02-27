@@ -1,0 +1,135 @@
+---
+import type { SiteData } from "../../types/site";
+import ButtonLink from "../ui/ButtonLink.astro";
+
+interface Props {
+  wines: SiteData["wines"];
+}
+
+const { wines } = Astro.props;
+---
+
+<section class="wines section section--soft" id="cuvees">
+  <div class="shell shell--narrow">
+    <div class="wines__header">
+      <div>
+        <p class="wines__eyebrow">{wines.eyebrow}</p>
+        <h2>{wines.title}</h2>
+      </div>
+      <ButtonLink href={wines.allWinesHref} label={wines.allWinesLabel} variant="text" />
+    </div>
+
+    <div class="wines__grid">
+      {wines.items.map((wine) => (
+        <article class="wines__card">
+          <div class="wines__media">
+            <img src={wine.image} alt={wine.title} loading="lazy" />
+          </div>
+          <div class="wines__body">
+            <p class="wines__subtitle">{wine.subtitle}</p>
+            <h3>{wine.title}</h3>
+            <p class="wines__description">{wine.description}</p>
+            <ButtonLink href={wine.ctaHref} label={wine.ctaLabel} variant="text" />
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .wines__header {
+    align-items: end;
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+    margin-bottom: 2.4rem;
+  }
+
+  .wines__eyebrow {
+    color: var(--color-accent);
+    font-size: 0.8125rem;
+    letter-spacing: 0.22em;
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+  }
+
+  .wines h2 {
+    font-size: var(--display-section-lg);
+    margin: 0;
+  }
+
+  .wines__grid {
+    display: grid;
+    gap: 1.15rem;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .wines__card {
+    background: var(--color-white);
+    border: 1px solid var(--color-card-border-soft);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    overflow: clip;
+  }
+
+  .wines__media {
+    background: #efe8dd;
+    height: 16.5rem;
+  }
+
+  .wines__media img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .wines__body {
+    display: grid;
+    gap: 0.78rem;
+    min-height: 11.9rem;
+    padding: 1.35rem 1.2rem 1.5rem;
+  }
+
+  .wines__subtitle {
+    color: var(--color-muted);
+    font-size: 0.6875rem;
+    letter-spacing: 0.15em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .wines h3 {
+    font-size: 1.4rem;
+    margin: 0;
+  }
+
+  .wines__description {
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .wines__body :global(.text-link) {
+    align-self: end;
+    margin-top: auto;
+  }
+
+  @media (max-width: 1023px) {
+    .wines__header {
+      align-items: start;
+      flex-direction: column;
+    }
+
+    .wines__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 767px) {
+    .wines__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

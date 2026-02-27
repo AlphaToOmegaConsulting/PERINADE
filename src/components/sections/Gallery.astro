@@ -1,0 +1,197 @@
+---
+import type { SiteData } from "../../types/site";
+import SectionHeading from "../ui/SectionHeading.astro";
+
+interface Props {
+  gallery: SiteData["gallery"];
+}
+
+const { gallery } = Astro.props;
+const galleryItems = gallery.items.slice(0, 3);
+---
+
+<section class="gallery section section--white" id="gallery">
+  <div class="gallery__tiger-layer" aria-hidden="true">
+    <div class="gallery__tiger-art"></div>
+  </div>
+
+  <div class="shell shell--narrow">
+    <div class="gallery__intro">
+      <div class="gallery__title-card">
+        <SectionHeading eyebrow={gallery.eyebrow} title={gallery.title} centered />
+      </div>
+    </div>
+
+    <div class="gallery__composition">
+      <div class="gallery__track">
+        {galleryItems.map((item) => (
+          <figure class="gallery__item">
+            <img src={item.src} alt={item.alt} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery {
+    background: linear-gradient(180deg, rgba(248, 246, 243, 0.36) 0%, rgba(248, 246, 243, 0.62) 40%, rgba(255, 255, 255, 0.92) 100%);
+    isolation: isolate;
+    overflow: clip;
+    position: relative;
+  }
+
+  .gallery__tiger-layer {
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 0;
+  }
+
+  .gallery__tiger-art {
+    aspect-ratio: 1536 / 1024;
+    background: url("/assets/perinade/gallery-tiger.png") center top / contain no-repeat;
+    margin-inline: auto;
+    opacity: 0.36;
+    position: sticky;
+    top: calc(var(--header-height) + 0.8rem);
+    width: min(62rem, 90vw);
+  }
+
+  .gallery .shell {
+    position: relative;
+    z-index: 1;
+  }
+
+  .gallery__intro {
+    display: grid;
+    padding-block: clamp(5rem, 10vw, 7rem) clamp(1.5rem, 4.2vw, 2.6rem);
+    place-items: end center;
+    position: relative;
+    text-align: center;
+  }
+
+  .gallery__title-card {
+    max-width: 40rem;
+    padding: 0;
+  }
+
+  .gallery :global(.section-heading__title) {
+    font-size: clamp(2.4rem, 4.2vw, 3.4rem);
+  }
+
+  .gallery :global(.section-heading__eyebrow) {
+    color: rgba(25, 43, 23, 0.7);
+  }
+
+  .gallery__composition {
+    --gallery-mask-shape: url("/assets/perinade/gallery-curve-mask.svg");
+    aspect-ratio: 1442 / 831;
+    background: #dcdcdc;
+    box-shadow: 0 26px 48px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    -webkit-mask: var(--gallery-mask-shape) center / 100% 100% no-repeat;
+    mask: var(--gallery-mask-shape) center / 100% 100% no-repeat;
+  }
+
+  .gallery__composition::after {
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+  }
+
+  .gallery__track {
+    display: grid;
+    gap: 8px;
+    height: 100%;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .gallery__item {
+    background: #efefef;
+    margin: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .gallery__item img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 360ms ease;
+    width: 100%;
+  }
+
+  .gallery__item:hover img {
+    transform: scale(1.04);
+  }
+
+  @supports not ((-webkit-mask-image: linear-gradient(#000, #000)) or (mask-image: linear-gradient(#000, #000))) {
+    .gallery__composition {
+      -webkit-mask: none;
+      mask: none;
+      clip-path: path("M 0 28 C 252 132 1190 132 1442 28 L 1442 803 C 1190 699 252 699 0 803 Z");
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .gallery__tiger-art {
+      opacity: 0.32;
+      top: calc(var(--header-height) + 0.7rem);
+      width: min(49rem, 102vw);
+    }
+
+    .gallery__composition {
+      border-radius: 1.15rem;
+    }
+
+    .gallery__track {
+      gap: 6px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .gallery__tiger-art {
+      opacity: 0.28;
+      top: calc(var(--header-height) + 0.5rem);
+      width: min(33rem, 132vw);
+    }
+
+    .gallery__intro {
+      padding-block: 4.5rem 1.6rem;
+    }
+
+    .gallery__composition {
+      aspect-ratio: auto;
+      background: transparent;
+      box-shadow: none;
+      overflow: visible;
+      -webkit-mask: none;
+      mask: none;
+      clip-path: none;
+    }
+
+    .gallery__track {
+      display: flex;
+      gap: 0.7rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      padding-bottom: 0.35rem;
+    }
+
+    .gallery__item {
+      border-radius: 0.85rem;
+      min-width: min(74vw, 22rem);
+      scroll-snap-align: start;
+    }
+
+    .gallery__item img {
+      aspect-ratio: 4 / 5;
+    }
+  }
+</style>

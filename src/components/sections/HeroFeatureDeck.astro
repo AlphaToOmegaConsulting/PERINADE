@@ -1,0 +1,336 @@
+---
+import type { HeroFeatureCard } from "../../types/site";
+
+interface Props {
+  cards: HeroFeatureCard[];
+}
+
+const { cards } = Astro.props;
+const visibleCards = cards.slice(0, 3);
+---
+
+{
+  visibleCards.length === 3 && (
+    <div class="hero-deck" data-hero-deck>
+      <div class="hero-deck__stage">
+        {visibleCards.map((card, index) => {
+          const slot = index === 0 ? "left" : index === 1 ? "center" : "right";
+          const isPlaceholder = card.href.startsWith("TODO_");
+
+          const content = (
+            <>
+              <img class="hero-deck__image" src={card.image} alt={card.alt} loading={index === 1 ? "eager" : "lazy"} />
+              <div class="hero-deck__overlay" aria-hidden="true"></div>
+              <div class="hero-deck__copy">
+                <p class="hero-deck__kicker">{card.kicker}</p>
+                <h2 class="hero-deck__title">{card.title}</h2>
+              </div>
+            </>
+          );
+
+          return isPlaceholder ? (
+            <article class={`hero-deck__card hero-deck__card--${slot}`}>
+              {content}
+            </article>
+          ) : (
+            <a class={`hero-deck__card hero-deck__card--${slot}`} href={card.href}>
+              {content}
+            </a>
+          );
+        })}
+
+        <span class="hero-deck__nav hero-deck__nav--prev" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M14.5 6.5L9 12l5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+        <span class="hero-deck__nav hero-deck__nav--next" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M9.5 6.5L15 12l-5.5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </span>
+      </div>
+    </div>
+  )
+}
+
+<style>
+  .hero-deck {
+    pointer-events: auto;
+    position: relative;
+    width: min(100%, 29.5rem);
+  }
+
+  .hero-deck__stage {
+    height: 16.8rem;
+    position: relative;
+    width: 100%;
+  }
+
+  .hero-deck__card {
+    border-radius: 0.83rem;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    color: var(--color-white);
+    display: block;
+    height: 13.22rem;
+    overflow: hidden;
+    position: absolute;
+    text-decoration: none;
+    transition:
+      transform 280ms ease,
+      left 280ms ease,
+      top 280ms ease,
+      box-shadow 280ms ease;
+    width: 9.91rem;
+  }
+
+  .hero-deck__card--left {
+    left: 2.06rem;
+    top: 1.44rem;
+    transform: rotate(-15.16deg);
+  }
+
+  .hero-deck__card--center {
+    left: 9.6rem;
+    top: 0;
+    z-index: 2;
+  }
+
+  .hero-deck__card--right {
+    left: 14.55rem;
+    top: 0.56rem;
+    transform: rotate(14.25deg);
+    z-index: 3;
+  }
+
+  .hero-deck:hover .hero-deck__card--left,
+  .hero-deck:focus-within .hero-deck__card--left {
+    left: -0.46rem;
+    top: 0.93rem;
+  }
+
+  .hero-deck:hover .hero-deck__card--center,
+  .hero-deck:focus-within .hero-deck__card--center {
+    left: 9.08rem;
+    top: -2.06rem;
+  }
+
+  .hero-deck:hover .hero-deck__card--right,
+  .hero-deck:focus-within .hero-deck__card--right {
+    left: 16.62rem;
+    top: -0.42rem;
+  }
+
+  .hero-deck:hover .hero-deck__card,
+  .hero-deck:focus-within .hero-deck__card {
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+  }
+
+  .hero-deck__image,
+  .hero-deck__overlay {
+    inset: 0;
+    position: absolute;
+  }
+
+  .hero-deck__image {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .hero-deck__overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.7) 100%);
+  }
+
+  .hero-deck__copy {
+    bottom: 0;
+    left: 0;
+    padding: 1.15rem 0.82rem 0.82rem;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+  }
+
+  .hero-deck__kicker {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.455rem;
+    letter-spacing: 0.15em;
+    line-height: 1.5;
+    margin: 0 0 0.45rem;
+    text-transform: uppercase;
+  }
+
+  .hero-deck__title {
+    color: var(--color-white);
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 0.99;
+    margin: 0;
+    max-width: 8rem;
+    text-transform: uppercase;
+  }
+
+  .hero-deck__nav {
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.8);
+    display: inline-flex;
+    height: 2.07rem;
+    justify-content: center;
+    position: absolute;
+    top: 8.21rem;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+    width: 2.07rem;
+  }
+
+  .hero-deck__nav--prev {
+    left: 0;
+  }
+
+  .hero-deck__nav--next {
+    background: rgba(255, 255, 255, 0.35);
+    left: 27.45rem;
+  }
+
+  .hero-deck:hover .hero-deck__nav--prev,
+  .hero-deck:focus-within .hero-deck__nav--prev {
+    background: rgba(214, 116, 0, 0.55);
+    border-color: rgba(214, 116, 0, 0.58);
+    color: var(--color-white);
+  }
+
+  .hero-deck:hover .hero-deck__nav--next,
+  .hero-deck:focus-within .hero-deck__nav--next {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-deck__nav svg {
+    height: 0.82rem;
+    width: 0.82rem;
+  }
+
+  @media (max-width: 1023px) {
+    .hero-deck {
+      width: min(100%, 25rem);
+    }
+
+    .hero-deck__stage {
+      height: 14.75rem;
+    }
+
+    .hero-deck__card {
+      height: 11.25rem;
+      width: 8.45rem;
+    }
+
+    .hero-deck__card--left {
+      left: 1.85rem;
+      top: 1.45rem;
+    }
+
+    .hero-deck__card--center {
+      left: 8.4rem;
+    }
+
+    .hero-deck__card--right {
+      left: 12.85rem;
+      top: 0.4rem;
+    }
+
+    .hero-deck:hover .hero-deck__card--left,
+    .hero-deck:focus-within .hero-deck__card--left {
+      left: 0;
+      top: 1rem;
+    }
+
+    .hero-deck:hover .hero-deck__card--center,
+    .hero-deck:focus-within .hero-deck__card--center {
+      left: 8rem;
+      top: -1.2rem;
+    }
+
+    .hero-deck:hover .hero-deck__card--right,
+    .hero-deck:focus-within .hero-deck__card--right {
+      left: 14.7rem;
+      top: -0.1rem;
+    }
+
+    .hero-deck__nav {
+      top: 7rem;
+    }
+
+    .hero-deck__nav--next {
+      left: 22.85rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .hero-deck {
+      margin-inline: auto;
+      width: min(100%, 18.5rem);
+    }
+
+    .hero-deck__stage {
+      height: 12rem;
+    }
+
+    .hero-deck__card {
+      height: 9.3rem;
+      width: 6.95rem;
+    }
+
+    .hero-deck__card--left {
+      left: 1.15rem;
+      top: 1.15rem;
+    }
+
+    .hero-deck__card--center {
+      left: 5.95rem;
+    }
+
+    .hero-deck__card--right {
+      left: 9.35rem;
+      top: 0.35rem;
+    }
+
+    .hero-deck:hover .hero-deck__card--left,
+    .hero-deck:focus-within .hero-deck__card--left {
+      left: 0.1rem;
+      top: 0.85rem;
+    }
+
+    .hero-deck:hover .hero-deck__card--center,
+    .hero-deck:focus-within .hero-deck__card--center {
+      left: 5.3rem;
+      top: -0.95rem;
+    }
+
+    .hero-deck:hover .hero-deck__card--right,
+    .hero-deck:focus-within .hero-deck__card--right {
+      left: 10.4rem;
+      top: 0;
+    }
+
+    .hero-deck__copy {
+      padding: 0.95rem 0.7rem 0.72rem;
+    }
+
+    .hero-deck__title {
+      font-size: 0.88rem;
+      max-width: 5.7rem;
+    }
+
+    .hero-deck__nav {
+      height: 1.8rem;
+      top: 5.75rem;
+      width: 1.8rem;
+    }
+
+    .hero-deck__nav--next {
+      left: 16.7rem;
+    }
+  }
+</style>
