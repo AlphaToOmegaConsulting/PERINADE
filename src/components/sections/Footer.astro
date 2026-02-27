@@ -45,11 +45,15 @@ const { footer } = Astro.props;
         {footer.social.map((item) => (
           isPlaceholderLink(item.href) ? (
             <span class="footer__social-link" data-todo={item.href} aria-label={item.label}>
-              <Icon name={item.label.toLowerCase() === "instagram" ? "instagram" : "facebook"} class="footer__social-icon" />
+              <span class="footer__social-icon">
+                <Icon name={item.label.toLowerCase() === "instagram" ? "instagram" : "facebook"} />
+              </span>
             </span>
           ) : (
             <a class="footer__social-link" href={item.href} aria-label={item.label}>
-              <Icon name={item.label.toLowerCase() === "instagram" ? "instagram" : "facebook"} class="footer__social-icon" />
+              <span class="footer__social-icon">
+                <Icon name={item.label.toLowerCase() === "instagram" ? "instagram" : "facebook"} />
+              </span>
             </a>
           )
         ))}

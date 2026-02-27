@@ -32,7 +32,7 @@ const { escape } = Astro.props;
       <ul>
         {escape.features.map((item) => (
           <li>
-            <Icon name={item.icon} />
+            <span><Icon name={item.icon} /></span>
             <span>{item.label}</span>
           </li>
         ))}

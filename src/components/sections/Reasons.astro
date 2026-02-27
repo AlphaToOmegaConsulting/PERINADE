@@ -17,7 +17,7 @@ const { reasons } = Astro.props;
     <div class="reasons__grid">
       {reasons.map((reason) => (
         <article class="reasons__card">
-          <Icon name={reason.icon} class="reasons__icon" />
+          <span class="reasons__icon"><Icon name={reason.icon} /></span>
           <h3>{reason.title}</h3>
           <p>{reason.body}</p>
         </article>

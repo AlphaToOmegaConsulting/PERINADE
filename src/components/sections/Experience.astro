@@ -25,7 +25,7 @@ const { experience } = Astro.props;
     <div class="experience__grid">
       {experience.details.map((detail) => (
         <article class="experience__card">
-          <Icon name={detail.icon} class="experience__icon" />
+          <span class="experience__icon"><Icon name={detail.icon} /></span>
           <p class="experience__label">{detail.label}</p>
           <p class="experience__value">{detail.value}</p>
         </article>

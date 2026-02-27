@@ -33,7 +33,7 @@ const { access } = Astro.props;
         {access.rightCards.map((card) => (
           <article class="access__card">
             <div class="access__card-head">
-              {card.icon && <Icon name={card.icon} class="access__icon" />}
+              {card.icon && <span class="access__icon"><Icon name={card.icon} /></span>}
               {card.tag && <p class="access__tag">{card.tag}</p>}
             </div>
             <h3>{card.title}</h3>

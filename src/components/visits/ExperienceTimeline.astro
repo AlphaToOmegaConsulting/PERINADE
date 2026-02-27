@@ -69,6 +69,7 @@ const { timeline } = Astro.props;
   .timeline figure {
     border-radius: var(--visit-radius-lg);
     box-shadow: var(--shadow-card);
+    justify-self: center;
     margin: 0;
     max-width: var(--timeline-media-max, 28rem);
     overflow: hidden;
@@ -83,11 +84,12 @@ const { timeline } = Astro.props;
   }
 
   .timeline__copy {
+    justify-self: center;
     max-width: var(--timeline-copy-max, 25rem);
   }
 
   .timeline__step--start {
-    align-items: start;
+    align-items: center;
   }
 
   .timeline__number {

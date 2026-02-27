@@ -19,7 +19,7 @@ const { contact } = Astro.props;
       <ul class="contact__list">
         {contact.info.map((item) => (
           <li>
-            <Icon name={item.icon} class="contact__icon" />
+            <span class="contact__icon"><Icon name={item.icon} /></span>
             <div class="contact__details">
               <strong>{item.label}</strong>
               <span>{item.value}</span>

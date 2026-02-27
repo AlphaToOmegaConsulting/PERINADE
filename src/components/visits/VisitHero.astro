@@ -23,7 +23,7 @@ const { hero } = Astro.props;
       <ul class="visit-hero__badges">
         {hero.badges.map((badge) => (
           <li>
-            <Icon name={badge.icon} class="visit-hero__badge-icon" />
+            <span class="visit-hero__badge-icon"><Icon name={badge.icon} /></span>
             <span>{badge.label}</span>
           </li>
         ))}
