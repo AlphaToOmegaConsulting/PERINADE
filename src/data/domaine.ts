@@ -1,13 +1,13 @@
 import type { DomainePageData } from "../types/domaine";
-import experienceBg from "../assets/perinade/experience-bg.png";
-import galleryTiger from "../assets/perinade/gallery-tiger.png";
-import galleryVinesClose from "../assets/perinade/gallery-vines-close.png";
-import heroGrapes from "../assets/perinade/visits/hero-grapes.jpg";
-import step3 from "../assets/perinade/visits/step-3.jpg";
-import step4 from "../assets/perinade/visits/step-4.jpg";
-import wineBlanc from "../assets/perinade/wine-blanc.png";
-import wineCuveeDomaine from "../assets/perinade/wine-cuvee-domaine.png";
-import wineGrandeReserve from "../assets/perinade/wine-grande-reserve.png";
+import familyImg from "../assets/perinade/domaine/family.jpg";
+import heroImg from "../assets/perinade/domaine/hero.jpg";
+import terroirImg from "../assets/perinade/domaine/terroir.jpg";
+import timelineLeftImg from "../assets/perinade/domaine/timeline-left.jpg";
+import timelineRightImg from "../assets/perinade/domaine/timeline-right.jpg";
+import visitCtaImg from "../assets/perinade/domaine/visit-cta.jpg";
+import wine1Img from "../assets/perinade/domaine/wine-1.jpg";
+import wine2Img from "../assets/perinade/domaine/wine-2.jpg";
+import wine3Img from "../assets/perinade/domaine/wine-3.jpg";
 
 export const domainePage: DomainePageData = {
   theme: {
@@ -27,7 +27,7 @@ export const domainePage: DomainePageData = {
       "Entre le Canal du Midi et le Fresquel, le Domaine de la Périnade perpétue six générations de viticulture sur 100 ha, dont 40 ha de vignes. Une histoire familiale ancrée dans le Minervois, relancée en 2019 avec exigence.",
     primaryCta: {
       label: "Réserver une visite du domaine",
-      href: "TODO_LINK_BOOKING"
+      href: "/visites#booking"
     },
     secondaryCta: {
       label: "Découvrir nos cuvées",
@@ -35,8 +35,8 @@ export const domainePage: DomainePageData = {
     },
     badges: ["Viticulture", "Terroir", "Transmission"],
     highlights: ["100 ha de domaine", "40 ha de vignes", "6 générations", "Minervois · Languedoc"],
-    image: heroGrapes,
-    imageAlt: "Portrait au domaine"
+    image: heroImg,
+    imageAlt: "Personne consultant son téléphone au crépuscule dans le domaine"
   },
   terroir: {
     eyebrow: "Terroir & Savoir-faire",
@@ -58,8 +58,8 @@ export const domainePage: DomainePageData = {
         body: "Gestion de l'enherbement pour préserver la vie des sols."
       }
     ],
-    image: galleryVinesClose,
-    imageAlt: "Vignes du domaine au lever du jour"
+    image: terroirImg,
+    imageAlt: "Paysage de montagnes au lever du soleil"
   },
   family: {
     eyebrow: "La famille",
@@ -74,8 +74,8 @@ export const domainePage: DomainePageData = {
       { year: "2019", label: "Relance" },
       { year: "2020", label: "1er chai" }
     ],
-    image: galleryTiger,
-    imageAlt: "Esprit de transmission du domaine"
+    image: familyImg,
+    imageAlt: "Inscription Dream Big sur fond sombre"
   },
   statsBar: [
     { value: "100 ha", label: "Domaine total" },
@@ -86,38 +86,79 @@ export const domainePage: DomainePageData = {
     { value: "365j", label: "Accueil visiteurs" }
   ],
   timeline: {
-    eyebrow: "Héritage",
+    eyebrow: "Histoire",
     title: "Deux siècles d'une même famille",
-    rows: [
+    defaultTabId: "2021",
+    tabs: [
       {
+        id: "1830",
         year: "1830",
+        tabLabel: "~1830",
         title: "Fondation",
-        detail: "Premières parcelles cultivées par la famille, ancrage historique dans le Minervois."
+        detail: "Premières parcelles cultivées au cœur du Minervois, naissance du domaine familial.",
+        images: [
+          { src: timelineLeftImg, alt: "Travail artisanal de précision" },
+          { src: timelineRightImg, alt: "Moment de dégustation conviviale" }
+        ]
       },
       {
-        year: "1987",
-        title: "Transmission",
-        detail: "Nouvelle génération et structuration du domaine autour d'un projet viticole durable."
-      },
-      {
+        id: "2019",
         year: "2019",
-        title: "Relance du domaine",
-        detail: "Réinvestissement global: vignes, chai et accueil œnotouristique."
+        tabLabel: "2019",
+        title: "Transmission",
+        detail:
+          "La 6e et 7e génération reprend le domaine avec une vision orientée qualité, terroir et expérience visiteur.",
+        images: [
+          { src: timelineRightImg, alt: "Verres de vin en dégustation" },
+          { src: timelineLeftImg, alt: "Travail de cave et vinification" }
+        ]
       },
       {
+        id: "2020",
         year: "2020",
-        title: "Premier chai moderne",
-        detail: "Mise en service d'un chai rénové pour accompagner la montée en qualité."
-      }
-    ],
-    images: [
-      {
-        src: step3,
-        alt: "Travail de précision au chai"
+        tabLabel: "2020",
+        title: "Relance du domaine",
+        detail: "Réinvestissement global: vignes, chai modernisé et structuration de l'accueil œnotouristique.",
+        images: [
+          { src: visitCtaImg, alt: "Alignement de bouteilles dans la cave" },
+          { src: terroirImg, alt: "Panorama du terroir du domaine" }
+        ]
       },
       {
-        src: step4,
-        alt: "Moment de dégustation au domaine"
+        id: "2021",
+        year: "2021",
+        tabLabel: "2021",
+        title: "Résilience",
+        detail:
+          "Année difficile marquée par le Covid et le gel. Le domaine consolide ses débouchés en restauration gastronomique et affine sa proposition premium.",
+        images: [
+          { src: timelineLeftImg, alt: "Outil de cave en action" },
+          { src: timelineRightImg, alt: "Partage autour du vin" }
+        ]
+      },
+      {
+        id: "2022",
+        year: "2022",
+        tabLabel: "2022",
+        title: "Montée en gamme",
+        detail:
+          "Sélection parcellaire renforcée, affinage des cuvées et montée en exigence sur les circuits cavistes et restauration.",
+        images: [
+          { src: wine2Img, alt: "Bouteille du domaine en présentation" },
+          { src: wine3Img, alt: "Collection de bouteilles en cave" }
+        ]
+      },
+      {
+        id: "2023",
+        year: "2023",
+        tabLabel: "2023",
+        title: "Rayonnement œnotouristique",
+        detail:
+          "Déploiement des visites privées et dégustations signatures pour relier histoire familiale et expérience client.",
+        images: [
+          { src: wine1Img, alt: "Cuvée du domaine en gros plan" },
+          { src: visitCtaImg, alt: "Rangée de bouteilles au caveau" }
+        ]
       }
     ]
   },
@@ -130,14 +171,14 @@ export const domainePage: DomainePageData = {
     details: ["Durée: 1h30", "Sur réservation", "Accueil FR / EN", "Groupes privés sur demande"],
     primaryCta: {
       label: "Réserver une visite du domaine",
-      href: "TODO_LINK_BOOKING"
+      href: "/visites#booking"
     },
     secondaryCta: {
       label: "Nous contacter",
       href: "#domaine-contact"
     },
-    image: experienceBg,
-    imageAlt: "Bouteilles du domaine en cave"
+    image: visitCtaImg,
+    imageAlt: "Bouteilles alignées en cave"
   },
   wines: {
     eyebrow: "Nos vins",
@@ -146,7 +187,7 @@ export const domainePage: DomainePageData = {
     allHref: "/boutique",
     items: [
       {
-        image: wineCuveeDomaine,
+        image: wine1Img,
         alt: "Cuvée du Domaine",
         meta: "AOP Minervois · 2022 · 75 cl",
         title: "Cuvée du Domaine",
@@ -156,7 +197,7 @@ export const domainePage: DomainePageData = {
         ctaHref: "/boutique"
       },
       {
-        image: wineBlanc,
+        image: wine2Img,
         alt: "Blanc de Périnade",
         meta: "IGP Pays d'Oc · 2023 · 75 cl",
         title: "Blanc de Périnade",
@@ -166,7 +207,7 @@ export const domainePage: DomainePageData = {
         ctaHref: "/boutique"
       },
       {
-        image: wineGrandeReserve,
+        image: wine3Img,
         alt: "Grande Réserve",
         meta: "AOP Minervois · 2020 · 75 cl",
         title: "Grande Réserve",

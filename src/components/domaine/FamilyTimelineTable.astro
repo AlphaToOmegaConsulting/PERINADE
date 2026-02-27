@@ -1,6 +1,6 @@
 ---
-import type { DomaineTimelineData } from "../../types/domaine";
 import { Image } from "astro:assets";
+import type { DomaineTimelineData } from "../../types/domaine";
 import SectionHeading from "../ui/SectionHeading.astro";
 
 interface Props {
@@ -14,115 +14,196 @@ const { timeline } = Astro.props;
   <div class="shell">
     <SectionHeading eyebrow={timeline.eyebrow} title={timeline.title} class="timeline__heading" />
 
-    <div class="timeline__table-wrap">
-      <table class="timeline__table">
-        <tbody>
-          {timeline.rows.map((row) => (
-            <tr>
-              <th scope="row">{row.year}</th>
-              <td>
-                <strong>{row.title}</strong>
-                <p>{row.detail}</p>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <div class="timeline-tabs" data-timeline-tabs>
+      <div class="timeline-tabs__left" role="tablist" aria-label="Chronologie du domaine">
+        {timeline.tabs.map((tab) => {
+          const isActive = tab.id === timeline.defaultTabId;
+          return (
+            <button
+              type="button"
+              class:list={["timeline-tab", isActive && "is-active"]}
+              role="tab"
+              aria-selected={isActive ? "true" : "false"}
+              aria-controls={`timeline-panel-${tab.id}`}
+              id={`timeline-tab-${tab.id}`}
+              data-tab-id={tab.id}
+            >
+              {tab.tabLabel}
+            </button>
+          );
+        })}
+      </div>
 
-    <div class="timeline__media-grid">
-      {timeline.images.map((image) => (
-        <figure>
-          <Image src={image.src} alt={image.alt} loading="lazy" />
-        </figure>
-      ))}
+      <div class="timeline-tabs__right">
+        {timeline.tabs.map((tab) => {
+          const isActive = tab.id === timeline.defaultTabId;
+          return (
+            <article
+              class:list={["timeline-panel", isActive && "is-active"]}
+              id={`timeline-panel-${tab.id}`}
+              role="tabpanel"
+              aria-labelledby={`timeline-tab-${tab.id}`}
+              data-panel-id={tab.id}
+              hidden={!isActive}
+            >
+              <header class="timeline-panel__head">
+                <h3>{tab.title}</h3>
+                <p>{tab.detail}</p>
+              </header>
+
+              <div class="timeline-panel__media-grid">
+                {tab.images.map((image) => (
+                  <figure>
+                    <Image src={image.src} alt={image.alt} loading="lazy" />
+                  </figure>
+                ))}
+              </div>
+            </article>
+          );
+        })}
+      </div>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  document.querySelectorAll("[data-timeline-tabs]").forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll("[data-tab-id]"));
+    const panels = Array.from(root.querySelectorAll("[data-panel-id]"));
+
+    const activate = (id) => {
+      tabs.forEach((tab) => {
+        const active = tab.getAttribute("data-tab-id") === id;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", active ? "true" : "false");
+      });
+
+      panels.forEach((panel) => {
+        const active = panel.getAttribute("data-panel-id") === id;
+        panel.classList.toggle("is-active", active);
+        panel.hidden = !active;
+      });
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const id = tab.getAttribute("data-tab-id");
+        if (id) activate(id);
+      });
+    });
+  });
+</script>
 
 <style>
   .timeline__heading {
     margin-bottom: 1.7rem;
   }
 
-  .timeline__table-wrap {
+  .timeline-tabs {
     background: var(--color-soft);
     border: 1px solid rgba(44, 44, 44, 0.09);
     border-radius: 1rem;
+    display: grid;
+    grid-template-columns: 5.6rem minmax(0, 1fr);
     overflow: hidden;
   }
 
-  .timeline__table {
-    border-collapse: collapse;
-    width: 100%;
+  .timeline-tabs__left {
+    background: rgba(255, 255, 255, 0.35);
+    border-right: 1px solid rgba(44, 44, 44, 0.09);
+    display: grid;
+    grid-auto-rows: minmax(3.2rem, auto);
   }
 
-  .timeline__table tr + tr {
-    border-top: 1px solid rgba(44, 44, 44, 0.09);
-  }
-
-  .timeline__table th,
-  .timeline__table td {
-    padding: 1rem 1.3rem;
-    vertical-align: top;
-  }
-
-  .timeline__table th {
-    color: var(--color-accent);
+  .timeline-tab {
+    background: transparent;
+    border: 0;
+    border-left: 2px solid transparent;
+    color: #9f9f9f;
+    cursor: pointer;
     font-family: var(--font-display);
-    font-size: 1.04rem;
-    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 0.95rem 0.75rem;
     text-align: left;
-    white-space: nowrap;
-    width: 8rem;
   }
 
-  .timeline__table strong {
+  .timeline-tab.is-active {
+    background: #f2eeea;
+    border-left-color: var(--color-accent);
     color: var(--color-text-strong);
-    display: block;
-    margin-bottom: 0.3rem;
   }
 
-  .timeline__table p {
-    color: var(--color-muted);
+  .timeline-tabs__right {
+    min-height: 25rem;
+  }
+
+  .timeline-panel {
+    display: grid;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+  }
+
+  .timeline-panel__head h3 {
     margin: 0;
   }
 
-  .timeline__media-grid {
+  .timeline-panel__head p {
+    color: var(--color-muted);
+    margin: 0.55rem 0 0;
+  }
+
+  .timeline-panel__media-grid {
     display: grid;
     gap: 0.95rem;
     grid-template-columns: 1.08fr 0.92fr;
-    margin-top: 1.25rem;
   }
 
-  .timeline__media-grid figure {
+  .timeline-panel__media-grid figure {
     border-radius: 0.85rem;
     margin: 0;
     overflow: hidden;
   }
 
-  .timeline__media-grid img {
+  .timeline-panel__media-grid img {
     aspect-ratio: 16/9;
     object-fit: cover;
     width: 100%;
   }
 
+  @media (max-width: 1023px) {
+    .timeline-tabs {
+      grid-template-columns: 1fr;
+    }
+
+    .timeline-tabs__left {
+      border-bottom: 1px solid rgba(44, 44, 44, 0.09);
+      border-right: 0;
+      display: flex;
+      overflow-x: auto;
+    }
+
+    .timeline-tab {
+      min-width: 5.2rem;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .timeline-tab.is-active {
+      border-bottom: 2px solid var(--color-accent);
+      border-left-color: transparent;
+    }
+
+    .timeline-tabs__right {
+      min-height: 0;
+    }
+  }
+
   @media (max-width: 767px) {
-    .timeline__table th,
-    .timeline__table td {
-      display: block;
-      width: auto;
+    .timeline-panel {
+      padding: 1rem;
     }
 
-    .timeline__table th {
-      padding-bottom: 0;
-    }
-
-    .timeline__table td {
-      padding-top: 0.45rem;
-    }
-
-    .timeline__media-grid {
+    .timeline-panel__media-grid {
       grid-template-columns: 1fr;
     }
   }

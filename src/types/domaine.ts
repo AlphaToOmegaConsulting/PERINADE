@@ -57,14 +57,17 @@ export interface DomaineStatItem {
 export interface DomaineTimelineData {
   eyebrow: string;
   title: string;
-  rows: Array<{
+  defaultTabId: string;
+  tabs: Array<{
+    id: string;
     year: string;
+    tabLabel: string;
     title: string;
     detail: string;
-  }>;
-  images: Array<{
-    src: ImageMetadata;
-    alt: string;
+    images: Array<{
+      src: ImageMetadata;
+      alt: string;
+    }>;
   }>;
 }
 

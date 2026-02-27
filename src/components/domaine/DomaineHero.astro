@@ -1,5 +1,4 @@
 ---
-import ButtonLink from "../ui/ButtonLink.astro";
 import { Image } from "astro:assets";
 import type { DomaineHeroData } from "../../types/domaine";
 import { isPlaceholderLink } from "../../utils/link";
@@ -22,7 +21,31 @@ const { hero } = Astro.props;
       <p class="domaine-hero__body">{hero.body}</p>
 
       <div class="domaine-hero__cta-row">
-        <ButtonLink href={hero.primaryCta.href} label={hero.primaryCta.label} class="domaine-hero__cta-primary" />
+        {
+          isPlaceholderLink(hero.primaryCta.href) ? (
+            <span class="domaine-hero__cta-primary" data-todo={hero.primaryCta.href}>
+              <span class="domaine-hero__cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="3.5" y="4.5" width="17" height="16" rx="2.2" stroke="currentColor" stroke-width="1.7"></rect>
+                  <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.7"></path>
+                  <path d="M8 2.8V6.2M16 2.8V6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+                </svg>
+              </span>
+              <span>{hero.primaryCta.label}</span>
+            </span>
+          ) : (
+            <a class="domaine-hero__cta-primary" href={hero.primaryCta.href}>
+              <span class="domaine-hero__cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="3.5" y="4.5" width="17" height="16" rx="2.2" stroke="currentColor" stroke-width="1.7"></rect>
+                  <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.7"></path>
+                  <path d="M8 2.8V6.2M16 2.8V6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
+                </svg>
+              </span>
+              <span>{hero.primaryCta.label}</span>
+            </a>
+          )
+        }
         {
           isPlaceholderLink(hero.secondaryCta.href) ? (
             <span class="domaine-hero__cta-secondary" data-todo={hero.secondaryCta.href}>{hero.secondaryCta.label}</span>
@@ -101,8 +124,30 @@ const { hero } = Astro.props;
   }
 
   .domaine-hero__cta-primary {
+    align-items: center;
+    background: var(--color-cta);
+    border-radius: 999px;
+    color: var(--color-white);
+    display: inline-flex;
+    font-size: 0.78rem;
+    font-weight: 600;
+    gap: 0.55rem;
+    letter-spacing: 0.14em;
     min-height: 3.9rem;
     padding-inline: 1.8rem;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .domaine-hero__cta-icon {
+    display: inline-flex;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .domaine-hero__cta-icon svg {
+    height: 100%;
+    width: 100%;
   }
 
   .domaine-hero__cta-secondary {
