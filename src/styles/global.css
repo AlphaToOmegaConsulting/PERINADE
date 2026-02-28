@@ -65,8 +65,10 @@
 
   --shadow-soft: 0 0.625rem 1.5rem rgba(24, 20, 14, 0.08);
   --shadow-card: 0 1.125rem 2.375rem rgba(28, 22, 17, 0.08);
-  --overlay-hero-left: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.48) 45%, rgba(0, 0, 0, 0.22) 100%);
-  --overlay-hero-bottom: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.45) 100%);
+  --overlay-hero-left-strong: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.48) 45%, rgba(0, 0, 0, 0.22) 100%);
+  --overlay-hero-bottom-strong: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.45) 100%);
+  --overlay-hero-left: linear-gradient(90deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.34) 45%, rgba(0, 0, 0, 0.12) 100%);
+  --overlay-hero-bottom: linear-gradient(180deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.28) 100%);
   --overlay-history: linear-gradient(180deg, rgba(52, 37, 21, 0.84) 0%, rgba(52, 37, 21, 0.9) 100%);
   --motion-duration-enter: 620ms;
   --motion-ease-enter: cubic-bezier(0.21, 1, 0.31, 1);
