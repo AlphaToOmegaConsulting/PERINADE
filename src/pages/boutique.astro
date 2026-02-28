@@ -12,7 +12,7 @@ import { site } from "../data/site";
 ---
 
 <BaseLayout title="Boutique | Domaine de la Périnade" description="Commandez les cuvées du Domaine de la Périnade en ligne.">
-  <Header nav={site.nav} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
   <main class="shop-page">
     <ShopHero />
     <ShopProductGrid />

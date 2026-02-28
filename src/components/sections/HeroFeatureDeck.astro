@@ -58,23 +58,30 @@ const visibleCards = cards.slice(0, 3);
 
 <style>
   .hero-deck {
+    --deck-width: clamp(18.5rem, 36vw, 29.5rem);
+    --deck-scale: clamp(0.627, 2vw + 0.45, 1);
+    --deck-stage-height: calc(16.8rem * var(--deck-scale));
+    --deck-card-width: calc(9.91rem * var(--deck-scale));
+    --deck-card-height: calc(13.22rem * var(--deck-scale));
+    --deck-nav-size: calc(2.07rem * var(--deck-scale));
+    --deck-title-max: calc(8rem * var(--deck-scale));
     pointer-events: auto;
     position: relative;
-    width: min(100%, 29.5rem);
+    width: min(100%, var(--deck-width));
   }
 
   .hero-deck__stage {
-    height: 16.8rem;
+    block-size: var(--deck-stage-height);
     position: relative;
     width: 100%;
   }
 
   .hero-deck__card {
     border-radius: 0.83rem;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.25);
     color: var(--color-white);
     display: block;
-    height: 13.22rem;
+    block-size: var(--deck-card-height);
     overflow: hidden;
     position: absolute;
     text-decoration: none;
@@ -83,49 +90,49 @@ const visibleCards = cards.slice(0, 3);
       left 280ms ease,
       top 280ms ease,
       box-shadow 280ms ease;
-    width: 9.91rem;
+    inline-size: var(--deck-card-width);
   }
 
   .hero-deck__card--left {
-    left: 2.06rem;
-    top: 1.44rem;
+    left: 7%;
+    top: 8.6%;
     transform: rotate(-15.16deg);
   }
 
   .hero-deck__card--center {
-    left: 9.6rem;
+    left: 32.5%;
     top: 0;
     z-index: 2;
   }
 
   .hero-deck__card--right {
-    left: 14.55rem;
-    top: 0.56rem;
+    left: 49.3%;
+    top: 3.4%;
     transform: rotate(14.25deg);
     z-index: 3;
   }
 
   .hero-deck:hover .hero-deck__card--left,
   .hero-deck:focus-within .hero-deck__card--left {
-    left: -0.46rem;
-    top: 0.93rem;
+    left: -1.6%;
+    top: 5.6%;
   }
 
   .hero-deck:hover .hero-deck__card--center,
   .hero-deck:focus-within .hero-deck__card--center {
-    left: 9.08rem;
-    top: -2.06rem;
+    left: 30.8%;
+    top: -12.2%;
   }
 
   .hero-deck:hover .hero-deck__card--right,
   .hero-deck:focus-within .hero-deck__card--right {
-    left: 16.62rem;
-    top: -0.42rem;
+    left: 56.3%;
+    top: -2.5%;
   }
 
   .hero-deck:hover .hero-deck__card,
   .hero-deck:focus-within .hero-deck__card {
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 0.875rem 2rem rgba(0, 0, 0, 0.28);
   }
 
   .hero-deck__image,
@@ -147,7 +154,7 @@ const visibleCards = cards.slice(0, 3);
   .hero-deck__copy {
     bottom: 0;
     left: 0;
-    padding: 1.15rem 0.82rem 0.82rem;
+    padding: clamp(0.72rem, 2vw, 1.15rem) clamp(0.55rem, 1.8vw, 0.82rem) clamp(0.55rem, 1.8vw, 0.82rem);
     position: absolute;
     right: 0;
     z-index: 1;
@@ -155,37 +162,37 @@ const visibleCards = cards.slice(0, 3);
 
   .hero-deck__kicker {
     color: rgba(255, 255, 255, 0.6);
-    font-size: 0.455rem;
+    font-size: clamp(0.42rem, 0.9vw, 0.455rem);
     letter-spacing: 0.15em;
     line-height: 1.5;
-    margin: 0 0 0.45rem;
+    margin: 0 0 clamp(0.28rem, 1vw, 0.45rem);
     text-transform: uppercase;
   }
 
   .hero-deck__title {
     color: var(--color-white);
     font-family: var(--font-display);
-    font-size: 1.05rem;
+    font-size: clamp(0.88rem, 2.2vw, 1.05rem);
     font-weight: 400;
     letter-spacing: 0.03em;
     line-height: 0.99;
     margin: 0;
-    max-width: 8rem;
+    max-inline-size: var(--deck-title-max);
     text-transform: uppercase;
   }
 
   .hero-deck__nav {
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 999px;
+    border-radius: 100vmax;
     color: rgba(255, 255, 255, 0.8);
     display: inline-flex;
-    height: 2.07rem;
+    block-size: var(--deck-nav-size);
     justify-content: center;
     position: absolute;
-    top: 8.21rem;
+    top: 48.9%;
     transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
-    width: 2.07rem;
+    inline-size: var(--deck-nav-size);
   }
 
   .hero-deck__nav--prev {
@@ -194,7 +201,7 @@ const visibleCards = cards.slice(0, 3);
 
   .hero-deck__nav--next {
     background: rgba(255, 255, 255, 0.35);
-    left: 27.45rem;
+    left: calc(100% - var(--deck-nav-size));
   }
 
   .hero-deck:hover .hero-deck__nav--prev,
@@ -210,129 +217,20 @@ const visibleCards = cards.slice(0, 3);
   }
 
   .hero-deck__nav svg {
-    height: 0.82rem;
-    width: 0.82rem;
+    block-size: clamp(0.68rem, 1.8vw, 0.82rem);
+    inline-size: clamp(0.68rem, 1.8vw, 0.82rem);
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 63.9375em) {
     .hero-deck {
-      width: min(100%, 25rem);
-    }
-
-    .hero-deck__stage {
-      height: 14.75rem;
-    }
-
-    .hero-deck__card {
-      height: 11.25rem;
-      width: 8.45rem;
-    }
-
-    .hero-deck__card--left {
-      left: 1.85rem;
-      top: 1.45rem;
-    }
-
-    .hero-deck__card--center {
-      left: 8.4rem;
-    }
-
-    .hero-deck__card--right {
-      left: 12.85rem;
-      top: 0.4rem;
-    }
-
-    .hero-deck:hover .hero-deck__card--left,
-    .hero-deck:focus-within .hero-deck__card--left {
-      left: 0;
-      top: 1rem;
-    }
-
-    .hero-deck:hover .hero-deck__card--center,
-    .hero-deck:focus-within .hero-deck__card--center {
-      left: 8rem;
-      top: -1.2rem;
-    }
-
-    .hero-deck:hover .hero-deck__card--right,
-    .hero-deck:focus-within .hero-deck__card--right {
-      left: 14.7rem;
-      top: -0.1rem;
-    }
-
-    .hero-deck__nav {
-      top: 7rem;
-    }
-
-    .hero-deck__nav--next {
-      left: 22.85rem;
+      --deck-width: clamp(18.5rem, 48vw, 25rem);
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375em) {
     .hero-deck {
       margin-inline: auto;
-      width: min(100%, 18.5rem);
-    }
-
-    .hero-deck__stage {
-      height: 12rem;
-    }
-
-    .hero-deck__card {
-      height: 9.3rem;
-      width: 6.95rem;
-    }
-
-    .hero-deck__card--left {
-      left: 1.15rem;
-      top: 1.15rem;
-    }
-
-    .hero-deck__card--center {
-      left: 5.95rem;
-    }
-
-    .hero-deck__card--right {
-      left: 9.35rem;
-      top: 0.35rem;
-    }
-
-    .hero-deck:hover .hero-deck__card--left,
-    .hero-deck:focus-within .hero-deck__card--left {
-      left: 0.1rem;
-      top: 0.85rem;
-    }
-
-    .hero-deck:hover .hero-deck__card--center,
-    .hero-deck:focus-within .hero-deck__card--center {
-      left: 5.3rem;
-      top: -0.95rem;
-    }
-
-    .hero-deck:hover .hero-deck__card--right,
-    .hero-deck:focus-within .hero-deck__card--right {
-      left: 10.4rem;
-      top: 0;
-    }
-
-    .hero-deck__copy {
-      padding: 0.95rem 0.7rem 0.72rem;
-    }
-
-    .hero-deck__title {
-      font-size: 0.88rem;
-      max-width: 5.7rem;
-    }
-
-    .hero-deck__nav {
-      height: 1.8rem;
-      top: 5.75rem;
-      width: 1.8rem;
-    }
-
-    .hero-deck__nav--next {
-      left: 16.7rem;
+      --deck-width: clamp(16.5rem, 78vw, 18.5rem);
     }
   }
 </style>

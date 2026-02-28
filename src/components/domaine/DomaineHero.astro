@@ -76,21 +76,21 @@ const { hero } = Astro.props;
 
 <style>
   .domaine-hero {
-    background: #1a1a1a;
+    background: radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.06), transparent 42%), #161616;
     color: var(--color-white);
-    padding-top: calc(var(--header-height) + 5.6rem);
+    padding-top: calc(var(--header-height) + clamp(3rem, 8vw, 5.6rem));
   }
 
   .domaine-hero__inner {
     align-items: center;
     display: grid;
-    gap: 3rem;
+    gap: var(--content-gap-lg);
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
   }
 
   .domaine-hero__eyebrow {
     color: var(--color-accent);
-    font-size: 0.84rem;
+    font-size: clamp(0.74rem, 1.9vw, 0.84rem);
     letter-spacing: 0.22em;
     margin: 0;
     text-transform: uppercase;
@@ -98,9 +98,10 @@ const { hero } = Astro.props;
 
   .domaine-hero__title {
     display: grid;
-    font-size: clamp(2.5rem, 5.1vw, 4.35rem);
-    line-height: 0.98;
-    margin: 0.95rem 0 1.25rem;
+    font-size: clamp(2.2rem, 4.6vw, 3.85rem);
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+    margin: clamp(0.5rem, 1.8vw, 0.85rem) 0 clamp(0.8rem, 2.2vw, 1.15rem);
   }
 
   .domaine-hero__title .is-accent {
@@ -109,40 +110,41 @@ const { hero } = Astro.props;
 
   .domaine-hero__body {
     color: rgba(255, 255, 255, 0.72);
-    font-size: 1.08rem;
-    line-height: 1.72;
+    font-size: clamp(0.94rem, 2vw, 1.04rem);
+    line-height: 1.64;
     margin: 0;
-    max-width: 42rem;
+    max-inline-size: clamp(20rem, 48vw, 36rem);
   }
 
   .domaine-hero__cta-row {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
-    gap: 0.9rem;
-    margin-top: 2rem;
+    gap: var(--space-sm);
+    margin-top: clamp(1rem, 2.8vw, 1.7rem);
   }
 
   .domaine-hero__cta-primary {
     align-items: center;
     background: var(--color-cta);
-    border-radius: 999px;
+    border-radius: 100vmax;
     color: var(--color-white);
     display: inline-flex;
-    font-size: 0.78rem;
+    font-size: clamp(0.72rem, 1.8vw, 0.78rem);
     font-weight: 600;
-    gap: 0.55rem;
+    gap: clamp(0.4rem, 1.4vw, 0.55rem);
     letter-spacing: 0.14em;
-    min-height: 3.9rem;
-    padding-inline: 1.8rem;
+    box-shadow: 0 0.625rem 1.5rem rgba(214, 116, 0, 0.28);
+    min-block-size: var(--control-height-md);
+    padding-inline: clamp(1rem, 3.3vw, 1.55rem);
     text-decoration: none;
     text-transform: uppercase;
   }
 
   .domaine-hero__cta-icon {
     display: inline-flex;
-    height: 1rem;
-    width: 1rem;
+    block-size: var(--icon-size-sm);
+    inline-size: var(--icon-size-sm);
   }
 
   .domaine-hero__cta-icon svg {
@@ -152,13 +154,13 @@ const { hero } = Astro.props;
 
   .domaine-hero__cta-secondary {
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 999px;
+    border-radius: 100vmax;
     color: var(--color-white);
     display: inline-flex;
-    font-size: 0.78rem;
+    font-size: clamp(0.72rem, 1.8vw, 0.78rem);
     letter-spacing: 0.12em;
-    min-height: 3.9rem;
-    padding: 0 1.45rem;
+    min-block-size: var(--control-height-md);
+    padding-inline: clamp(0.95rem, 3vw, 1.45rem);
     text-transform: uppercase;
   }
 
@@ -166,18 +168,18 @@ const { hero } = Astro.props;
   .domaine-hero__highlights {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
+    gap: var(--space-2xs);
     list-style: none;
-    margin: 1.05rem 0 0;
+    margin: clamp(0.7rem, 2vw, 1.05rem) 0 0;
     padding: 0;
   }
 
   .domaine-hero__badges li,
   .domaine-hero__highlights li {
-    border-radius: 999px;
-    font-size: 0.73rem;
+    border-radius: 100vmax;
+    font-size: clamp(0.62rem, 1.5vw, 0.69rem);
     letter-spacing: 0.12em;
-    padding: 0.58rem 0.9rem;
+    padding: clamp(0.38rem, 1.3vw, 0.53rem) clamp(0.65rem, 2.2vw, 0.85rem);
     text-transform: uppercase;
   }
 
@@ -194,8 +196,9 @@ const { hero } = Astro.props;
   }
 
   .domaine-hero__media {
-    border-radius: 1.55rem;
-    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    box-shadow: 0 1.5rem 3.25rem rgba(0, 0, 0, 0.32);
     overflow: hidden;
   }
 
@@ -210,29 +213,29 @@ const { hero } = Astro.props;
     cursor: not-allowed;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 63.9375em) {
     .domaine-hero__inner {
-      gap: 2.4rem;
+      gap: clamp(1.4rem, 4vw, 2.4rem);
       grid-template-columns: 1fr;
     }
 
     .domaine-hero__media {
-      max-width: 33rem;
+      max-inline-size: clamp(22rem, 72vw, 33rem);
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375em) {
     .domaine-hero {
-      padding-top: calc(var(--header-height) + 4rem);
+      padding-top: calc(var(--header-height) + clamp(2rem, 8vw, 4rem));
     }
 
     .domaine-hero__body {
-      font-size: 1rem;
+      font-size: clamp(0.92rem, 3.8vw, 1rem);
     }
 
     .domaine-hero__cta-primary,
     .domaine-hero__cta-secondary {
-      min-height: 3.45rem;
+      min-block-size: clamp(3rem, 10vw, 3.45rem);
       width: 100%;
     }
   }

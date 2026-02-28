@@ -47,13 +47,13 @@ const { hero } = Astro.props;
   .visit-hero {
     background: #1a1a1a;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-    padding: calc(var(--header-height) + 2rem) 0 4rem;
+    padding: calc(var(--header-height) + clamp(1rem, 4vw, 2rem)) 0 clamp(2rem, 7vw, 4rem);
   }
 
   .visit-hero__inner {
     align-items: center;
     display: grid;
-    gap: 3.75rem;
+    gap: clamp(1.8rem, 5vw, 3.75rem);
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
@@ -73,7 +73,7 @@ const { hero } = Astro.props;
     font-weight: var(--visit-type-display-weight);
     letter-spacing: var(--visit-type-display-track);
     line-height: var(--visit-type-display-lh);
-    margin: 1.15rem 0 0;
+    margin: clamp(0.7rem, 2vw, 1.15rem) 0 0;
   }
 
   .visit-hero__content h1 span {
@@ -85,16 +85,16 @@ const { hero } = Astro.props;
     color: rgba(255, 255, 255, 0.72);
     font-size: var(--visit-type-body-size);
     line-height: var(--visit-type-body-lh);
-    margin: 1.55rem 0 0;
-    max-width: 34rem;
+    margin: clamp(1rem, 2.7vw, 1.55rem) 0 0;
+    max-inline-size: clamp(20rem, 46vw, 34rem);
   }
 
   .visit-hero__badges {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: var(--space-xs);
     list-style: none;
-    margin: 1.6rem 0 0;
+    margin: clamp(1rem, 2.8vw, 1.6rem) 0 0;
     padding: 0;
   }
 
@@ -102,20 +102,20 @@ const { hero } = Astro.props;
     align-items: center;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 999px;
+    border-radius: 100vmax;
     color: rgba(255, 255, 255, 0.84);
     display: inline-flex;
     font-size: var(--visit-type-caption-size);
-    gap: 0.55rem;
-    min-height: 2.55rem;
-    padding: 0.4rem 1.05rem;
+    gap: clamp(0.4rem, 1.2vw, 0.55rem);
+    min-block-size: var(--control-height-sm);
+    padding: clamp(0.2rem, 0.9vw, 0.4rem) clamp(0.75rem, 2.6vw, 1.05rem);
   }
 
   .visit-hero__badge-icon {
     color: var(--visit-accent-on-dark);
     display: inline-flex;
-    height: 1rem;
-    width: 1rem;
+    block-size: var(--icon-size-sm);
+    inline-size: var(--icon-size-sm);
   }
 
   .visit-hero__badge-icon :global(svg) {
@@ -125,8 +125,8 @@ const { hero } = Astro.props;
 
   .visit-hero__actions {
     display: flex;
-    gap: 1rem;
-    margin-top: 1.75rem;
+    gap: var(--space-sm);
+    margin-top: clamp(1rem, 3vw, 1.75rem);
   }
 
   .visit-hero__cta {
@@ -136,9 +136,9 @@ const { hero } = Astro.props;
     font-size: var(--visit-type-caption-size);
     justify-content: center;
     letter-spacing: var(--visit-type-caption-track);
-    min-height: 3.3rem;
-    min-width: 12.5rem;
-    padding: 0 1.6rem;
+    min-block-size: var(--control-height-md);
+    min-inline-size: clamp(10rem, 22vw, 12.5rem);
+    padding-inline: clamp(1rem, 3vw, 1.6rem);
     text-transform: uppercase;
   }
 
@@ -154,13 +154,13 @@ const { hero } = Astro.props;
 
   .visit-hero__helper {
     color: rgba(255, 255, 255, 0.38);
-    font-size: 0.92rem;
-    margin: 1rem 0 0;
+    font-size: clamp(0.82rem, 2vw, 0.92rem);
+    margin: var(--space-sm) 0 0;
   }
 
   .visit-hero__media {
     border-radius: var(--visit-radius-xl);
-    box-shadow: 0 30px 72px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 1.875rem 4.5rem rgba(0, 0, 0, 0.35);
     margin: 0;
     overflow: hidden;
   }
@@ -172,9 +172,9 @@ const { hero } = Astro.props;
     width: 100%;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 63.9375em) {
     .visit-hero {
-      padding-top: calc(var(--header-height) + 1.5rem);
+      padding-top: calc(var(--header-height) + clamp(0.9rem, 3vw, 1.5rem));
     }
 
     .visit-hero__inner {
@@ -182,12 +182,12 @@ const { hero } = Astro.props;
     }
 
     .visit-hero__media {
-      max-width: 38rem;
+      max-inline-size: clamp(24rem, 80vw, 38rem);
       width: 100%;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375em) {
     .visit-hero__actions {
       flex-direction: column;
     }
@@ -197,8 +197,8 @@ const { hero } = Astro.props;
     }
 
     .visit-hero__badges li {
-      font-size: 0.9rem;
-      min-height: 2.7rem;
+      font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+      min-block-size: clamp(2.5rem, 8vw, 2.7rem);
     }
   }
 </style>

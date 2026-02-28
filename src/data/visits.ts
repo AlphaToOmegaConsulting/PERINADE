@@ -83,8 +83,8 @@ export const visitsPage: VisitPageData = {
       { icon: "calendar", label: "11h – 16h, tous les jours" },
       { icon: "car", label: "Parking gratuit" }
     ],
-    primaryCta: { label: "Book Online", href: "/visites#booking" },
-    secondaryCta: { label: "Call Us", href: "tel:+33468000000" },
+    primaryCta: { label: "Reserver", href: "/visites#booking" },
+    secondaryCta: { label: "Appeler", href: "tel:+33468000000" },
     helper: "+33 4 68 XX XX XX · Réponse sous 24h",
     image: visitsHeroGrapes,
     imageAlt: "Raisins fraîchement récoltés dans une cuve"
@@ -230,7 +230,7 @@ export const visitsPage: VisitPageData = {
           "Commentary by the winemaker",
           "French & English available"
         ],
-        ctaLabel: "Book Online",
+        ctaLabel: "Reserver",
         ctaHref: "/visites#booking"
       },
       {
@@ -246,7 +246,7 @@ export const visitsPage: VisitPageData = {
           "Perfect for couples & groups",
           "Available daily"
         ],
-        ctaLabel: "Book Online",
+        ctaLabel: "Reserver",
         ctaHref: "/visites#booking",
         isHighlighted: true,
         badge: "Popular"
@@ -269,7 +269,7 @@ export const visitsPage: VisitPageData = {
       subtitle: "Aude, Occitanie",
       content: ["Domaine de la Périnade", "Coordonnées GPS partagées après réservation", "Parking visiteur gratuit"],
       ctaLabel: "Voir sur la carte",
-      ctaHref: "TODO_LINK_MAPS"
+      ctaHref: "https://maps.google.com/?q=Domaine+de+la+Perinade+Minervois+Languedoc"
     },
     rightCards: [
       {
@@ -327,8 +327,15 @@ export const visitsPage: VisitPageData = {
     },
     config: {
       monthLabel: "February 2026",
+      initialMonth: "2026-02",
+      locale: "en-US",
+      timezone: "Europe/Paris",
+      startDate: "2026-02-01",
+      endDate: "2026-12-31",
       dayLabels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
       selectableDays: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
+      disabledWeekdays: [],
+      disabledDates: [],
       defaultDay: 27,
       slots: [
         { id: "11-00", label: "11:00" },
@@ -347,9 +354,12 @@ export const visitsPage: VisitPageData = {
       addonLabel: "Ajouter planche fromages & charcuterie",
       basePricePerPerson: 15,
       addonPricePerPerson: 10,
-      ctaLabel: "Book Online",
+      ctaLabel: "Reserver",
       ctaHref: "/visites#booking",
-      callLabel: "Or Call Us"
+      callLabel: "Ou appeler",
+      submitEndpoint: "",
+      successMessage: "Demande envoyee. Nous revenons vers vous sous 24h.",
+      errorMessage: "Impossible d'envoyer la demande. Merci d'appeler le domaine."
     }
   },
   finalCta: {

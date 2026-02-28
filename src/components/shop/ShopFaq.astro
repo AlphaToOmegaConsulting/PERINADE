@@ -73,38 +73,6 @@ const faqs = [
   </div>
 </section>
 
-<script is:inline>
-  const faqRoot = document.querySelector("[data-faq]");
-
-  if (faqRoot) {
-    const triggers = Array.from(faqRoot.querySelectorAll("[data-faq-trigger]"));
-
-    const closeAll = () => {
-      triggers.forEach((trigger) => {
-        trigger.setAttribute("aria-expanded", "false");
-        const panel = document.getElementById(trigger.getAttribute("aria-controls"));
-        const item = trigger.closest(".shop-faq__item");
-        if (panel) panel.hidden = true;
-        item?.classList.remove("is-open");
-      });
-    };
-
-    triggers.forEach((trigger) => {
-      trigger.addEventListener("click", () => {
-        const expanded = trigger.getAttribute("aria-expanded") === "true";
-        closeAll();
-        if (!expanded) {
-          trigger.setAttribute("aria-expanded", "true");
-          const panel = document.getElementById(trigger.getAttribute("aria-controls"));
-          const item = trigger.closest(".shop-faq__item");
-          if (panel) panel.hidden = false;
-          item?.classList.add("is-open");
-        }
-      });
-    });
-  }
-</script>
-
 <style>
   .shop-faq__heading {
     margin: 0 auto 2.35rem;
@@ -151,6 +119,15 @@ const faqs = [
     padding: 1rem 1.35rem;
     text-align: left;
     width: 100%;
+  }
+
+  .shop-faq__trigger:hover,
+  .shop-faq__trigger:focus-visible {
+    background: rgba(196, 156, 110, 0.08);
+  }
+
+  .shop-faq__trigger:active {
+    transform: scale(0.998);
   }
 
   .shop-faq__chevron {

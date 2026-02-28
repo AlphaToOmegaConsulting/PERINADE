@@ -7,7 +7,6 @@ interface Props {
 }
 
 const { booking } = Astro.props;
-const bookingConfig = JSON.stringify(booking.config);
 ---
 
 <section class="booking section section--soft" id="booking">
@@ -17,15 +16,15 @@ const bookingConfig = JSON.stringify(booking.config);
     <div
       class="booking__panel"
       data-booking
-      data-config={bookingConfig}
+      data-config={JSON.stringify(booking.config)}
       style={`--booking-calendar-ratio:${booking.layout.calendarWidthRatio}; --booking-controls-ratio:${booking.layout.controlsWidthRatio}; --booking-panel-max:${booking.layout.panelMaxWidth}; --booking-calendar-cell-height:${booking.layout.calendarCellHeight}; --booking-control-row-height:${booking.layout.controlRowHeight};`}
     >
       <div class="booking__calendar">
         <header>
-          <button type="button" data-calendar-prev aria-label="Mois précédent">‹</button>
-          <h3 data-calendar-month>{booking.config.monthLabel}</h3>
-          <button type="button" data-calendar-next aria-label="Mois suivant">›</button>
-        </header>
+            <button type="button" data-calendar-prev aria-label="Mois précédent">‹</button>
+            <h3 data-calendar-month>{booking.config.monthLabel}</h3>
+            <button type="button" data-calendar-next aria-label="Mois suivant">›</button>
+          </header>
 
         <div class="booking__days-row">
           {booking.config.dayLabels.map((day) => (
@@ -33,19 +32,34 @@ const bookingConfig = JSON.stringify(booking.config);
           ))}
         </div>
 
-        <div class="booking__grid" data-calendar-days>
-          {booking.config.selectableDays.map((day) => (
-            <button type="button" data-day={day} class:list={[day === booking.config.defaultDay && "is-active"]}>{day}</button>
-          ))}
-        </div>
+          <div class="booking__grid" data-calendar-days>
+            {booking.config.selectableDays.map((day) => (
+              <button type="button" data-day={day} class:list={[day === booking.config.defaultDay && "is-active"]}>{day}</button>
+            ))}
+          </div>
       </div>
 
       <div class="booking__controls">
+        <form
+          class="booking__form"
+          data-ui-form
+          data-booking-form
+          data-submit-endpoint={booking.config.submitEndpoint ?? ""}
+          data-submit-success={booking.config.successMessage ?? ""}
+          data-submit-error={booking.config.errorMessage ?? ""}
+        >
         <section>
           <h4>Créneau</h4>
           <div class="booking__slot-grid" data-slot-grid>
             {booking.config.slots.map((slot) => (
-              <button type="button" data-slot={slot.id} class:list={[slot.id === booking.config.defaultSlotId && "is-active"]}>{slot.label}</button>
+              <button
+                type="button"
+                data-slot={slot.id}
+                aria-pressed={slot.id === booking.config.defaultSlotId ? "true" : "false"}
+                class:list={[slot.id === booking.config.defaultSlotId && "is-active"]}
+              >
+                {slot.label}
+              </button>
             ))}
           </div>
         </section>
@@ -66,101 +80,47 @@ const bookingConfig = JSON.stringify(booking.config);
 
         <p class="booking__price">
           <span>From</span>
-          <strong data-price-label>{booking.config.basePricePerPerson}€ <small>/ person</small></strong>
+          <strong><span data-price-value>{booking.config.basePricePerPerson}</span>€ <small>/ person</small></strong>
         </p>
 
-        <a class="booking__cta" href={booking.config.ctaHref}>{booking.config.ctaLabel}</a>
+        <input type="hidden" name="day" data-booking-field-day />
+        <input type="hidden" name="slotId" data-booking-field-slot />
+        <input type="hidden" name="participants" data-booking-field-participants />
+        <input type="hidden" name="addon" data-booking-field-addon />
+        <input type="hidden" name="totalPerPerson" data-booking-field-total />
+
+        <button class="booking__cta" type="submit">{booking.config.ctaLabel}</button>
         <a class="booking__call" href="tel:+33468000000">{booking.config.callLabel}</a>
+        <p class="booking__status" data-booking-status aria-live="polite"></p>
+        </form>
       </div>
     </div>
   </div>
 </section>
-
-<script is:inline define:vars={{ bookingConfig }}>
-  const root = document.querySelector("[data-booking]");
-  if (root) {
-    const config = JSON.parse(bookingConfig);
-    let participants = config.defaultParticipants;
-    let selectedDay = config.defaultDay;
-    let selectedSlot = config.defaultSlotId;
-    let addon = false;
-
-    const countValue = root.querySelector("[data-count-value]");
-    const priceLabel = root.querySelector("[data-price-label]");
-    const addonInput = root.querySelector("[data-addon]");
-
-    const refresh = () => {
-      const base = config.basePricePerPerson;
-      const addonFee = addon ? config.addonPricePerPerson : 0;
-      const total = base + addonFee;
-      if (countValue) countValue.textContent = String(participants);
-      if (priceLabel) priceLabel.innerHTML = `${total}€ <small>/ person</small>`;
-
-      root.querySelectorAll("[data-day]").forEach((button) => {
-        button.classList.toggle("is-active", Number(button.getAttribute("data-day")) === selectedDay);
-      });
-
-      root.querySelectorAll("[data-slot]").forEach((button) => {
-        button.classList.toggle("is-active", button.getAttribute("data-slot") === selectedSlot);
-      });
-    };
-
-    root.querySelector("[data-count-dec]")?.addEventListener("click", () => {
-      participants = Math.max(config.minParticipants, participants - 1);
-      refresh();
-    });
-
-    root.querySelector("[data-count-inc]")?.addEventListener("click", () => {
-      participants = Math.min(config.maxParticipants, participants + 1);
-      refresh();
-    });
-
-    root.querySelectorAll("[data-day]").forEach((button) => {
-      button.addEventListener("click", () => {
-        selectedDay = Number(button.getAttribute("data-day"));
-        refresh();
-      });
-    });
-
-    root.querySelectorAll("[data-slot]").forEach((button) => {
-      button.addEventListener("click", () => {
-        selectedSlot = button.getAttribute("data-slot");
-        refresh();
-      });
-    });
-
-    addonInput?.addEventListener("change", () => {
-      addon = Boolean(addonInput.checked);
-      refresh();
-    });
-
-    refresh();
-  }
-</script>
 
 <style>
   .booking__panel {
     background: #fff;
     border: 1px solid var(--visit-stroke-subtle);
     border-radius: var(--visit-radius-xl);
-    box-shadow: 0 20px 42px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 1.25rem 2.625rem rgba(0, 0, 0, 0.08);
     display: grid;
     grid-template-columns: minmax(0, var(--booking-calendar-ratio)) minmax(0, var(--booking-controls-ratio));
-    margin-top: 2.3rem;
+    margin-top: clamp(1.2rem, 3.5vw, 2.3rem);
     max-width: var(--booking-panel-max);
     margin-inline: auto;
     overflow: hidden;
   }
 
   .booking__calendar {
-    padding: 2rem;
+    padding: clamp(1rem, 3vw, 2rem);
   }
 
   .booking__calendar header {
     align-items: center;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    margin-bottom: 1.1rem;
+    margin-bottom: clamp(0.7rem, 2vw, 1.1rem);
   }
 
   .booking__calendar header h3 {
@@ -172,18 +132,33 @@ const bookingConfig = JSON.stringify(booking.config);
   .booking__calendar header button {
     background: transparent;
     border: 1px solid var(--visit-stroke-subtle);
-    border-radius: 999px;
+    border-radius: 100vmax;
     cursor: pointer;
-    font-size: 1.5rem;
-    height: 2.5rem;
-    width: 2.5rem;
+    font-size: clamp(1.15rem, 4vw, 1.5rem);
+    block-size: var(--control-height-sm);
+    inline-size: var(--control-height-sm);
+  }
+
+  .booking__calendar header button:hover:not(:disabled),
+  .booking__calendar header button:focus-visible:not(:disabled) {
+    border-color: var(--visit-accent-primary);
+    color: var(--visit-accent-primary);
+  }
+
+  .booking__calendar header button:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+
+  .booking__calendar header button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
   }
 
   .booking__days-row {
     display: grid;
-    gap: 0.35rem;
+    gap: var(--space-2xs);
     grid-template-columns: repeat(7, minmax(0, 1fr));
-    margin-bottom: 0.6rem;
+    margin-bottom: var(--space-2xs);
   }
 
   .booking__days-row span {
@@ -196,8 +171,12 @@ const bookingConfig = JSON.stringify(booking.config);
 
   .booking__grid {
     display: grid;
-    gap: 0.35rem;
+    gap: var(--space-2xs);
     grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .booking__day-pad {
+    min-block-size: var(--booking-calendar-cell-height);
   }
 
   .booking__grid button {
@@ -206,8 +185,18 @@ const bookingConfig = JSON.stringify(booking.config);
     border-radius: var(--visit-radius-sm);
     color: #b7b7b7;
     cursor: pointer;
-    font-size: 0.95rem;
-    min-height: var(--booking-calendar-cell-height);
+    font-size: clamp(0.84rem, 2.5vw, 0.95rem);
+    min-block-size: var(--booking-calendar-cell-height);
+  }
+
+  .booking__grid button:hover:not(:disabled),
+  .booking__grid button:focus-visible:not(:disabled) {
+    border-color: var(--visit-accent-primary);
+    color: var(--visit-accent-primary);
+  }
+
+  .booking__grid button:active:not(:disabled) {
+    transform: scale(0.97);
   }
 
   .booking__grid button.is-active {
@@ -216,23 +205,33 @@ const bookingConfig = JSON.stringify(booking.config);
     font-weight: 600;
   }
 
+  .booking__grid button.is-disabled,
+  .booking__grid button:disabled {
+    color: #b7b7b7;
+    cursor: not-allowed;
+    opacity: 0.48;
+  }
+
   .booking__controls {
     border-left: 1px solid var(--visit-stroke-subtle);
+    padding: clamp(1rem, 3vw, 1.35rem);
+  }
+
+  .booking__form {
     display: grid;
-    gap: 0.95rem;
-    padding: 1.35rem;
+    gap: var(--space-sm);
   }
 
   .booking__controls h4 {
     font-size: var(--visit-type-caption-size);
     letter-spacing: var(--visit-type-caption-track);
-    margin: 0 0 0.55rem;
+    margin: 0 0 clamp(0.35rem, 1.2vw, 0.55rem);
     text-transform: uppercase;
   }
 
   .booking__slot-grid {
     display: grid;
-    gap: 0.7rem;
+    gap: var(--space-xs);
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -241,8 +240,18 @@ const bookingConfig = JSON.stringify(booking.config);
     border: 1px solid var(--visit-stroke-subtle);
     border-radius: var(--visit-radius-sm);
     cursor: pointer;
-    font-size: 1rem;
-    min-height: var(--booking-control-row-height);
+    font-size: clamp(0.92rem, 2.6vw, 1rem);
+    min-block-size: var(--booking-control-row-height);
+  }
+
+  .booking__slot-grid button:hover,
+  .booking__slot-grid button:focus-visible {
+    border-color: var(--visit-accent-primary);
+    color: var(--visit-accent-primary);
+  }
+
+  .booking__slot-grid button:active {
+    transform: scale(0.98);
   }
 
   .booking__slot-grid button.is-active {
@@ -253,7 +262,7 @@ const bookingConfig = JSON.stringify(booking.config);
 
   .booking__counter {
     display: grid;
-    gap: 0.8rem;
+    gap: var(--space-xs);
     grid-template-columns: 1fr auto 1fr;
   }
 
@@ -262,17 +271,27 @@ const bookingConfig = JSON.stringify(booking.config);
     border: 1px solid var(--visit-stroke-subtle);
     border-radius: var(--visit-radius-sm);
     cursor: pointer;
-    font-size: 1.6rem;
-    min-height: var(--booking-control-row-height);
+    font-size: clamp(1.2rem, 4.5vw, 1.6rem);
+    min-block-size: var(--booking-control-row-height);
+  }
+
+  .booking__counter button:hover,
+  .booking__counter button:focus-visible {
+    border-color: var(--visit-accent-primary);
+    color: var(--visit-accent-primary);
+  }
+
+  .booking__counter button:active {
+    transform: scale(0.98);
   }
 
   .booking__counter output {
     align-items: center;
     display: inline-flex;
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     justify-content: center;
-    min-width: 3rem;
+    min-inline-size: clamp(2rem, 8vw, 3rem);
   }
 
   .booking__addon {
@@ -281,15 +300,20 @@ const bookingConfig = JSON.stringify(booking.config);
     border-radius: var(--visit-radius-md);
     cursor: pointer;
     display: flex;
-    gap: 0.7rem;
-    min-height: calc(var(--booking-control-row-height) + 0.4rem);
-    padding: 0 1rem;
+    gap: var(--space-xs);
+    min-block-size: calc(var(--booking-control-row-height) + clamp(0.15rem, 0.8vw, 0.4rem));
+    padding-inline: clamp(0.7rem, 2.4vw, 1rem);
   }
 
   .booking__addon input {
     accent-color: var(--visit-accent-primary);
-    height: 1.15rem;
-    width: 1.15rem;
+    block-size: clamp(0.95rem, 3vw, 1.15rem);
+    inline-size: clamp(0.95rem, 3vw, 1.15rem);
+  }
+
+  .booking__addon:hover,
+  .booking__addon:focus-within {
+    border-color: var(--visit-accent-primary);
   }
 
   .booking__price {
@@ -312,21 +336,33 @@ const bookingConfig = JSON.stringify(booking.config);
   .booking__price small {
     color: var(--color-muted);
     font-family: var(--font-body);
-    font-size: 0.95rem;
+    font-size: clamp(0.82rem, 2.3vw, 0.95rem);
     font-weight: 400;
   }
 
   .booking__cta {
     align-items: center;
     background: var(--visit-accent-primary);
+    border: 0;
     border-radius: var(--visit-radius-xl);
     color: #ffffff;
+    cursor: pointer;
     display: inline-flex;
     font-size: var(--visit-type-caption-size);
     justify-content: center;
     letter-spacing: var(--visit-type-caption-track);
-    min-height: calc(var(--booking-control-row-height) + 0.6rem);
+    min-block-size: calc(var(--booking-control-row-height) + clamp(0.2rem, 1vw, 0.6rem));
     text-transform: uppercase;
+  }
+
+  .booking__cta:hover,
+  .booking__cta:focus-visible {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  .booking__cta:active {
+    transform: translateY(0);
   }
 
   .booking__call {
@@ -337,7 +373,26 @@ const bookingConfig = JSON.stringify(booking.config);
     text-transform: uppercase;
   }
 
-  @media (max-width: 1100px) {
+  .booking__call:hover,
+  .booking__call:focus-visible {
+    color: var(--visit-accent-primary);
+  }
+
+  .booking__status {
+    font-size: 0.9rem;
+    margin: 0;
+    min-block-size: 1.25rem;
+  }
+
+  .booking__status.is-success {
+    color: #1f5b31;
+  }
+
+  .booking__status.is-error {
+    color: #9f2517;
+  }
+
+  @media (max-width: 68.75em) {
     .booking__panel {
       grid-template-columns: 1fr;
     }
@@ -348,17 +403,17 @@ const bookingConfig = JSON.stringify(booking.config);
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375em) {
     .booking__calendar {
-      padding: 1rem;
+      padding: clamp(0.8rem, 3vw, 1rem);
     }
 
     .booking__controls {
-      padding: 1rem;
+      padding: clamp(0.8rem, 3vw, 1rem);
     }
 
     .booking__grid button {
-      min-height: 2.5rem;
+      min-block-size: clamp(2.2rem, 9vw, 2.5rem);
     }
 
     .booking__slot-grid {

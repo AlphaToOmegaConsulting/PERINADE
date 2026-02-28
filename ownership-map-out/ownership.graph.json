@@ -1,0 +1,1698 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "community_maintainers": [
+      {
+        "id": 1,
+        "size": 166,
+        "maintainers": [
+          {
+            "person_id": "codex@minidefrancois.home",
+            "name": "codex",
+            "touches": 227,
+            "touch_share": 1.0,
+            "recency_share": 1.0,
+            "sensitive_share": 0.0,
+            "primary_tz_offset": "+01:00"
+          }
+        ],
+        "bus_factor": 1,
+        "owner_count": 1,
+        "totals": {
+          "touches": 227,
+          "recency_weight": 226.924239,
+          "sensitive_weight": 0
+        }
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "node_type": "person",
+      "id": "codex@minidefrancois.home"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Contact.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Experience.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Footer.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Reasons.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/AccessSection.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/ExperienceTimeline.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/ExtendedEscape.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/VisitHero.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".gitignore"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "FINAL_VISIT.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "PERINADE SHOP INTERMEDIAIRE.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "PERINADE_Design.fig"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "PERINADE_Make APP.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "Pictures-to-add/8a4b3fbe55bc13da224e8ecf3731f47aefe319e7.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "Pictures-to-add/ChatGPT Image Feb 26, 2026, 06_11_38 PM 1.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "SHOP.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "VISIT.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "VISIT_2_DEV.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "history.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "home.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/DomaineHero.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/FamilyTimelineTable.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/data/domaine.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/types/domaine.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "CLOUDFLARE_PAGES_DEPLOY.md"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "package-lock.json"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "package.json"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/img-1.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/img-2.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/img-3.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/img-4.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/img-5.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/img-6.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/img-7.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/shop/package.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/extended-pool.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/final-cta-bg.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/hero-grapes.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/pairing-board.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/step-1.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/step-2.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/step-3.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/step-4.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/wine-red-card.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/wine-rose-card.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/visits/wine-white-card.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/family.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/hero.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/terroir.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/timeline-left.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/timeline-right.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/visit-cta.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/wine-1.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/wine-2.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/domaine/wine-3.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/experience-bg.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/gallery-cellar.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/gallery-curve-mask.svg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/gallery-tiger.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/gallery-tiger.svg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/gallery-vines-close.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/hero-deck/balade-vignes.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/hero-deck/cuvees-exception.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/hero-deck/visite-caveau.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/hero-vineyard.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/history-family.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/logo.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/img-1.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/img-2.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/img-3.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/img-4.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/img-5.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/img-6.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/img-7.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/shop/package.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/extended-pool.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/final-cta-bg.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/hero-grapes.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/pairing-board.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/step-1.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/step-2.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/step-3.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/step-4.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/wine-red-card.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/wine-rose-card.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/visits/wine-white-card.jpg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/wine-blanc.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/wine-cuvee-domaine.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/wine-grande-reserve.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/assets/perinade/wine-rose.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/DomainContactSection.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/DomainStatsBar.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/DomainWinesShowcase.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/FamilyStorySection.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/TerroirSection.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/domaine/VisitDomainCta.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Gallery.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Header.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Hero.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/HeroFeatureDeck.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/History.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Wines.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/shop/ShopCaseComposer.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/shop/ShopDomainSelection.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/shop/ShopFaq.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/shop/ShopFinalCtaBand.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/shop/ShopHero.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/shop/ShopProductGrid.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/ui/ButtonLink.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/ui/Icon.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/BookingSection.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/FinalCta.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/PairingAddon.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/PricingPlans.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/TrustBar.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/visits/WinesShowcase.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/data/site.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/data/visits.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/layouts/BaseLayout.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/pages/boutique.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/pages/domaine.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/pages/index.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/pages/visites.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/styles/global.css"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/types/site.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/types/visits.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/utils/link.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".DS_Store"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".codex-desktop-final.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".codex-desktop-full.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".codex-desktop.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".codex-mobile-final.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".codex-mobile-full.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".codex-mobile.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".post-fix-desktop.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": ".post-fix-mobile.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "PERINADE_Make.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "PERINADE_Make.zip"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "output/playwright/full-page-long-2.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "output/playwright/full-page-long.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "output/playwright/full-page.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "output/playwright/gallery-bottom-3.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "output/playwright/gallery-hash-2.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "output/playwright/gallery-hash.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "output/playwright/gallery-top-3.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "astro.config.mjs"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/experience-bg.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/gallery-cellar.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/gallery-curve-mask.svg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/gallery-tiger.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/gallery-tiger.svg"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/gallery-vines-close.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/hero-deck/balade-vignes.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/hero-deck/cuvees-exception.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/hero-deck/visite-caveau.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/hero-vineyard.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/history-family.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/logo.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/wine-blanc.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/wine-cuvee-domaine.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/wine-grande-reserve.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "public/assets/perinade/wine-rose.png"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/sections/Testimonials.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/components/ui/SectionHeading.astro"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "src/env.d.ts"
+    },
+    {
+      "node_type": "file",
+      "community_id": 1,
+      "id": "tsconfig.json"
+    }
+  ],
+  "edges": [
+    {
+      "weight": 3.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Contact.astro"
+    },
+    {
+      "weight": 3.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Experience.astro"
+    },
+    {
+      "weight": 3.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Footer.astro"
+    },
+    {
+      "weight": 3.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Reasons.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/AccessSection.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/ExperienceTimeline.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/ExtendedEscape.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/VisitHero.astro"
+    },
+    {
+      "weight": 3.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".gitignore"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "FINAL_VISIT.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "PERINADE SHOP INTERMEDIAIRE.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "PERINADE_Design.fig"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "PERINADE_Make APP.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "Pictures-to-add/8a4b3fbe55bc13da224e8ecf3731f47aefe319e7.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "Pictures-to-add/ChatGPT Image Feb 26, 2026, 06_11_38 PM 1.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "SHOP.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "VISIT.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "VISIT_2_DEV.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "history.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "home.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/DomaineHero.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/FamilyTimelineTable.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/data/domaine.ts"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/types/domaine.ts"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "CLOUDFLARE_PAGES_DEPLOY.md"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "package-lock.json"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "package.json"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/img-1.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/img-2.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/img-3.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/img-4.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/img-5.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/img-6.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/img-7.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/shop/package.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/extended-pool.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/final-cta-bg.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/hero-grapes.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/pairing-board.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/step-1.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/step-2.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/step-3.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/step-4.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/wine-red-card.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/wine-rose-card.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/visits/wine-white-card.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/family.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/hero.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/terroir.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/timeline-left.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/timeline-right.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/visit-cta.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/wine-1.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/wine-2.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/domaine/wine-3.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/experience-bg.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/gallery-cellar.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/gallery-curve-mask.svg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/gallery-tiger.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/gallery-tiger.svg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/gallery-vines-close.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/hero-deck/balade-vignes.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/hero-deck/cuvees-exception.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/hero-deck/visite-caveau.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/hero-vineyard.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/history-family.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/logo.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/img-1.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/img-2.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/img-3.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/img-4.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/img-5.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/img-6.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/img-7.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/shop/package.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/extended-pool.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/final-cta-bg.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/hero-grapes.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/pairing-board.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/step-1.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/step-2.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/step-3.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/step-4.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/wine-red-card.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/wine-rose-card.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/visits/wine-white-card.jpg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/wine-blanc.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/wine-cuvee-domaine.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/wine-grande-reserve.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/assets/perinade/wine-rose.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/DomainContactSection.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/DomainStatsBar.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/DomainWinesShowcase.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/FamilyStorySection.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/TerroirSection.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/domaine/VisitDomainCta.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Gallery.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Header.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Hero.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/HeroFeatureDeck.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/History.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Wines.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/shop/ShopCaseComposer.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/shop/ShopDomainSelection.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/shop/ShopFaq.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/shop/ShopFinalCtaBand.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/shop/ShopHero.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/shop/ShopProductGrid.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/ui/ButtonLink.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/ui/Icon.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/BookingSection.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/FinalCta.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/PairingAddon.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/PricingPlans.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/TrustBar.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/visits/WinesShowcase.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/data/site.ts"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/data/visits.ts"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/layouts/BaseLayout.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/pages/boutique.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/pages/domaine.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/pages/index.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/pages/visites.astro"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/styles/global.css"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/types/site.ts"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/types/visits.ts"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/utils/link.ts"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".DS_Store"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".codex-desktop-final.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".codex-desktop-full.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".codex-desktop.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".codex-mobile-final.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".codex-mobile-full.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".codex-mobile.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".post-fix-desktop.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": ".post-fix-mobile.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "PERINADE_Make.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "PERINADE_Make.zip"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "output/playwright/full-page-long-2.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "output/playwright/full-page-long.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "output/playwright/full-page.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "output/playwright/gallery-bottom-3.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "output/playwright/gallery-hash-2.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "output/playwright/gallery-hash.png"
+    },
+    {
+      "weight": 2.0,
+      "source": "codex@minidefrancois.home",
+      "target": "output/playwright/gallery-top-3.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "astro.config.mjs"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/experience-bg.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/gallery-cellar.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/gallery-curve-mask.svg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/gallery-tiger.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/gallery-tiger.svg"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/gallery-vines-close.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/hero-deck/balade-vignes.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/hero-deck/cuvees-exception.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/hero-deck/visite-caveau.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/hero-vineyard.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/history-family.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/logo.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/wine-blanc.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/wine-cuvee-domaine.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/wine-grande-reserve.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "public/assets/perinade/wine-rose.png"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/sections/Testimonials.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/components/ui/SectionHeading.astro"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "src/env.d.ts"
+    },
+    {
+      "weight": 1.0,
+      "source": "codex@minidefrancois.home",
+      "target": "tsconfig.json"
+    }
+  ]
+}

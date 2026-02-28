@@ -26,6 +26,7 @@ const { timeline } = Astro.props;
               aria-selected={isActive ? "true" : "false"}
               aria-controls={`timeline-panel-${tab.id}`}
               id={`timeline-tab-${tab.id}`}
+              tabindex={isActive ? "0" : "-1"}
               data-tab-id={tab.id}
             >
               {tab.tabLabel}
@@ -66,45 +67,17 @@ const { timeline } = Astro.props;
   </div>
 </section>
 
-<script is:inline>
-  document.querySelectorAll("[data-timeline-tabs]").forEach((root) => {
-    const tabs = Array.from(root.querySelectorAll("[data-tab-id]"));
-    const panels = Array.from(root.querySelectorAll("[data-panel-id]"));
-
-    const activate = (id) => {
-      tabs.forEach((tab) => {
-        const active = tab.getAttribute("data-tab-id") === id;
-        tab.classList.toggle("is-active", active);
-        tab.setAttribute("aria-selected", active ? "true" : "false");
-      });
-
-      panels.forEach((panel) => {
-        const active = panel.getAttribute("data-panel-id") === id;
-        panel.classList.toggle("is-active", active);
-        panel.hidden = !active;
-      });
-    };
-
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const id = tab.getAttribute("data-tab-id");
-        if (id) activate(id);
-      });
-    });
-  });
-</script>
-
 <style>
   .timeline__heading {
-    margin-bottom: 1.7rem;
+    margin-bottom: clamp(0.9rem, 2.8vw, 1.35rem);
   }
 
   .timeline-tabs {
     background: var(--color-soft);
     border: 1px solid rgba(44, 44, 44, 0.09);
-    border-radius: 1rem;
+    border-radius: clamp(0.75rem, 1.8vw, 0.9rem);
     display: grid;
-    grid-template-columns: 5.6rem minmax(0, 1fr);
+    grid-template-columns: clamp(4.8rem, 9vw, 5.8rem) minmax(0, 1fr);
     overflow: hidden;
   }
 
@@ -112,35 +85,49 @@ const { timeline } = Astro.props;
     background: rgba(255, 255, 255, 0.35);
     border-right: 1px solid rgba(44, 44, 44, 0.09);
     display: grid;
-    grid-auto-rows: minmax(3.2rem, auto);
+    grid-auto-rows: minmax(clamp(2.8rem, 6vw, 3.4rem), auto);
   }
 
   .timeline-tab {
     background: transparent;
     border: 0;
-    border-left: 2px solid transparent;
-    color: #9f9f9f;
+    border-left: 0.125rem solid transparent;
+    color: #a2a2a2;
     cursor: pointer;
     font-family: var(--font-display);
-    font-size: 1.1rem;
-    padding: 0.95rem 0.75rem;
+    font-size: clamp(0.84rem, 2vw, 0.95rem);
+    padding: clamp(0.72rem, 2vw, 1rem) clamp(0.45rem, 1.4vw, 0.65rem);
     text-align: left;
   }
 
-  .timeline-tab.is-active {
-    background: #f2eeea;
-    border-left-color: var(--color-accent);
+  .timeline-tab:hover,
+  .timeline-tab:focus-visible {
     color: var(--color-text-strong);
   }
 
+  .timeline-tab:active {
+    transform: scale(0.99);
+  }
+
+  .timeline-tab.is-active {
+    background: #ece8e2;
+    border-left-color: var(--color-accent);
+    color: var(--color-text-strong);
+    font-weight: 600;
+  }
+
   .timeline-tabs__right {
-    min-height: 25rem;
+    min-block-size: clamp(18rem, 40vw, 26rem);
   }
 
   .timeline-panel {
     display: grid;
-    gap: 1rem;
-    padding: 1.2rem 1.5rem;
+    gap: var(--space-xs);
+    padding: clamp(0.8rem, 2.6vw, 1.2rem);
+  }
+
+  .timeline-panel[hidden] {
+    display: none;
   }
 
   .timeline-panel__head h3 {
@@ -149,28 +136,29 @@ const { timeline } = Astro.props;
 
   .timeline-panel__head p {
     color: var(--color-muted);
-    margin: 0.55rem 0 0;
+    margin: clamp(0.24rem, 1vw, 0.45rem) 0 0;
+    max-inline-size: clamp(20rem, 70vw, 44rem);
   }
 
   .timeline-panel__media-grid {
     display: grid;
-    gap: 0.95rem;
+    gap: var(--space-xs);
     grid-template-columns: 1.08fr 0.92fr;
   }
 
   .timeline-panel__media-grid figure {
-    border-radius: 0.85rem;
+    border-radius: 0.7rem;
     margin: 0;
     overflow: hidden;
   }
 
   .timeline-panel__media-grid img {
-    aspect-ratio: 16/9;
+    aspect-ratio: 3/2;
     object-fit: cover;
     width: 100%;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 63.9375em) {
     .timeline-tabs {
       grid-template-columns: 1fr;
     }
@@ -183,13 +171,13 @@ const { timeline } = Astro.props;
     }
 
     .timeline-tab {
-      min-width: 5.2rem;
+      min-inline-size: clamp(4.2rem, 11vw, 5.2rem);
       text-align: center;
       white-space: nowrap;
     }
 
     .timeline-tab.is-active {
-      border-bottom: 2px solid var(--color-accent);
+      border-bottom: 0.125rem solid var(--color-accent);
       border-left-color: transparent;
     }
 
@@ -198,9 +186,9 @@ const { timeline } = Astro.props;
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375em) {
     .timeline-panel {
-      padding: 1rem;
+      padding: clamp(0.75rem, 3vw, 1rem);
     }
 
     .timeline-panel__media-grid {

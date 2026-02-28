@@ -6,7 +6,6 @@ import DomaineHero from "../components/domaine/DomaineHero.astro";
 import TerroirSection from "../components/domaine/TerroirSection.astro";
 import FamilyStorySection from "../components/domaine/FamilyStorySection.astro";
 import DomainStatsBar from "../components/domaine/DomainStatsBar.astro";
-import FamilyTimelineTable from "../components/domaine/FamilyTimelineTable.astro";
 import VisitDomainCta from "../components/domaine/VisitDomainCta.astro";
 import DomainWinesShowcase from "../components/domaine/DomainWinesShowcase.astro";
 import DomainContactSection from "../components/domaine/DomainContactSection.astro";
@@ -21,13 +20,12 @@ const themeVars = [
 ---
 
 <BaseLayout title={domainePage.seo.title} description={domainePage.seo.description}>
-  <Header nav={site.nav} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
   <main class="domaine-page" style={themeVars}>
     <DomaineHero hero={domainePage.hero} />
     <TerroirSection terroir={domainePage.terroir} />
     <FamilyStorySection family={domainePage.family} />
     <DomainStatsBar stats={domainePage.statsBar} />
-    <FamilyTimelineTable timeline={domainePage.timeline} />
     <VisitDomainCta visitCta={domainePage.visitCta} />
     <DomainWinesShowcase wines={domainePage.wines} />
     <DomainContactSection contact={domainePage.contact} />
@@ -36,8 +34,25 @@ const themeVars = [
 </BaseLayout>
 
 <style>
+  .domaine-page {
+    --domaine-soft: #f4f1ec;
+  }
+
+  .domaine-page :global(.shell) {
+    max-width: 74rem;
+  }
+
   .domaine-page :global(.section) {
     padding-block: var(--domaine-section-space-desktop);
+  }
+
+  .domaine-page :global(.section--soft),
+  .domaine-page :global(.section--white) {
+    border-top: 1px solid rgba(44, 44, 44, 0.04);
+  }
+
+  .domaine-page :global(.section--soft) {
+    background: var(--domaine-soft);
   }
 
   @media (max-width: 1023px) {

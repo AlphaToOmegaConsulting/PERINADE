@@ -24,13 +24,8 @@ const {
   </head>
   <body>
     <slot />
-    <script is:inline>
-      document.addEventListener("submit", (event) => {
-        const target = event.target;
-        if (target instanceof HTMLFormElement && target.matches("[data-ui-form]")) {
-          event.preventDefault();
-        }
-      });
+    <script>
+      import "../scripts/ui/init";
     </script>
   </body>
 </html>

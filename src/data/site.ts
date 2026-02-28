@@ -18,16 +18,21 @@ export const site: SiteData = {
     { label: "Visites", href: "/visites", desktopSlot: "left", desktopLabel: "VISIT" },
     { label: "Boutique", href: "/boutique", desktopSlot: "left", desktopLabel: "SHOP" },
     { label: "Le Domaine", href: "/domaine", desktopSlot: "left", desktopLabel: "DOMAINE" },
-    { label: "News", href: "/news", desktopSlot: "right", desktopLabel: "NEWS" },
+    { label: "Actualites", href: "/#contact", desktopSlot: "right", desktopLabel: "ACTUALITES" },
     { label: "Contact", href: "/#contact" }
+  ],
+  mobileQuickActions: [
+    { id: "book", label: "Reserver", href: "/visites#booking", icon: "calendar", priority: "primary" },
+    { id: "shop", label: "Boutique", href: "/boutique", icon: "bag", priority: "secondary" },
+    { id: "call", label: "Appeler", href: "tel:+33468000000", icon: "phone", priority: "secondary" }
   ],
   hero: {
     eyebrow: "Près de Carcassonne",
     title: ["Domaine", "de la", "Périnade"],
     body:
       "Un domaine familial d'exception, niché au cœur du Languedoc. Venez découvrir nos vins, notre terroir et notre histoire lors d'une visite personnalisée.",
-    ctaLabel: "Visiter Boutique",
-    ctaHref: "/boutique",
+    ctaLabel: "Reserver une visite",
+    ctaHref: "/visites#booking",
     meta: ["Sur rendez-vous", "Domaine familial", "Depuis 1987"],
     backgroundImage: heroVineyard,
     featuredCards: [
@@ -192,7 +197,9 @@ export const site: SiteData = {
       { label: "Site", value: "www.perinade.fr", icon: "globe" },
       { label: "Adresse", value: "Près de Carcassonne, Aude (11)", icon: "pin" }
     ],
-    formAction: "TODO_FORM_ENDPOINT"
+    formAction: "mailto:contact@perinade.fr",
+    formSuccessMessage: "Message pret. Merci de verifier votre brouillon email avant envoi.",
+    formErrorMessage: "Impossible de preparer le message. Merci de nous appeler au +33 4 68 XX XX XX."
   },
   footer: {
     brandTitle: "Périnade",
@@ -206,27 +213,27 @@ export const site: SiteData = {
           { label: "Visites", href: "/visites" },
           { label: "Boutique", href: "/boutique" },
           { label: "Le Domaine", href: "/domaine" },
-          { label: "News", href: "/news" },
+          { label: "Actualites", href: "/#contact" },
           { label: "Contact", href: "/#contact" }
         ]
       },
       {
         title: "Informations",
         links: [
-          { label: "Mentions légales", href: "TODO_LINK_LEGAL" },
-          { label: "Politique de confidentialité", href: "TODO_LINK_PRIVACY" },
-          { label: "Conditions de vente", href: "TODO_LINK_TERMS" },
-          { label: "Presse", href: "TODO_LINK_PRESS" }
+          { label: "Mentions legales", href: "/#contact" },
+          { label: "Politique de confidentialite", href: "/#contact" },
+          { label: "Conditions de vente", href: "/#contact" },
+          { label: "Presse", href: "/#contact" }
         ]
       }
     ],
     newsletterTitle: "Newsletter",
     newsletterBody: "Recevez nos actualités et offres exclusives.",
     newsletterPlaceholder: "votre@email.fr",
-    newsletterAction: "TODO_NEWSLETTER_ENDPOINT",
+    newsletterAction: "mailto:contact@perinade.fr",
     social: [
-      { label: "Instagram", href: "TODO_LINK_INSTAGRAM" },
-      { label: "Facebook", href: "TODO_LINK_FACEBOOK" }
+      { label: "Instagram", href: "https://www.instagram.com/" },
+      { label: "Facebook", href: "https://www.facebook.com/" }
     ],
     copyright: "© 2026 Domaine de la Périnade. Tous droits réservés.",
     legalLine: "L'abus d'alcool est dangereux pour la santé. À consommer avec modération."

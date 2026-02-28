@@ -10,6 +10,14 @@ export interface NavItem {
   mobile?: boolean;
 }
 
+export interface MobileQuickAction {
+  id: "book" | "shop" | "call";
+  label: string;
+  href: LinkTarget;
+  icon: "calendar" | "bag" | "phone";
+  priority: "primary" | "secondary";
+}
+
 export interface HeroData {
   eyebrow: string;
   title: string[];
@@ -83,6 +91,7 @@ export interface FooterLinkGroup {
 
 export interface SiteData {
   nav: NavItem[];
+  mobileQuickActions: MobileQuickAction[];
   hero: HeroData;
   reasons: ReasonItem[];
   experience: {
@@ -124,6 +133,8 @@ export interface SiteData {
     body: string;
     info: ContactInfoItem[];
     formAction: LinkTarget;
+    formSuccessMessage?: string;
+    formErrorMessage?: string;
   };
   footer: {
     brandTitle: string;

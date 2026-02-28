@@ -95,7 +95,7 @@ const galleryItems = gallery.items.slice(0, 3);
     --gallery-mask-shape: url("/assets/perinade/gallery-curve-mask.svg");
     aspect-ratio: 1442 / 831;
     background: #dcdcdc;
-    box-shadow: 0 26px 48px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1.625rem 3rem rgba(0, 0, 0, 0.12);
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -113,7 +113,7 @@ const galleryItems = gallery.items.slice(0, 3);
 
   .gallery__track {
     display: grid;
-    gap: 8px;
+    gap: clamp(0.35rem, 1.2vw, 0.5rem);
     height: 100%;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     width: 100%;
@@ -145,7 +145,7 @@ const galleryItems = gallery.items.slice(0, 3);
     }
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 63.9375em) {
     .gallery {
       --tiger-sticky-top: calc(var(--header-height) - 0.55rem);
       --tiger-preroll: clamp(3.2rem, 8vh, 5rem);
@@ -153,7 +153,7 @@ const galleryItems = gallery.items.slice(0, 3);
     }
 
     .gallery__tiger-art {
-      width: min(49rem, 102vw);
+      width: min(49rem, 100vw);
     }
 
     .gallery__composition {
@@ -161,11 +161,11 @@ const galleryItems = gallery.items.slice(0, 3);
     }
 
     .gallery__track {
-      gap: 6px;
+      gap: clamp(0.3rem, 1vw, 0.375rem);
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375em) {
     .gallery {
       --tiger-sticky-top: calc(var(--header-height) - 0.35rem);
       --tiger-preroll: 2rem;
@@ -173,7 +173,7 @@ const galleryItems = gallery.items.slice(0, 3);
     }
 
     .gallery__tiger-art {
-      width: min(33rem, 132vw);
+      width: min(33rem, 100vw);
     }
 
     .gallery__intro {
@@ -184,7 +184,7 @@ const galleryItems = gallery.items.slice(0, 3);
       aspect-ratio: auto;
       background: transparent;
       box-shadow: none;
-      overflow: visible;
+      overflow: clip;
       -webkit-mask: none;
       mask: none;
       clip-path: none;
@@ -193,6 +193,7 @@ const galleryItems = gallery.items.slice(0, 3);
     .gallery__track {
       display: flex;
       gap: 0.7rem;
+      max-inline-size: 100%;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       padding-bottom: 0.35rem;

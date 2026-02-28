@@ -29,19 +29,42 @@
   --radius-panel: 1.4rem;
   --container-wide: 76rem;
   --container-narrow: 64rem;
-  --page-padding: 4.5rem;
-  --header-height: 5.35rem;
-  --hero-fold-offset: 1.5rem;
-  --display-hero: clamp(4.8rem, 6.7vw, 6.25rem);
-  --display-section-xl: clamp(2.5rem, 3.9vw, 3.55rem);
-  --display-section-lg: clamp(2.3rem, 3.8vw, 2.95rem);
-  --section-space-desktop: 6.15rem;
-  --section-space-tablet: 5rem;
-  --section-space-mobile: 3.85rem;
-  --content-gap-lg: 3rem;
-  --content-gap-md: 2rem;
-  --shadow-soft: 0 10px 24px rgba(24, 20, 14, 0.08);
-  --shadow-card: 0 18px 38px rgba(28, 22, 17, 0.08);
+
+  --bp-tablet: 63.9375em;
+  --bp-mobile: 47.9375em;
+
+  --page-padding: clamp(1rem, 5vw, 4.5rem);
+  --header-height: clamp(4.2rem, 8vw, 5.35rem);
+  --hero-fold-offset: clamp(0.75rem, 1.6vw, 1.5rem);
+
+  --space-2xs: clamp(0.3rem, 0.6vw, 0.5rem);
+  --space-xs: clamp(0.55rem, 1vw, 0.8rem);
+  --space-sm: clamp(0.75rem, 1.4vw, 1rem);
+  --space-md: clamp(1rem, 2vw, 1.4rem);
+  --space-lg: clamp(1.25rem, 2.8vw, 2rem);
+  --space-xl: clamp(1.8rem, 4vw, 3rem);
+  --space-2xl: clamp(2.5rem, 5vw, 4rem);
+
+  --control-height-sm: clamp(2.35rem, 5.8vw, 2.85rem);
+  --control-height-md: clamp(2.8rem, 6.5vw, 3.5rem);
+  --control-height-lg: clamp(3.15rem, 7.2vw, 4.25rem);
+  --icon-size-sm: clamp(0.85rem, 2.4vw, 1rem);
+  --icon-size-md: clamp(1rem, 2.8vw, 1.5rem);
+  --icon-size-lg: clamp(1.45rem, 3.6vw, 2rem);
+
+  --display-hero: clamp(3rem, 7vw, 6.25rem);
+  --display-section-xl: clamp(2.3rem, 4vw, 3.55rem);
+  --display-section-lg: clamp(2.05rem, 3.8vw, 2.95rem);
+
+  --section-space-desktop: clamp(4rem, 8vw, 6.15rem);
+  --section-space-tablet: clamp(3.5rem, 7vw, 5rem);
+  --section-space-mobile: clamp(3rem, 6vw, 3.85rem);
+
+  --content-gap-lg: clamp(1.8rem, 4vw, 3rem);
+  --content-gap-md: clamp(1.15rem, 2.8vw, 2rem);
+
+  --shadow-soft: 0 0.625rem 1.5rem rgba(24, 20, 14, 0.08);
+  --shadow-card: 0 1.125rem 2.375rem rgba(28, 22, 17, 0.08);
   --overlay-hero-left: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.48) 45%, rgba(0, 0, 0, 0.22) 100%);
   --overlay-hero-bottom: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.45) 100%);
   --overlay-history: linear-gradient(180deg, rgba(52, 37, 21, 0.84) 0%, rgba(52, 37, 21, 0.9) 100%);
@@ -63,7 +86,6 @@ body {
   font-family: var(--font-body);
   line-height: 1.5;
   margin: 0;
-  min-width: 320px;
 }
 
 img {
@@ -76,19 +98,26 @@ a {
   text-decoration: none;
 }
 
-a,
 button,
+a {
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+button {
+  transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
 input,
 textarea {
-  transition: opacity 180ms ease, transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
+  outline: 0.125rem solid var(--color-accent);
+  outline-offset: 0.1875rem;
 }
 
 button,
@@ -136,36 +165,34 @@ p {
 .sr-only {
   border: 0;
   clip: rect(0 0 0 0);
-  height: 1px;
+  block-size: 1px;
+  inline-size: 1px;
   margin: -1px;
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
 }
 
-@media (max-width: 1023px) {
-  :root {
-    --page-padding: 2rem;
-    --header-height: 4.6rem;
-    --hero-fold-offset: 1rem;
-    --section-space-tablet: 4.85rem;
-  }
-
+@media (max-width: 63.9375em) {
   .section {
     padding-block: var(--section-space-tablet);
   }
 }
 
-@media (max-width: 767px) {
-  :root {
-    --page-padding: 1.2rem;
-    --hero-fold-offset: 0.75rem;
-    --section-space-mobile: 3.75rem;
-  }
-
+@media (max-width: 47.9375em) {
   .section {
     padding-block: var(--section-space-mobile);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
   }
 }

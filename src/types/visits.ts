@@ -59,8 +59,15 @@ export interface BookingSlot {
 
 export interface BookingConfig {
   monthLabel: string;
+  initialMonth: string;
+  locale: string;
+  timezone: string;
+  startDate: string;
+  endDate: string;
   dayLabels: string[];
   selectableDays: number[];
+  disabledWeekdays?: number[];
+  disabledDates?: string[];
   defaultDay: number;
   slots: BookingSlot[];
   defaultSlotId: string;
@@ -73,6 +80,25 @@ export interface BookingConfig {
   ctaLabel: string;
   ctaHref: string;
   callLabel: string;
+  submitEndpoint?: string;
+  successMessage?: string;
+  errorMessage?: string;
+}
+
+export interface BookingSubmissionPayload {
+  source: "mobile" | "desktop";
+  day: number;
+  slotId: string;
+  participants: number;
+  addon: boolean;
+  totalPerPerson: number;
+  pagePath: string;
+  submittedAt: string;
+}
+
+export interface BookingApiResponse {
+  ok: boolean;
+  message: string;
 }
 
 export interface VisitThemeTokens {

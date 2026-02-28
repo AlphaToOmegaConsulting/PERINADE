@@ -1,14 +1,15 @@
 ---
-import type { NavItem } from "../../types/site";
+import type { MobileQuickAction, NavItem } from "../../types/site";
 import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   nav: NavItem[];
+  quickActions?: MobileQuickAction[];
   ctaLabel: string;
   ctaHref: string;
 }
 
-const { nav, ctaLabel, ctaHref } = Astro.props;
+const { nav, quickActions = [], ctaLabel, ctaHref } = Astro.props;
 
 const leftNav = nav.filter((item) => item.desktopSlot === "left");
 const rightNav = nav.filter((item) => item.desktopSlot === "right");
@@ -57,34 +58,40 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
   </div>
 </header>
 
-<script is:inline>
-  const header = document.querySelector("[data-header]");
-  const toggle = document.querySelector("[data-menu-toggle]");
-  const mobileNav = document.querySelector("[data-mobile-nav]");
-
-  const syncHeader = () => {
-    if (!header) return;
-    header.classList.toggle("is-scrolled", window.scrollY > 48);
-  };
-
-  syncHeader();
-  window.addEventListener("scroll", syncHeader, { passive: true });
-
-  toggle?.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    mobileNav.hidden = isOpen;
-    header?.classList.toggle("is-open", !isOpen);
-  });
-
-  mobileNav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      toggle?.setAttribute("aria-expanded", "false");
-      mobileNav.hidden = true;
-      header?.classList.remove("is-open");
-    });
-  });
-</script>
+{
+  quickActions.length > 0 && (
+    <nav class="mobile-quick-actions" aria-label="Actions rapides mobiles" data-mobile-quick-actions>
+      {quickActions.map((action) => (
+        <a
+          class:list={["mobile-quick-actions__item", action.priority === "primary" && "mobile-quick-actions__item--primary"]}
+          href={action.href}
+          data-quick-action={action.id}
+        >
+          <span class="mobile-quick-actions__icon" aria-hidden="true">
+            {
+              action.icon === "calendar" ? (
+                <svg viewBox="0 0 24 24" fill="none">
+                  <rect x="4" y="5.5" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.8"></rect>
+                  <path d="M8 3.5v4M16 3.5v4M4 9h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                </svg>
+              ) : action.icon === "bag" ? (
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M6.5 8.5h11l-1 10h-9l-1-10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"></path>
+                  <path d="M9 9V7.8A3 3 0 0 1 12 5a3 3 0 0 1 3 2.8V9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                </svg>
+              ) : (
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M7.5 5.5c.4-.4 1-.5 1.5-.2l2 1c.6.3.8 1 .5 1.6l-.7 1.4c1 1.9 2.5 3.4 4.4 4.4l1.4-.7c.6-.3 1.3-.1 1.6.5l1 2c.3.5.2 1.1-.2 1.5l-1.2 1.2c-.7.7-1.7.9-2.6.6A17.6 17.6 0 0 1 4.4 8.1c-.3-.9-.1-1.9.6-2.6l1.2-1.2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              )
+            }
+          </span>
+          <span>{action.label}</span>
+        </a>
+      ))}
+    </nav>
+  )
+}
 
 <style>
   .site-header {
@@ -98,9 +105,9 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
 
   .site-header.is-scrolled,
   .site-header.is-open {
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(0.875rem);
     background: rgba(15, 15, 15, 0.9);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.2);
   }
 
   .site-header__fade {
@@ -165,25 +172,25 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
     color: var(--color-white);
     display: inline-flex;
     grid-column: 4;
-    height: 5rem;
+    block-size: clamp(3.6rem, 7vw, 5rem);
     justify-items: center;
     justify-self: center;
     overflow: hidden;
     text-align: center;
-    width: 5rem;
+    inline-size: clamp(3.6rem, 7vw, 5rem);
   }
 
   .site-header__brand img {
-    height: 5rem;
+    block-size: clamp(3.6rem, 7vw, 5rem);
     object-fit: contain;
     transform: scale(1.3);
     transform-origin: center;
-    width: 5rem;
+    inline-size: clamp(3.6rem, 7vw, 5rem);
   }
 
   .site-header__cta {
-    min-height: 2.6rem;
-    padding-inline: 1rem;
+    min-block-size: var(--control-height-sm);
+    padding-inline: clamp(0.8rem, 2.4vw, 1rem);
   }
 
   .site-header__toggle,
@@ -195,16 +202,18 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
     background: transparent;
     border: 0;
     justify-self: end;
+    min-block-size: 2.75rem;
+    min-inline-size: 2.75rem;
     padding: 0.5rem;
   }
 
   .site-header__toggle span:not(.sr-only) {
     background: var(--color-white);
     display: block;
-    height: 2px;
-    margin-block: 5px;
+    block-size: 0.125rem;
+    margin-block: clamp(0.2rem, 0.8vw, 0.3125rem);
     transition: transform 160ms ease, opacity 160ms ease;
-    width: 1.6rem;
+    inline-size: clamp(1.2rem, 4vw, 1.6rem);
   }
 
   .site-header__mobile {
@@ -218,25 +227,78 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
 
   .site-header__mobile-inner {
     display: grid;
-    gap: 0.8rem;
-    padding-block: 1.1rem 1.4rem;
+    gap: var(--space-xs);
+    padding-block: var(--space-md) var(--space-lg);
   }
 
   .site-header__mobile-link {
     color: rgba(255, 255, 255, 0.86);
-    font-size: 0.95rem;
+    font-size: clamp(0.84rem, 2.6vw, 0.95rem);
     letter-spacing: 0.12em;
-    padding-block: 0.5rem;
+    min-block-size: 2.75rem;
+    padding-block: var(--space-2xs);
     text-transform: uppercase;
   }
 
   .site-header__mobile-cta {
     justify-self: start;
-    margin-top: 0.6rem;
-    min-height: 3rem;
+    margin-top: var(--space-2xs);
+    min-block-size: var(--control-height-md);
   }
 
-  @media (max-width: 1023px) {
+  .mobile-quick-actions {
+    align-items: center;
+    background: rgba(15, 15, 15, 0.95);
+    backdrop-filter: blur(0.75rem);
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    bottom: 0;
+    display: none;
+    gap: 0.5rem;
+    inset-inline: 0;
+    padding: 0.5rem max(0.75rem, env(safe-area-inset-left)) calc(0.5rem + env(safe-area-inset-bottom))
+      max(0.75rem, env(safe-area-inset-right));
+    position: fixed;
+    z-index: 70;
+  }
+
+  .mobile-quick-actions__item {
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 0.875rem;
+    color: rgba(255, 255, 255, 0.9);
+    display: inline-flex;
+    flex: 1 1 0;
+    font-size: 0.72rem;
+    font-weight: 600;
+    gap: 0.35rem;
+    justify-content: center;
+    min-block-size: 2.75rem;
+    padding: 0 0.65rem;
+    text-transform: uppercase;
+  }
+
+  .mobile-quick-actions__item--primary {
+    background: var(--color-cta);
+    border-color: var(--color-cta);
+    color: var(--color-white);
+  }
+
+  .mobile-quick-actions__item.is-active {
+    box-shadow: 0 0 0 0.125rem rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-quick-actions__icon {
+    display: inline-flex;
+    block-size: 1rem;
+    inline-size: 1rem;
+  }
+
+  .mobile-quick-actions__icon svg {
+    block-size: 100%;
+    inline-size: 100%;
+  }
+
+  @media (max-width: 63.9375em) {
     .site-header__nav {
       grid-template-columns: auto 1fr auto;
       height: var(--header-height);
@@ -247,9 +309,9 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
     }
 
     .site-header__brand {
-      height: 4.2rem;
+      block-size: clamp(3.2rem, 12vw, 4.2rem);
       justify-self: center;
-      width: 4.2rem;
+      inline-size: clamp(3.2rem, 12vw, 4.2rem);
     }
 
     .site-header__toggle,
@@ -258,9 +320,19 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
     }
 
     .site-header__brand img {
-      height: 4.2rem;
+      block-size: clamp(3.2rem, 12vw, 4.2rem);
       transform: scale(1.24);
-      width: 4.2rem;
+      inline-size: clamp(3.2rem, 12vw, 4.2rem);
+    }
+  }
+
+  @media (max-width: 47.9375em) {
+    .mobile-quick-actions {
+      display: flex;
+    }
+
+    :global(body) {
+      padding-bottom: calc(4.4rem + env(safe-area-inset-bottom));
     }
   }
 </style>

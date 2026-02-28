@@ -53,7 +53,7 @@ const visitsThemeStyle = [
 ---
 
 <BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description}>
-  <Header nav={site.nav} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
   <main class="visits-page" style={visitsThemeStyle}>
     <VisitHero hero={visitsPage.hero} />
     <TrustBar items={visitsPage.trustBar} />
