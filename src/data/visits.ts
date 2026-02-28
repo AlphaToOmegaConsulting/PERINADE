@@ -1,4 +1,5 @@
 import type { VisitPageData } from "../types/visits";
+import { CONTACT_INFO } from "./site";
 import visitsExtendedPool from "../assets/perinade/visits/extended-pool.jpg";
 import visitsFinalCtaBg from "../assets/perinade/visits/final-cta-bg.jpg";
 import visitsHeroGrapes from "../assets/perinade/visits/hero-grapes.jpg";
@@ -84,8 +85,8 @@ export const visitsPage: VisitPageData = {
       { icon: "car", label: "Parking gratuit" }
     ],
     primaryCta: { label: "Reserver", href: "/visites#booking" },
-    secondaryCta: { label: "Appeler", href: "tel:+33468000000" },
-    helper: "+33 4 68 XX XX XX · Réponse sous 24h",
+    secondaryCta: { label: "Appeler", href: CONTACT_INFO.phoneTel },
+    helper: `${CONTACT_INFO.phone} · Réponse sous 24h`,
     image: visitsHeroGrapes,
     imageAlt: "Raisins fraîchement récoltés dans une cuve"
   },

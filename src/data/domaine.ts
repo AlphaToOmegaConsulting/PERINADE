@@ -1,4 +1,5 @@
 import type { DomainePageData } from "../types/domaine";
+import { CONTACT_INFO } from "./site";
 import familyImg from "../assets/perinade/domaine/family.jpg";
 import heroImg from "../assets/perinade/domaine/hero.jpg";
 import terroirImg from "../assets/perinade/domaine/terroir.jpg";
@@ -201,7 +202,7 @@ export const domainePage: DomainePageData = {
         alt: "Blanc de Périnade",
         meta: "IGP Pays d'Oc · 2023 · 75 cl",
         title: "Blanc de Périnade",
-        body: "Agrumes et fleurs blanches. Une cuvée fraîche, précise et minérale.",
+        body: "Agrumes et fleurs blanches. Fraîcheur remarquable, finale minérale.",
         price: "10,00 € TTC",
         ctaLabel: "Voir",
         ctaHref: "/boutique"
@@ -211,7 +212,7 @@ export const domainePage: DomainePageData = {
         alt: "Grande Réserve",
         meta: "AOP Minervois · 2020 · 75 cl",
         title: "Grande Réserve",
-        body: "Élevé en fûts, puissant et complexe, avec des tanins fondus.",
+        body: "Élevé en fûts de chêne. Puissant, complexe, tanins fondus.",
         price: "22,00 € TTC",
         ctaLabel: "Voir",
         ctaHref: "/boutique"
@@ -224,7 +225,7 @@ export const domainePage: DomainePageData = {
     body:
       "L'équipe répond sous 24h. Vous pouvez aussi nous appeler directement pendant les heures d'ouverture du domaine.",
     cards: [
-      { label: "Téléphone", value: "+33 4 68 XX XX XX", href: "tel:+33468XXXXXX" },
+      { label: "Téléphone", value: CONTACT_INFO.phone, href: CONTACT_INFO.phoneTel },
       {
         label: "Adresse",
         value: "Domaine de la Périnade · Minervois, Languedoc",

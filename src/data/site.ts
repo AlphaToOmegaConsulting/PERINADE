@@ -1,4 +1,13 @@
 import type { SiteData } from "../types/site";
+
+export const CONTACT_INFO = {
+  phone: "+33 4 68 XX XX XX",
+  phoneTel: "tel:+33468XXXXXX",
+  email: "contact@perinade.fr",
+  address: "Près de Carcassonne, Aude (11)",
+  mapsUrl: "https://maps.google.com/?q=Domaine+de+la+Perinade+Minervois+Languedoc",
+  website: "www.perinade.fr"
+} as const;
 import experienceBg from "../assets/perinade/experience-bg.png";
 import galleryCellar from "../assets/perinade/gallery-cellar.png";
 import galleryVinesClose from "../assets/perinade/gallery-vines-close.png";
@@ -24,7 +33,7 @@ export const site: SiteData = {
   mobileQuickActions: [
     { id: "book", label: "Reserver", href: "/visites#booking", icon: "calendar", priority: "primary" },
     { id: "shop", label: "Boutique", href: "/boutique", icon: "bag", priority: "secondary" },
-    { id: "call", label: "Appeler", href: "tel:+33468000000", icon: "phone", priority: "secondary" }
+    { id: "call", label: "Appeler", href: CONTACT_INFO.phoneTel, icon: "phone", priority: "secondary" }
   ],
   hero: {
     eyebrow: "Près de Carcassonne",
@@ -33,7 +42,7 @@ export const site: SiteData = {
       "Au cœur du Languedoc, notre domaine familial vous ouvre ses portes pour une parenthèse authentique entre vignes, caveau et dégustation. Découvrez des cuvées de caractère, façonnées avec passion et respect du terroir.",
     ctaLabel: "Reserver une visite",
     ctaHref: "/visites#booking",
-    meta: ["Sur rendez-vous", "Domaine familial", "Depuis 1987"],
+    meta: ["Sur rendez-vous", "Domaine familial", "Depuis 1830"],
     backgroundImage: heroVineyard,
     featuredCards: [
       {
@@ -132,11 +141,11 @@ export const site: SiteData = {
   },
   history: {
     eyebrow: "Notre histoire",
-    title: "Trois générations de",
+    title: "Six générations de",
     titleHighlight: "passion",
     body: [
-      "Fondé en 1987, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes avec le respect des traditions et une attention particulière portée à l'environnement.",
-      "Aujourd'hui, c'est la troisième génération qui perpétue ce savoir-faire, alliant méthodes ancestrales et vinification moderne pour produire des vins qui expriment la singularité de notre terroir."
+      "Fondé en 1830, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes avec le respect des traditions et une attention particulière portée à l'environnement.",
+      "Aujourd'hui, ce sont les sixième et septième générations qui perpétuent ce savoir-faire, alliant méthodes ancestrales et vinification moderne pour produire des vins qui expriment la singularité de notre terroir."
     ],
     imagePrimary: historyFamily,
     ctaLabel: "Découvrir l'histoire complète",
@@ -192,19 +201,19 @@ export const site: SiteData = {
     body:
       "Vous souhaitez réserver une visite, passer commande ou simplement en savoir plus sur nos vins ? N'hésitez pas à nous contacter.",
     info: [
-      { label: "Téléphone", value: "+33 4 68 XX XX XX", icon: "phone" },
-      { label: "Email", value: "contact@perinade.fr", icon: "mail" },
-      { label: "Site", value: "www.perinade.fr", icon: "globe" },
-      { label: "Adresse", value: "Près de Carcassonne, Aude (11)", icon: "pin" }
+      { label: "Téléphone", value: CONTACT_INFO.phone, icon: "phone" },
+      { label: "Email", value: CONTACT_INFO.email, icon: "mail" },
+      { label: "Site", value: CONTACT_INFO.website, icon: "globe" },
+      { label: "Adresse", value: CONTACT_INFO.address, icon: "pin" }
     ],
-    formAction: "mailto:contact@perinade.fr",
+    formAction: `mailto:${CONTACT_INFO.email}`,
     formSuccessMessage: "Message pret. Merci de verifier votre brouillon email avant envoi.",
-    formErrorMessage: "Impossible de preparer le message. Merci de nous appeler au +33 4 68 XX XX XX."
+    formErrorMessage: `Impossible de preparer le message. Merci de nous appeler au ${CONTACT_INFO.phone}.`
   },
   footer: {
     brandTitle: "Périnade",
     about:
-      "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1987.",
+      "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1830.",
     groups: [
       {
         title: "Navigation",

@@ -1,99 +1,22 @@
 ---
 import { Image } from "astro:assets";
-import shopImage2 from "../../assets/perinade/shop/img-2.png";
-import shopImage3 from "../../assets/perinade/shop/img-3.png";
-import shopImage4 from "../../assets/perinade/shop/img-4.png";
-import shopImage5 from "../../assets/perinade/shop/img-5.png";
-import type { ImageMetadata } from "astro";
+import { getCollection } from "astro:content";
 
-interface ProductCard {
-  name: string;
-  meta: string;
-  description: string;
-  price: string;
-  stock: string;
-  image: ImageMetadata;
-  imageAlt: string;
-  badges: string[];
-  tone: string;
-  ctaHref: string;
-}
-
-const products: ProductCard[] = [
-  {
-    name: "Cuvée du Domaine",
-    meta: "AOP Minervois · 2022 · 75 cl",
-    description: "Fruits noirs, garrigue, épices douces. Bouche soyeuse, belle longueur.",
-    price: "12,50 € TTC",
-    stock: "En stock",
-    image: shopImage2,
-    imageAlt: "Bouteille rouge en close-up",
-    badges: ["Best Seller", "Rouge"],
-    tone: "Rouge",
+const rawVins = await getCollection("vins");
+const products = rawVins
+  .sort((a, b) => a.data.ordre - b.data.ordre)
+  .map((vin) => ({
+    name: vin.data.nom,
+    meta: `${vin.data.appellation} · ${vin.data.millesime} · ${vin.data.volume} cl`,
+    description: vin.data.description,
+    price: `${vin.data.prix.toFixed(2).replace(".", ",")} € TTC`,
+    stock: vin.data.stock,
+    image: vin.data.image,
+    imageAlt: vin.data.imageAlt,
+    badges: vin.data.badges,
+    tone: vin.data.couleur,
     ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Blanc de Périnade",
-    meta: "IGP Pays d'Oc · 2023 · 75 cl",
-    description: "Agrumes, fleurs blanches. Fraîcheur remarquable, finale minérale.",
-    price: "10,00 € TTC",
-    stock: "En stock",
-    image: shopImage3,
-    imageAlt: "Bouteille de blanc sur fond clair",
-    badges: ["Best Seller", "Blanc"],
-    tone: "Blanc",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Grande Réserve",
-    meta: "AOP Minervois · 2020 · 75 cl",
-    description: "Élevé en fûts de chêne. Puissant, complexe, tanins fondus.",
-    price: "22,00 € TTC",
-    stock: "En stock",
-    image: shopImage4,
-    imageAlt: "Étagères de vins",
-    badges: ["Best Seller", "Rouge"],
-    tone: "Rouge",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Rosé d'Été",
-    meta: "IGP Pays d'Oc · 2024 · 75 cl",
-    description: "Pêche, fraise. Bouche vive et gourmande, idéale pour l'apéritif.",
-    price: "9,50 € TTC",
-    stock: "En stock",
-    image: shopImage5,
-    imageAlt: "Scène rosé et panier",
-    badges: ["Favori Visite", "Rosé"],
-    tone: "Rosé",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Blanc Réserve",
-    meta: "AOP Minervois · 2022 · 75 cl",
-    description: "Fruits exotiques, vanille subtile. Bouche ample et élégante.",
-    price: "16,00 € TTC",
-    stock: "En stock",
-    image: shopImage3,
-    imageAlt: "Bouteille blanc réserve",
-    badges: ["Blanc"],
-    tone: "Blanc",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Rosé Prestige",
-    meta: "IGP Pays d'Oc · 2024 · 75 cl",
-    description: "Rose, fruits printaniers. Finale fraîche, structurée et vive.",
-    price: "13,00 € TTC",
-    stock: "En stock",
-    image: shopImage5,
-    imageAlt: "Rosé prestige",
-    badges: ["Rosé"],
-    tone: "Rosé",
-    ctaHref: "/boutique#produits"
-  }
-];
-
+  }));
 ---
 
 <section id="produits" class="shop-grid section section--soft" aria-labelledby="shop-grid-title">
