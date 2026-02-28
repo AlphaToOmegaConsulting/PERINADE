@@ -1,28 +1,79 @@
 ---
 import "../styles/global.css";
+import type { Locale } from "../i18n/locales";
+import { defaultLocale, localeHtmlLang } from "../i18n/locales";
+import { getUiStrings } from "../i18n/ui";
+
+interface Alternate {
+  locale: string;
+  href: string;
+}
 
 interface Props {
   title?: string;
   description?: string;
+  locale?: Locale;
+  canonicalPath?: string;
+  alternates?: Alternate[];
+  ogImage?: string;
 }
 
+const siteUrl = "https://www.perinade.fr";
 const {
   title = "Domaine de la Périnade",
-  description = "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1987."
+  description = "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1987.",
+  locale = defaultLocale,
+  canonicalPath,
+  alternates = [],
+  ogImage = "/assets/perinade/hero-vineyard.png"
 } = Astro.props;
+
+const lang = localeHtmlLang[locale];
+const ui = getUiStrings(locale);
+const canonical = canonicalPath ? `${siteUrl}${canonicalPath}` : undefined;
+
+const hreflangLinks = alternates.map((a) => ({
+  hreflang: a.locale,
+  href: `${siteUrl}${a.href}`
+}));
+
+const xDefault = alternates.find((a) => a.locale === "fr");
 ---
 
 <!doctype html>
-<html lang="fr">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <title>{title}</title>
+
+    {canonical && <link rel="canonical" href={canonical} />}
+    {hreflangLinks.map((link) => (
+      <link rel="alternate" hreflang={link.hreflang} href={link.href} />
+    ))}
+    {xDefault && <link rel="alternate" hreflang="x-default" href={`${siteUrl}${xDefault.href}`} />}
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={lang} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:site_name" content="Domaine de la Périnade" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
+
     <link rel="icon" type="image/png" href="/assets/perinade/logo.png" />
     <link rel="apple-touch-icon" href="/assets/perinade/logo.png" />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">{ui.skipToContent}</a>
     <slot />
     <script>
       import "../scripts/ui/init";

@@ -1,17 +1,17 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Footer from "../components/sections/Footer.astro";
-import Header from "../components/sections/Header.astro";
-import DomaineHero from "../components/domaine/DomaineHero.astro";
-import TerroirSection from "../components/domaine/TerroirSection.astro";
-import FamilyStorySection from "../components/domaine/FamilyStorySection.astro";
-import DomainStatsBar from "../components/domaine/DomainStatsBar.astro";
-import VisitDomainCta from "../components/domaine/VisitDomainCta.astro";
-import DomainWinesShowcase from "../components/domaine/DomainWinesShowcase.astro";
-import DomainContactSection from "../components/domaine/DomainContactSection.astro";
-import { getSiteData, getDomaineData } from "../data/index";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Footer from "../../components/sections/Footer.astro";
+import Header from "../../components/sections/Header.astro";
+import DomaineHero from "../../components/domaine/DomaineHero.astro";
+import TerroirSection from "../../components/domaine/TerroirSection.astro";
+import FamilyStorySection from "../../components/domaine/FamilyStorySection.astro";
+import DomainStatsBar from "../../components/domaine/DomainStatsBar.astro";
+import VisitDomainCta from "../../components/domaine/VisitDomainCta.astro";
+import DomainWinesShowcase from "../../components/domaine/DomainWinesShowcase.astro";
+import DomainContactSection from "../../components/domaine/DomainContactSection.astro";
+import { getSiteData, getDomaineData } from "../../data/index";
 
-const locale = "fr";
+const locale = "es";
 const site = await getSiteData(locale);
 const domainePage = await getDomaineData(locale);
 
@@ -28,7 +28,7 @@ const alternates = [
 ];
 ---
 
-<BaseLayout title={domainePage.seo.title} description={domainePage.seo.description} locale={locale} canonicalPath="/domaine" alternates={alternates}>
+<BaseLayout title={domainePage.seo.title} description={domainePage.seo.description} locale={locale} canonicalPath="/es/domaine" alternates={alternates}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/domaine", en: "/en/domaine", es: "/es/domaine" }} />
   <main id="main-content" class="domaine-page" style={themeVars}>
     <DomaineHero hero={domainePage.hero} />

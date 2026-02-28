@@ -1,3 +1,7 @@
+import type { BookingConfig, BookingSlot } from "./visits";
+
+export type { BookingConfig, BookingSlot };
+
 export interface HeaderMenuOptions {
   header: HTMLElement;
   toggle: HTMLButtonElement;
@@ -13,39 +17,6 @@ export interface TabsOptions {
 export interface AccordionOptions {
   root: HTMLElement;
   triggers: HTMLButtonElement[];
-}
-
-export interface BookingSlot {
-  id: string;
-  label: string;
-}
-
-export interface BookingConfig {
-  monthLabel: string;
-  initialMonth: string;
-  locale: string;
-  timezone: string;
-  startDate: string;
-  endDate: string;
-  dayLabels: string[];
-  selectableDays: number[];
-  disabledWeekdays?: number[];
-  disabledDates?: string[];
-  defaultDay: number;
-  slots: BookingSlot[];
-  defaultSlotId: string;
-  minParticipants: number;
-  maxParticipants: number;
-  defaultParticipants: number;
-  addonLabel: string;
-  basePricePerPerson: number;
-  addonPricePerPerson: number;
-  ctaLabel: string;
-  ctaHref: string;
-  callLabel: string;
-  submitEndpoint?: string;
-  successMessage?: string;
-  errorMessage?: string;
 }
 
 export interface BookingState {
