@@ -1,9 +1,6 @@
-import { initBookingCalendars } from "./booking-calendar";
 import { initCursorOrb } from "./cursor-orb";
-import { initFaqAccordions } from "./faq-accordion";
 import { initHeaderMenus } from "./header-menu";
 import { initScrollReveals } from "./scroll-reveal";
-import { initTimelineTabsWidgets } from "./timeline-tabs";
 
 let submitHandlerReady = false;
 
@@ -25,9 +22,6 @@ const initFormGuards = () => {
 export const initUi = (): void => {
   initFormGuards();
   initHeaderMenus();
-  initTimelineTabsWidgets();
-  initFaqAccordions();
-  initBookingCalendars();
   initCursorOrb();
   initScrollReveals();
 };

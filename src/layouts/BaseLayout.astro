@@ -16,6 +16,10 @@ interface Props {
   canonicalPath?: string;
   alternates?: Alternate[];
   ogImage?: string;
+  /** URL of the LCP hero image — enables early preload hint */
+  heroImageUrl?: string;
+  /** Serialised JSON-LD object (use JSON.stringify) */
+  jsonLd?: string;
 }
 
 const siteUrl = "https://www.perinade.fr";
@@ -25,7 +29,9 @@ const {
   locale = defaultLocale,
   canonicalPath,
   alternates = [],
-  ogImage = "/assets/perinade/hero-vineyard.png"
+  ogImage = "/assets/perinade/hero-vineyard.png",
+  heroImageUrl,
+  jsonLd
 } = Astro.props;
 
 const lang = localeHtmlLang[locale];
@@ -54,6 +60,11 @@ const xDefault = alternates.find((a) => a.locale === "fr");
     ))}
     {xDefault && <link rel="alternate" hreflang="x-default" href={`${siteUrl}${xDefault.href}`} />}
 
+    <!-- LCP hero image preload -->
+    {heroImageUrl && (
+      <link rel="preload" as="image" href={heroImageUrl} fetchpriority="high" />
+    )}
+
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -71,6 +82,9 @@ const xDefault = alternates.find((a) => a.locale === "fr");
 
     <link rel="icon" type="image/png" href="/assets/perinade/logo.png" />
     <link rel="apple-touch-icon" href="/assets/perinade/logo.png" />
+
+    <!-- Structured data -->
+    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
   </head>
   <body>
     <a href="#main-content" class="skip-link">{ui.skipToContent}</a>

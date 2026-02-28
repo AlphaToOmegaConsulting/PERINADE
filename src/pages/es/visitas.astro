@@ -61,3 +61,12 @@ const alternates = [
     }
   }
 </style>
+
+<script>
+  import { initBookingCalendars } from "../../scripts/ui/booking-calendar";
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => initBookingCalendars(), { once: true });
+  } else {
+    initBookingCalendars();
+  }
+</script>
