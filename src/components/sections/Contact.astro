@@ -29,21 +29,54 @@ const { contact } = Astro.props;
       </ul>
     </div>
 
-    <form class="contact__form" data-ui-form data-placeholder={contact.formAction}>
+    <form
+      class="contact__form"
+      data-ui-form
+      data-contact-form
+      data-success-message={contact.formSuccessMessage ?? "Message envoye."}
+      data-error-message={contact.formErrorMessage ?? "Erreur d'envoi."}
+      action={contact.formAction}
+      method="post"
+      novalidate
+    >
       <div class="contact__grid">
-        <label class="sr-only" for="contact-first-name">Prénom</label>
-        <input id="contact-first-name" type="text" name="firstName" placeholder="Prénom *" required />
-        <label class="sr-only" for="contact-last-name">Nom</label>
-        <input id="contact-last-name" type="text" name="lastName" placeholder="Nom *" required />
-        <label class="sr-only" for="contact-email">Email</label>
-        <input id="contact-email" type="email" name="email" placeholder="Email *" required />
-        <label class="sr-only" for="contact-phone">Téléphone</label>
-        <input id="contact-phone" type="tel" name="phone" placeholder="Téléphone *" required />
+        <div class="contact__field">
+          <label for="contact-first-name">Prenom *</label>
+          <input id="contact-first-name" type="text" name="firstName" autocomplete="given-name" required />
+          <small class="contact__error" data-error-for="contact-first-name"></small>
+        </div>
+
+        <div class="contact__field">
+          <label for="contact-last-name">Nom *</label>
+          <input id="contact-last-name" type="text" name="lastName" autocomplete="family-name" required />
+          <small class="contact__error" data-error-for="contact-last-name"></small>
+        </div>
+
+        <div class="contact__field">
+          <label for="contact-email">Email *</label>
+          <input id="contact-email" type="email" name="email" inputmode="email" autocomplete="email" required />
+          <small class="contact__error" data-error-for="contact-email"></small>
+        </div>
+
+        <div class="contact__field">
+          <label for="contact-phone">Telephone *</label>
+          <input id="contact-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel" required />
+          <small class="contact__error" data-error-for="contact-phone"></small>
+        </div>
       </div>
-      <label class="sr-only" for="contact-subject">Sujet</label>
-      <input id="contact-subject" type="text" name="subject" placeholder="Sujet *" required />
-      <label class="sr-only" for="contact-message">Message</label>
-      <textarea id="contact-message" name="message" rows="6" placeholder="Message *" required></textarea>
+
+      <div class="contact__field">
+        <label for="contact-subject">Sujet *</label>
+        <input id="contact-subject" type="text" name="subject" required />
+        <small class="contact__error" data-error-for="contact-subject"></small>
+      </div>
+
+      <div class="contact__field">
+        <label for="contact-message">Message *</label>
+        <textarea id="contact-message" name="message" rows="6" required></textarea>
+        <small class="contact__error" data-error-for="contact-message"></small>
+      </div>
+
       <div class="contact__cta">
         <span class="contact__ornament" aria-hidden="true"></span>
         <button type="submit" class="contact__submit">
@@ -55,9 +88,123 @@ const { contact } = Astro.props;
           Envoyer le message
         </button>
       </div>
+      <p class="contact__status" data-contact-status aria-live="polite"></p>
     </form>
   </div>
 </section>
+
+<script is:inline>
+  const contactForm = document.querySelector("[data-contact-form]");
+
+  const trackUiEvent = (event, context, meta = {}) => {
+    const payload = { event, context, meta };
+    window.dataLayer = window.dataLayer ?? [];
+    window.dataLayer.push(payload);
+    window.dispatchEvent(new CustomEvent("ui:track", { detail: payload }));
+  };
+
+  if (contactForm instanceof HTMLFormElement) {
+    const statusEl = contactForm.querySelector("[data-contact-status]");
+    const fields = Array.from(contactForm.querySelectorAll("input, textarea"));
+
+    const setFieldError = (field, message) => {
+      const errorEl = contactForm.querySelector(`[data-error-for="${field.id}"]`);
+      if (!(errorEl instanceof HTMLElement)) return;
+      errorEl.textContent = message;
+      field.setAttribute("aria-invalid", message ? "true" : "false");
+    };
+
+    const validateField = (field) => {
+      if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) return true;
+      if (field.validity.valid) {
+        setFieldError(field, "");
+        return true;
+      }
+
+      let message = "Ce champ est requis.";
+      if (field.validity.typeMismatch && field.type === "email") {
+        message = "Merci de saisir un email valide.";
+      }
+
+      setFieldError(field, message);
+      return false;
+    };
+
+    fields.forEach((field) => {
+      field.addEventListener("blur", () => {
+        validateField(field);
+      });
+
+      field.addEventListener("input", () => {
+        if (field.getAttribute("aria-invalid") === "true") {
+          validateField(field);
+        }
+      });
+    });
+
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const valid = fields.every((field) => validateField(field));
+      if (!valid) {
+        if (statusEl instanceof HTMLElement) {
+          statusEl.textContent = "Veuillez corriger les champs en erreur.";
+          statusEl.classList.remove("is-success");
+          statusEl.classList.add("is-error");
+        }
+        return;
+      }
+
+      const formData = new FormData(contactForm);
+      const payload = Object.fromEntries(formData.entries());
+      const action = contactForm.getAttribute("action") || "";
+      const successMessage = contactForm.dataset.successMessage || "Message envoye.";
+      const errorMessage = contactForm.dataset.errorMessage || "Erreur d'envoi.";
+
+      try {
+        if (action.startsWith("mailto:")) {
+          const subject = encodeURIComponent(String(payload.subject || "Demande de contact"));
+          const body = encodeURIComponent(
+            `Prenom: ${payload.firstName}\nNom: ${payload.lastName}\nEmail: ${payload.email}\nTelephone: ${payload.phone}\n\nMessage:\n${payload.message}`
+          );
+          window.location.href = `${action}?subject=${subject}&body=${body}`;
+          if (statusEl instanceof HTMLElement) {
+            statusEl.textContent = successMessage;
+            statusEl.classList.remove("is-error");
+            statusEl.classList.add("is-success");
+          }
+          contactForm.reset();
+          trackUiEvent("cta_click", "contact_form_submit", payload);
+          return;
+        }
+
+        if (statusEl instanceof HTMLElement) {
+          statusEl.textContent = errorMessage;
+          statusEl.classList.remove("is-success");
+          statusEl.classList.add("is-error");
+        }
+      } catch {
+        if (statusEl instanceof HTMLElement) {
+          statusEl.textContent = errorMessage;
+          statusEl.classList.remove("is-success");
+          statusEl.classList.add("is-error");
+        }
+      }
+    });
+
+    let dirty = false;
+    fields.forEach((field) => {
+      field.addEventListener("change", () => {
+        dirty = true;
+      });
+    });
+
+    window.addEventListener("beforeunload", () => {
+      if (dirty) {
+        trackUiEvent("form_abandon", "contact_form");
+      }
+    });
+  }
+</script>
 
 <style>
   .contact {
@@ -148,14 +295,26 @@ const { contact } = Astro.props;
   .contact__form {
     align-self: start;
     display: grid;
-    gap: 0.85rem;
+    gap: 0.75rem;
     padding-top: 0.4rem;
   }
 
   .contact__grid {
     display: grid;
-    gap: 0.85rem;
+    gap: 0.75rem;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .contact__field {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .contact__field label {
+    font-size: 0.79rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
   .contact__form input,
@@ -166,8 +325,8 @@ const { contact } = Astro.props;
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
     color: var(--color-text);
     font: inherit;
-    min-height: 3.2rem;
-    padding: 0.9rem 1.15rem;
+    min-height: 3rem;
+    padding: 0.8rem 1rem;
   }
 
   .contact__form textarea {
@@ -175,16 +334,22 @@ const { contact } = Astro.props;
     resize: vertical;
   }
 
-  .contact__form input::placeholder,
-  .contact__form textarea::placeholder {
-    color: #9b9b9b;
+  .contact__form input[aria-invalid="true"],
+  .contact__form textarea[aria-invalid="true"] {
+    border-color: #9f2517;
+  }
+
+  .contact__error {
+    color: #9f2517;
+    font-size: 0.82rem;
+    min-block-size: 1.1rem;
   }
 
   .contact__cta {
     align-items: center;
     display: grid;
     justify-items: start;
-    margin-top: 0.4rem;
+    margin-top: 0.2rem;
     position: relative;
   }
 
@@ -208,7 +373,7 @@ const { contact } = Astro.props;
     display: inline-flex;
     gap: 0.9rem;
     justify-content: center;
-    min-height: 3.75rem;
+    min-height: 3.2rem;
     min-width: 18rem;
     padding: 0 1.8rem;
     text-transform: uppercase;
@@ -229,6 +394,20 @@ const { contact } = Astro.props;
     width: 1rem;
   }
 
+  .contact__status {
+    font-size: 0.9rem;
+    margin: 0;
+    min-block-size: 1.3rem;
+  }
+
+  .contact__status.is-success {
+    color: #1f5b31;
+  }
+
+  .contact__status.is-error {
+    color: #9f2517;
+  }
+
   @media (max-width: 1023px) {
     .contact__inner {
       grid-template-columns: 1fr;
@@ -242,6 +421,10 @@ const { contact } = Astro.props;
   @media (max-width: 767px) {
     .contact__grid {
       grid-template-columns: 1fr;
+    }
+
+    .contact__submit {
+      min-width: 100%;
     }
   }
 </style>

@@ -30,7 +30,7 @@ export const site: SiteData = {
     eyebrow: "Près de Carcassonne",
     title: ["Domaine", "de la", "Périnade"],
     body:
-      "Un domaine familial d'exception, niché au cœur du Languedoc. Venez découvrir nos vins, notre terroir et notre histoire lors d'une visite personnalisée.",
+      "Au cœur du Languedoc, notre domaine familial vous ouvre ses portes pour une parenthèse authentique entre vignes, caveau et dégustation. Découvrez des cuvées de caractère, façonnées avec passion et respect du terroir.",
     ctaLabel: "Reserver une visite",
     ctaHref: "/visites#booking",
     meta: ["Sur rendez-vous", "Domaine familial", "Depuis 1987"],

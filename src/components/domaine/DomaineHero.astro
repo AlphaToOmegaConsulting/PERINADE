@@ -24,24 +24,10 @@ const { hero } = Astro.props;
         {
           isPlaceholderLink(hero.primaryCta.href) ? (
             <span class="domaine-hero__cta-primary" data-todo={hero.primaryCta.href}>
-              <span class="domaine-hero__cta-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <rect x="3.5" y="4.5" width="17" height="16" rx="2.2" stroke="currentColor" stroke-width="1.7"></rect>
-                  <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.7"></path>
-                  <path d="M8 2.8V6.2M16 2.8V6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
-                </svg>
-              </span>
               <span>{hero.primaryCta.label}</span>
             </span>
           ) : (
             <a class="domaine-hero__cta-primary" href={hero.primaryCta.href}>
-              <span class="domaine-hero__cta-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <rect x="3.5" y="4.5" width="17" height="16" rx="2.2" stroke="currentColor" stroke-width="1.7"></rect>
-                  <path d="M3.5 9.5H20.5" stroke="currentColor" stroke-width="1.7"></path>
-                  <path d="M8 2.8V6.2M16 2.8V6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"></path>
-                </svg>
-              </span>
               <span>{hero.primaryCta.label}</span>
             </a>
           )
@@ -132,32 +118,24 @@ const { hero } = Astro.props;
     display: inline-flex;
     font-size: clamp(0.72rem, 1.8vw, 0.78rem);
     font-weight: 600;
-    gap: clamp(0.4rem, 1.4vw, 0.55rem);
+    justify-content: center;
+    line-height: 1;
     letter-spacing: 0.14em;
-    box-shadow: 0 0.625rem 1.5rem rgba(214, 116, 0, 0.28);
+    box-shadow: 0 0.5rem 1.1rem rgba(214, 116, 0, 0.24);
     min-block-size: var(--control-height-md);
     padding-inline: clamp(1rem, 3.3vw, 1.55rem);
     text-decoration: none;
     text-transform: uppercase;
   }
 
-  .domaine-hero__cta-icon {
-    display: inline-flex;
-    block-size: var(--icon-size-sm);
-    inline-size: var(--icon-size-sm);
-  }
-
-  .domaine-hero__cta-icon svg {
-    height: 100%;
-    width: 100%;
-  }
-
   .domaine-hero__cta-secondary {
+    align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 100vmax;
     color: var(--color-white);
     display: inline-flex;
     font-size: clamp(0.72rem, 1.8vw, 0.78rem);
+    line-height: 1;
     letter-spacing: 0.12em;
     min-block-size: var(--control-height-md);
     padding-inline: clamp(0.95rem, 3vw, 1.45rem);

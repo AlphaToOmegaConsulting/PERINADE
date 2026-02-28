@@ -68,6 +68,10 @@
   --overlay-hero-left: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.48) 45%, rgba(0, 0, 0, 0.22) 100%);
   --overlay-hero-bottom: linear-gradient(180deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.45) 100%);
   --overlay-history: linear-gradient(180deg, rgba(52, 37, 21, 0.84) 0%, rgba(52, 37, 21, 0.9) 100%);
+  --motion-duration-enter: 620ms;
+  --motion-ease-enter: cubic-bezier(0.21, 1, 0.31, 1);
+  --motion-duration-hover: 240ms;
+  --motion-shadow-soft: 0 1.2rem 2rem rgba(20, 14, 9, 0.12);
 }
 
 *,
@@ -110,6 +114,62 @@ button {
 input,
 textarea {
   transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 1.15rem, 0);
+  transition:
+    opacity var(--motion-duration-enter) var(--motion-ease-enter),
+    transform var(--motion-duration-enter) var(--motion-ease-enter);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+[data-reveal="left"] {
+  transform: translate3d(-1.15rem, 0, 0);
+}
+
+[data-reveal="right"] {
+  transform: translate3d(1.15rem, 0, 0);
+}
+
+[data-reveal="zoom"] {
+  transform: scale(0.975);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.reasons__card,
+.experience__card,
+.testimonials__card,
+.wines__card,
+.contact__form,
+.history__content,
+.history__media,
+.gallery__item {
+  transition:
+    transform var(--motion-duration-hover) ease,
+    box-shadow var(--motion-duration-hover) ease,
+    border-color var(--motion-duration-hover) ease;
+}
+
+.reasons__card:hover,
+.experience__card:hover,
+.testimonials__card:hover,
+.wines__card:hover,
+.contact__form:hover,
+.history__content:hover {
+  transform: translateY(-0.2rem);
+}
+
+.experience__card:hover,
+.testimonials__card:hover,
+.wines__card:hover {
+  box-shadow: var(--motion-shadow-soft);
 }
 
 a:focus-visible,
@@ -194,5 +254,10 @@ p {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
     transition-duration: 1ms !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }

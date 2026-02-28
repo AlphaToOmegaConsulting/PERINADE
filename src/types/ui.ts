@@ -43,6 +43,9 @@ export interface BookingConfig {
   ctaLabel: string;
   ctaHref: string;
   callLabel: string;
+  submitEndpoint?: string;
+  successMessage?: string;
+  errorMessage?: string;
 }
 
 export interface BookingState {

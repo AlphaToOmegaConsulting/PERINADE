@@ -5,18 +5,21 @@ interface Props {
   href: string;
   label: string;
   variant?: "hero" | "pill" | "text" | "form";
+  size?: "default" | "mobile";
+  priority?: "primary" | "secondary" | "tertiary";
   class?: string;
 }
 
-const { href, label, variant = "pill", class: className = "" } = Astro.props;
+const { href, label, variant = "pill", size = "default", priority = "primary", class: className = "" } = Astro.props;
 const isPlaceholder = isPlaceholderLink(href);
+const composedClassName = `${className} is-size-${size} is-priority-${priority}`.trim();
 ---
 
 {
   variant === "hero" ? (
     <Fragment>
       {isPlaceholder ? (
-        <span class={`hero-cta ${className}`} data-todo={href}>
+        <span class={`hero-cta ${composedClassName}`} data-todo={href}>
           <span class="hero-cta__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -25,7 +28,7 @@ const isPlaceholder = isPlaceholderLink(href);
           <span class="hero-cta__label">{label}</span>
         </span>
       ) : (
-        <a class={`hero-cta ${className}`} href={href}>
+        <a class={`hero-cta ${composedClassName}`} href={href}>
           <span class="hero-cta__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none">
               <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -37,13 +40,13 @@ const isPlaceholder = isPlaceholderLink(href);
     </Fragment>
   ) : variant === "text" ? (
     isPlaceholder ? (
-      <span class={`text-link ${className}`} data-todo={href}>{label}</span>
+      <span class={`text-link ${composedClassName}`} data-todo={href}>{label}</span>
     ) : (
-      <a class={`text-link ${className}`} href={href}>{label}</a>
+      <a class={`text-link ${composedClassName}`} href={href}>{label}</a>
     )
   ) : variant === "form" ? (
     isPlaceholder ? (
-      <span class={`form-link ${className}`} data-todo={href}>
+      <span class={`form-link ${composedClassName}`} data-todo={href}>
         <span class="form-link__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -52,7 +55,7 @@ const isPlaceholder = isPlaceholderLink(href);
         <span>{label}</span>
       </span>
     ) : (
-      <a class={`form-link ${className}`} href={href}>
+      <a class={`form-link ${composedClassName}`} href={href}>
         <span class="form-link__icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none">
             <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -62,9 +65,9 @@ const isPlaceholder = isPlaceholderLink(href);
       </a>
     )
   ) : isPlaceholder ? (
-    <span class={`pill-link ${className}`} data-todo={href}>{label}</span>
+    <span class={`pill-link ${composedClassName}`} data-todo={href}>{label}</span>
   ) : (
-    <a class={`pill-link ${className}`} href={href}>{label}</a>
+    <a class={`pill-link ${composedClassName}`} href={href}>{label}</a>
   )
 }
 
@@ -129,6 +132,21 @@ const isPlaceholder = isPlaceholderLink(href);
     padding-inline: clamp(0.8rem, 2.4vw, 1rem);
     position: relative;
     transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, background 180ms ease;
+  }
+
+  .pill-link.is-size-mobile {
+    min-block-size: 2.75rem;
+  }
+
+  .pill-link.is-priority-secondary {
+    background: #ffffff;
+    border: 1px solid var(--color-cta);
+    color: var(--color-cta);
+  }
+
+  .pill-link.is-priority-tertiary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 
   .pill-link.site-header__cta::after {

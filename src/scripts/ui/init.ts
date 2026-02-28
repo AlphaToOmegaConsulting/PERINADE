@@ -1,6 +1,7 @@
 import { initBookingCalendars } from "./booking-calendar";
 import { initFaqAccordions } from "./faq-accordion";
 import { initHeaderMenus } from "./header-menu";
+import { initScrollReveals } from "./scroll-reveal";
 import { initTimelineTabsWidgets } from "./timeline-tabs";
 
 let submitHandlerReady = false;
@@ -24,6 +25,7 @@ export const initUi = (): void => {
   initTimelineTabsWidgets();
   initFaqAccordions();
   initBookingCalendars();
+  initScrollReveals();
 };
 
 if (document.readyState === "loading") {
