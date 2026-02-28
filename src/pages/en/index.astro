@@ -1,0 +1,37 @@
+---
+import Contact from "../../components/sections/Contact.astro";
+import Experience from "../../components/sections/Experience.astro";
+import Footer from "../../components/sections/Footer.astro";
+import Gallery from "../../components/sections/Gallery.astro";
+import Header from "../../components/sections/Header.astro";
+import Hero from "../../components/sections/Hero.astro";
+import History from "../../components/sections/History.astro";
+import Reasons from "../../components/sections/Reasons.astro";
+import Testimonials from "../../components/sections/Testimonials.astro";
+import Wines from "../../components/sections/Wines.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getSiteData } from "../../data/index";
+
+const locale = "en";
+const site = await getSiteData(locale);
+const alternates = [
+  { locale: "fr", href: "/" },
+  { locale: "en", href: "/en" },
+  { locale: "es", href: "/es" }
+];
+---
+
+<BaseLayout locale={locale} canonicalPath="/en" alternates={alternates}>
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/", en: "/en", es: "/es" }} />
+  <main id="main-content">
+    <Hero hero={site.hero} />
+    <Reasons reasons={site.reasons} />
+    <Experience experience={site.experience} />
+    <Gallery gallery={site.gallery} />
+    <Testimonials testimonials={site.testimonials} />
+    <History history={site.history} />
+    <Wines wines={site.wines} />
+    <Contact contact={site.contact} />
+  </main>
+  <Footer footer={site.footer} />
+</BaseLayout>

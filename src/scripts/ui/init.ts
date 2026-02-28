@@ -12,7 +12,9 @@ const initFormGuards = () => {
 
   document.addEventListener("submit", (event) => {
     const target = event.target;
-    if (target instanceof HTMLFormElement && target.matches("[data-ui-form]")) {
+    if (!(target instanceof HTMLFormElement)) return;
+    /* Only block forms that opt-in to guard AND don't have their own handler */
+    if (target.matches("[data-ui-form]") && !target.matches("[data-contact-form]")) {
       event.preventDefault();
     }
   });

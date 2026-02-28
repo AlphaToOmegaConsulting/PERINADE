@@ -10,12 +10,20 @@ import Reasons from "../components/sections/Reasons.astro";
 import Testimonials from "../components/sections/Testimonials.astro";
 import Wines from "../components/sections/Wines.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { site } from "../data/site";
+import { getSiteData } from "../data/index";
+
+const locale = "fr";
+const site = await getSiteData(locale);
+const alternates = [
+  { locale: "fr", href: "/" },
+  { locale: "en", href: "/en" },
+  { locale: "es", href: "/es" }
+];
 ---
 
-<BaseLayout>
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
-  <main>
+<BaseLayout locale={locale} canonicalPath="/" alternates={alternates}>
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/", en: "/en", es: "/es" }} />
+  <main id="main-content">
     <Hero hero={site.hero} />
     <Reasons reasons={site.reasons} />
     <Experience experience={site.experience} />

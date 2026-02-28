@@ -11,9 +11,12 @@ import TrustBar from "../components/visits/TrustBar.astro";
 import ExtendedEscape from "../components/visits/ExtendedEscape.astro";
 import Footer from "../components/sections/Footer.astro";
 import Header from "../components/sections/Header.astro";
-import { site } from "../data/site";
-import { visitsPage } from "../data/visits";
+import { getSiteData, getVisitsData } from "../data/index";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const locale = "fr";
+const site = await getSiteData(locale);
+const visitsPage = await getVisitsData(locale);
 
 const theme = visitsPage.theme;
 const visitsThemeStyle = [
@@ -50,11 +53,17 @@ const visitsThemeStyle = [
   `--visit-stroke-subtle:${theme.stroke.subtle}`,
   `--visit-stroke-strong:${theme.stroke.strong}`
 ].join(";");
+
+const alternates = [
+  { locale: "fr", href: "/visites" },
+  { locale: "en", href: "/en/visits" },
+  { locale: "es", href: "/es/visitas" }
+];
 ---
 
-<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description}>
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
-  <main class="visits-page" style={visitsThemeStyle}>
+<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description} locale={locale} canonicalPath="/visites" alternates={alternates}>
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/visites", en: "/en/visits", es: "/es/visitas" }} />
+  <main id="main-content" class="visits-page" style={visitsThemeStyle}>
     <VisitHero hero={visitsPage.hero} />
     <TrustBar items={visitsPage.trustBar} />
     <ExperienceTimeline timeline={visitsPage.timeline} />
@@ -74,13 +83,13 @@ const visitsThemeStyle = [
     padding-block: var(--visit-section-space-desktop);
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 63.9375em) {
     .visits-page :global(.section) {
       padding-block: var(--visit-section-space-tablet);
     }
   }
 
-  @media (max-width: 767px) {
+  @media (max-width: 47.9375em) {
     .visits-page :global(.section) {
       padding-block: var(--visit-section-space-mobile);
     }

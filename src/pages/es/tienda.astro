@@ -1,16 +1,16 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import Header from "../components/sections/Header.astro";
-import Footer from "../components/sections/Footer.astro";
-import ShopHero from "../components/shop/ShopHero.astro";
-import ShopProductGrid from "../components/shop/ShopProductGrid.astro";
-import ShopDomainSelection from "../components/shop/ShopDomainSelection.astro";
-import ShopCaseComposer from "../components/shop/ShopCaseComposer.astro";
-import ShopFinalCtaBand from "../components/shop/ShopFinalCtaBand.astro";
-import ShopFaq from "../components/shop/ShopFaq.astro";
-import { getSiteData } from "../data/index";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/sections/Header.astro";
+import Footer from "../../components/sections/Footer.astro";
+import ShopHero from "../../components/shop/ShopHero.astro";
+import ShopProductGrid from "../../components/shop/ShopProductGrid.astro";
+import ShopDomainSelection from "../../components/shop/ShopDomainSelection.astro";
+import ShopCaseComposer from "../../components/shop/ShopCaseComposer.astro";
+import ShopFinalCtaBand from "../../components/shop/ShopFinalCtaBand.astro";
+import ShopFaq from "../../components/shop/ShopFaq.astro";
+import { getSiteData } from "../../data/index";
 
-const locale = "fr";
+const locale = "es";
 const site = await getSiteData(locale);
 
 const alternates = [
@@ -20,7 +20,7 @@ const alternates = [
 ];
 ---
 
-<BaseLayout title="Boutique | Domaine de la Périnade" description="Commandez les cuvées du Domaine de la Périnade en ligne." locale={locale} canonicalPath="/boutique" alternates={alternates}>
+<BaseLayout title="Tienda | Domaine de la Périnade" description="Pida los vinos del Domaine de la Périnade en línea." locale={locale} canonicalPath="/es/tienda" alternates={alternates}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/boutique", en: "/en/shop", es: "/es/tienda" }} />
   <main id="main-content" class="shop-page">
     <ShopHero />
