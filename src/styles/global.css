@@ -209,19 +209,6 @@ textarea {
   transform: translate(-50%, -50%) scale(0.84);
 }
 
-body.has-cursor-orb,
-body.has-cursor-orb a,
-body.has-cursor-orb button,
-body.has-cursor-orb [role="button"] {
-  cursor: none;
-}
-
-body.has-cursor-orb input,
-body.has-cursor-orb textarea,
-body.has-cursor-orb [contenteditable="true"] {
-  cursor: text;
-}
-
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
@@ -315,10 +302,4 @@ p {
     display: none !important;
   }
 
-  body.has-cursor-orb,
-  body.has-cursor-orb a,
-  body.has-cursor-orb button,
-  body.has-cursor-orb [role="button"] {
-    cursor: auto !important;
-  }
 }
