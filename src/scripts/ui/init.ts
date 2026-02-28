@@ -1,4 +1,5 @@
 import { initBookingCalendars } from "./booking-calendar";
+import { initCursorOrb } from "./cursor-orb";
 import { initFaqAccordions } from "./faq-accordion";
 import { initHeaderMenus } from "./header-menu";
 import { initScrollReveals } from "./scroll-reveal";
@@ -25,6 +26,7 @@ export const initUi = (): void => {
   initTimelineTabsWidgets();
   initFaqAccordions();
   initBookingCalendars();
+  initCursorOrb();
   initScrollReveals();
 };
 
