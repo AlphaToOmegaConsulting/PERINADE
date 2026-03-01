@@ -1,21 +1,21 @@
 ---
-import FinalCta from "../components/visits/FinalCta.astro";
-import PairingAddon from "../components/visits/PairingAddon.astro";
-import PricingPlans from "../components/visits/PricingPlans.astro";
-import BookingSection from "../components/visits/BookingSection.astro";
-import ExperienceTimeline from "../components/visits/ExperienceTimeline.astro";
-import VisitHero from "../components/visits/VisitHero.astro";
-import WinesShowcase from "../components/visits/WinesShowcase.astro";
-import AccessSection from "../components/visits/AccessSection.astro";
-import TrustBar from "../components/visits/TrustBar.astro";
-import ExtendedEscape from "../components/visits/ExtendedEscape.astro";
-import Footer from "../components/sections/Footer.astro";
-import Header from "../components/sections/Header.astro";
-import { getSiteData, getVisitsData } from "../data/index";
-import { buildVisitsThemeStyle } from "../utils/visits-theme";
-import BaseLayout from "../layouts/BaseLayout.astro";
+import FinalCta from "../../components/visits/FinalCta.astro";
+import PairingAddon from "../../components/visits/PairingAddon.astro";
+import PricingPlans from "../../components/visits/PricingPlans.astro";
+import BookingSection from "../../components/visits/BookingSection.astro";
+import ExperienceTimeline from "../../components/visits/ExperienceTimeline.astro";
+import VisitHero from "../../components/visits/VisitHero.astro";
+import WinesShowcase from "../../components/visits/WinesShowcase.astro";
+import AccessSection from "../../components/visits/AccessSection.astro";
+import TrustBar from "../../components/visits/TrustBar.astro";
+import ExtendedEscape from "../../components/visits/ExtendedEscape.astro";
+import Footer from "../../components/sections/Footer.astro";
+import Header from "../../components/sections/Header.astro";
+import { getSiteData, getVisitsData } from "../../data/index";
+import { buildVisitsThemeStyle } from "../../utils/visits-theme";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-const locale = "fr";
+const locale = "es";
 const site = await getSiteData(locale);
 const visitsPage = await getVisitsData(locale);
 const visitsThemeStyle = buildVisitsThemeStyle(visitsPage.theme);
@@ -27,7 +27,7 @@ const alternates = [
 ];
 ---
 
-<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description} locale={locale} canonicalPath="/visites" alternates={alternates}>
+<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description} locale={locale} canonicalPath="/es/visitas" alternates={alternates}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/visites", en: "/en/visits", es: "/es/visitas" }} />
   <main id="main-content" class="visits-page" style={visitsThemeStyle}>
     <VisitHero hero={visitsPage.hero} />
@@ -63,7 +63,7 @@ const alternates = [
 </style>
 
 <script>
-  import { initBookingCalendars } from "../scripts/ui/booking-calendar";
+  import { initBookingCalendars } from "../../scripts/ui/booking-calendar";
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => initBookingCalendars(), { once: true });
   } else {

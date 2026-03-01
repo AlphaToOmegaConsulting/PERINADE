@@ -10,12 +10,57 @@ import Reasons from "../components/sections/Reasons.astro";
 import Testimonials from "../components/sections/Testimonials.astro";
 import Wines from "../components/sections/Wines.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { site } from "../data/site";
+import { getSiteData } from "../data/index";
+
+const locale = "fr";
+const site = await getSiteData(locale);
+const alternates = [
+  { locale: "fr", href: "/" },
+  { locale: "en", href: "/en" },
+  { locale: "es", href: "/es" }
+];
+
+const heroImageUrl = site.hero.backgroundImage.src;
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Winery",
+  "name": "Domaine de la Périnade",
+  "url": "https://www.perinade.fr",
+  "telephone": "+33 4 68 XX XX XX",
+  "email": "contact@perinade.fr",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Carcassonne",
+    "addressRegion": "Occitanie",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "43.2",
+    "longitude": "2.35"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.instagram.com/",
+    "https://www.facebook.com/"
+  ],
+  "description": "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1987.",
+  "foundingDate": "1987",
+  "priceRange": "€€"
+});
 ---
 
-<BaseLayout>
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} />
-  <main>
+<BaseLayout locale={locale} canonicalPath="/" alternates={alternates} heroImageUrl={heroImageUrl} jsonLd={jsonLd}>
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/", en: "/en", es: "/es" }} />
+  <main id="main-content">
     <Hero hero={site.hero} />
     <Reasons reasons={site.reasons} />
     <Experience experience={site.experience} />

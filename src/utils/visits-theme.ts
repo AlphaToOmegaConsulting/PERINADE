@@ -1,0 +1,39 @@
+import type { VisitThemeTokens } from "../types/visits";
+
+/** Build the CSS custom property string for visit page theming. */
+export function buildVisitsThemeStyle(theme: VisitThemeTokens): string {
+  return [
+    `--visit-accent-primary:${theme.accent.primary}`,
+    `--visit-accent-soft:${theme.accent.soft}`,
+    `--visit-accent-on-dark:${theme.accent.onDark}`,
+    `--visit-radius-sm:${theme.radius.sm}`,
+    `--visit-radius-md:${theme.radius.md}`,
+    `--visit-radius-lg:${theme.radius.lg}`,
+    `--visit-radius-xl:${theme.radius.xl}`,
+    `--visit-section-space-desktop:${theme.spacing.sectionDesktop}`,
+    `--visit-section-space-tablet:${theme.spacing.sectionTablet}`,
+    `--visit-section-space-mobile:${theme.spacing.sectionMobile}`,
+    `--visit-type-eyebrow-size:${theme.typography.eyebrow.fontSize}`,
+    `--visit-type-eyebrow-lh:${theme.typography.eyebrow.lineHeight}`,
+    `--visit-type-eyebrow-track:${theme.typography.eyebrow.letterSpacing}`,
+    `--visit-type-eyebrow-weight:${theme.typography.eyebrow.fontWeight}`,
+    `--visit-type-display-size:${theme.typography.titleDisplay.fontSize}`,
+    `--visit-type-display-lh:${theme.typography.titleDisplay.lineHeight}`,
+    `--visit-type-display-track:${theme.typography.titleDisplay.letterSpacing}`,
+    `--visit-type-display-weight:${theme.typography.titleDisplay.fontWeight}`,
+    `--visit-type-section-size:${theme.typography.titleSection.fontSize}`,
+    `--visit-type-section-lh:${theme.typography.titleSection.lineHeight}`,
+    `--visit-type-section-track:${theme.typography.titleSection.letterSpacing}`,
+    `--visit-type-section-weight:${theme.typography.titleSection.fontWeight}`,
+    `--visit-type-body-size:${theme.typography.body.fontSize}`,
+    `--visit-type-body-lh:${theme.typography.body.lineHeight}`,
+    `--visit-type-body-track:${theme.typography.body.letterSpacing}`,
+    `--visit-type-body-weight:${theme.typography.body.fontWeight}`,
+    `--visit-type-caption-size:${theme.typography.caption.fontSize}`,
+    `--visit-type-caption-lh:${theme.typography.caption.lineHeight}`,
+    `--visit-type-caption-track:${theme.typography.caption.letterSpacing}`,
+    `--visit-type-caption-weight:${theme.typography.caption.fontWeight}`,
+    `--visit-stroke-subtle:${theme.stroke.subtle}`,
+    `--visit-stroke-strong:${theme.stroke.strong}`
+  ].join(";");
+}

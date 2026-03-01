@@ -1,5 +1,8 @@
 ---
 import type { MobileQuickAction, NavItem } from "../../types/site";
+import type { Locale } from "../../i18n/locales";
+import { locales, localeLabels, defaultLocale } from "../../i18n/locales";
+import { getUiStrings } from "../../i18n/ui";
 import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
@@ -7,18 +10,26 @@ interface Props {
   quickActions?: MobileQuickAction[];
   ctaLabel: string;
   ctaHref: string;
+  locale?: Locale;
+  alternateUrls?: Record<Locale, string>;
 }
 
-const { nav, quickActions = [], ctaLabel, ctaHref } = Astro.props;
+const { nav, quickActions = [], ctaLabel, ctaHref, locale = defaultLocale, alternateUrls } = Astro.props;
+const ui = getUiStrings(locale);
 
 const leftNav = nav.filter((item) => item.desktopSlot === "left");
 const rightNav = nav.filter((item) => item.desktopSlot === "right");
 const mobileNav = nav.filter((item) => item.mobile !== false);
+const homeHref = locale === defaultLocale ? "/" : `/${locale}`;
+
+const langLinks = alternateUrls
+  ? locales.map((loc) => ({ locale: loc, href: alternateUrls[loc], label: localeLabels[loc], active: loc === locale }))
+  : [];
 ---
 
 <header class="site-header" data-header>
   <div class="site-header__fade" aria-hidden="true"></div>
-  <nav class="shell site-header__nav" aria-label="Navigation principale">
+  <nav class="shell site-header__nav" aria-label={ui.navLabel}>
     <div class="site-header__group site-header__group--left">
       {leftNav.map((item) => (
         <a class="site-header__link" href={item.href}>
@@ -27,7 +38,7 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
       ))}
     </div>
 
-    <a class="site-header__brand" href="/" aria-label="Accueil">
+    <a class="site-header__brand" href={homeHref} aria-label={ui.homeLabel}>
       <img src="/assets/perinade/logo.png" alt="" width="80" height="80" loading="eager" />
     </a>
 
@@ -37,6 +48,15 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
           {item.desktopLabel ?? item.label}
         </a>
       ))}
+      {langLinks.length > 0 && (
+        <div class="site-header__lang" aria-label={ui.languageLabel}>
+          {langLinks.map((l) => (
+            l.active
+              ? <span class="site-header__lang-item is-active" aria-current="true">{l.locale.toUpperCase()}</span>
+              : <a class="site-header__lang-item" href={l.href}>{l.locale.toUpperCase()}</a>
+          ))}
+        </div>
+      )}
       <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__cta" />
     </div>
 
@@ -44,7 +64,7 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
       <span></span>
       <span></span>
       <span></span>
-      <span class="sr-only">Ouvrir le menu</span>
+      <span class="sr-only">{ui.menuOpen}</span>
     </button>
   </nav>
 
@@ -53,6 +73,15 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
       {mobileNav.map((item) => (
         <a class="site-header__mobile-link" href={item.href}>{item.label}</a>
       ))}
+      {langLinks.length > 0 && (
+        <div class="site-header__lang site-header__lang--mobile" aria-label={ui.languageLabel}>
+          {langLinks.map((l) => (
+            l.active
+              ? <span class="site-header__lang-item is-active" aria-current="true">{l.locale.toUpperCase()}</span>
+              : <a class="site-header__lang-item" href={l.href}>{l.locale.toUpperCase()}</a>
+          ))}
+        </div>
+      )}
       <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__mobile-cta" />
     </div>
   </div>
@@ -60,7 +89,7 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
 
 {
   quickActions.length > 0 && (
-    <nav class="mobile-quick-actions" aria-label="Actions rapides mobiles" data-mobile-quick-actions>
+    <nav class="mobile-quick-actions" aria-label={ui.mobileNavLabel} data-mobile-quick-actions>
       {quickActions.map((action) => (
         <a
           class:list={["mobile-quick-actions__item", action.priority === "primary" && "mobile-quick-actions__item--primary"]}
@@ -191,6 +220,34 @@ const mobileNav = nav.filter((item) => item.mobile !== false);
   .site-header__cta {
     min-block-size: var(--control-height-sm);
     padding-inline: clamp(0.8rem, 2.4vw, 1rem);
+  }
+
+  /* Language switcher */
+  .site-header__lang {
+    align-items: center;
+    display: flex;
+    gap: 0.2rem;
+  }
+
+  .site-header__lang-item {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 0.2rem 0.35rem;
+  }
+
+  .site-header__lang-item:hover {
+    color: var(--color-white);
+  }
+
+  .site-header__lang-item.is-active {
+    color: var(--color-white);
+    border-bottom: 1.5px solid var(--color-accent);
+  }
+
+  .site-header__lang--mobile {
+    padding-block: var(--space-2xs);
   }
 
   .site-header__toggle,
