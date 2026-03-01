@@ -13,11 +13,17 @@ const site = await getSiteData(locale);
   <main id="main-content" class="not-found">
     <div class="shell not-found__shell">
       <p class="not-found__code" aria-hidden="true">404</p>
-      <h1 class="not-found__title">Page introuvable</h1>
-      <p class="not-found__body">
-        Cette page n'existe pas ou a été déplacée. Revenez à l'accueil pour découvrir nos vins et nos visites.
-      </p>
-      <a href="/" class="not-found__cta">Retour à l'accueil</a>
+      <h1 class="not-found__title">Page introuvable · Page not found · Página no encontrada</h1>
+      <div class="not-found__body">
+        <p>Cette page n'existe pas ou a été déplacée.</p>
+        <p>This page does not exist or has been moved.</p>
+        <p>Esta página no existe o ha sido movida.</p>
+      </div>
+      <div class="not-found__actions">
+        <a href="/" class="not-found__cta">FR</a>
+        <a href="/en" class="not-found__cta">EN</a>
+        <a href="/es" class="not-found__cta">ES</a>
+      </div>
     </div>
   </main>
   <Footer footer={site.footer} />
@@ -59,6 +65,15 @@ const site = await getSiteData(locale);
     max-width: 36rem;
   }
 
+  .not-found__body p {
+    margin: 0.4rem 0;
+  }
+
+  .not-found__actions {
+    display: inline-flex;
+    gap: 0.65rem;
+  }
+
   .not-found__cta {
     background: var(--color-cta);
     border-radius: 0.5rem;
@@ -66,7 +81,9 @@ const site = await getSiteData(locale);
     display: inline-block;
     font-size: 0.9375rem;
     font-weight: 600;
-    padding: 0.85rem 2rem;
+    min-width: 5rem;
+    padding: 0.85rem 1.4rem;
+    text-align: center;
     transition: background 180ms ease;
   }
 

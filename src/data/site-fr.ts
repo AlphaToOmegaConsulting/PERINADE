@@ -16,8 +16,8 @@ import wineRose from "../assets/perinade/wine-rose.png";
 export const siteFr: SiteData = {
   nav: [
     { label: "Accueil", href: "/", mobile: false },
-    { label: "Visites", href: "/visites", desktopSlot: "left", desktopLabel: "VISIT" },
-    { label: "Boutique", href: "/boutique", desktopSlot: "left", desktopLabel: "SHOP" },
+    { label: "Visites", href: "/visites", desktopSlot: "left", desktopLabel: "VISITES" },
+    { label: "Boutique", href: "/boutique", desktopSlot: "left", desktopLabel: "BOUTIQUE" },
     { label: "Le Domaine", href: "/domaine", desktopSlot: "left", desktopLabel: "DOMAINE" },
     { label: "Actualités", href: "/#contact", desktopSlot: "right", desktopLabel: "ACTUALITÉS" },
     { label: "Contact", href: "/#contact" }
@@ -87,6 +87,7 @@ export const siteFr: SiteData = {
       { label: "Lieu", value: "Près de Carcassonne", icon: "pin" },
       { label: "Tarif", value: "15 € / personne", icon: "ticket" }
     ],
+    infoLine: "Sur rendez-vous uniquement · Parking gratuit · Accès facile depuis Carcassonne",
     ctaLabel: "Réserver une visite",
     ctaHref: "/visites#booking",
     backgroundImage: experienceBg
@@ -188,6 +189,28 @@ export const siteFr: SiteData = {
       { label: "Site", value: contactInfo.website, icon: "globe" },
       { label: "Adresse", value: "Près de Carcassonne, Aude (11)", icon: "pin" }
     ],
+    labels: {
+      firstName: "Prénom *",
+      lastName: "Nom *",
+      email: "Email *",
+      phone: "Téléphone *",
+      subject: "Sujet *",
+      message: "Message *",
+      submit: "Envoyer le message"
+    },
+    validation: {
+      required: "Ce champ est requis.",
+      invalidEmail: "Merci de saisir un email valide.",
+      fixErrors: "Veuillez corriger les champs en erreur."
+    },
+    mail: {
+      defaultSubject: "Demande de contact",
+      fieldFirstName: "Prénom",
+      fieldLastName: "Nom",
+      fieldEmail: "Email",
+      fieldPhone: "Téléphone",
+      fieldMessage: "Message"
+    },
     formAction: `mailto:${contactInfo.email}`,
     formSuccessMessage: "Message prêt. Merci de vérifier votre brouillon email avant envoi.",
     formErrorMessage: `Impossible de préparer le message. Merci de nous appeler au ${contactInfo.phone}.`

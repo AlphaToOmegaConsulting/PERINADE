@@ -85,6 +85,19 @@ export interface BookingConfig {
   errorMessage?: string;
 }
 
+export interface BookingUiLabels {
+  prevMonthAriaLabel: string;
+  nextMonthAriaLabel: string;
+  slotHeading: string;
+  participantsHeading: string;
+  priceFromLabel: string;
+  pricePerPersonLabel: string;
+  missingDateMessage: string;
+  defaultSuccessMessage: string;
+  defaultErrorMessage: string;
+  mailSubjectFallback: string;
+}
+
 export interface BookingSubmissionPayload {
   source: "mobile" | "desktop";
   day: number;
@@ -261,6 +274,7 @@ export interface VisitPageData {
     title: string;
     body: string;
     layout: BookingLayout;
+    ui: BookingUiLabels;
     config: BookingConfig;
   };
   finalCta: {

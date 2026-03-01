@@ -1,42 +1,22 @@
 ---
-const faqs = [
-  {
-    question: "Quels sont les délais de livraison ?",
-    answer:
-      "Les commandes sont expédiées sous 24h et livrées sous 48-72 h en France métropolitaine. Emballage isotherme inclus en période de chaleur."
-  },
-  {
-    question: "La livraison est-elle gratuite ?",
-    answer: "La livraison est offerte dès 80 € d'achat, sinon les frais sont calculés selon votre zone de livraison."
-  },
-  {
-    question: "Puis-je retourner ma commande ?",
-    answer: "Oui, vous disposez de 14 jours après réception. Les bouteilles doivent rester intactes et non ouvertes."
-  },
-  {
-    question: "Comment conserver les vins après réception ?",
-    answer: "Conservez les bouteilles couchées dans un endroit frais, sec et à l'abri de la lumière directe."
-  },
-  {
-    question: "Livrez-vous à l'étranger ?",
-    answer: "Oui, sur demande pour certaines destinations européennes. Contactez-nous avant validation de commande."
-  },
-  {
-    question: "Comment contacter le domaine ?",
-    answer: "Par téléphone au +33 4 68 XX XX XX ou par email via le formulaire de contact du site."
-  }
-];
+import type { ShopPageData } from "../../types/shop";
+
+interface Props {
+  faq: ShopPageData["faq"];
+}
+
+const { faq } = Astro.props;
 ---
 
 <section class="shop-faq section section--soft" aria-labelledby="shop-faq-title">
   <div class="shell shop-shell shop-shell--narrow">
     <header class="shop-faq__heading">
-      <p>Questions fréquentes</p>
-      <h2 id="shop-faq-title">Tout savoir avant d'acheter</h2>
+      <p>{faq.eyebrow}</p>
+      <h2 id="shop-faq-title">{faq.title}</h2>
     </header>
 
     <div class="shop-faq__list" data-faq>
-      {faqs.map((faq, index) => {
+      {faq.items.map((item, index) => {
         const panelId = `shop-faq-panel-${index}`;
         const triggerId = `shop-faq-trigger-${index}`;
         const isOpen = index === 0;
@@ -52,7 +32,7 @@ const faqs = [
                 aria-controls={panelId}
                 data-faq-trigger
               >
-                <span>{faq.question}</span>
+                <span>{item.question}</span>
                 <span class="shop-faq__chevron" aria-hidden="true">⌄</span>
               </button>
             </h3>
@@ -64,7 +44,7 @@ const faqs = [
               hidden={!isOpen}
               data-faq-panel
             >
-              <p>{faq.answer}</p>
+              <p>{item.answer}</p>
             </div>
           </article>
         );

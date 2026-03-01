@@ -90,9 +90,9 @@ export const visitsPageFr: VisitPageData = {
     imageAlt: "Raisins fraîchement récoltés dans une cuve"
   },
   trustBar: [
-    "4.9/5 based on 127 reviews",
-    "Languedoc Wine Tourism Excellence",
-    "Guided by the winemaker"
+    "4,9/5 selon 127 avis",
+    "Excellence œnotouristique du Languedoc",
+    "Visite guidée par le vigneron"
   ],
   timeline: {
     eyebrow: "Votre parcours",
@@ -206,9 +206,9 @@ export const visitsPageFr: VisitPageData = {
     note: "Ajoutez cette option lors de votre réservation en ligne."
   },
   pricing: {
-    eyebrow: "Visit Options",
-    title: "Choose Your Format",
-    body: "Flexible formats, including private and large groups on request.",
+    eyebrow: "Formules de visite",
+    title: "Choisissez votre format",
+    body: "Formats flexibles, incluant visites privées et grands groupes sur demande.",
     layout: {
       containerMaxWidth: "50rem",
       cardMinHeight: "22rem",
@@ -218,49 +218,49 @@ export const visitsPageFr: VisitPageData = {
     },
     plans: [
       {
-        title: "Standard Visit",
-        subtitle: "The essential experience",
+        title: "Visite standard",
+        subtitle: "L'expérience essentielle",
         price: "15€",
-        perLabel: "/ person",
+        perLabel: "/ personne",
         features: [
-          "1h30 guided visit",
-          "Walk through the vines",
-          "Cellar tour & winery",
-          "Tasting of 5 estate wines",
-          "Commentary by the winemaker",
-          "French & English available"
+          "Visite guidée de 1h30",
+          "Promenade dans les vignes",
+          "Visite du chai et de la cave",
+          "Dégustation de 5 cuvées du domaine",
+          "Commentaires par le vigneron",
+          "Français et anglais disponibles"
         ],
-        ctaLabel: "Reserver",
+        ctaLabel: "Réserver",
         ctaHref: "/visites#booking"
       },
       {
-        title: "Gourmet Visit",
-        subtitle: "Visit + food pairing",
+        title: "Visite gourmande",
+        subtitle: "Visite + accord gourmand",
         price: "25€",
-        perLabel: "/ person",
+        perLabel: "/ personne",
         features: [
-          "Everything in Standard",
-          "Cheese & charcuterie board",
-          "Local artisan selection",
-          "Extended tasting time",
-          "Perfect for couples & groups",
-          "Available daily"
+          "Tout inclus de la formule standard",
+          "Planche fromages et charcuterie",
+          "Sélection artisanale locale",
+          "Temps de dégustation prolongé",
+          "Idéal pour couples et groupes",
+          "Disponible tous les jours"
         ],
-        ctaLabel: "Reserver",
+        ctaLabel: "Réserver",
         ctaHref: "/visites#booking",
         isHighlighted: true,
-        badge: "Popular"
+        badge: "Populaire"
       }
     ],
     meta: [
-      "Available daily, 11:00 – 16:00",
-      "Private groups on request",
-      "Premium experience, fair pricing"
+      "Disponible tous les jours, 11:00 – 16:00",
+      "Groupes privés sur demande",
+      "Expérience premium, tarification juste"
     ]
   },
   access: {
-    eyebrow: "Easy to Reach",
-    title: "Easy to Reach",
+    eyebrow: "Accès facile",
+    title: "Comment venir",
     body: "Accessible depuis Carcassonne, avec un accueil simple pour les visites en duo, en famille ou en groupe.",
     leftCard: {
       icon: "pin",
@@ -275,21 +275,21 @@ export const visitsPageFr: VisitPageData = {
       {
         icon: "car",
         tag: "Le plus pratique",
-        title: "By car",
-        subtitle: "Most convenient",
+        title: "En voiture",
+        subtitle: "Le plus pratique",
         content: ["15 min depuis Carcassonne", "Accès direct et parking sur place"]
       },
       {
         icon: "plane",
         tag: "Aéroport",
-        title: "From airport",
-        subtitle: "Carcassonne Airport",
+        title: "Depuis l'aéroport",
+        subtitle: "Aéroport de Carcassonne",
         content: ["20 min en voiture", "Taxis et VTC disponibles"]
       },
       {
         icon: "train",
         tag: "Train + transfert",
-        title: "Train + transfer",
+        title: "Train + transfert",
         subtitle: "Gare de Carcassonne",
         content: ["25 min avec transfert", "Idéal pour séjour œnotourisme"]
       }
@@ -325,14 +325,26 @@ export const visitsPageFr: VisitPageData = {
       calendarCellHeight: "2.9rem",
       controlRowHeight: "2.5rem"
     },
+    ui: {
+      prevMonthAriaLabel: "Mois précédent",
+      nextMonthAriaLabel: "Mois suivant",
+      slotHeading: "Créneau",
+      participantsHeading: "Participants",
+      priceFromLabel: "À partir de",
+      pricePerPersonLabel: "/ personne",
+      missingDateMessage: "Sélectionnez une date valide.",
+      defaultSuccessMessage: "Demande envoyée.",
+      defaultErrorMessage: "Erreur lors de l'envoi.",
+      mailSubjectFallback: "Demande de visite - Domaine de la Perinade"
+    },
     config: {
-      monthLabel: "February 2026",
+      monthLabel: "Février 2026",
       initialMonth: "2026-02",
-      locale: "en-US",
+      locale: "fr-FR",
       timezone: "Europe/Paris",
       startDate: "2026-02-01",
       endDate: "2026-12-31",
-      dayLabels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      dayLabels: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
       selectableDays: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28],
       disabledWeekdays: [],
       disabledDates: [],
@@ -354,11 +366,11 @@ export const visitsPageFr: VisitPageData = {
       addonLabel: "Ajouter planche fromages & charcuterie",
       basePricePerPerson: 15,
       addonPricePerPerson: 10,
-      ctaLabel: "Reserver",
+      ctaLabel: "Réserver",
       ctaHref: "/visites#booking",
       callLabel: "Ou appeler",
       submitEndpoint: "",
-      successMessage: "Demande envoyee. Nous revenons vers vous sous 24h.",
+      successMessage: "Demande envoyée. Nous revenons vers vous sous 24h.",
       errorMessage: "Impossible d'envoyer la demande. Merci d'appeler le domaine."
     }
   },
@@ -371,7 +383,7 @@ export const visitsPageFr: VisitPageData = {
       titleToBodyGap: "0.6rem",
       sectionMinHeight: "24rem"
     },
-    eyebrow: "Ready to Visit?",
+    eyebrow: "Prêt à visiter ?",
     title: "Votre visite vous attend",
     body: "Réservez en ligne en quelques clics et venez vivre une expérience inoubliable au cœur du Languedoc."
   }

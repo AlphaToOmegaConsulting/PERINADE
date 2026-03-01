@@ -87,6 +87,7 @@ export const siteEs: SiteData = {
       { label: "Ubicación", value: "Cerca de Carcassonne", icon: "pin" },
       { label: "Precio", value: "15 € / persona", icon: "ticket" }
     ],
+    infoLine: "Solo con cita previa · Aparcamiento gratuito · Acceso fácil desde Carcassonne",
     ctaLabel: "Reservar una visita",
     ctaHref: "/es/visitas#booking",
     backgroundImage: experienceBg
@@ -188,6 +189,28 @@ export const siteEs: SiteData = {
       { label: "Web", value: contactInfo.website, icon: "globe" },
       { label: "Dirección", value: "Cerca de Carcassonne, Aude (11)", icon: "pin" }
     ],
+    labels: {
+      firstName: "Nombre *",
+      lastName: "Apellido *",
+      email: "Email *",
+      phone: "Teléfono *",
+      subject: "Asunto *",
+      message: "Mensaje *",
+      submit: "Enviar mensaje"
+    },
+    validation: {
+      required: "Este campo es obligatorio.",
+      invalidEmail: "Introduzca un correo electrónico válido.",
+      fixErrors: "Corrija los campos marcados."
+    },
+    mail: {
+      defaultSubject: "Solicitud de contacto",
+      fieldFirstName: "Nombre",
+      fieldLastName: "Apellido",
+      fieldEmail: "Email",
+      fieldPhone: "Teléfono",
+      fieldMessage: "Mensaje"
+    },
     formAction: `mailto:${contactInfo.email}`,
     formSuccessMessage: "Mensaje listo. Por favor, revise su borrador de correo antes de enviar.",
     formErrorMessage: `No se pudo preparar el mensaje. Por favor, llámenos al ${contactInfo.phone}.`

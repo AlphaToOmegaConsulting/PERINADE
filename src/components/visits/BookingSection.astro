@@ -21,9 +21,9 @@ const { booking } = Astro.props;
     >
       <div class="booking__calendar">
         <header>
-            <button type="button" data-calendar-prev aria-label="Mois précédent">‹</button>
+            <button type="button" data-calendar-prev aria-label={booking.ui.prevMonthAriaLabel}>‹</button>
             <h3 data-calendar-month>{booking.config.monthLabel}</h3>
-            <button type="button" data-calendar-next aria-label="Mois suivant">›</button>
+            <button type="button" data-calendar-next aria-label={booking.ui.nextMonthAriaLabel}>›</button>
           </header>
 
         <div class="booking__days-row">
@@ -47,9 +47,13 @@ const { booking } = Astro.props;
           data-submit-endpoint={booking.config.submitEndpoint ?? ""}
           data-submit-success={booking.config.successMessage ?? ""}
           data-submit-error={booking.config.errorMessage ?? ""}
+          data-error-missing-date={booking.ui.missingDateMessage}
+          data-default-success={booking.ui.defaultSuccessMessage}
+          data-default-error={booking.ui.defaultErrorMessage}
+          data-mail-subject={booking.ui.mailSubjectFallback}
         >
         <section>
-          <h4>Créneau</h4>
+          <h4>{booking.ui.slotHeading}</h4>
           <div class="booking__slot-grid" data-slot-grid>
             {booking.config.slots.map((slot) => (
               <button
@@ -65,7 +69,7 @@ const { booking } = Astro.props;
         </section>
 
         <section>
-          <h4>Participants</h4>
+          <h4>{booking.ui.participantsHeading}</h4>
           <div class="booking__counter">
             <button type="button" data-count-dec aria-label="Diminuer">−</button>
             <output data-count-value>{booking.config.defaultParticipants}</output>
@@ -79,8 +83,8 @@ const { booking } = Astro.props;
         </label>
 
         <p class="booking__price">
-          <span>From</span>
-          <strong><span data-price-value>{booking.config.basePricePerPerson}</span>€ <small>/ person</small></strong>
+          <span>{booking.ui.priceFromLabel}</span>
+          <strong><span data-price-value>{booking.config.basePricePerPerson}</span>€ <small>{booking.ui.pricePerPersonLabel}</small></strong>
         </p>
 
         <input type="hidden" name="day" data-booking-field-day />

@@ -1,35 +1,35 @@
 ---
 import { Image } from "astro:assets";
-import shopHeroImage from "../../assets/perinade/shop/img-1.png";
+import type { ShopPageData } from "../../types/shop";
 
-const primaryCta = { label: "Découvrir", href: "/boutique#produits" };
-const secondaryCta = { label: "Composer ma caisse", href: "/boutique#coffrets" };
+interface Props {
+  hero: ShopPageData["hero"];
+}
+
+const { hero } = Astro.props;
 ---
 
 <section class="shop-hero section" aria-labelledby="shop-hero-title">
   <div class="shell shop-shell shop-hero__shell">
     <figure class="shop-hero__media">
-      <Image src={shopHeroImage} alt="Cave avec étagères de bouteilles" loading="eager" />
+      <Image src={hero.image} alt={hero.imageAlt} loading="eager" />
     </figure>
 
     <div class="shop-hero__content">
-      <p class="shop-hero__eyebrow">Boutique en ligne</p>
-      <h1 id="shop-hero-title">Nos vins,<br /><span>chez vous</span></h1>
-      <p class="shop-hero__body">
-        Du domaine à votre table: commandez nos cuvées en ligne et recevez-les directement chez vous.
-        Livraison gratuite dès 80 €.
-      </p>
+      <p class="shop-hero__eyebrow">{hero.eyebrow}</p>
+      <h1 id="shop-hero-title" set:html={hero.titleHtml}></h1>
+      <p class="shop-hero__body">{hero.body}</p>
 
       <div class="shop-hero__actions">
-        <a class="shop-hero__btn shop-hero__btn--primary" href={primaryCta.href}>{primaryCta.label}</a>
+        <a class="shop-hero__btn shop-hero__btn--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
 
-        <a class="shop-hero__btn shop-hero__btn--ghost" href={secondaryCta.href}>{secondaryCta.label}</a>
+        <a class="shop-hero__btn shop-hero__btn--ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
       </div>
 
-      <ul class="shop-hero__meta" aria-label="Informations livraison boutique">
-        <li>Livraison 48-72 h</li>
-        <li>Paiement sécurisé</li>
-        <li>Retours 14 jours</li>
+      <ul class="shop-hero__meta" aria-label={hero.metaAriaLabel}>
+        {hero.metaItems.map((item) => (
+          <li>{item}</li>
+        ))}
       </ul>
     </div>
   </div>

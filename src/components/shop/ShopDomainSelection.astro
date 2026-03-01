@@ -1,31 +1,11 @@
 ---
-const items = [
-  {
-    icon: "shipping",
-    title: "Livraison soignée",
-    body: "48-72 h en France, emballage isotherme inclus"
-  },
-  {
-    icon: "map",
-    title: "Zones de livraison",
-    body: "France métropolitaine, Europe sur demande"
-  },
-  {
-    icon: "return",
-    title: "Retours",
-    body: "14 jours après réception, remboursement intégral"
-  },
-  {
-    icon: "lock",
-    title: "Paiement sécurisé",
-    body: "CB, Visa, Mastercard, connexion SSL"
-  },
-  {
-    icon: "support",
-    title: "Support direct",
-    body: "Réponse sous 24 h au +33 4 68 XX XX XX"
-  }
-];
+import type { ShopPageData } from "../../types/shop";
+
+interface Props {
+  domainSelection: ShopPageData["domainSelection"];
+}
+
+const { domainSelection } = Astro.props;
 
 function iconSvg(icon: string) {
   if (icon === "shipping") {
@@ -47,13 +27,13 @@ function iconSvg(icon: string) {
 <section class="shop-selection section section--white" aria-labelledby="shop-selection-title">
   <div class="shell shop-shell">
     <header class="shop-selection__heading">
-      <p>Collections</p>
-      <h2 id="shop-selection-title">Sélections du domaine</h2>
+      <p>{domainSelection.eyebrow}</p>
+      <h2 id="shop-selection-title">{domainSelection.title}</h2>
     </header>
 
     <!-- TODO_ADD_TIGER_DECOR: tiger visuals intentionally excluded in this iteration -->
     <div class="shop-selection__items" role="list">
-      {items.map((item) => (
+      {domainSelection.items.map((item) => (
         <article class="shop-selection__item" role="listitem">
           <span class="shop-selection__icon" aria-hidden="true" set:html={iconSvg(item.icon)}></span>
           <div>

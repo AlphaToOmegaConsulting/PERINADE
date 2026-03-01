@@ -325,6 +325,18 @@ export const visitsPageEn: VisitPageData = {
       calendarCellHeight: "2.9rem",
       controlRowHeight: "2.5rem"
     },
+    ui: {
+      prevMonthAriaLabel: "Previous month",
+      nextMonthAriaLabel: "Next month",
+      slotHeading: "Time slot",
+      participantsHeading: "Participants",
+      priceFromLabel: "From",
+      pricePerPersonLabel: "/ person",
+      missingDateMessage: "Please select a valid date.",
+      defaultSuccessMessage: "Request sent.",
+      defaultErrorMessage: "Error while sending request.",
+      mailSubjectFallback: "Visit request - Domaine de la Perinade"
+    },
     config: {
       monthLabel: "February 2026",
       initialMonth: "2026-02",

@@ -8,10 +8,11 @@ import ShopDomainSelection from "../components/shop/ShopDomainSelection.astro";
 import ShopCaseComposer from "../components/shop/ShopCaseComposer.astro";
 import ShopFinalCtaBand from "../components/shop/ShopFinalCtaBand.astro";
 import ShopFaq from "../components/shop/ShopFaq.astro";
-import { getSiteData } from "../data/index";
+import { getShopData, getSiteData } from "../data/index";
 
 const locale = "fr";
 const site = await getSiteData(locale);
+const shopPage = await getShopData(locale);
 
 const alternates = [
   { locale: "fr", href: "/boutique" },
@@ -23,12 +24,12 @@ const alternates = [
 <BaseLayout title="Boutique | Domaine de la Périnade" description="Commandez les cuvées du Domaine de la Périnade en ligne." locale={locale} canonicalPath="/boutique" alternates={alternates}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/boutique", en: "/en/shop", es: "/es/tienda" }} />
   <main id="main-content" class="shop-page">
-    <ShopHero />
-    <ShopProductGrid />
-    <ShopDomainSelection />
-    <ShopCaseComposer />
-    <ShopFinalCtaBand />
-    <ShopFaq />
+    <ShopHero hero={shopPage.hero} />
+    <ShopProductGrid productGrid={shopPage.productGrid} />
+    <ShopDomainSelection domainSelection={shopPage.domainSelection} />
+    <ShopCaseComposer caseComposer={shopPage.caseComposer} />
+    <ShopFinalCtaBand finalCta={shopPage.finalCta} />
+    <ShopFaq faq={shopPage.faq} />
   </main>
   <Footer footer={site.footer} />
 </BaseLayout>

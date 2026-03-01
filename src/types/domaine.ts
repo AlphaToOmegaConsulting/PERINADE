@@ -28,6 +28,8 @@ export interface DomaineTerroirData {
   eyebrow: string;
   title: string;
   body: string;
+  grapesTitle: string;
+  commitmentsTitle: string;
   grapes: string[];
   commitments: Array<{
     title: string;

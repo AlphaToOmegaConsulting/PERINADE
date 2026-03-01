@@ -87,6 +87,7 @@ export const siteEn: SiteData = {
       { label: "Location", value: "Near Carcassonne", icon: "pin" },
       { label: "Price", value: "€15 / person", icon: "ticket" }
     ],
+    infoLine: "By appointment only · Free parking · Easy access from Carcassonne",
     ctaLabel: "Book a visit",
     ctaHref: "/en/visits#booking",
     backgroundImage: experienceBg
@@ -188,6 +189,28 @@ export const siteEn: SiteData = {
       { label: "Website", value: contactInfo.website, icon: "globe" },
       { label: "Address", value: "Near Carcassonne, Aude (11)", icon: "pin" }
     ],
+    labels: {
+      firstName: "First name *",
+      lastName: "Last name *",
+      email: "Email *",
+      phone: "Phone *",
+      subject: "Subject *",
+      message: "Message *",
+      submit: "Send message"
+    },
+    validation: {
+      required: "This field is required.",
+      invalidEmail: "Please enter a valid email address.",
+      fixErrors: "Please fix the highlighted fields."
+    },
+    mail: {
+      defaultSubject: "Contact request",
+      fieldFirstName: "First name",
+      fieldLastName: "Last name",
+      fieldEmail: "Email",
+      fieldPhone: "Phone",
+      fieldMessage: "Message"
+    },
     formAction: `mailto:${contactInfo.email}`,
     formSuccessMessage: "Message ready. Please check your email draft before sending.",
     formErrorMessage: `Unable to prepare message. Please call us at ${contactInfo.phone}.`

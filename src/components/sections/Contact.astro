@@ -35,44 +35,53 @@ const { contact } = Astro.props;
       data-contact-form
       data-success-message={contact.formSuccessMessage ?? "Message envoye."}
       data-error-message={contact.formErrorMessage ?? "Erreur d'envoi."}
+      data-required-message={contact.validation.required}
+      data-invalid-email-message={contact.validation.invalidEmail}
+      data-fix-errors-message={contact.validation.fixErrors}
+      data-default-subject={contact.mail.defaultSubject}
+      data-mail-first-name={contact.mail.fieldFirstName}
+      data-mail-last-name={contact.mail.fieldLastName}
+      data-mail-email={contact.mail.fieldEmail}
+      data-mail-phone={contact.mail.fieldPhone}
+      data-mail-message={contact.mail.fieldMessage}
       action={contact.formAction}
       method="post"
       novalidate
     >
       <div class="contact__grid">
         <div class="contact__field">
-          <label for="contact-first-name">Prenom *</label>
+          <label for="contact-first-name">{contact.labels.firstName}</label>
           <input id="contact-first-name" type="text" name="firstName" autocomplete="given-name" required />
           <small class="contact__error" data-error-for="contact-first-name"></small>
         </div>
 
         <div class="contact__field">
-          <label for="contact-last-name">Nom *</label>
+          <label for="contact-last-name">{contact.labels.lastName}</label>
           <input id="contact-last-name" type="text" name="lastName" autocomplete="family-name" required />
           <small class="contact__error" data-error-for="contact-last-name"></small>
         </div>
 
         <div class="contact__field">
-          <label for="contact-email">Email *</label>
+          <label for="contact-email">{contact.labels.email}</label>
           <input id="contact-email" type="email" name="email" inputmode="email" autocomplete="email" required />
           <small class="contact__error" data-error-for="contact-email"></small>
         </div>
 
         <div class="contact__field">
-          <label for="contact-phone">Telephone *</label>
+          <label for="contact-phone">{contact.labels.phone}</label>
           <input id="contact-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel" required />
           <small class="contact__error" data-error-for="contact-phone"></small>
         </div>
       </div>
 
       <div class="contact__field">
-        <label for="contact-subject">Sujet *</label>
+        <label for="contact-subject">{contact.labels.subject}</label>
         <input id="contact-subject" type="text" name="subject" required />
         <small class="contact__error" data-error-for="contact-subject"></small>
       </div>
 
       <div class="contact__field">
-        <label for="contact-message">Message *</label>
+        <label for="contact-message">{contact.labels.message}</label>
         <textarea id="contact-message" name="message" rows="6" required></textarea>
         <small class="contact__error" data-error-for="contact-message"></small>
       </div>
@@ -85,7 +94,7 @@ const { contact } = Astro.props;
               <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
             </svg>
           </span>
-          Envoyer le message
+          {contact.labels.submit}
         </button>
       </div>
       <p class="contact__status" data-contact-status aria-live="polite"></p>
@@ -106,6 +115,15 @@ const { contact } = Astro.props;
   if (contactForm instanceof HTMLFormElement) {
     const statusEl = contactForm.querySelector("[data-contact-status]");
     const fields = Array.from(contactForm.querySelectorAll("input, textarea"));
+    const requiredMessage = contactForm.dataset.requiredMessage || "Required field.";
+    const invalidEmailMessage = contactForm.dataset.invalidEmailMessage || "Please enter a valid email.";
+    const fixErrorsMessage = contactForm.dataset.fixErrorsMessage || "Please fix the highlighted fields.";
+    const defaultSubject = contactForm.dataset.defaultSubject || "Contact request";
+    const mailFirstName = contactForm.dataset.mailFirstName || "First name";
+    const mailLastName = contactForm.dataset.mailLastName || "Last name";
+    const mailEmail = contactForm.dataset.mailEmail || "Email";
+    const mailPhone = contactForm.dataset.mailPhone || "Phone";
+    const mailMessage = contactForm.dataset.mailMessage || "Message";
 
     const setFieldError = (field, message) => {
       const errorEl = contactForm.querySelector(`[data-error-for="${field.id}"]`);
@@ -121,9 +139,9 @@ const { contact } = Astro.props;
         return true;
       }
 
-      let message = "Ce champ est requis.";
+      let message = requiredMessage;
       if (field.validity.typeMismatch && field.type === "email") {
-        message = "Merci de saisir un email valide.";
+        message = invalidEmailMessage;
       }
 
       setFieldError(field, message);
@@ -147,7 +165,7 @@ const { contact } = Astro.props;
       const valid = fields.every((field) => validateField(field));
       if (!valid) {
         if (statusEl instanceof HTMLElement) {
-          statusEl.textContent = "Veuillez corriger les champs en erreur.";
+          statusEl.textContent = fixErrorsMessage;
           statusEl.classList.remove("is-success");
           statusEl.classList.add("is-error");
         }
@@ -162,9 +180,9 @@ const { contact } = Astro.props;
 
       try {
         if (action.startsWith("mailto:")) {
-          const subject = encodeURIComponent(String(payload.subject || "Demande de contact"));
+          const subject = encodeURIComponent(String(payload.subject || defaultSubject));
           const body = encodeURIComponent(
-            `Prenom: ${payload.firstName}\nNom: ${payload.lastName}\nEmail: ${payload.email}\nTelephone: ${payload.phone}\n\nMessage:\n${payload.message}`
+            `${mailFirstName}: ${payload.firstName}\n${mailLastName}: ${payload.lastName}\n${mailEmail}: ${payload.email}\n${mailPhone}: ${payload.phone}\n\n${mailMessage}:\n${payload.message}`
           );
           window.location.href = `${action}?subject=${subject}&body=${body}`;
           if (statusEl instanceof HTMLElement) {

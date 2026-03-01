@@ -98,6 +98,7 @@ export interface SiteData {
     eyebrow: string;
     title: string;
     body: string;
+    infoLine: string;
     details: VisitDetail[];
     ctaLabel: string;
     ctaHref: LinkTarget;
@@ -132,6 +133,28 @@ export interface SiteData {
     titleHtml: string;
     body: string;
     info: ContactInfoItem[];
+    labels: {
+      firstName: string;
+      lastName: string;
+      email: string;
+      phone: string;
+      subject: string;
+      message: string;
+      submit: string;
+    };
+    validation: {
+      required: string;
+      invalidEmail: string;
+      fixErrors: string;
+    };
+    mail: {
+      defaultSubject: string;
+      fieldFirstName: string;
+      fieldLastName: string;
+      fieldEmail: string;
+      fieldPhone: string;
+      fieldMessage: string;
+    };
     formAction: LinkTarget;
     formSuccessMessage?: string;
     formErrorMessage?: string;

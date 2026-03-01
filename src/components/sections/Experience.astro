@@ -34,7 +34,7 @@ const { experience } = Astro.props;
 
     <div class="experience__cta">
       <ButtonLink href={experience.ctaHref} label={experience.ctaLabel} />
-      <p>Sur rendez-vous uniquement · Parking gratuit · Accès facile depuis Carcassonne</p>
+      <p>{experience.infoLine}</p>
     </div>
   </div>
 </section>

@@ -44,6 +44,8 @@ export const domainePageEn: DomainePageData = {
     title: "An exceptional location",
     body:
       "The estate stretches between the Canal du Midi and the Fresquel river, within the AOP Minervois appellation. This rare geographical setting — between water and garrigue — shapes the minerality and freshness of our wines.",
+    grapesTitle: "Grape varieties",
+    commitmentsTitle: "Environmental commitments",
     grapes: ["Grenache Noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot"],
     commitments: [
       {

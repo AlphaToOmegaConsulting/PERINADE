@@ -43,6 +43,8 @@ export const domainePageFr: DomainePageData = {
     title: "Un emplacement d'exception",
     body:
       "Le domaine s'étend entre le Canal du Midi et la rivière Fresquel, dans le périmètre de l'AOP Minervois. Cette situation géographique rare — entre eau et garrigue — façonne la minéralité et la fraîcheur de nos cuvées.",
+    grapesTitle: "Cépages cultivés",
+    commitmentsTitle: "Engagements environnementaux",
     grapes: ["Grenache noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot"],
     commitments: [
       {

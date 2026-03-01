@@ -1,36 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import shopBackdropImage from "../../assets/perinade/shop/img-4.png";
-import shopCrateImage from "../../assets/perinade/shop/img-7.png";
+import type { ShopPageData } from "../../types/shop";
 
-const offers = [
-  {
-    title: "Coffret Découverte",
-    saving: "Économie: 8,00 €",
-    lines: [
-      "Blanc de Périnade 2023 ×2",
-      "Grande Réserve 2020 ×1",
-      "Rosé d'Été 2024 ×2"
-    ],
-    price: "62,00 €",
-    strikePrice: "70,00 €",
-    details: "5 bouteilles · 75 cl chacune",
-    cta: "/boutique#coffrets"
-  },
-  {
-    title: "Coffret Prestige",
-    saving: "Économie: 17,00 €",
-    lines: [
-      "Grande Réserve 2020 ×2",
-      "Blanc Réserve 2022 ×2",
-      "Rosé Prestige 2024 ×2"
-    ],
-    price: "85,00 €",
-    strikePrice: "102,00 €",
-    details: "6 bouteilles · 75 cl chacune",
-    cta: "/boutique#coffrets"
-  }
-];
+interface Props {
+  caseComposer: ShopPageData["caseComposer"];
+}
+
+const { caseComposer } = Astro.props;
 
 ---
 
@@ -38,24 +14,21 @@ const offers = [
   id="coffrets"
   class="shop-composer section"
   aria-labelledby="shop-composer-title"
-  style={`--shop-composer-bg:url('${shopBackdropImage.src}')`}
+  style={`--shop-composer-bg:url('${caseComposer.backdropImage.src}')`}
 >
   <div class="shop-composer__backdrop" aria-hidden="true"></div>
   <div class="shell shop-shell shop-composer__shell">
     <figure class="shop-composer__crate">
-      <Image src={shopCrateImage} alt="Panier de dégustation" loading="lazy" />
+      <Image src={caseComposer.crateImage} alt={caseComposer.crateImageAlt} loading="lazy" />
     </figure>
 
     <div class="shop-composer__content">
-      <p class="shop-composer__eyebrow">Coffrets & lots</p>
-      <h2 id="shop-composer-title">Composez votre caisse</h2>
-      <p class="shop-composer__intro">
-        Nos coffrets sont composés de cuvées sélectionnées, en quantité limitée pour offrir ou découvrir toute la
-        gamme, avec une remise immédiate.
-      </p>
+      <p class="shop-composer__eyebrow">{caseComposer.eyebrow}</p>
+      <h2 id="shop-composer-title">{caseComposer.title}</h2>
+      <p class="shop-composer__intro">{caseComposer.intro}</p>
 
       <div class="shop-composer__offers">
-        {offers.map((offer) => (
+        {caseComposer.offers.map((offer) => (
           <article class="shop-offer">
             <h3>{offer.title}</h3>
             <p class="shop-offer__saving">{offer.saving}</p>
@@ -70,7 +43,7 @@ const offers = [
             </div>
             <p class="shop-offer__details">{offer.details}</p>
 
-            <a class="shop-offer__cta" href={offer.cta}>Composer ma caisse</a>
+            <a class="shop-offer__cta" href={offer.ctaHref}>{offer.ctaLabel}</a>
           </article>
         ))}
       </div>

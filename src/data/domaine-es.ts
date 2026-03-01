@@ -44,6 +44,8 @@ export const domainePageEs: DomainePageData = {
     title: "Una ubicación excepcional",
     body:
       "La finca se extiende entre el Canal du Midi y el río Fresquel, dentro del perímetro de la AOP Minervois. Esta situación geográfica singular — entre agua y garriga — moldea la mineralidad y la frescura de nuestros vinos.",
+    grapesTitle: "Variedades de uva",
+    commitmentsTitle: "Compromisos medioambientales",
     grapes: ["Grenache Noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot"],
     commitments: [
       {

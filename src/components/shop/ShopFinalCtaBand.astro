@@ -1,15 +1,21 @@
 ---
-const cta = { label: "Découvrir les vins", href: "/boutique#produits" };
+import type { ShopPageData } from "../../types/shop";
+
+interface Props {
+  finalCta: ShopPageData["finalCta"];
+}
+
+const { finalCta } = Astro.props;
 ---
 
-<section class="shop-band" aria-label="Appel à l'action boutique">
+<section class="shop-band" aria-label={finalCta.sectionAriaLabel}>
   <div class="shell shop-shell shop-band__shell">
     <div>
-      <h2>Prêt à déguster ?</h2>
-      <p>Ajoutez vos cuvées préférées et profitez de la livraison gratuite dès 80 €.</p>
+      <h2>{finalCta.title}</h2>
+      <p>{finalCta.body}</p>
     </div>
 
-    <a class="shop-band__cta" href={cta.href}>{cta.label}</a>
+    <a class="shop-band__cta" href={finalCta.ctaHref}>{finalCta.ctaLabel}</a>
   </div>
 </section>
 

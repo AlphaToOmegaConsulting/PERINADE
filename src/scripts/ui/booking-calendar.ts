@@ -271,8 +271,11 @@ const initBookingCalendar = (root: HTMLElement): void => {
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
+    const missingDateMessage = form?.dataset.errorMissingDate?.trim() || "Please select a valid date.";
+    const mailSubjectFallback = form?.dataset.mailSubject?.trim() || "Visit request - Domaine de la Perinade";
+
     if (!state.selectedDate) {
-      setStatus(statusEl, "error", config.errorMessage ?? "Selectionnez une date valide.");
+      setStatus(statusEl, "error", missingDateMessage);
       trackUiEvent({
         event: "booking_error",
         context: "visites_booking",
@@ -295,12 +298,12 @@ const initBookingCalendar = (root: HTMLElement): void => {
     };
 
     const endpoint = form.dataset.submitEndpoint?.trim() ?? "";
-    const successMessage = form.dataset.submitSuccess?.trim() || "Demande envoyee.";
-    const errorMessage = form.dataset.submitError?.trim() || "Erreur lors de l'envoi.";
+    const successMessage = form.dataset.submitSuccess?.trim() || form.dataset.defaultSuccess?.trim() || "Request sent.";
+    const errorMessage = form.dataset.submitError?.trim() || form.dataset.defaultError?.trim() || "Error while sending request.";
 
     try {
       if (!endpoint) {
-        const subject = encodeURIComponent("Demande de visite - Domaine de la Perinade");
+        const subject = encodeURIComponent(mailSubjectFallback);
         const body = encodeURIComponent(JSON.stringify(payload, null, 2));
         window.location.href = `mailto:contact@perinade.fr?subject=${subject}&body=${body}`;
         setStatus(statusEl, "success", successMessage);

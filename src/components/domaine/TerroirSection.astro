@@ -20,7 +20,7 @@ const { terroir } = Astro.props;
       <SectionHeading eyebrow={terroir.eyebrow} title={terroir.title} body={terroir.body} />
 
       <div class="terroir__block">
-        <h3>Cépages cultivés</h3>
+        <h3>{terroir.grapesTitle}</h3>
         <ul class="terroir__chips">
           {terroir.grapes.map((grape) => (
             <li>{grape}</li>
@@ -29,7 +29,7 @@ const { terroir } = Astro.props;
       </div>
 
       <div class="terroir__block">
-        <h3>Engagements environnementaux</h3>
+        <h3>{terroir.commitmentsTitle}</h3>
         <ul class="terroir__commitments">
           {terroir.commitments.map((item) => (
             <li>

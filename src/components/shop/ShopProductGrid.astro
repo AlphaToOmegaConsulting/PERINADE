@@ -1,110 +1,24 @@
 ---
 import { Image } from "astro:assets";
-import shopImage2 from "../../assets/perinade/shop/img-2.png";
-import shopImage3 from "../../assets/perinade/shop/img-3.png";
-import shopImage4 from "../../assets/perinade/shop/img-4.png";
-import shopImage5 from "../../assets/perinade/shop/img-5.png";
-import type { ImageMetadata } from "astro";
+import type { ShopPageData } from "../../types/shop";
 
-interface ProductCard {
-  name: string;
-  meta: string;
-  description: string;
-  price: string;
-  stock: string;
-  image: ImageMetadata;
-  imageAlt: string;
-  badges: string[];
-  tone: string;
-  ctaHref: string;
+interface Props {
+  productGrid: ShopPageData["productGrid"];
 }
 
-const products: ProductCard[] = [
-  {
-    name: "Cuvée du Domaine",
-    meta: "AOP Minervois · 2022 · 75 cl",
-    description: "Fruits noirs, garrigue, épices douces. Bouche soyeuse, belle longueur.",
-    price: "12,50 € TTC",
-    stock: "En stock",
-    image: shopImage2,
-    imageAlt: "Bouteille rouge en close-up",
-    badges: ["Best Seller", "Rouge"],
-    tone: "Rouge",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Blanc de Périnade",
-    meta: "IGP Pays d'Oc · 2023 · 75 cl",
-    description: "Agrumes, fleurs blanches. Fraîcheur remarquable, finale minérale.",
-    price: "10,00 € TTC",
-    stock: "En stock",
-    image: shopImage3,
-    imageAlt: "Bouteille de blanc sur fond clair",
-    badges: ["Best Seller", "Blanc"],
-    tone: "Blanc",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Grande Réserve",
-    meta: "AOP Minervois · 2020 · 75 cl",
-    description: "Élevé en fûts de chêne. Puissant, complexe, tanins fondus.",
-    price: "22,00 € TTC",
-    stock: "En stock",
-    image: shopImage4,
-    imageAlt: "Étagères de vins",
-    badges: ["Best Seller", "Rouge"],
-    tone: "Rouge",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Rosé d'Été",
-    meta: "IGP Pays d'Oc · 2024 · 75 cl",
-    description: "Pêche, fraise. Bouche vive et gourmande, idéale pour l'apéritif.",
-    price: "9,50 € TTC",
-    stock: "En stock",
-    image: shopImage5,
-    imageAlt: "Scène rosé et panier",
-    badges: ["Favori Visite", "Rosé"],
-    tone: "Rosé",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Blanc Réserve",
-    meta: "AOP Minervois · 2022 · 75 cl",
-    description: "Fruits exotiques, vanille subtile. Bouche ample et élégante.",
-    price: "16,00 € TTC",
-    stock: "En stock",
-    image: shopImage3,
-    imageAlt: "Bouteille blanc réserve",
-    badges: ["Blanc"],
-    tone: "Blanc",
-    ctaHref: "/boutique#produits"
-  },
-  {
-    name: "Rosé Prestige",
-    meta: "IGP Pays d'Oc · 2024 · 75 cl",
-    description: "Rose, fruits printaniers. Finale fraîche, structurée et vive.",
-    price: "13,00 € TTC",
-    stock: "En stock",
-    image: shopImage5,
-    imageAlt: "Rosé prestige",
-    badges: ["Rosé"],
-    tone: "Rosé",
-    ctaHref: "/boutique#produits"
-  }
-];
+const { productGrid } = Astro.props;
 
 ---
 
 <section id="produits" class="shop-grid section section--soft" aria-labelledby="shop-grid-title">
   <div class="shell shop-shell">
     <header class="shop-grid__heading">
-      <p>Votre parcours</p>
-      <h2 id="shop-grid-title">L'expérience pas à pas</h2>
+      <p>{productGrid.eyebrow}</p>
+      <h2 id="shop-grid-title">{productGrid.title}</h2>
     </header>
 
     <div class="shop-grid__cards">
-      {products.map((product) => (
+      {productGrid.products.map((product) => (
         <article class="shop-card">
           <div class="shop-card__image-wrap">
             <Image src={product.image} alt={product.imageAlt} loading="lazy" />
@@ -125,7 +39,7 @@ const products: ProductCard[] = [
                 <p class="shop-card__price">{product.price}</p>
                 <p class="shop-card__stock">{product.stock}</p>
               </div>
-              <a class="shop-card__cta" href={product.ctaHref}>Ajouter au panier</a>
+              <a class="shop-card__cta" href={product.ctaHref}>{product.ctaLabel}</a>
             </div>
           </div>
         </article>

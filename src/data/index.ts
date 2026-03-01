@@ -5,6 +5,7 @@ import type { Locale } from "../i18n/locales";
 import type { SiteData } from "../types/site";
 import type { DomainePageData } from "../types/domaine";
 import type { VisitPageData } from "../types/visits";
+import type { ShopPageData } from "../types/shop";
 
 /* ── Site data ───────────────────────────────────────────── */
 
@@ -33,5 +34,15 @@ export async function getVisitsData(locale: Locale): Promise<VisitPageData> {
     case "en": return (await import("./visits-en")).visitsPageEn;
     case "es": return (await import("./visits-es")).visitsPageEs;
     default:   return (await import("./visits-fr")).visitsPageFr;
+  }
+}
+
+/* ── Shop data ───────────────────────────────────────────── */
+
+export async function getShopData(locale: Locale): Promise<ShopPageData> {
+  switch (locale) {
+    case "en": return (await import("./shop-en")).shopPageEn;
+    case "es": return (await import("./shop-es")).shopPageEs;
+    default:   return (await import("./shop-fr")).shopPageFr;
   }
 }
