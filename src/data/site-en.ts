@@ -33,7 +33,7 @@ export const siteEn: SiteData = {
     body: "In the heart of Languedoc, our family estate welcomes you for an authentic experience among vines, cellar and tastings. Discover wines of character, crafted with passion and respect for the terroir.",
     ctaLabel: "Book a visit",
     ctaHref: "/en/visits#booking",
-    meta: ["By appointment", "Family estate", "Since 1987"],
+    meta: ["By appointment", "Family estate", "Since 1830"],
     backgroundImage: heroVineyard,
     featuredCards: [
       {
@@ -62,7 +62,7 @@ export const siteEn: SiteData = {
   reasons: [
     {
       title: "A family estate",
-      body: "For three generations, our family has passionately cultivated a human-scale vineyard.",
+      body: "For six generations, our family has passionately cultivated a human-scale vineyard.",
       icon: "leaf"
     },
     {
@@ -129,11 +129,11 @@ export const siteEn: SiteData = {
   },
   history: {
     eyebrow: "Our story",
-    title: "Three generations of",
+    title: "Six generations of",
     titleHighlight: "passion",
     body: [
-      "Founded in 1987, Domaine de la Périnade is a family adventure born from a love of the Languedoc terroir. On these sun-drenched lands between garrigue and hills, we cultivate our vines with respect for tradition and particular attention to the environment.",
-      "Today, the third generation carries on this expertise, blending ancestral methods with modern winemaking to produce wines that express the uniqueness of our terroir."
+      "Founded in 1830, Domaine de la Périnade is a family adventure born from a love of the Languedoc terroir. On these sun-drenched lands between garrigue and hills, we cultivate our vines with respect for tradition and particular attention to the environment.",
+      "Today, the sixth generation carries on this expertise, blending ancestral methods with modern winemaking to produce wines that express the uniqueness of our terroir."
     ],
     imagePrimary: historyFamily,
     ctaLabel: "Discover the full story",
@@ -217,7 +217,7 @@ export const siteEn: SiteData = {
   },
   footer: {
     brandTitle: "Périnade",
-    about: "Family estate near Carcassonne. Authentic Languedoc wines since 1987.",
+    about: "Family estate near Carcassonne. Authentic Languedoc wines since 1830.",
     groups: [
       {
         title: "Navigation",

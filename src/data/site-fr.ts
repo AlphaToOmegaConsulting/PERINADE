@@ -33,7 +33,7 @@ export const siteFr: SiteData = {
     body: "Au cœur du Languedoc, notre domaine familial vous ouvre ses portes pour une parenthèse authentique entre vignes, caveau et dégustation. Découvrez des cuvées de caractère, façonnées avec passion et respect du terroir.",
     ctaLabel: "Réserver une visite",
     ctaHref: "/visites#booking",
-    meta: ["Sur rendez-vous", "Domaine familial", "Depuis 1987"],
+    meta: ["Sur rendez-vous", "Domaine familial", "Depuis 1830"],
     backgroundImage: heroVineyard,
     featuredCards: [
       {
@@ -62,7 +62,7 @@ export const siteFr: SiteData = {
   reasons: [
     {
       title: "Un domaine familial",
-      body: "Depuis trois générations, notre famille cultive avec passion un vignoble à taille humaine.",
+      body: "Depuis six générations, notre famille cultive avec passion un vignoble à taille humaine.",
       icon: "leaf"
     },
     {
@@ -83,7 +83,7 @@ export const siteFr: SiteData = {
     details: [
       { label: "Durée", value: "1h30 environ", icon: "clock" },
       { label: "Groupe", value: "2 à 10 personnes", icon: "users" },
-      { label: "Langues", value: "Français, English, Español", icon: "globe" },
+      { label: "Langues", value: "Français, anglais, espagnol", icon: "globe" },
       { label: "Lieu", value: "Près de Carcassonne", icon: "pin" },
       { label: "Tarif", value: "15 € / personne", icon: "ticket" }
     ],
@@ -114,7 +114,7 @@ export const siteFr: SiteData = {
         rating: 5
       },
       {
-        quote: "A hidden gem near Carcassonne. The family was incredibly welcoming and the wines were outstanding. A must-visit experience.",
+        quote: "Un joyau caché près de Carcassonne. La famille a été incroyablement accueillante et les vins remarquables. Une visite incontournable.",
         author: "Sarah T.",
         meta: "London, UK",
         rating: 5
@@ -132,7 +132,7 @@ export const siteFr: SiteData = {
     title: "Trois générations de",
     titleHighlight: "passion",
     body: [
-      "Fondé en 1987, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes avec le respect des traditions et une attention particulière portée à l'environnement.",
+      "Fondé en 1830, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes dans le respect des traditions et avec une attention particulière portée à l'environnement.",
       "Aujourd'hui, c'est la troisième génération qui perpétue ce savoir-faire, alliant méthodes ancestrales et vinification moderne pour produire des vins qui expriment la singularité de notre terroir."
     ],
     imagePrimary: historyFamily,
@@ -217,7 +217,7 @@ export const siteFr: SiteData = {
   },
   footer: {
     brandTitle: "Périnade",
-    about: "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1987.",
+    about: "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1830.",
     groups: [
       {
         title: "Navigation",

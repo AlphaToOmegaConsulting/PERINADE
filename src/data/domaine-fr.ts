@@ -24,7 +24,7 @@ export const domainePageFr: DomainePageData = {
     eyebrow: "Le Domaine",
     titleLines: ["Depuis 1830,", "le soin du terroir"],
     body:
-      "Entre le Canal du Midi et le Fresquel, le Domaine de la Périnade perpétue six générations de viticulture sur 100 ha, dont 40 ha de vignes. Une histoire familiale ancrée dans le Minervois, relancée en 2019 avec exigence.",
+      "Entre le Canal du Midi et le Fresquel, le Domaine de la Périnade perpétue six générations de viticulture depuis 1830 sur 100 ha, dont 40 ha de vignes. Une histoire familiale ancrée dans le Minervois, relancée en 2019 avec exigence.",
     primaryCta: {
       label: "Réserver une visite du domaine",
       href: "/visites#booking"
@@ -68,8 +68,8 @@ export const domainePageFr: DomainePageData = {
     title: "La famille Arnal aujourd'hui",
     body: [
       "En 2019, les 6e et 7e générations de la famille Arnal reprennent le domaine avec la volonté de redonner tout son rayonnement à ce terroir historique.",
-      "La création du chai en 2020, la restauration des caves et la sélection parcellaire ont marqué un nouveau départ. L'objectif reste inchangé: produire des vins justes, élégants et fidèles au lieu.",
-      "Au domaine, l'héritage se vit au quotidien: précision dans la vigne, écoute du millésime, et hospitalité lors de chaque visite."
+      "La création du chai en 2020, la restauration des caves et la sélection parcellaire ont marqué un nouveau départ. L'objectif reste inchangé : produire des vins justes, élégants et fidèles au lieu.",
+      "Au domaine, l'héritage se vit au quotidien : précision dans la vigne, écoute du millésime et hospitalité lors de chaque visite."
     ],
     milestones: [
       { year: "1830", label: "Fondation" },
@@ -81,11 +81,11 @@ export const domainePageFr: DomainePageData = {
   },
   statsBar: [
     { value: "100 ha", label: "Domaine total" },
-    { value: "~40 ha", label: "De vignes" },
+    { value: "~40 ha", label: "Surface viticole" },
     { value: "6e & 7e", label: "Générations" },
     { value: "HVE", label: "Démarche en cours" },
     { value: "AOP", label: "Minervois" },
-    { value: "365j", label: "Accueil visiteurs" }
+    { value: "365 j/an", label: "Accueil visiteurs" }
   ],
   timeline: {
     eyebrow: "Histoire",
@@ -120,7 +120,7 @@ export const domainePageFr: DomainePageData = {
         year: "2020",
         tabLabel: "2020",
         title: "Relance du domaine",
-        detail: "Réinvestissement global: vignes, chai modernisé et structuration de l'accueil œnotouristique.",
+        detail: "Réinvestissement global : vignes, chai modernisé et structuration de l'accueil œnotouristique.",
         images: [
           { src: visitCtaImg, alt: "Alignement de bouteilles dans la cave" },
           { src: terroirImg, alt: "Panorama du terroir du domaine" }
@@ -170,7 +170,7 @@ export const domainePageFr: DomainePageData = {
     titleHighlight: "du domaine",
     body:
       "Prenez rendez-vous pour visiter les vignes, découvrir le chai et déguster nos cuvées dans un cadre authentique.",
-    details: ["Durée: 1h30", "Sur réservation", "Accueil FR / EN", "Groupes privés sur demande"],
+    details: ["Durée : 1 h 30", "Sur réservation", "Accueil FR / EN", "Groupes privés sur demande"],
     primaryCta: {
       label: "Réserver une visite du domaine",
       href: "/visites#booking"

@@ -33,7 +33,7 @@ export const siteEs: SiteData = {
     body: "En el corazón del Languedoc, nuestra finca familiar le abre sus puertas para una experiencia auténtica entre viñedos, bodega y degustación. Descubra vinos de carácter, elaborados con pasión y respeto por el terruño.",
     ctaLabel: "Reservar una visita",
     ctaHref: "/es/visitas#booking",
-    meta: ["Con cita previa", "Finca familiar", "Desde 1987"],
+    meta: ["Con cita previa", "Finca familiar", "Desde 1830"],
     backgroundImage: heroVineyard,
     featuredCards: [
       {
@@ -62,7 +62,7 @@ export const siteEs: SiteData = {
   reasons: [
     {
       title: "Una finca familiar",
-      body: "Desde tres generaciones, nuestra familia cultiva con pasión un viñedo a escala humana.",
+      body: "Desde hace seis generaciones, nuestra familia cultiva con pasión un viñedo a escala humana.",
       icon: "leaf"
     },
     {
@@ -129,11 +129,11 @@ export const siteEs: SiteData = {
   },
   history: {
     eyebrow: "Nuestra historia",
-    title: "Tres generaciones de",
+    title: "Seis generaciones de",
     titleHighlight: "pasión",
     body: [
-      "Fundada en 1987, el Domaine de la Périnade es una aventura familiar nacida del amor por el terruño del Languedoc. En estas tierras bañadas por el sol, entre garriga y colinas, cultivamos nuestros viñedos con respeto por las tradiciones y especial atención al medio ambiente.",
-      "Hoy es la tercera generación la que perpetúa este saber hacer, combinando métodos ancestrales y vinificación moderna para producir vinos que expresan la singularidad de nuestro terruño."
+      "Fundada en 1830, el Domaine de la Périnade es una aventura familiar nacida del amor por el terruño del Languedoc. En estas tierras bañadas por el sol, entre garriga y colinas, cultivamos nuestros viñedos con respeto por las tradiciones y especial atención al medio ambiente.",
+      "Hoy es la sexta generación la que perpetúa este saber hacer, combinando métodos ancestrales y vinificación moderna para producir vinos que expresan la singularidad de nuestro terruño."
     ],
     imagePrimary: historyFamily,
     ctaLabel: "Descubrir la historia completa",
@@ -217,7 +217,7 @@ export const siteEs: SiteData = {
   },
   footer: {
     brandTitle: "Périnade",
-    about: "Finca familiar cerca de Carcassonne. Vinos auténticos del Languedoc desde 1987.",
+    about: "Finca familiar cerca de Carcassonne. Vinos auténticos del Languedoc desde 1830.",
     groups: [
       {
         title: "Navegación",

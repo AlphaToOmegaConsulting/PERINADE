@@ -77,15 +77,15 @@ export const visitsPageFr: VisitPageData = {
     body:
       "Une immersion guidée par le vigneron : promenade dans les vignes, visite du chai et dégustation de 5 cuvées dans un cadre familial d'exception.",
     badges: [
-      { icon: "clock", label: "1h30" },
+      { icon: "clock", label: "1 h 30" },
       { icon: "ticket", label: "À partir de 15 €" },
       { icon: "globe", label: "FR / EN" },
-      { icon: "calendar", label: "11h – 16h, tous les jours" },
+      { icon: "calendar", label: "11 h – 16 h, tous les jours" },
       { icon: "car", label: "Parking gratuit" }
     ],
-    primaryCta: { label: "Reserver", href: "/visites#booking" },
+    primaryCta: { label: "Réserver", href: "/visites#booking" },
     secondaryCta: { label: "Appeler", href: "tel:+33468000000" },
-    helper: "+33 4 68 XX XX XX · Réponse sous 24h",
+    helper: "+33 4 68 XX XX XX · Réponse sous 24 h",
     image: visitsHeroGrapes,
     imageAlt: "Raisins fraîchement récoltés dans une cuve"
   },
@@ -97,7 +97,7 @@ export const visitsPageFr: VisitPageData = {
   timeline: {
     eyebrow: "Votre parcours",
     title: "L'expérience pas à pas",
-    body: "1h30 d'immersion totale dans l'univers du vin, guidé par notre vigneron.",
+    body: "1 h 30 d'immersion totale dans l'univers du vin, guidée par notre vigneron.",
     steps: [
       {
         id: "step-1",
@@ -173,7 +173,7 @@ export const visitsPageFr: VisitPageData = {
       },
       {
         id: "wine-white",
-        tag: "3 BLANC",
+        tag: "3 BLANCS",
         tagTone: "white",
         title: "Blancs de Périnade",
         notes: ["Agrumes, fleurs blanches", "Fraîcheur minérale"],
@@ -220,7 +220,7 @@ export const visitsPageFr: VisitPageData = {
       {
         title: "Visite standard",
         subtitle: "L'expérience essentielle",
-        price: "15€",
+        price: "15 €",
         perLabel: "/ personne",
         features: [
           "Visite guidée de 1h30",
@@ -236,7 +236,7 @@ export const visitsPageFr: VisitPageData = {
       {
         title: "Visite gourmande",
         subtitle: "Visite + accord gourmand",
-        price: "25€",
+        price: "25 €",
         perLabel: "/ personne",
         features: [
           "Tout inclus de la formule standard",
@@ -253,7 +253,7 @@ export const visitsPageFr: VisitPageData = {
       }
     ],
     meta: [
-      "Disponible tous les jours, 11:00 – 16:00",
+      "Disponible tous les jours, 11 h – 16 h",
       "Groupes privés sur demande",
       "Expérience premium, tarification juste"
     ]

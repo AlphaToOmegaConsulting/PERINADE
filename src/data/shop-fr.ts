@@ -31,7 +31,7 @@ export const shopPageFr: ShopPageData = {
         stock: "En stock",
         image: shopImage2,
         imageAlt: "Bouteille rouge en close-up",
-        badges: ["Best-seller", "Rouge"],
+        badges: ["Meilleure vente", "Rouge"],
         tone: "Rouge",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
@@ -44,7 +44,7 @@ export const shopPageFr: ShopPageData = {
         stock: "En stock",
         image: shopImage3,
         imageAlt: "Bouteille de blanc sur fond clair",
-        badges: ["Best-seller", "Blanc"],
+        badges: ["Meilleure vente", "Blanc"],
         tone: "Blanc",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
@@ -57,7 +57,7 @@ export const shopPageFr: ShopPageData = {
         stock: "En stock",
         image: shopImage4,
         imageAlt: "Étagères de vins",
-        badges: ["Best-seller", "Rouge"],
+        badges: ["Meilleure vente", "Rouge"],
         tone: "Rouge",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
@@ -70,7 +70,7 @@ export const shopPageFr: ShopPageData = {
         stock: "En stock",
         image: shopImage5,
         imageAlt: "Scène rosé et panier",
-        badges: ["Favori Visite", "Rosé"],
+        badges: ["Favori visite", "Rosé"],
         tone: "Rosé",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
@@ -91,7 +91,7 @@ export const shopPageFr: ShopPageData = {
       {
         name: "Rosé Prestige",
         meta: "IGP Pays d'Oc · 2024 · 75 cl",
-        description: "Rose, fruits printaniers. Finale fraîche, structurée et vive.",
+        description: "Pétale de rose, fruits printaniers. Finale fraîche, structurée et vive.",
         price: "13,00 € TTC",
         stock: "En stock",
         image: shopImage5,
@@ -179,7 +179,7 @@ export const shopPageFr: ShopPageData = {
       {
         question: "Quels sont les délais de livraison ?",
         answer:
-          "Les commandes sont expédiées sous 24h et livrées sous 48-72 h en France métropolitaine. Emballage isotherme inclus en période de chaleur."
+          "Les commandes sont expédiées sous 24 h et livrées sous 48-72 h en France métropolitaine. Emballage isotherme inclus en période de chaleur."
       },
       {
         question: "La livraison est-elle gratuite ?",
