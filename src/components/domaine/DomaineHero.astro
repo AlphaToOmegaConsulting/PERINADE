@@ -62,7 +62,8 @@ const { hero } = Astro.props;
 
 <style>
   .domaine-hero {
-    background: radial-gradient(circle at 78% 26%, rgba(255, 255, 255, 0.06), transparent 42%), #161616;
+    background: #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     color: var(--color-white);
     padding-top: calc(var(--header-height) + clamp(3rem, 8vw, 5.6rem));
   }
@@ -83,6 +84,7 @@ const { hero } = Astro.props;
   }
 
   .domaine-hero__title {
+    color: var(--color-white);
     display: grid;
     font-size: clamp(2.2rem, 4.6vw, 3.85rem);
     letter-spacing: -0.025em;
