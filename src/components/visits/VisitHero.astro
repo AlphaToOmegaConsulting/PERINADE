@@ -2,6 +2,7 @@
 import type { VisitPageData } from "../../types/visits";
 import { Image } from "astro:assets";
 import Icon from "../ui/Icon.astro";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   hero: VisitPageData["hero"];
@@ -30,8 +31,8 @@ const { hero } = Astro.props;
       </ul>
 
       <div class="visit-hero__actions">
-        <a class="visit-hero__cta visit-hero__cta--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-        <a class="visit-hero__cta visit-hero__cta--secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+        <ButtonLink href={hero.primaryCta.href} label={hero.primaryCta.label} variant="primary" size="lg" />
+        <ButtonLink href={hero.secondaryCta.href} label={hero.secondaryCta.label} variant="ghost" size="lg" />
       </div>
 
       <p class="visit-hero__helper">{hero.helper}</p>
@@ -129,27 +130,21 @@ const { hero } = Astro.props;
     margin-top: clamp(1rem, 3vw, 1.75rem);
   }
 
-  .visit-hero__cta {
-    align-items: center;
-    border-radius: var(--visit-radius-xl);
-    display: inline-flex;
-    font-size: var(--visit-type-caption-size);
-    justify-content: center;
-    letter-spacing: var(--visit-type-caption-track);
-    min-block-size: var(--control-height-md);
+  .visit-hero__actions :global(.btn) {
     min-inline-size: clamp(10rem, 22vw, 12.5rem);
-    padding-inline: clamp(1rem, 3vw, 1.6rem);
-    text-transform: uppercase;
   }
 
-  .visit-hero__cta--primary {
-    background: var(--visit-accent-primary);
-    color: var(--color-white);
+  .visit-hero__actions :global(.btn--primary) {
+    --btn-primary-bg: var(--visit-accent-primary);
+    --btn-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
+    --btn-primary-border: var(--visit-accent-primary);
+    --btn-primary-shadow: none;
   }
 
-  .visit-hero__cta--secondary {
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    color: var(--color-white);
+  .visit-hero__actions :global(.btn--ghost) {
+    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.12);
+    --btn-ghost-border: rgba(255, 255, 255, 0.22);
+    --btn-ghost-color: var(--color-white);
   }
 
   .visit-hero__helper {
@@ -192,7 +187,7 @@ const { hero } = Astro.props;
       flex-direction: column;
     }
 
-    .visit-hero__cta {
+    .visit-hero__actions :global(.btn) {
       width: 100%;
     }
 

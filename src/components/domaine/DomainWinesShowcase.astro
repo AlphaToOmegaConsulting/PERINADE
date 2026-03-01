@@ -24,29 +24,21 @@ const { wines } = Astro.props;
     <div class="domain-wines__grid">
       {wines.items.map((item) => (
         <article class="domain-wines__card">
-          {
-            isPlaceholderLink(item.ctaHref) ? (
-              <figure class="domain-wines__media" data-todo={item.ctaHref}>
-                <Image src={item.image} alt={item.alt} loading="lazy" />
-              </figure>
-            ) : (
-              <a class="domain-wines__media" href={item.ctaHref}>
-                <Image src={item.image} alt={item.alt} loading="lazy" />
-              </a>
-            )
-          }
+          {isPlaceholderLink(item.ctaHref) ? (
+            <div class="domain-wines__media" aria-disabled="true">
+              <Image src={item.image} alt={item.alt} loading="lazy" />
+            </div>
+          ) : (
+            <a class="domain-wines__media" href={item.ctaHref}>
+              <Image src={item.image} alt={item.alt} loading="lazy" />
+            </a>
+          )}
           <div class="domain-wines__meta">{item.meta}</div>
-          {
-            isPlaceholderLink(item.ctaHref) ? (
-              <h3>{item.title}</h3>
-            ) : (
-              <h3><a href={item.ctaHref}>{item.title}</a></h3>
-            )
-          }
+          {isPlaceholderLink(item.ctaHref) ? <h3>{item.title}</h3> : <h3><a href={item.ctaHref}>{item.title}</a></h3>}
           <p>{item.body}</p>
           <div class="domain-wines__bottom">
             <strong>{item.price}</strong>
-            <ButtonLink href={item.ctaHref} label={item.ctaLabel} />
+            <ButtonLink href={item.ctaHref} label={item.ctaLabel} variant="primary" disabled={isPlaceholderLink(item.ctaHref)} />
           </div>
         </article>
       ))}
@@ -168,7 +160,4 @@ const { wines } = Astro.props;
     }
   }
 
-  [data-todo] {
-    cursor: not-allowed;
-  }
 </style>

@@ -5,6 +5,7 @@
 @import "@fontsource/playfair-display/500.css";
 @import "@fontsource/playfair-display/600.css";
 @import "@fontsource/playfair-display/700.css";
+@import "./components/buttons.css";
 
 /* ── Skip link (accessibility) ───────────────────────────── */
 .skip-link {
@@ -122,15 +123,6 @@ img {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-button,
-a {
-  transition: opacity 180ms ease, transform 180ms ease;
-}
-
-button {
-  transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
 }
 
 input,

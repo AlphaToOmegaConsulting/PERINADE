@@ -1,6 +1,6 @@
 let cursorOrbReady = false;
 
-const INTERACTIVE_SELECTOR = 'a, button, input, textarea, select, label, [role="button"], [data-todo]';
+const INTERACTIVE_SELECTOR = 'a, button, input, textarea, select, label, [role="button"]';
 
 export const initCursorOrb = (): void => {
   if (cursorOrbReady) return;

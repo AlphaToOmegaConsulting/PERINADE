@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ShopPageData } from "../../types/shop";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   productGrid: ShopPageData["productGrid"];
@@ -39,7 +40,7 @@ const { productGrid } = Astro.props;
                 <p class="shop-card__price">{product.price}</p>
                 <p class="shop-card__stock">{product.stock}</p>
               </div>
-              <a class="shop-card__cta" href={product.ctaHref}>{product.ctaLabel}</a>
+              <ButtonLink class="shop-card__cta" href={product.ctaHref} label={product.ctaLabel} variant="primary" size="sm" />
             </div>
           </div>
         </article>
@@ -171,18 +172,9 @@ const { productGrid } = Astro.props;
     margin: 0;
   }
 
-  .shop-card__cta {
-    align-items: center;
-    background: var(--color-cta);
-    border-radius: 100vmax;
-    color: var(--color-white);
-    display: inline-flex;
-    font-size: clamp(0.64rem, 1.7vw, 0.68rem);
-    font-weight: 500;
-    letter-spacing: 0.11em;
+  .shop-card__footer :global(.shop-card__cta) {
     min-block-size: clamp(2.35rem, 6vw, 2.65rem);
     padding-inline: clamp(0.75rem, 2.4vw, 0.95rem);
-    text-transform: uppercase;
     white-space: nowrap;
   }
 
@@ -223,7 +215,7 @@ const { productGrid } = Astro.props;
       gap: var(--space-xs);
     }
 
-    .shop-card__cta {
+    .shop-card__footer :global(.shop-card__cta) {
       justify-content: center;
       width: 100%;
     }

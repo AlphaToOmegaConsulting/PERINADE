@@ -2,6 +2,7 @@
 import type { VisitPageData } from "../../types/visits";
 import { Image } from "astro:assets";
 import Icon from "../ui/Icon.astro";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   escape: VisitPageData["escape"];
@@ -38,7 +39,7 @@ const { escape } = Astro.props;
         ))}
       </ul>
 
-      <a class="escape__cta" href={escape.cta.href}>{escape.cta.label}</a>
+      <ButtonLink class="escape__cta" href={escape.cta.href} label={escape.cta.label} variant="ghost" size="lg" />
     </div>
   </div>
 </section>
@@ -146,20 +147,15 @@ const { escape } = Astro.props;
     width: 1rem;
   }
 
-  .escape__cta {
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.26);
-    border-radius: var(--visit-radius-xl);
-    color: var(--color-white);
-    display: inline-flex;
-    font-size: var(--visit-type-caption-size);
-    justify-content: center;
-    letter-spacing: var(--visit-type-caption-track);
+  .escape :global(.escape__cta) {
+    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.12);
+    --btn-ghost-border: rgba(255, 255, 255, 0.26);
+    --btn-ghost-color: var(--color-white);
+
     margin-top: 1.9rem;
     min-height: 3.2rem;
     min-width: 23rem;
     padding: 0 1.4rem;
-    text-transform: uppercase;
   }
 
   @media (max-width: 1023px) {
@@ -167,7 +163,7 @@ const { escape } = Astro.props;
       grid-template-columns: 1fr;
     }
 
-    .escape__cta {
+    .escape :global(.escape__cta) {
       min-width: 0;
       width: 100%;
     }

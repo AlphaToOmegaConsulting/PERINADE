@@ -9,6 +9,11 @@
     "preview": "astro preview",
     "check": "astro check",
     "verify": "npm run check && npm run build",
+    "i18n:audit": "node --experimental-strip-types scripts/i18n/audit-language.ts",
+    "i18n:extract": "node --experimental-strip-types scripts/i18n/extract-translatables.ts",
+    "i18n:crawl-text": "node --experimental-strip-types scripts/i18n/crawl-site-text.ts",
+    "i18n:spell-fixes": ".venv/bin/python scripts/i18n/generate-spell-fixes.py",
+    "i18n:verify": "npm run check && npm run build && npm run i18n:audit",
     "lint": "eslint src --ext .ts,.astro",
     "format": "prettier --write src",
     "format:check": "prettier --check src"

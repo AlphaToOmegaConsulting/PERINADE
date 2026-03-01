@@ -2,7 +2,6 @@
 import ButtonLink from "../ui/ButtonLink.astro";
 import { Image } from "astro:assets";
 import type { DomaineVisitCtaData } from "../../types/domaine";
-import { isPlaceholderLink } from "../../utils/link";
 
 interface Props {
   visitCta: DomaineVisitCtaData;
@@ -32,14 +31,8 @@ const { visitCta } = Astro.props;
       </ul>
 
       <div class="visit-cta__actions">
-        <ButtonLink href={visitCta.primaryCta.href} label={visitCta.primaryCta.label} />
-        {
-          isPlaceholderLink(visitCta.secondaryCta.href) ? (
-            <span class="visit-cta__ghost" data-todo={visitCta.secondaryCta.href}>{visitCta.secondaryCta.label}</span>
-          ) : (
-            <a class="visit-cta__ghost" href={visitCta.secondaryCta.href}>{visitCta.secondaryCta.label}</a>
-          )
-        }
+        <ButtonLink href={visitCta.primaryCta.href} label={visitCta.primaryCta.label} variant="primary" />
+        <ButtonLink class="visit-cta__ghost" href={visitCta.secondaryCta.href} label={visitCta.secondaryCta.label} variant="ghost" />
       </div>
     </div>
   </div>
@@ -128,20 +121,13 @@ const { visitCta } = Astro.props;
     margin-top: 0.35rem;
   }
 
-  .visit-cta__ghost {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 999px;
-    color: var(--color-white);
-    display: inline-flex;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
+  .visit-cta__actions :global(.visit-cta__ghost) {
+    --btn-ghost-border: rgba(255, 255, 255, 0.3);
+    --btn-ghost-color: var(--color-white);
+    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.1);
+
     min-height: 3.4rem;
     padding-inline: 1.35rem;
-    text-transform: uppercase;
-  }
-
-  [data-todo] {
-    cursor: not-allowed;
   }
 
   @media (max-width: 1023px) {
@@ -164,7 +150,7 @@ const { visitCta } = Astro.props;
       width: 100%;
     }
 
-    .visit-cta__ghost {
+    .visit-cta__actions :global(.visit-cta__ghost) {
       justify-content: center;
       width: 100%;
     }

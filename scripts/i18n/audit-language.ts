@@ -68,6 +68,8 @@ function collectHardcodedText(astro: string): string[] {
     .map((m) => (m[1] || "").trim())
     .filter(Boolean)
     .filter((s) => !s.startsWith("{"))
+    .filter((s) => /\p{L}/u.test(s))
+    .filter((s) => /\s/.test(s))
     .filter((s) => !/^[\-–—•·\d\s]+$/.test(s));
 }
 

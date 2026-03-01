@@ -2,240 +2,46 @@
 import { isPlaceholderLink } from "../../utils/link";
 
 interface Props {
-  href: string;
   label: string;
-  variant?: "hero" | "pill" | "text" | "form";
-  size?: "default" | "mobile";
-  priority?: "primary" | "secondary" | "tertiary";
+  variant?: "primary" | "secondary" | "ghost" | "text";
+  size?: "sm" | "md" | "lg";
+  disabled?: boolean;
+  fullWidth?: boolean;
+  href?: string;
+  type?: "button" | "submit";
   class?: string;
 }
 
-const { href, label, variant = "pill", size = "default", priority = "primary", class: className = "" } = Astro.props;
-const isPlaceholder = isPlaceholderLink(href);
-const composedClassName = `${className} is-size-${size} is-priority-${priority}`.trim();
+const {
+  label,
+  variant = "primary",
+  size = "md",
+  disabled = false,
+  fullWidth = false,
+  href,
+  type = "button",
+  class: className = ""
+} = Astro.props;
+
+const isPlaceholder = href ? isPlaceholderLink(href) : false;
+const isDisabled = disabled || isPlaceholder;
+
+const classes = [
+  "btn",
+  `btn--${variant}`,
+  `btn--${size}`,
+  fullWidth && "btn--block",
+  isDisabled && "is-disabled",
+  className
+]
+  .filter(Boolean)
+  .join(" ");
 ---
 
-{
-  variant === "hero" ? (
-    <Fragment>
-      {isPlaceholder ? (
-        <span class={`hero-cta ${composedClassName}`} data-todo={href}>
-          <span class="hero-cta__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </span>
-          <span class="hero-cta__label">{label}</span>
-        </span>
-      ) : (
-        <a class={`hero-cta ${composedClassName}`} href={href}>
-          <span class="hero-cta__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </span>
-          <span class="hero-cta__label">{label}</span>
-        </a>
-      )}
-    </Fragment>
-  ) : variant === "text" ? (
-    isPlaceholder ? (
-      <span class={`text-link ${composedClassName}`} data-todo={href}>{label}</span>
-    ) : (
-      <a class={`text-link ${composedClassName}`} href={href}>{label}</a>
-    )
-  ) : variant === "form" ? (
-    isPlaceholder ? (
-      <span class={`form-link ${composedClassName}`} data-todo={href}>
-        <span class="form-link__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </span>
-        <span>{label}</span>
-      </span>
-    ) : (
-      <a class={`form-link ${composedClassName}`} href={href}>
-        <span class="form-link__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none">
-            <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </span>
-        <span>{label}</span>
-      </a>
-    )
-  ) : isPlaceholder ? (
-    <span class={`pill-link ${composedClassName}`} data-todo={href}>{label}</span>
-  ) : (
-    <a class={`pill-link ${composedClassName}`} href={href}>{label}</a>
-  )
-}
-
-<style>
-  .hero-cta {
-    align-items: center;
-    color: var(--color-white);
-    display: inline-flex;
-    gap: var(--space-sm);
-  }
-
-  .hero-cta__icon {
-    align-items: center;
-    background: var(--color-cta);
-    border-radius: 100vmax;
-    color: var(--color-white);
-    display: inline-flex;
-    block-size: var(--control-height-lg);
-    justify-content: center;
-    transition: transform 180ms ease, background 180ms ease;
-    inline-size: var(--control-height-lg);
-  }
-
-  .hero-cta__icon svg {
-    block-size: var(--icon-size-md);
-    inline-size: var(--icon-size-md);
-  }
-
-  .hero-cta__label {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    font-size: clamp(0.74rem, 1.75vw, 0.8125rem);
-    letter-spacing: 0.16em;
-    line-height: 1.4;
-    padding-bottom: 0.25rem;
-    text-transform: uppercase;
-  }
-
-  .pill-link {
-    align-items: center;
-    background: var(--color-cta);
-    border-radius: 100vmax;
-    box-shadow: var(--shadow-soft);
-    color: var(--color-white);
-    display: inline-flex;
-    font-size: clamp(0.74rem, 1.7vw, 0.8125rem);
-    font-weight: 500;
-    justify-content: center;
-    letter-spacing: 0.16em;
-    min-block-size: var(--control-height-md);
-    padding-inline: clamp(0.95rem, 2.8vw, 1.5rem);
-    text-transform: uppercase;
-    transition: transform 180ms ease, background 180ms ease;
-  }
-
-  .pill-link.site-header__cta {
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 0.5rem;
-    box-shadow: 0 0.5rem 1.25rem rgba(196, 106, 0, 0.25);
-    letter-spacing: 0.11em;
-    min-block-size: var(--control-height-sm);
-    overflow: hidden;
-    padding-inline: clamp(0.8rem, 2.4vw, 1rem);
-    position: relative;
-    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, background 180ms ease;
-  }
-
-  .pill-link.is-size-mobile {
-    min-block-size: 2.75rem;
-  }
-
-  .pill-link.is-priority-secondary {
-    background: #ffffff;
-    border: 1px solid var(--color-cta);
-    color: var(--color-cta);
-  }
-
-  .pill-link.is-priority-tertiary {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .pill-link.site-header__cta::after {
-    background: linear-gradient(120deg, transparent 25%, rgba(255, 255, 255, 0.28) 50%, transparent 75%);
-    content: "";
-    inset: 0;
-    pointer-events: none;
-    position: absolute;
-    transform: translateX(-120%);
-    transition: transform 280ms ease;
-  }
-
-  a.pill-link.site-header__cta:hover {
-    background: linear-gradient(180deg, #dc7f0a 0%, #c86d00 100%);
-    box-shadow: 0 0.75rem 1.75rem rgba(196, 106, 0, 0.42);
-    filter: saturate(1.08);
-    transform: translateY(-0.125rem);
-  }
-
-  a.pill-link.site-header__cta:hover::after {
-    transform: translateX(120%);
-  }
-
-  .text-link {
-    border-bottom: 1px solid rgba(196, 156, 110, 0.35);
-    color: var(--color-accent);
-    display: inline-flex;
-    font-size: clamp(0.74rem, 1.7vw, 0.8125rem);
-    letter-spacing: 0.16em;
-    line-height: 1.4;
-    padding-bottom: 0.25rem;
-    text-transform: uppercase;
-  }
-
-  .form-link {
-    align-items: center;
-    background: var(--color-cta);
-    border-radius: 100vmax;
-    box-shadow: var(--shadow-card);
-    color: var(--color-white);
-    display: inline-flex;
-    gap: var(--space-sm);
-    justify-content: center;
-    min-block-size: var(--control-height-lg);
-    padding-inline: clamp(1.1rem, 3vw, 2rem);
-    text-transform: uppercase;
-  }
-
-  .form-link__icon {
-    align-items: center;
-    background: rgba(255, 255, 255, 0.24);
-    border-radius: 100vmax;
-    display: inline-flex;
-    block-size: var(--icon-size-lg);
-    justify-content: center;
-    inline-size: var(--icon-size-lg);
-  }
-
-  .form-link__icon svg {
-    block-size: var(--icon-size-sm);
-    inline-size: var(--icon-size-sm);
-  }
-
-  a.hero-cta:hover .hero-cta__icon,
-  a.pill-link:hover,
-  a.form-link:hover,
-  a.text-link:hover {
-    transform: translateY(-0.0625rem);
-  }
-
-  a.hero-cta:hover .hero-cta__icon,
-  a.pill-link:hover,
-  a.form-link:hover {
-    background: var(--color-cta-strong);
-  }
-
-  a.text-link:hover {
-    color: var(--color-cta);
-  }
-
-  [data-todo] {
-    cursor: not-allowed;
-    opacity: 0.95;
-  }
-
-  @media (max-width: 47.9375em) {
-    .hero-cta__icon {
-      block-size: clamp(3rem, 12vw, 3.5rem);
-      inline-size: clamp(3rem, 12vw, 3.5rem);
-    }
-  }
-</style>
+{href && !isDisabled ? (
+  <a class={classes} href={href}>{label}</a>
+) : (
+  <button class={classes} type={type} disabled={isDisabled} aria-disabled={isDisabled ? "true" : undefined}>
+    {label}
+  </button>
+)}

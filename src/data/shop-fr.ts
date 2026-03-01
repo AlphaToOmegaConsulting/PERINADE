@@ -31,7 +31,7 @@ export const shopPageFr: ShopPageData = {
         stock: "En stock",
         image: shopImage2,
         imageAlt: "Bouteille rouge en close-up",
-        badges: ["Best Seller", "Rouge"],
+        badges: ["Best-seller", "Rouge"],
         tone: "Rouge",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
@@ -44,7 +44,7 @@ export const shopPageFr: ShopPageData = {
         stock: "En stock",
         image: shopImage3,
         imageAlt: "Bouteille de blanc sur fond clair",
-        badges: ["Best Seller", "Blanc"],
+        badges: ["Best-seller", "Blanc"],
         tone: "Blanc",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
@@ -57,7 +57,7 @@ export const shopPageFr: ShopPageData = {
         stock: "En stock",
         image: shopImage4,
         imageAlt: "Étagères de vins",
-        badges: ["Best Seller", "Rouge"],
+        badges: ["Best-seller", "Rouge"],
         tone: "Rouge",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
@@ -199,7 +199,7 @@ export const shopPageFr: ShopPageData = {
       },
       {
         question: "Comment contacter le domaine ?",
-        answer: "Par téléphone au +33 4 68 XX XX XX ou par email via le formulaire de contact du site."
+        answer: "Par téléphone au +33 4 68 XX XX XX ou par e-mail via le formulaire de contact du site."
       }
     ]
   }

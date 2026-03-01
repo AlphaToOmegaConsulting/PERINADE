@@ -1,6 +1,7 @@
 ---
 import type { SiteData } from "../../types/site";
 import Icon from "../ui/Icon.astro";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   contact: SiteData["contact"];
@@ -88,14 +89,7 @@ const { contact } = Astro.props;
 
       <div class="contact__cta">
         <span class="contact__ornament" aria-hidden="true"></span>
-        <button type="submit" class="contact__submit">
-          <span aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M5 12h14M13 5l7 7-7 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
-            </svg>
-          </span>
-          {contact.labels.submit}
-        </button>
+        <ButtonLink label={contact.labels.submit} type="submit" variant="primary" size="lg" class="contact__submit" />
       </div>
       <p class="contact__status" data-contact-status aria-live="polite"></p>
     </form>
@@ -380,36 +374,12 @@ const { contact } = Astro.props;
     width: 3rem;
   }
 
-  .contact__submit {
-    align-items: center;
-    background: var(--color-cta);
-    border: 0;
-    border-radius: 999px;
-    box-shadow: var(--shadow-card);
-    color: var(--color-white);
-    cursor: pointer;
-    display: inline-flex;
-    gap: 0.9rem;
-    justify-content: center;
+  .contact__cta :global(.contact__submit) {
+    --btn-primary-shadow: var(--shadow-card);
+
     min-height: 3.2rem;
     min-width: 18rem;
     padding: 0 1.8rem;
-    text-transform: uppercase;
-  }
-
-  .contact__submit span {
-    align-items: center;
-    background: rgba(255, 255, 255, 0.28);
-    border-radius: 999px;
-    display: inline-flex;
-    height: 2rem;
-    justify-content: center;
-    width: 2rem;
-  }
-
-  .contact__submit svg {
-    height: 1rem;
-    width: 1rem;
   }
 
   .contact__status {
@@ -441,7 +411,7 @@ const { contact } = Astro.props;
       grid-template-columns: 1fr;
     }
 
-    .contact__submit {
+    .contact__cta :global(.contact__submit) {
       min-width: 100%;
     }
   }

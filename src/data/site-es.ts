@@ -185,14 +185,14 @@ export const siteEs: SiteData = {
     body: "¿Desea reservar una visita, hacer un pedido o simplemente saber más sobre nuestros vinos? No dude en contactarnos.",
     info: [
       { label: "Teléfono", value: contactInfo.phone, icon: "phone" },
-      { label: "Email", value: contactInfo.email, icon: "mail" },
+      { label: "Correo electrónico", value: contactInfo.email, icon: "mail" },
       { label: "Web", value: contactInfo.website, icon: "globe" },
       { label: "Dirección", value: "Cerca de Carcassonne, Aude (11)", icon: "pin" }
     ],
     labels: {
       firstName: "Nombre *",
       lastName: "Apellido *",
-      email: "Email *",
+      email: "Correo electrónico *",
       phone: "Teléfono *",
       subject: "Asunto *",
       message: "Mensaje *",
@@ -207,7 +207,7 @@ export const siteEs: SiteData = {
       defaultSubject: "Solicitud de contacto",
       fieldFirstName: "Nombre",
       fieldLastName: "Apellido",
-      fieldEmail: "Email",
+      fieldEmail: "Correo electrónico",
       fieldPhone: "Teléfono",
       fieldMessage: "Mensaje"
     },

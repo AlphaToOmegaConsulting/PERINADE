@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { DomaineHeroData } from "../../types/domaine";
-import { isPlaceholderLink } from "../../utils/link";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   hero: DomaineHeroData;
@@ -21,24 +21,8 @@ const { hero } = Astro.props;
       <p class="domaine-hero__body">{hero.body}</p>
 
       <div class="domaine-hero__cta-row">
-        {
-          isPlaceholderLink(hero.primaryCta.href) ? (
-            <span class="domaine-hero__cta-primary" data-todo={hero.primaryCta.href}>
-              <span>{hero.primaryCta.label}</span>
-            </span>
-          ) : (
-            <a class="domaine-hero__cta-primary" href={hero.primaryCta.href}>
-              <span>{hero.primaryCta.label}</span>
-            </a>
-          )
-        }
-        {
-          isPlaceholderLink(hero.secondaryCta.href) ? (
-            <span class="domaine-hero__cta-secondary" data-todo={hero.secondaryCta.href}>{hero.secondaryCta.label}</span>
-          ) : (
-            <a class="domaine-hero__cta-secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
-          )
-        }
+        <ButtonLink class="domaine-hero__cta-primary" href={hero.primaryCta.href} label={hero.primaryCta.label} variant="primary" />
+        <ButtonLink class="domaine-hero__cta-secondary" href={hero.secondaryCta.href} label={hero.secondaryCta.label} variant="ghost" />
       </div>
 
       <ul class="domaine-hero__badges" aria-label="Axes clés du domaine">
@@ -112,36 +96,20 @@ const { hero } = Astro.props;
     margin-top: clamp(1rem, 2.8vw, 1.7rem);
   }
 
-  .domaine-hero__cta-primary {
-    align-items: center;
-    background: var(--color-cta);
-    border-radius: 100vmax;
-    color: var(--color-white);
-    display: inline-flex;
-    font-size: clamp(0.72rem, 1.8vw, 0.78rem);
-    font-weight: 600;
-    justify-content: center;
-    line-height: 1;
-    letter-spacing: 0.14em;
-    box-shadow: 0 0.5rem 1.1rem rgba(214, 116, 0, 0.24);
+  .domaine-hero__cta-row :global(.domaine-hero__cta-primary) {
+    --btn-primary-shadow: 0 0.5rem 1.1rem rgba(214, 116, 0, 0.24);
+
     min-block-size: var(--control-height-md);
     padding-inline: clamp(1rem, 3.3vw, 1.55rem);
-    text-decoration: none;
-    text-transform: uppercase;
   }
 
-  .domaine-hero__cta-secondary {
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 100vmax;
-    color: var(--color-white);
-    display: inline-flex;
-    font-size: clamp(0.72rem, 1.8vw, 0.78rem);
-    line-height: 1;
-    letter-spacing: 0.12em;
+  .domaine-hero__cta-row :global(.domaine-hero__cta-secondary) {
+    --btn-ghost-border: rgba(255, 255, 255, 0.2);
+    --btn-ghost-color: var(--color-white);
+    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.08);
+
     min-block-size: var(--control-height-md);
     padding-inline: clamp(0.95rem, 3vw, 1.45rem);
-    text-transform: uppercase;
   }
 
   .domaine-hero__badges,
@@ -189,10 +157,6 @@ const { hero } = Astro.props;
     width: 100%;
   }
 
-  [data-todo] {
-    cursor: not-allowed;
-  }
-
   @media (max-width: 63.9375em) {
     .domaine-hero__inner {
       gap: clamp(1.4rem, 4vw, 2.4rem);
@@ -213,8 +177,7 @@ const { hero } = Astro.props;
       font-size: clamp(0.92rem, 3.8vw, 1rem);
     }
 
-    .domaine-hero__cta-primary,
-    .domaine-hero__cta-secondary {
+    .domaine-hero__cta-row :global(.btn) {
       min-block-size: clamp(3rem, 10vw, 3.45rem);
       width: 100%;
     }

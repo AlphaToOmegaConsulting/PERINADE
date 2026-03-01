@@ -185,14 +185,14 @@ export const siteFr: SiteData = {
     body: "Vous souhaitez réserver une visite, passer commande ou simplement en savoir plus sur nos vins ? N'hésitez pas à nous contacter.",
     info: [
       { label: "Téléphone", value: contactInfo.phone, icon: "phone" },
-      { label: "Email", value: contactInfo.email, icon: "mail" },
+      { label: "E-mail", value: contactInfo.email, icon: "mail" },
       { label: "Site", value: contactInfo.website, icon: "globe" },
       { label: "Adresse", value: "Près de Carcassonne, Aude (11)", icon: "pin" }
     ],
     labels: {
       firstName: "Prénom *",
       lastName: "Nom *",
-      email: "Email *",
+      email: "E-mail *",
       phone: "Téléphone *",
       subject: "Sujet *",
       message: "Message *",
@@ -200,19 +200,19 @@ export const siteFr: SiteData = {
     },
     validation: {
       required: "Ce champ est requis.",
-      invalidEmail: "Merci de saisir un email valide.",
+      invalidEmail: "Merci de saisir une adresse e-mail valide.",
       fixErrors: "Veuillez corriger les champs en erreur."
     },
     mail: {
       defaultSubject: "Demande de contact",
       fieldFirstName: "Prénom",
       fieldLastName: "Nom",
-      fieldEmail: "Email",
+      fieldEmail: "E-mail",
       fieldPhone: "Téléphone",
       fieldMessage: "Message"
     },
     formAction: `mailto:${contactInfo.email}`,
-    formSuccessMessage: "Message prêt. Merci de vérifier votre brouillon email avant envoi.",
+    formSuccessMessage: "Message prêt. Merci de vérifier votre brouillon d’e-mail avant envoi.",
     formErrorMessage: `Impossible de préparer le message. Merci de nous appeler au ${contactInfo.phone}.`
   },
   footer: {

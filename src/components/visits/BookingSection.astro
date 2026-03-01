@@ -1,6 +1,7 @@
 ---
 import type { VisitPageData } from "../../types/visits";
 import SectionHeading from "../ui/SectionHeading.astro";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   booking: VisitPageData["booking"];
@@ -93,7 +94,7 @@ const { booking } = Astro.props;
         <input type="hidden" name="addon" data-booking-field-addon />
         <input type="hidden" name="totalPerPerson" data-booking-field-total />
 
-        <button class="booking__cta" type="submit">{booking.config.ctaLabel}</button>
+        <ButtonLink class="booking__cta" type="submit" label={booking.config.ctaLabel} variant="primary" size="lg" fullWidth />
         <a class="booking__call" href="tel:+33468000000">{booking.config.callLabel}</a>
         <p class="booking__status" data-booking-status aria-live="polite"></p>
         </form>
@@ -344,29 +345,13 @@ const { booking } = Astro.props;
     font-weight: 400;
   }
 
-  .booking__cta {
-    align-items: center;
-    background: var(--visit-accent-primary);
-    border: 0;
-    border-radius: var(--visit-radius-xl);
-    color: #ffffff;
-    cursor: pointer;
-    display: inline-flex;
-    font-size: var(--visit-type-caption-size);
-    justify-content: center;
-    letter-spacing: var(--visit-type-caption-track);
+  .booking__form :global(.booking__cta) {
+    --btn-primary-bg: var(--visit-accent-primary);
+    --btn-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
+    --btn-primary-border: var(--visit-accent-primary);
+    --btn-primary-shadow: none;
+
     min-block-size: calc(var(--booking-control-row-height) + clamp(0.2rem, 1vw, 0.6rem));
-    text-transform: uppercase;
-  }
-
-  .booking__cta:hover,
-  .booking__cta:focus-visible {
-    opacity: 0.92;
-    transform: translateY(-1px);
-  }
-
-  .booking__cta:active {
-    transform: translateY(0);
   }
 
   .booking__call {

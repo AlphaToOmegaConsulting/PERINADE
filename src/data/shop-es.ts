@@ -179,7 +179,7 @@ export const shopPageEs: ShopPageData = {
       },
       {
         question: "¿Cómo contactar con la finca?",
-        answer: "Por teléfono al +33 4 68 XX XX XX o por email mediante el formulario de contacto del sitio."
+        answer: "Por teléfono al +33 4 68 XX XX XX o por correo electrónico mediante el formulario de contacto del sitio."
       }
     ]
   }

@@ -1,5 +1,6 @@
 ---
 import type { ShopPageData } from "../../types/shop";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   finalCta: ShopPageData["finalCta"];
@@ -15,7 +16,7 @@ const { finalCta } = Astro.props;
       <p>{finalCta.body}</p>
     </div>
 
-    <a class="shop-band__cta" href={finalCta.ctaHref}>{finalCta.ctaLabel}</a>
+    <ButtonLink class="shop-band__cta" href={finalCta.ctaHref} label={finalCta.ctaLabel} variant="secondary" size="lg" />
   </div>
 </section>
 
@@ -44,19 +45,15 @@ const { finalCta } = Astro.props;
     max-width: 38rem;
   }
 
-  .shop-band__cta {
-    align-items: center;
-    background: var(--color-white);
-    border-radius: 999px;
-    color: var(--color-cta);
-    display: inline-flex;
+  .shop-band__shell :global(.shop-band__cta) {
+    --btn-secondary-bg: var(--color-white);
+    --btn-secondary-bg-hover: #f3ede4;
+    --btn-secondary-border: var(--color-white);
+    --btn-secondary-color: var(--color-cta);
+
     flex-shrink: 0;
-    font-size: 0.78rem;
-    font-weight: 500;
-    letter-spacing: 0.16em;
     min-height: 4rem;
     padding: 0 2.1rem;
-    text-transform: uppercase;
   }
 
   @media (max-width: 1023px) {
@@ -71,7 +68,7 @@ const { finalCta } = Astro.props;
       padding: 2.25rem 0;
     }
 
-    .shop-band__cta {
+    .shop-band__shell :global(.shop-band__cta) {
       justify-content: center;
       width: 100%;
     }

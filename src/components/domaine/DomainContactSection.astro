@@ -25,11 +25,13 @@ const { contact } = Astro.props;
           <p class="domain-contact__label">{card.label}</p>
           {
             card.href ? (
-              isPlaceholderLink(card.href) ? (
-                <span class="domain-contact__value domain-contact__value--link" data-todo={card.href}>{card.value}</span>
-              ) : (
-                <a class="domain-contact__value domain-contact__value--link" href={card.href}>{card.value}</a>
-              )
+              <ButtonLink
+                class="domain-contact__value-link"
+                href={card.href}
+                label={card.value}
+                variant="text"
+                disabled={isPlaceholderLink(card.href)}
+              />
             ) : (
               <p class="domain-contact__value">{card.value}</p>
             )
@@ -39,7 +41,7 @@ const { contact } = Astro.props;
     </div>
 
     <div class="domain-contact__cta">
-      <ButtonLink href={contact.cta.href} label={contact.cta.label} variant="form" />
+      <ButtonLink href={contact.cta.href} label={contact.cta.label} variant="primary" size="lg" />
     </div>
   </div>
 </section>
@@ -114,15 +116,15 @@ const { contact } = Astro.props;
     margin: 0.45rem 0 0;
   }
 
-  .domain-contact__value--link {
-    border-bottom: 1px solid rgba(196, 156, 110, 0.45);
-    color: var(--color-text-strong);
-    padding-bottom: 0.1rem;
-    text-decoration: none;
-  }
+  .domain-contact__card :global(.domain-contact__value-link) {
+    --btn-text-color: var(--color-text-strong);
+    --btn-text-color-hover: var(--color-text-strong);
+    --btn-text-underline: rgba(196, 156, 110, 0.45);
 
-  [data-todo] {
-    cursor: not-allowed;
+    margin-top: 0.35rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1rem;
   }
 
   .domain-contact__cta {

@@ -2,6 +2,7 @@
 import type { SiteData } from "../../types/site";
 import Icon from "../ui/Icon.astro";
 import { isPlaceholderLink } from "../../utils/link";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   footer: SiteData["footer"];
@@ -24,9 +25,9 @@ const { footer } = Astro.props;
           {group.links.map((link) => (
             <li>
               {isPlaceholderLink(link.href) ? (
-                <span data-todo={link.href}>{link.label}</span>
+                <ButtonLink label={link.label} variant="text" disabled class="footer__group-link" />
               ) : (
-                <a href={link.href}>{link.label}</a>
+                <ButtonLink href={link.href} label={link.label} variant="text" class="footer__group-link" />
               )}
             </li>
           ))}
@@ -39,16 +40,16 @@ const { footer } = Astro.props;
       <p>{footer.newsletterBody}</p>
       <form data-ui-form action={footer.newsletterAction} method="post">
         <input type="email" name="email" inputmode="email" autocomplete="email" placeholder={footer.newsletterPlaceholder} required />
-        <button type="submit">OK</button>
+        <ButtonLink class="footer__newsletter-submit" label="OK" type="submit" variant="primary" size="sm" />
       </form>
       <div class="footer__social">
         {footer.social.map((item) => (
           isPlaceholderLink(item.href) ? (
-            <span class="footer__social-link" data-todo={item.href} aria-label={item.label}>
+            <button class="footer__social-link" type="button" aria-label={item.label} disabled>
               <span class="footer__social-icon">
                 <Icon name={item.label.toLowerCase() === "instagram" ? "instagram" : "facebook"} />
               </span>
-            </span>
+            </button>
           ) : (
             <a class="footer__social-link" href={item.href} aria-label={item.label} target="_blank" rel="noreferrer">
               <span class="footer__social-icon">
@@ -112,8 +113,18 @@ const { footer } = Astro.props;
     padding: 0;
   }
 
-  .footer__group a,
-  .footer__group span[data-todo] {
+  .footer__group :global(.footer__group-link) {
+    --btn-text-color: rgba(255, 255, 255, 0.62);
+    --btn-text-color-hover: rgba(255, 255, 255, 0.9);
+    --btn-text-underline: rgba(255, 255, 255, 0.24);
+
+    font-size: 0.95rem;
+    letter-spacing: 0;
+    padding-bottom: 0.1rem;
+    text-transform: none;
+  }
+
+  .footer__group :global(.footer__group-link):disabled {
     color: rgba(255, 255, 255, 0.62);
   }
 
@@ -133,14 +144,16 @@ const { footer } = Astro.props;
     padding: 0 1rem;
   }
 
-  .footer__newsletter button {
-    background: var(--color-accent);
-    border: 0;
+  .footer__newsletter :global(.footer__newsletter-submit) {
+    --btn-primary-bg: var(--color-accent);
+    --btn-primary-bg-hover: color-mix(in srgb, var(--color-accent) 82%, black);
+    --btn-primary-border: var(--color-accent);
+    --btn-primary-shadow: none;
+
     border-radius: 0 0.5rem 0.5rem 0;
-    color: var(--color-white);
-    font: inherit;
     min-height: 3rem;
     min-width: 3.25rem;
+    padding-inline: 0.8rem;
   }
 
   .footer__social {
@@ -150,12 +163,20 @@ const { footer } = Astro.props;
   }
 
   .footer__social-link {
+    background: transparent;
+    border: 0;
     color: var(--color-white);
     display: inline-flex;
     min-height: 2.75rem;
     min-width: 2.75rem;
     justify-content: center;
     align-items: center;
+    padding: 0;
+  }
+
+  .footer__social-link:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
   }
 
   .footer__social-icon :global(svg) {
@@ -176,10 +197,6 @@ const { footer } = Astro.props;
 
   .footer__bottom p {
     margin: 0;
-  }
-
-  [data-todo] {
-    cursor: not-allowed;
   }
 
   @media (max-width: 1023px) {

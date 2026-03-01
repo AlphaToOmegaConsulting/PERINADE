@@ -21,7 +21,7 @@ const ui = {
     formSuccess: "Message envoyé avec succès.",
     formError: "Erreur lors de l'envoi. Veuillez réessayer.",
     required: "Requis",
-    invalidEmail: "Adresse email invalide",
+    invalidEmail: "Adresse e-mail invalide",
     legalLine: "L'abus d'alcool est dangereux pour la santé. À consommer avec modération.",
     copyright: "© 2026 Domaine de la Périnade. Tous droits réservés."
   },

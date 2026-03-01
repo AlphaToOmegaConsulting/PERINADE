@@ -2,6 +2,7 @@
 import type { VisitPageData } from "../../types/visits";
 import Icon from "../ui/Icon.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   access: VisitPageData["access"];
@@ -25,7 +26,7 @@ const { access } = Astro.props;
           ))}
         </ul>
         {access.leftCard.ctaLabel && access.leftCard.ctaHref && (
-          <a class="access__cta" href={access.leftCard.ctaHref}>{access.leftCard.ctaLabel}</a>
+          <ButtonLink class="access__cta" href={access.leftCard.ctaHref} label={access.leftCard.ctaLabel} variant="text" />
         )}
       </article>
 
@@ -128,9 +129,11 @@ const { access } = Astro.props;
     margin: 0.35rem 0;
   }
 
-  .access__cta {
-    border-bottom: 1px solid var(--visit-accent-primary);
-    color: var(--visit-accent-primary);
+  .access__card--main :global(.access__cta) {
+    --btn-text-color: var(--visit-accent-primary);
+    --btn-text-color-hover: var(--visit-accent-primary);
+    --btn-text-underline: var(--visit-accent-primary);
+
     justify-self: center;
     margin-top: 0.6rem;
     width: fit-content;

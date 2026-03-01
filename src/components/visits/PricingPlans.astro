@@ -1,6 +1,7 @@
 ---
 import type { VisitPageData } from "../../types/visits";
 import SectionHeading from "../ui/SectionHeading.astro";
+import ButtonLink from "../ui/ButtonLink.astro";
 
 interface Props {
   pricing: VisitPageData["pricing"];
@@ -30,7 +31,14 @@ const { pricing } = Astro.props;
             ))}
           </ul>
 
-          <a href={plan.ctaHref} class="plan__cta">{plan.ctaLabel}</a>
+          <ButtonLink
+            href={plan.ctaHref}
+            label={plan.ctaLabel}
+            variant={plan.isHighlighted ? "primary" : "secondary"}
+            size="lg"
+            fullWidth
+            class="plan__cta"
+          />
         </article>
       ))}
     </div>
@@ -140,27 +148,22 @@ const { pricing } = Astro.props;
     top: 0;
   }
 
-  .plan__cta {
-    align-items: center;
-    border-radius: 999px;
-    display: inline-flex;
-    font-size: var(--visit-type-caption-size);
-    justify-content: center;
-    letter-spacing: var(--visit-type-caption-track);
+  .plan :global(.plan__cta) {
     margin-top: 1.2rem;
-    min-height: 3.1rem;
-    min-width: 100%;
-    text-transform: uppercase;
   }
 
-  .plan:not(.plan--highlighted) .plan__cta {
-    border: 2px solid #1a1a1a;
-    color: #1a1a1a;
+  .plan:not(.plan--highlighted) :global(.plan__cta) {
+    --btn-secondary-bg: transparent;
+    --btn-secondary-bg-hover: rgba(26, 26, 26, 0.06);
+    --btn-secondary-border: #1a1a1a;
+    --btn-secondary-color: #1a1a1a;
   }
 
-  .plan--highlighted .plan__cta {
-    background: var(--visit-accent-primary);
-    color: var(--color-white);
+  .plan--highlighted :global(.plan__cta) {
+    --btn-primary-bg: var(--visit-accent-primary);
+    --btn-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
+    --btn-primary-border: var(--visit-accent-primary);
+    --btn-primary-shadow: none;
   }
 
   .pricing__meta {

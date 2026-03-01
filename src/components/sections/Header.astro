@@ -57,7 +57,7 @@ const langLinks = alternateUrls
           ))}
         </div>
       )}
-      <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__cta" />
+      <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__cta" variant="primary" size="sm" />
     </div>
 
     <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
@@ -82,7 +82,7 @@ const langLinks = alternateUrls
           ))}
         </div>
       )}
-      <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__mobile-cta" />
+      <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__mobile-cta" variant="primary" size="md" fullWidth />
     </div>
   </div>
 </header>
@@ -217,9 +217,18 @@ const langLinks = alternateUrls
     inline-size: clamp(3.6rem, 7vw, 5rem);
   }
 
-  .site-header__cta {
+  .site-header__group--right :global(.site-header__cta) {
+    --btn-primary-bg: linear-gradient(180deg, #dc7f0a 0%, #c86d00 100%);
+    --btn-primary-bg-hover: linear-gradient(180deg, #e08a1b 0%, #cf7608 100%);
+    --btn-primary-border: rgba(255, 255, 255, 0.16);
+    --btn-primary-shadow: 0 0.5rem 1.25rem rgba(196, 106, 0, 0.25);
+
+    border-radius: 0.5rem;
+    letter-spacing: 0.11em;
     min-block-size: var(--control-height-sm);
+    overflow: hidden;
     padding-inline: clamp(0.8rem, 2.4vw, 1rem);
+    position: relative;
   }
 
   /* Language switcher */
@@ -297,7 +306,7 @@ const langLinks = alternateUrls
     text-transform: uppercase;
   }
 
-  .site-header__mobile-cta {
+  .site-header__mobile-inner :global(.site-header__mobile-cta) {
     justify-self: start;
     margin-top: var(--space-2xs);
     min-block-size: var(--control-height-md);

@@ -25,7 +25,7 @@ const { hero } = Astro.props;
 
       <p class="hero__body">{hero.body}</p>
 
-      <ButtonLink href={hero.ctaHref} label={hero.ctaLabel} variant="hero" />
+      <ButtonLink href={hero.ctaHref} label={hero.ctaLabel} variant="primary" size="lg" />
 
       <ul class="hero__meta" aria-label="Informations principales">
         {hero.meta.map((item) => <li>{item}</li>)}
