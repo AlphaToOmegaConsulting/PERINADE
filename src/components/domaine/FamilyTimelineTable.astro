@@ -14,7 +14,7 @@ const { timeline } = Astro.props;
   <div class="shell">
     <SectionHeading eyebrow={timeline.eyebrow} title={timeline.title} class="timeline__heading" />
 
-    <div class="timeline-tabs" data-timeline-tabs>
+    <div class="timeline-tabs" data-tabs data-tabs-activation="manual" data-reveal="up">
       <div class="timeline-tabs__left" role="tablist" aria-label="Chronologie du domaine">
         {timeline.tabs.map((tab) => {
           const isActive = tab.id === timeline.defaultTabId;
@@ -46,6 +46,7 @@ const { timeline } = Astro.props;
               aria-labelledby={`timeline-tab-${tab.id}`}
               data-panel-id={tab.id}
               hidden={!isActive}
+              data-reveal="up"
             >
               <header class="timeline-panel__head">
                 <h3>{tab.title}</h3>

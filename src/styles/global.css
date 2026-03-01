@@ -5,7 +5,12 @@
 @import "@fontsource/playfair-display/500.css";
 @import "@fontsource/playfair-display/600.css";
 @import "@fontsource/playfair-display/700.css";
-@import "./components/buttons.css";
+@import "./ui/actions.css";
+@import "./ui/motion.css";
+@import "./ui/navigation.css";
+@import "./ui/controls.css";
+@import "./ui/surfaces.css";
+@import "./ui/patterns.css";
 
 /* ── Skip link (accessibility) ───────────────────────────── */
 .skip-link {
@@ -95,6 +100,18 @@
   --motion-ease-enter: cubic-bezier(0.21, 1, 0.31, 1);
   --motion-duration-hover: 240ms;
   --motion-shadow-soft: 0 1.2rem 2rem rgba(20, 14, 9, 0.12);
+  --motion-duration-xs: 140ms;
+  --motion-duration-sm: 180ms;
+  --motion-duration-md: 240ms;
+  --motion-duration-lg: 620ms;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-emphasized: cubic-bezier(0.21, 1, 0.31, 1);
+  --motion-distance-sm: -0.125rem;
+  --motion-distance-md: -0.2rem;
+  --motion-scale-subtle: 1.02;
+  --motion-scale-media: 1.045;
+  --motion-shadow-hover: 0 1.3rem 2.2rem rgba(20, 14, 9, 0.14);
+  --motion-border-hover: rgba(196, 156, 110, 0.48);
 }
 
 *,
@@ -134,8 +151,8 @@ textarea {
   opacity: 0;
   transform: translate3d(0, 1.15rem, 0);
   transition:
-    opacity var(--motion-duration-enter) var(--motion-ease-enter),
-    transform var(--motion-duration-enter) var(--motion-ease-enter);
+    opacity var(--motion-duration-lg) var(--motion-ease-emphasized),
+    transform var(--motion-duration-lg) var(--motion-ease-emphasized);
   transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
@@ -155,35 +172,6 @@ textarea {
 [data-reveal].is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
-}
-
-.reasons__card,
-.experience__card,
-.testimonials__card,
-.wines__card,
-.contact__form,
-.history__content,
-.history__media,
-.gallery__item {
-  transition:
-    transform var(--motion-duration-hover) ease,
-    box-shadow var(--motion-duration-hover) ease,
-    border-color var(--motion-duration-hover) ease;
-}
-
-.reasons__card:hover,
-.experience__card:hover,
-.testimonials__card:hover,
-.wines__card:hover,
-.contact__form:hover,
-.history__content:hover {
-  transform: translateY(-0.2rem);
-}
-
-.experience__card:hover,
-.testimonials__card:hover,
-.wines__card:hover {
-  box-shadow: var(--motion-shadow-soft);
 }
 
 .cursor-orb {
@@ -229,6 +217,22 @@ input:focus-visible,
 textarea:focus-visible {
   outline: 0.125rem solid var(--color-accent);
   outline-offset: 0.1875rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .cursor-orb {
+    display: none;
+  }
 }
 
 button,

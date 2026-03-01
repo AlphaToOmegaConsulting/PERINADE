@@ -1,7 +1,7 @@
 ---
 import type { VisitPageData } from "../../types/visits";
 import SectionHeading from "../ui/SectionHeading.astro";
-import ButtonLink from "../ui/ButtonLink.astro";
+import SubmitButton from "../ui/actions/SubmitButton.astro";
 
 interface Props {
   booking: VisitPageData["booking"];
@@ -22,10 +22,10 @@ const { booking } = Astro.props;
     >
       <div class="booking__calendar">
         <header>
-            <button type="button" data-calendar-prev aria-label={booking.ui.prevMonthAriaLabel}>‹</button>
-            <h3 data-calendar-month>{booking.config.monthLabel}</h3>
-            <button type="button" data-calendar-next aria-label={booking.ui.nextMonthAriaLabel}>›</button>
-          </header>
+          <button type="button" data-calendar-prev aria-label={booking.ui.prevMonthAriaLabel}>‹</button>
+          <h3 data-calendar-month>{booking.config.monthLabel}</h3>
+          <button type="button" data-calendar-next aria-label={booking.ui.nextMonthAriaLabel}>›</button>
+        </header>
 
         <div class="booking__days-row">
           {booking.config.dayLabels.map((day) => (
@@ -33,11 +33,13 @@ const { booking } = Astro.props;
           ))}
         </div>
 
-          <div class="booking__grid" data-calendar-days>
-            {booking.config.selectableDays.map((day) => (
-              <button type="button" data-day={day} class:list={[day === booking.config.defaultDay && "is-active"]}>{day}</button>
-            ))}
-          </div>
+        <div class="booking__grid" data-calendar-days>
+          {booking.config.selectableDays.map((day) => (
+            <button type="button" data-day={day} class:list={[day === booking.config.defaultDay && "is-active"]}>
+              {day}
+            </button>
+          ))}
+        </div>
       </div>
 
       <div class="booking__controls">
@@ -53,50 +55,50 @@ const { booking } = Astro.props;
           data-default-error={booking.ui.defaultErrorMessage}
           data-mail-subject={booking.ui.mailSubjectFallback}
         >
-        <section>
-          <h4>{booking.ui.slotHeading}</h4>
-          <div class="booking__slot-grid" data-slot-grid>
-            {booking.config.slots.map((slot) => (
-              <button
-                type="button"
-                data-slot={slot.id}
-                aria-pressed={slot.id === booking.config.defaultSlotId ? "true" : "false"}
-                class:list={[slot.id === booking.config.defaultSlotId && "is-active"]}
-              >
-                {slot.label}
-              </button>
-            ))}
-          </div>
-        </section>
+          <section>
+            <h4>{booking.ui.slotHeading}</h4>
+            <div class="booking__slot-grid" data-slot-grid>
+              {booking.config.slots.map((slot) => (
+                <button
+                  type="button"
+                  data-slot={slot.id}
+                  aria-pressed={slot.id === booking.config.defaultSlotId ? "true" : "false"}
+                  class:list={[slot.id === booking.config.defaultSlotId && "is-active"]}
+                >
+                  {slot.label}
+                </button>
+              ))}
+            </div>
+          </section>
 
-        <section>
-          <h4>{booking.ui.participantsHeading}</h4>
-          <div class="booking__counter">
-            <button type="button" data-count-dec aria-label="Diminuer">−</button>
-            <output data-count-value>{booking.config.defaultParticipants}</output>
-            <button type="button" data-count-inc aria-label="Augmenter">+</button>
-          </div>
-        </section>
+          <section>
+            <h4>{booking.ui.participantsHeading}</h4>
+            <div class="booking__counter">
+              <button type="button" data-count-dec aria-label="Diminuer">−</button>
+              <output data-count-value>{booking.config.defaultParticipants}</output>
+              <button type="button" data-count-inc aria-label="Augmenter">+</button>
+            </div>
+          </section>
 
-        <label class="booking__addon">
-          <input type="checkbox" data-addon />
-          <span>{booking.config.addonLabel}</span>
-        </label>
+          <label class="booking__addon">
+            <input type="checkbox" data-addon />
+            <span>{booking.config.addonLabel}</span>
+          </label>
 
-        <p class="booking__price">
-          <span>{booking.ui.priceFromLabel}</span>
-          <strong><span data-price-value>{booking.config.basePricePerPerson}</span>€ <small>{booking.ui.pricePerPersonLabel}</small></strong>
-        </p>
+          <p class="booking__price">
+            <span>{booking.ui.priceFromLabel}</span>
+            <strong><span data-price-value>{booking.config.basePricePerPerson}</span>€ <small>{booking.ui.pricePerPersonLabel}</small></strong>
+          </p>
 
-        <input type="hidden" name="day" data-booking-field-day />
-        <input type="hidden" name="slotId" data-booking-field-slot />
-        <input type="hidden" name="participants" data-booking-field-participants />
-        <input type="hidden" name="addon" data-booking-field-addon />
-        <input type="hidden" name="totalPerPerson" data-booking-field-total />
+          <input type="hidden" name="day" data-booking-field-day />
+          <input type="hidden" name="slotId" data-booking-field-slot />
+          <input type="hidden" name="participants" data-booking-field-participants />
+          <input type="hidden" name="addon" data-booking-field-addon />
+          <input type="hidden" name="totalPerPerson" data-booking-field-total />
 
-        <ButtonLink class="booking__cta" type="submit" label={booking.config.ctaLabel} variant="primary" size="lg" fullWidth />
-        <a class="booking__call" href="tel:+33468000000">{booking.config.callLabel}</a>
-        <p class="booking__status" data-booking-status aria-live="polite"></p>
+          <SubmitButton class="booking__cta" label={booking.config.ctaLabel} variant="primary" size="lg" fullWidth />
+          <a class="booking__call" href="tel:+33468000000">{booking.config.callLabel}</a>
+          <p class="booking__status" data-booking-status aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -345,13 +347,14 @@ const { booking } = Astro.props;
     font-weight: 400;
   }
 
-  .booking__form :global(.booking__cta) {
-    --btn-primary-bg: var(--visit-accent-primary);
-    --btn-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
-    --btn-primary-border: var(--visit-accent-primary);
-    --btn-primary-shadow: none;
+  :global(.booking__cta) {
+    --action-primary-bg: var(--visit-accent-primary);
+    --action-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
+    --action-primary-border: var(--visit-accent-primary);
+    --action-primary-shadow: none;
 
     min-block-size: calc(var(--booking-control-row-height) + clamp(0.2rem, 1vw, 0.6rem));
+    margin-top: 0.35rem;
   }
 
   .booking__call {

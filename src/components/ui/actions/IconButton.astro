@@ -1,0 +1,44 @@
+---
+import { buildActionClassName } from "./shared";
+import type { ActionInteraction, ActionTone, ActionVariant, ActionSize } from "../../../types/ui";
+
+interface Props {
+  label: string;
+  variant?: ActionVariant;
+  size?: ActionSize;
+  tone?: ActionTone;
+  interaction?: ActionInteraction;
+  disabled?: boolean;
+  loading?: boolean;
+  type?: "button" | "submit";
+  class?: string;
+}
+
+const {
+  label,
+  variant = "ghost",
+  size = "sm",
+  tone = "default",
+  interaction = "default",
+  disabled = false,
+  loading = false,
+  type = "button",
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const classes = buildActionClassName({
+  variant,
+  size,
+  tone,
+  interaction,
+  disabled,
+  loading,
+  class: `ui-action--icon ${className}`.trim()
+});
+---
+
+<button class={classes} type={type} disabled={disabled || loading} aria-label={label} aria-disabled={disabled || loading ? "true" : undefined} {...rest}>
+  {loading && <span class="ui-action__spinner" aria-hidden="true"></span>}
+  <slot />
+</button>

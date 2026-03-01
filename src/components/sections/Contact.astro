@@ -1,7 +1,8 @@
 ---
 import type { SiteData } from "../../types/site";
 import Icon from "../ui/Icon.astro";
-import ButtonLink from "../ui/ButtonLink.astro";
+import SubmitButton from "../ui/actions/SubmitButton.astro";
+import ContactBlockSection from "../patterns/ContactBlockSection.astro";
 
 interface Props {
   contact: SiteData["contact"];
@@ -10,16 +11,16 @@ interface Props {
 const { contact } = Astro.props;
 ---
 
-<section class="contact section" id="contact">
+<ContactBlockSection class="contact section" id="contact">
   <div class="shell shell--narrow contact__inner">
-    <div class="contact__content">
+    <div class="contact__content" data-reveal="left">
       <p class="contact__eyebrow">{contact.eyebrow}</p>
       <h2>{contact.titleHtml}</h2>
       <p class="contact__body">{contact.body}</p>
 
-      <ul class="contact__list">
+      <ul class="contact__list" data-reveal-group data-reveal-stagger="65">
         {contact.info.map((item) => (
-          <li>
+          <li data-reveal="up">
             <span class="contact__icon"><Icon name={item.icon} /></span>
             <div class="contact__details">
               <strong>{item.label}</strong>
@@ -31,9 +32,10 @@ const { contact } = Astro.props;
     </div>
 
     <form
-      class="contact__form"
+      class="contact__form ui-hover-lift"
       data-ui-form
       data-contact-form
+      data-reveal="right"
       data-success-message={contact.formSuccessMessage ?? "Message envoye."}
       data-error-message={contact.formErrorMessage ?? "Erreur d'envoi."}
       data-required-message={contact.validation.required}
@@ -50,173 +52,51 @@ const { contact } = Astro.props;
       novalidate
     >
       <div class="contact__grid">
-        <div class="contact__field">
+        <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-first-name">{contact.labels.firstName}</label>
           <input id="contact-first-name" type="text" name="firstName" autocomplete="given-name" required />
           <small class="contact__error" data-error-for="contact-first-name"></small>
         </div>
 
-        <div class="contact__field">
+        <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-last-name">{contact.labels.lastName}</label>
           <input id="contact-last-name" type="text" name="lastName" autocomplete="family-name" required />
           <small class="contact__error" data-error-for="contact-last-name"></small>
         </div>
 
-        <div class="contact__field">
+        <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-email">{contact.labels.email}</label>
           <input id="contact-email" type="email" name="email" inputmode="email" autocomplete="email" required />
           <small class="contact__error" data-error-for="contact-email"></small>
         </div>
 
-        <div class="contact__field">
+        <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-phone">{contact.labels.phone}</label>
           <input id="contact-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel" required />
           <small class="contact__error" data-error-for="contact-phone"></small>
         </div>
       </div>
 
-      <div class="contact__field">
+      <div class="contact__field" data-field-state data-reveal="up">
         <label for="contact-subject">{contact.labels.subject}</label>
         <input id="contact-subject" type="text" name="subject" required />
         <small class="contact__error" data-error-for="contact-subject"></small>
       </div>
 
-      <div class="contact__field">
+      <div class="contact__field" data-field-state data-reveal="up">
         <label for="contact-message">{contact.labels.message}</label>
         <textarea id="contact-message" name="message" rows="6" required></textarea>
         <small class="contact__error" data-error-for="contact-message"></small>
       </div>
 
-      <div class="contact__cta">
+      <div class="contact__cta" data-reveal="up">
         <span class="contact__ornament" aria-hidden="true"></span>
-        <ButtonLink label={contact.labels.submit} type="submit" variant="primary" size="lg" class="contact__submit" />
+        <SubmitButton label={contact.labels.submit} variant="primary" size="lg" class="contact__submit" />
       </div>
-      <p class="contact__status" data-contact-status aria-live="polite"></p>
+      <p class="contact__status ui-status-animate" data-contact-status aria-live="polite"></p>
     </form>
   </div>
-</section>
-
-<script is:inline>
-  const contactForm = document.querySelector("[data-contact-form]");
-
-  const trackUiEvent = (event, context, meta = {}) => {
-    const payload = { event, context, meta };
-    window.dataLayer = window.dataLayer ?? [];
-    window.dataLayer.push(payload);
-    window.dispatchEvent(new CustomEvent("ui:track", { detail: payload }));
-  };
-
-  if (contactForm instanceof HTMLFormElement) {
-    const statusEl = contactForm.querySelector("[data-contact-status]");
-    const fields = Array.from(contactForm.querySelectorAll("input, textarea"));
-    const requiredMessage = contactForm.dataset.requiredMessage || "Required field.";
-    const invalidEmailMessage = contactForm.dataset.invalidEmailMessage || "Please enter a valid email.";
-    const fixErrorsMessage = contactForm.dataset.fixErrorsMessage || "Please fix the highlighted fields.";
-    const defaultSubject = contactForm.dataset.defaultSubject || "Contact request";
-    const mailFirstName = contactForm.dataset.mailFirstName || "First name";
-    const mailLastName = contactForm.dataset.mailLastName || "Last name";
-    const mailEmail = contactForm.dataset.mailEmail || "Email";
-    const mailPhone = contactForm.dataset.mailPhone || "Phone";
-    const mailMessage = contactForm.dataset.mailMessage || "Message";
-
-    const setFieldError = (field, message) => {
-      const errorEl = contactForm.querySelector(`[data-error-for="${field.id}"]`);
-      if (!(errorEl instanceof HTMLElement)) return;
-      errorEl.textContent = message;
-      field.setAttribute("aria-invalid", message ? "true" : "false");
-    };
-
-    const validateField = (field) => {
-      if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement)) return true;
-      if (field.validity.valid) {
-        setFieldError(field, "");
-        return true;
-      }
-
-      let message = requiredMessage;
-      if (field.validity.typeMismatch && field.type === "email") {
-        message = invalidEmailMessage;
-      }
-
-      setFieldError(field, message);
-      return false;
-    };
-
-    fields.forEach((field) => {
-      field.addEventListener("blur", () => {
-        validateField(field);
-      });
-
-      field.addEventListener("input", () => {
-        if (field.getAttribute("aria-invalid") === "true") {
-          validateField(field);
-        }
-      });
-    });
-
-    contactForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const valid = fields.every((field) => validateField(field));
-      if (!valid) {
-        if (statusEl instanceof HTMLElement) {
-          statusEl.textContent = fixErrorsMessage;
-          statusEl.classList.remove("is-success");
-          statusEl.classList.add("is-error");
-        }
-        return;
-      }
-
-      const formData = new FormData(contactForm);
-      const payload = Object.fromEntries(formData.entries());
-      const action = contactForm.getAttribute("action") || "";
-      const successMessage = contactForm.dataset.successMessage || "Message envoye.";
-      const errorMessage = contactForm.dataset.errorMessage || "Erreur d'envoi.";
-
-      try {
-        if (action.startsWith("mailto:")) {
-          const subject = encodeURIComponent(String(payload.subject || defaultSubject));
-          const body = encodeURIComponent(
-            `${mailFirstName}: ${payload.firstName}\n${mailLastName}: ${payload.lastName}\n${mailEmail}: ${payload.email}\n${mailPhone}: ${payload.phone}\n\n${mailMessage}:\n${payload.message}`
-          );
-          window.location.href = `${action}?subject=${subject}&body=${body}`;
-          if (statusEl instanceof HTMLElement) {
-            statusEl.textContent = successMessage;
-            statusEl.classList.remove("is-error");
-            statusEl.classList.add("is-success");
-          }
-          contactForm.reset();
-          trackUiEvent("cta_click", "contact_form_submit", payload);
-          return;
-        }
-
-        if (statusEl instanceof HTMLElement) {
-          statusEl.textContent = errorMessage;
-          statusEl.classList.remove("is-success");
-          statusEl.classList.add("is-error");
-        }
-      } catch {
-        if (statusEl instanceof HTMLElement) {
-          statusEl.textContent = errorMessage;
-          statusEl.classList.remove("is-success");
-          statusEl.classList.add("is-error");
-        }
-      }
-    });
-
-    let dirty = false;
-    fields.forEach((field) => {
-      field.addEventListener("change", () => {
-        dirty = true;
-      });
-    });
-
-    window.addEventListener("beforeunload", () => {
-      if (dirty) {
-        trackUiEvent("form_abandon", "contact_form");
-      }
-    });
-  }
-</script>
+</ContactBlockSection>
 
 <style>
   .contact {
@@ -351,10 +231,32 @@ const { contact } = Astro.props;
     border-color: #9f2517;
   }
 
+  .contact__field.is-invalid input,
+  .contact__field.is-invalid textarea {
+    border-color: #9f2517;
+    box-shadow: 0 0 0 0.18rem rgba(159, 37, 23, 0.08);
+  }
+
+  .contact__field.is-valid input,
+  .contact__field.is-valid textarea {
+    border-color: rgba(31, 111, 74, 0.4);
+    box-shadow: 0 0 0 0.18rem rgba(31, 111, 74, 0.08);
+  }
+
   .contact__error {
     color: #9f2517;
     font-size: 0.82rem;
     min-block-size: 1.1rem;
+    opacity: 0;
+    transform: translateY(-0.1rem);
+    transition:
+      opacity var(--motion-duration-sm) var(--motion-ease-standard),
+      transform var(--motion-duration-sm) var(--motion-ease-standard);
+  }
+
+  .contact__error.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .contact__cta {

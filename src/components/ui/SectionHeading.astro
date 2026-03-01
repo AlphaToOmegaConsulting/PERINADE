@@ -18,10 +18,10 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={["section-heading", centered && "section-heading--center", light && "section-heading--light", className]}>
-  <p class="section-heading__eyebrow">{eyebrow}</p>
-  <h2 class="section-heading__title">{title}</h2>
-  {body && <p class="section-heading__body">{body}</p>}
+<div class:list={["section-heading", centered && "section-heading--center", light && "section-heading--light", className]} data-reveal-group data-reveal-stagger="45">
+  <p class="section-heading__eyebrow" data-reveal="up">{eyebrow}</p>
+  <h2 class="section-heading__title" data-reveal="up">{title}</h2>
+  {body && <p class="section-heading__body" data-reveal="up">{body}</p>}
 </div>
 
 <style>

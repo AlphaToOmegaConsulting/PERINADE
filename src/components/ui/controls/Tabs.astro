@@ -1,0 +1,69 @@
+---
+interface TabItem {
+  id: string;
+  label: string;
+  content?: string;
+}
+
+interface Props {
+  items: TabItem[];
+  defaultValue: string;
+  class?: string;
+  listClass?: string;
+  triggerClass?: string;
+  panelsClass?: string;
+  panelClass?: string;
+  ariaLabel: string;
+}
+
+const {
+  items,
+  defaultValue,
+  class: className = "",
+  listClass = "",
+  triggerClass = "",
+  panelsClass = "",
+  panelClass = "",
+  ariaLabel
+} = Astro.props;
+---
+
+<div class={className} data-tabs data-tabs-activation="manual">
+  <div class:list={["ui-tabs__list", listClass]} role="tablist" aria-label={ariaLabel}>
+    {items.map((item) => {
+      const isActive = item.id === defaultValue;
+      return (
+        <button
+          type="button"
+          class:list={["ui-tabs__trigger", triggerClass, isActive && "is-active"]}
+          role="tab"
+          aria-selected={isActive ? "true" : "false"}
+          aria-controls={`tabs-panel-${item.id}`}
+          id={`tabs-trigger-${item.id}`}
+          tabindex={isActive ? "0" : "-1"}
+          data-tab-id={item.id}
+        >
+          {item.label}
+        </button>
+      );
+    })}
+  </div>
+
+  <div class:list={["ui-tabs__panels", panelsClass]}>
+    {items.map((item) => {
+      const isActive = item.id === defaultValue;
+      return (
+        <div
+          class:list={["ui-tabs__panel", panelClass, isActive && "is-active"]}
+          id={`tabs-panel-${item.id}`}
+          role="tabpanel"
+          aria-labelledby={`tabs-trigger-${item.id}`}
+          data-panel-id={item.id}
+          hidden={!isActive}
+        >
+          {item.content && <p>{item.content}</p>}
+        </div>
+      );
+    })}
+  </div>
+</div>

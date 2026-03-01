@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { DomaineHeroData } from "../../types/domaine";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   hero: DomaineHeroData;
@@ -12,33 +12,33 @@ const { hero } = Astro.props;
 
 <section class="domaine-hero section">
   <div class="shell domaine-hero__inner">
-    <div class="domaine-hero__content">
-      <p class="domaine-hero__eyebrow">{hero.eyebrow}</p>
-      <h1 class="domaine-hero__title">
+    <div class="domaine-hero__content" data-reveal-group data-reveal-stagger="85">
+      <p class="domaine-hero__eyebrow" data-reveal="up">{hero.eyebrow}</p>
+      <h1 class="domaine-hero__title" data-reveal="up">
         <span>{hero.titleLines[0]}</span>
         <span class="is-accent">{hero.titleLines[1]}</span>
       </h1>
-      <p class="domaine-hero__body">{hero.body}</p>
+      <p class="domaine-hero__body" data-reveal="up">{hero.body}</p>
 
-      <div class="domaine-hero__cta-row">
-        <ButtonLink class="domaine-hero__cta-primary" href={hero.primaryCta.href} label={hero.primaryCta.label} variant="primary" />
-        <ButtonLink class="domaine-hero__cta-secondary" href={hero.secondaryCta.href} label={hero.secondaryCta.label} variant="ghost" />
+      <div class="domaine-hero__cta-row" data-reveal="up">
+        <ActionLink class="domaine-hero__cta-primary" href={hero.primaryCta.href} label={hero.primaryCta.label} variant="primary" interaction="emphasis" />
+        <ActionLink class="domaine-hero__cta-secondary" href={hero.secondaryCta.href} label={hero.secondaryCta.label} variant="ghost" />
       </div>
 
-      <ul class="domaine-hero__badges" aria-label="Axes clés du domaine">
+      <ul class="domaine-hero__badges" aria-label="Axes clés du domaine" data-reveal-group data-reveal-stagger="55">
         {hero.badges.map((badge) => (
-          <li>{badge}</li>
+          <li data-reveal="up">{badge}</li>
         ))}
       </ul>
 
-      <ul class="domaine-hero__highlights" aria-label="Chiffres et repères clés">
+      <ul class="domaine-hero__highlights" aria-label="Chiffres et repères clés" data-reveal-group data-reveal-stagger="55">
         {hero.highlights.map((item) => (
-          <li>{item}</li>
+          <li data-reveal="up">{item}</li>
         ))}
       </ul>
     </div>
 
-    <div class="domaine-hero__media">
+    <div class="domaine-hero__media ui-hover-media" data-reveal="zoom">
       <Image src={hero.image} alt={hero.imageAlt} loading="eager" />
     </div>
   </div>
@@ -97,16 +97,16 @@ const { hero } = Astro.props;
   }
 
   .domaine-hero__cta-row :global(.domaine-hero__cta-primary) {
-    --btn-primary-shadow: 0 0.5rem 1.1rem rgba(214, 116, 0, 0.24);
+    --action-primary-shadow: 0 0.5rem 1.1rem rgba(214, 116, 0, 0.24);
 
     min-block-size: var(--control-height-md);
     padding-inline: clamp(1rem, 3.3vw, 1.55rem);
   }
 
   .domaine-hero__cta-row :global(.domaine-hero__cta-secondary) {
-    --btn-ghost-border: rgba(255, 255, 255, 0.2);
-    --btn-ghost-color: var(--color-white);
-    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.08);
+    --action-ghost-border: rgba(255, 255, 255, 0.2);
+    --action-ghost-color: var(--color-white);
+    --action-ghost-bg-hover: rgba(255, 255, 255, 0.08);
 
     min-block-size: var(--control-height-md);
     padding-inline: clamp(0.95rem, 3vw, 1.45rem);
@@ -177,7 +177,7 @@ const { hero } = Astro.props;
       font-size: clamp(0.92rem, 3.8vw, 1rem);
     }
 
-    .domaine-hero__cta-row :global(.btn) {
+    .domaine-hero__cta-row :global(.ui-action) {
       min-block-size: clamp(3rem, 10vw, 3.45rem);
       width: 100%;
     }

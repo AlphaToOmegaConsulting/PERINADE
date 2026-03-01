@@ -1,0 +1,8 @@
+.ui-pattern-card-grid {
+  display: grid;
+}
+
+.ui-pattern-cta-band__content {
+  display: grid;
+  gap: 1rem;
+}

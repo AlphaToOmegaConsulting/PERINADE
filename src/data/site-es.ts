@@ -59,23 +59,27 @@ export const siteEs: SiteData = {
       }
     ]
   },
-  reasons: [
-    {
-      title: "Una finca familiar",
-      body: "Desde hace seis generaciones, nuestra familia cultiva con pasión un viñedo a escala humana.",
-      icon: "leaf"
-    },
-    {
-      title: "Un terruño de excepción",
-      body: "Enclavado entre garriga y colinas, nuestro viñedo se beneficia de un microclima único.",
-      icon: "terrain"
-    },
-    {
-      title: "Una degustación íntima",
-      body: "Nada de visitas masivas. Le recibimos personalmente en un ambiente cálido y acogedor.",
-      icon: "glass"
-    }
-  ],
+  reasons: {
+    eyebrow: "Por qué visitarnos",
+    title: "Tres razones para venir",
+    items: [
+      {
+        title: "Una finca familiar",
+        body: "Desde hace seis generaciones, nuestra familia cultiva con pasión un viñedo a escala humana.",
+        icon: "leaf"
+      },
+      {
+        title: "Un terruño de excepción",
+        body: "Enclavado entre garriga y colinas, nuestro viñedo se beneficia de un microclima único.",
+        icon: "terrain"
+      },
+      {
+        title: "Una degustación íntima",
+        body: "Nada de visitas masivas. Le recibimos personalmente en un ambiente cálido y acogedor.",
+        icon: "glass"
+      }
+    ]
+  },
   experience: {
     eyebrow: "Visita",
     title: "Viva la experiencia Périnade",

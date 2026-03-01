@@ -1,0 +1,25 @@
+---
+interface Props {
+  value: number;
+  min: number;
+  max: number;
+  decrementLabel: string;
+  incrementLabel: string;
+  class?: string;
+}
+
+const {
+  value,
+  min,
+  max,
+  decrementLabel,
+  incrementLabel,
+  class: className = ""
+} = Astro.props;
+---
+
+<div class:list={["ui-counter", className]} data-counter data-counter-min={String(min)} data-counter-max={String(max)}>
+  <button class="ui-counter__button" type="button" data-count-dec aria-label={decrementLabel}>−</button>
+  <output class="ui-counter__value" data-count-value>{value}</output>
+  <button class="ui-counter__button" type="button" data-count-inc aria-label={incrementLabel}>+</button>
+</div>

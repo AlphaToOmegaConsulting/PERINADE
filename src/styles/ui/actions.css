@@ -1,0 +1,229 @@
+.ui-action {
+  --_action-bg: var(--color-cta);
+  --_action-bg-hover: var(--color-cta-strong);
+  --_action-color: var(--color-white);
+  --_action-border: var(--color-cta);
+  --_action-shadow: var(--shadow-soft);
+
+  align-items: center;
+  appearance: none;
+  background: var(--_action-bg);
+  border: 1px solid var(--_action-border);
+  border-radius: 999px;
+  box-shadow: var(--_action-shadow);
+  color: var(--_action-color);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  gap: 0.45rem;
+  justify-content: center;
+  letter-spacing: 0.14em;
+  line-height: 1;
+  min-block-size: var(--control-height-md);
+  padding-inline: clamp(0.95rem, 2.8vw, 1.5rem);
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    background-color var(--motion-duration-sm) var(--motion-ease-standard),
+    border-color var(--motion-duration-sm) var(--motion-ease-standard),
+    color var(--motion-duration-sm) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-md) var(--motion-ease-standard),
+    transform var(--motion-duration-md) var(--motion-ease-standard),
+    opacity var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.ui-action:hover,
+.ui-action:focus-visible {
+  background: var(--_action-bg-hover);
+  border-color: var(--_action-bg-hover);
+}
+
+.ui-action:hover {
+  box-shadow: var(--motion-shadow-hover);
+  transform: translateY(var(--motion-distance-sm));
+}
+
+.ui-action:active {
+  transform: translateY(0);
+}
+
+.ui-action--sm {
+  min-block-size: var(--control-height-sm);
+  padding-inline: clamp(0.8rem, 2.4vw, 1rem);
+}
+
+.ui-action--md {
+  min-block-size: var(--control-height-md);
+}
+
+.ui-action--lg {
+  min-block-size: var(--control-height-lg);
+  padding-inline: clamp(1.1rem, 3vw, 2rem);
+}
+
+.ui-action--block {
+  justify-content: center;
+  width: 100%;
+}
+
+.ui-action--primary {
+  --_action-bg: var(--action-primary-bg, var(--color-cta));
+  --_action-bg-hover: var(--action-primary-bg-hover, var(--color-cta-strong));
+  --_action-color: var(--action-primary-color, var(--color-white));
+  --_action-border: var(--action-primary-border, var(--action-primary-bg, var(--color-cta)));
+  --_action-shadow: var(--action-primary-shadow, var(--shadow-soft));
+}
+
+.ui-action--secondary {
+  --_action-bg: var(--action-secondary-bg, var(--color-white));
+  --_action-bg-hover: var(--action-secondary-bg-hover, #f7f7f7);
+  --_action-color: var(--action-secondary-color, var(--color-cta));
+  --_action-border: var(--action-secondary-border, var(--color-cta));
+  --_action-shadow: var(--action-secondary-shadow, none);
+}
+
+.ui-action--ghost {
+  --_action-bg: var(--action-ghost-bg, transparent);
+  --_action-bg-hover: var(--action-ghost-bg-hover, rgba(255, 255, 255, 0.09));
+  --_action-color: var(--action-ghost-color, inherit);
+  --_action-border: var(--action-ghost-border, rgba(255, 255, 255, 0.3));
+  --_action-shadow: var(--action-ghost-shadow, none);
+}
+
+.ui-action--text {
+  --_action-bg: transparent;
+  --_action-bg-hover: transparent;
+  --_action-color: var(--action-text-color, var(--color-accent));
+  --_action-border: transparent;
+  --_action-shadow: none;
+
+  border-bottom: 1px solid var(--action-text-underline, rgba(196, 156, 110, 0.35));
+  border-radius: 0;
+  font-size: clamp(0.74rem, 1.7vw, 0.8125rem);
+  min-block-size: auto;
+  padding: 0 0 0.25rem;
+  position: relative;
+}
+
+.ui-action--text:hover,
+.ui-action--text:focus-visible {
+  color: var(--action-text-color-hover, var(--color-cta));
+}
+
+.ui-action--text::after {
+  background: currentColor;
+  border-radius: 999px;
+  bottom: -0.08rem;
+  content: "";
+  height: 0.08rem;
+  inset-inline: 0;
+  opacity: 0.8;
+  position: absolute;
+  transform: scaleX(0.74);
+  transform-origin: left center;
+  transition:
+    opacity var(--motion-duration-sm) var(--motion-ease-standard),
+    transform var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.ui-action--text:hover::after,
+.ui-action--text:focus-visible::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.ui-action--text .ui-action__label::after {
+  content: "→";
+  display: inline-block;
+  margin-left: 0.45rem;
+  transform: translateX(0);
+  transition: transform var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.ui-action--text:hover .ui-action__label::after,
+.ui-action--text:focus-visible .ui-action__label::after {
+  transform: translateX(0.18rem);
+}
+
+.ui-action--tone-inverse {
+  --action-secondary-bg: transparent;
+  --action-secondary-bg-hover: rgba(255, 255, 255, 0.08);
+  --action-secondary-border: rgba(255, 255, 255, 0.28);
+  --action-secondary-color: var(--color-white);
+  --action-text-color: rgba(255, 255, 255, 0.9);
+  --action-text-color-hover: var(--color-white);
+  --action-text-underline: rgba(255, 255, 255, 0.26);
+}
+
+.ui-action--tone-quiet {
+  --action-primary-shadow: none;
+  --action-secondary-shadow: none;
+}
+
+.ui-action--tone-accent {
+  --action-secondary-border: var(--color-accent);
+  --action-secondary-color: var(--color-accent);
+  --action-text-color: var(--color-accent);
+  --action-text-color-hover: var(--color-cta);
+}
+
+.ui-action--interaction-quiet:hover,
+.ui-action--interaction-quiet:focus-visible {
+  box-shadow: var(--_action-shadow);
+  transform: translateY(calc(var(--motion-distance-sm) * 0.7));
+}
+
+.ui-action--interaction-emphasis:hover,
+.ui-action--interaction-emphasis:focus-visible {
+  box-shadow: 0 1.5rem 2.5rem rgba(196, 106, 0, 0.22);
+  transform: translateY(var(--motion-distance-md));
+}
+
+.ui-action:disabled,
+.ui-action[aria-disabled="true"],
+.ui-action.is-disabled {
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+  transform: none;
+}
+
+.ui-action.is-loading {
+  cursor: progress;
+  opacity: 0.82;
+  pointer-events: none;
+}
+
+.ui-action__spinner {
+  animation: ui-action-spin 900ms linear infinite;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  display: inline-flex;
+  height: 0.95rem;
+  width: 0.95rem;
+}
+
+.ui-action--icon {
+  border-radius: 999px;
+  min-height: auto;
+  min-width: auto;
+  padding: 0;
+}
+
+@keyframes ui-action-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 47.9375em) {
+  .ui-action--lg {
+    min-block-size: clamp(3rem, 10vw, 3.45rem);
+  }
+}

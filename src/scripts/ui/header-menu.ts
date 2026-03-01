@@ -11,9 +11,12 @@ const initHeaderMenu = (header: HTMLElement): void => {
 
   const toggle = header.querySelector<HTMLButtonElement>("[data-menu-toggle]");
   const mobileNav = header.querySelector<HTMLElement>("[data-mobile-nav]");
-  if (!toggle || !mobileNav) return;
+  const backdrop = header.querySelector<HTMLElement>("[data-menu-backdrop]");
+  const menuLabel = header.querySelector<HTMLElement>("[data-menu-label]");
+  if (!toggle || !mobileNav || !backdrop) return;
 
   const options: HeaderMenuOptions = { header, toggle, mobileNav };
+  const mobileBreakpoint = window.matchMedia("(max-width: 63.9375em)");
 
   const syncHeaderOnScroll = () => {
     options.header.classList.toggle("is-scrolled", window.scrollY > 48);
@@ -24,9 +27,20 @@ const initHeaderMenu = (header: HTMLElement): void => {
   };
 
   const setOpen = (open: boolean, focusTarget: "first" | "toggle" | "none" = "none") => {
+    const nextLabel = open ? toggle.dataset.labelClose : toggle.dataset.labelOpen;
+
     options.toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    if (nextLabel) {
+      options.toggle.setAttribute("aria-label", nextLabel);
+      if (menuLabel) menuLabel.textContent = nextLabel;
+    }
+
     options.mobileNav.hidden = !open;
+    backdrop.hidden = !open;
     options.header.classList.toggle("is-open", open);
+    options.mobileNav.classList.toggle("is-open", open);
+    backdrop.classList.toggle("is-open", open);
+    document.body.dataset.menuOpen = open ? "true" : "false";
 
     if (focusTarget === "first" && open) {
       getMobileFocusables()[0]?.focus();
@@ -38,8 +52,28 @@ const initHeaderMenu = (header: HTMLElement): void => {
   };
 
   const onKeydown = (event: KeyboardEvent) => {
-    if (event.key === "Escape" && options.toggle.getAttribute("aria-expanded") === "true") {
+    const isOpen = options.toggle.getAttribute("aria-expanded") === "true";
+    if (!isOpen) return;
+
+    if (event.key === "Escape") {
       setOpen(false, "toggle");
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const focusables = [options.toggle, ...getMobileFocusables()];
+    const activeIndex = focusables.indexOf(document.activeElement as HTMLElement);
+
+    if (event.shiftKey && activeIndex <= 0) {
+      event.preventDefault();
+      focusables.at(-1)?.focus();
+      return;
+    }
+
+    if (!event.shiftKey && activeIndex === focusables.length - 1) {
+      event.preventDefault();
+      focusables[0]?.focus();
     }
   };
 
@@ -49,6 +83,10 @@ const initHeaderMenu = (header: HTMLElement): void => {
 
     const target = event.target;
     if (!(target instanceof Node)) return;
+
+    if (options.toggle.contains(target) || options.mobileNav.contains(target)) {
+      return;
+    }
 
     if (!options.header.contains(target)) {
       setOpen(false);
@@ -60,10 +98,20 @@ const initHeaderMenu = (header: HTMLElement): void => {
     setOpen(!isOpen, !isOpen ? "first" : "toggle");
   });
 
+  backdrop.addEventListener("click", () => {
+    setOpen(false, "toggle");
+  });
+
   options.mobileNav.querySelectorAll<HTMLAnchorElement>("a").forEach((link) => {
     link.addEventListener("click", () => {
       setOpen(false);
     });
+  });
+
+  mobileBreakpoint.addEventListener("change", (event) => {
+    if (!event.matches) {
+      setOpen(false);
+    }
   });
 
   window.addEventListener("scroll", syncHeaderOnScroll, { passive: true });

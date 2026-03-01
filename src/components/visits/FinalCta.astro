@@ -13,10 +13,10 @@ const { finalCta } = Astro.props;
   style={`--visits-final-bg: url('${finalCta.image.src}'); --visits-final-min-h:${finalCta.layout.sectionMinHeight}; --visits-final-content-max:${finalCta.layout.contentMaxWidth}; --visits-final-gap-eyebrow-title:${finalCta.layout.eyebrowToTitleGap}; --visits-final-gap-title-body:${finalCta.layout.titleToBodyGap};`}
 >
   <div class="visits-final-cta__overlay" aria-hidden="true"></div>
-  <div class="shell visits-final-cta__inner">
-    <p>{finalCta.eyebrow}</p>
-    <h2>{finalCta.title}</h2>
-    <p class="visits-final-cta__body">{finalCta.body}</p>
+  <div class="shell visits-final-cta__inner" data-reveal-group data-reveal-stagger="85">
+    <p data-reveal="up">{finalCta.eyebrow}</p>
+    <h2 data-reveal="up">{finalCta.title}</h2>
+    <p class="visits-final-cta__body" data-reveal="up">{finalCta.body}</p>
   </div>
 </section>
 
@@ -25,6 +25,7 @@ const { finalCta } = Astro.props;
     background-image: var(--visits-final-bg);
     background-position: center;
     background-size: cover;
+    margin-top: clamp(-1.5rem, -2vw, -0.75rem);
     min-height: var(--visits-final-min-h);
     position: relative;
   }
@@ -38,10 +39,11 @@ const { finalCta } = Astro.props;
   .visits-final-cta__inner {
     color: var(--color-white);
     display: grid;
+    gap: clamp(0.4rem, 1vw, 0.75rem);
     justify-items: center;
     max-width: var(--visits-final-content-max);
     margin-inline: auto;
-    padding: 4.8rem 1rem;
+    padding: clamp(6.25rem, 11vw, 8rem) 1.25rem;
     position: relative;
     text-align: center;
   }
@@ -68,8 +70,18 @@ const { finalCta } = Astro.props;
   .visits-final-cta__body {
     color: rgba(255, 255, 255, 0.72);
     font-size: var(--visit-type-body-size);
-    line-height: var(--visit-type-body-lh);
+    line-height: calc(var(--visit-type-body-lh) + 0.08);
     margin: var(--visits-final-gap-title-body) 0 0;
-    max-width: 31rem;
+    max-width: 34rem;
+  }
+
+  @media (max-width: 47.9375em) {
+    .visits-final-cta {
+      margin-top: -0.75rem;
+    }
+
+    .visits-final-cta__inner {
+      padding-inline: 1rem;
+    }
   }
 </style>

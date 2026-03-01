@@ -12,17 +12,17 @@ const { family } = Astro.props;
 
 <section class="family section section--soft">
   <div class="shell family__inner">
-    <div class="family__content">
+    <div class="family__content" data-reveal-group data-reveal-stagger="80">
       <SectionHeading eyebrow={family.eyebrow} title={family.title} />
-      <div class="family__paragraphs">
+      <div class="family__paragraphs" data-reveal-group data-reveal-stagger="55">
         {family.body.map((paragraph) => (
-          <p>{paragraph}</p>
+          <p data-reveal="up">{paragraph}</p>
         ))}
       </div>
 
-      <ul class="family__milestones">
+      <ul class="family__milestones" data-reveal-group data-reveal-stagger="55">
         {family.milestones.map((item) => (
-          <li>
+          <li data-reveal="up">
             <strong>{item.year}</strong>
             <span>{item.label}</span>
           </li>
@@ -30,7 +30,7 @@ const { family } = Astro.props;
       </ul>
     </div>
 
-    <figure class="family__media">
+    <figure class="family__media ui-hover-media" data-reveal="right">
       <Image src={family.image} alt={family.imageAlt} loading="lazy" />
     </figure>
   </div>

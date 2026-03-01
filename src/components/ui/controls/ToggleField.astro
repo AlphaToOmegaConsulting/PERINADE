@@ -1,0 +1,26 @@
+---
+interface Props {
+  id: string;
+  name?: string;
+  label: string;
+  checked?: boolean;
+  disabled?: boolean;
+  class?: string;
+  dataAddon?: boolean;
+}
+
+const {
+  id,
+  name,
+  label,
+  checked = false,
+  disabled = false,
+  class: className = "",
+  dataAddon = false
+} = Astro.props;
+---
+
+<label class:list={["ui-toggle", className]}>
+  <input id={id} name={name} type="checkbox" checked={checked} disabled={disabled} data-addon={dataAddon ? "" : undefined} />
+  <span>{label}</span>
+</label>

@@ -13,9 +13,9 @@ const { testimonials } = Astro.props;
   <div class="shell shell--narrow">
     <SectionHeading eyebrow={testimonials.eyebrow} title={testimonials.title} centered />
 
-    <div class="testimonials__grid">
+    <div class="testimonials__grid" data-reveal-group data-reveal-stagger="75">
       {testimonials.items.map((item) => (
-        <article class="testimonials__card">
+        <article class="testimonials__card ui-hover-lift" data-reveal="up">
           <div class="testimonials__stars" aria-hidden="true">
             {Array.from({ length: item.rating }).map(() => <span>★</span>)}
           </div>
@@ -28,10 +28,10 @@ const { testimonials } = Astro.props;
       ))}
     </div>
 
-    <div class="testimonials__press">
-      <p>{testimonials.pressLabel}</p>
-      <div>
-        {testimonials.pressLogos.map((logo) => <span>{logo}</span>)}
+    <div class="testimonials__press" data-reveal-group data-reveal-stagger="45">
+      <p data-reveal="up">{testimonials.pressLabel}</p>
+      <div data-reveal-group data-reveal-stagger="45">
+        {testimonials.pressLogos.map((logo) => <span data-reveal="up">{logo}</span>)}
       </div>
     </div>
   </div>

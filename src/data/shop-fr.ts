@@ -152,16 +152,6 @@ export const shopPageFr: ShopPageData = {
         details: "5 bouteilles · 75 cl chacune",
         ctaLabel: "Composer ma caisse",
         ctaHref: "/boutique#coffrets"
-      },
-      {
-        title: "Coffret Prestige",
-        saving: "Économie : 17,00 €",
-        lines: ["Grande Réserve 2020 ×2", "Blanc Réserve 2022 ×2", "Rosé Prestige 2024 ×2"],
-        price: "85,00 €",
-        strikePrice: "102,00 €",
-        details: "6 bouteilles · 75 cl chacune",
-        ctaLabel: "Composer ma caisse",
-        ctaHref: "/boutique#coffrets"
       }
     ]
   },

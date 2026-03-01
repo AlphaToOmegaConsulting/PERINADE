@@ -1,6 +1,11 @@
+import { initAccordions } from "./accordion";
+import { initBookingCalendars } from "./booking-calendar";
+import { initContactForms } from "./contact-form";
+import { initCounters } from "./counter";
 import { initCursorOrb } from "./cursor-orb";
 import { initHeaderMenus } from "./header-menu";
 import { initScrollReveals } from "./scroll-reveal";
+import { initTabsWidgets } from "./tabs";
 
 let submitHandlerReady = false;
 
@@ -22,6 +27,11 @@ const initFormGuards = () => {
 export const initUi = (): void => {
   initFormGuards();
   initHeaderMenus();
+  initAccordions();
+  initTabsWidgets();
+  initBookingCalendars();
+  initCounters();
+  initContactForms();
   initCursorOrb();
   initScrollReveals();
 };

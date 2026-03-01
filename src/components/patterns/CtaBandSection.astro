@@ -1,0 +1,27 @@
+---
+import type { ImageMetadata } from "astro";
+import CtaPanel from "../ui/surfaces/CtaPanel.astro";
+
+interface ActionItem {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary" | "ghost" | "text";
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+  actions: ActionItem[];
+  titleHighlight?: string;
+  details?: string[];
+  image?: ImageMetadata;
+  imageAlt?: string;
+  class?: string;
+  tone?: "default" | "inverse";
+}
+
+const props = Astro.props;
+---
+
+<CtaPanel {...props} />

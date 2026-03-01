@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getSiteData } from "../data/index";
 import Header from "../components/sections/Header.astro";
 import Footer from "../components/sections/Footer.astro";
-import ButtonLink from "../components/ui/ButtonLink.astro";
+import ActionLink from "../components/ui/actions/ActionLink.astro";
 
 const locale = "fr";
 const site = await getSiteData(locale);
@@ -19,9 +19,9 @@ const site = await getSiteData(locale);
         <p>Cette page n'existe pas ou a été déplacée.</p>
       </div>
       <div class="not-found__actions">
-        <ButtonLink href="/" class="not-found__cta" label="FR" variant="primary" />
-        <ButtonLink href="/en" class="not-found__cta" label="EN" variant="primary" />
-        <ButtonLink href="/es" class="not-found__cta" label="ES" variant="primary" />
+        <ActionLink href="/" class="not-found__cta" label="FR" variant="primary" />
+        <ActionLink href="/en" class="not-found__cta" label="EN" variant="primary" />
+        <ActionLink href="/es" class="not-found__cta" label="ES" variant="primary" />
       </div>
     </div>
   </main>

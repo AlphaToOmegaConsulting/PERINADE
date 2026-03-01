@@ -1,0 +1,65 @@
+---
+import { buildActionClassName } from "./shared";
+import type { ActionInteraction, ActionTone, ActionVariant, ActionSize } from "../../../types/ui";
+
+const {
+  as = "button",
+  href,
+  label,
+  variant = "primary",
+  size = "md",
+  tone = "default",
+  interaction = "default",
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  type = "button",
+  target,
+  rel,
+  ariaCurrent,
+  class: className = "",
+  ...rest
+} = Astro.props as {
+  as?: "a" | "button";
+  href?: string;
+  label?: string;
+  variant?: ActionVariant;
+  size?: ActionSize;
+  tone?: ActionTone;
+  interaction?: ActionInteraction;
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  type?: "button" | "submit";
+  target?: string;
+  rel?: string;
+  ariaCurrent?: boolean | "true" | "false" | "page" | "step" | "location" | "date" | "time";
+  class?: string;
+} & Record<string, unknown>;
+
+const classes = buildActionClassName({
+  variant,
+  size,
+  tone,
+  interaction,
+  disabled,
+  loading,
+  fullWidth,
+  class: className
+});
+const Component = as;
+---
+
+{Component === "a" ? (
+  <a class={classes} href={href} target={target} rel={rel} aria-current={ariaCurrent} {...rest}>
+    {loading && <span class="ui-action__spinner" aria-hidden="true"></span>}
+    {label && <span class="ui-action__label">{label}</span>}
+    <slot />
+  </a>
+) : (
+  <button class={classes} type={type} disabled={disabled || loading} aria-disabled={disabled || loading ? "true" : undefined} {...rest}>
+    {loading && <span class="ui-action__spinner" aria-hidden="true"></span>}
+    {label && <span class="ui-action__label">{label}</span>}
+    <slot />
+  </button>
+)}

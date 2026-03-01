@@ -26,15 +26,15 @@ function iconSvg(icon: string) {
 
 <section class="shop-selection section section--white" aria-labelledby="shop-selection-title">
   <div class="shell shop-shell">
-    <header class="shop-selection__heading">
+    <header class="shop-selection__heading" data-reveal="up">
       <p>{domainSelection.eyebrow}</p>
       <h2 id="shop-selection-title">{domainSelection.title}</h2>
     </header>
 
     <!-- TODO_ADD_TIGER_DECOR: tiger visuals intentionally excluded in this iteration -->
-    <div class="shop-selection__items" role="list">
+    <div class="shop-selection__items" role="list" data-reveal-group data-reveal-stagger="65">
       {domainSelection.items.map((item) => (
-        <article class="shop-selection__item" role="listitem">
+        <article class="shop-selection__item ui-hover-lift" role="listitem" data-reveal="up">
           <span class="shop-selection__icon" aria-hidden="true" set:html={iconSvg(item.icon)}></span>
           <div>
             <h3>{item.title}</h3>

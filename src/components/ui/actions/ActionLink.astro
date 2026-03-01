@@ -1,0 +1,72 @@
+---
+import type { ActionInteraction, ActionTone, ActionVariant, ActionSize } from "../../../types/ui";
+import { isPlaceholderLink } from "../../../utils/link";
+import ActionBase from "./ActionBase.astro";
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: ActionVariant;
+  size?: ActionSize;
+  tone?: ActionTone;
+  interaction?: ActionInteraction;
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  target?: string;
+  rel?: string;
+  ariaCurrent?: boolean | "true" | "false" | "page" | "step" | "location" | "date" | "time";
+  class?: string;
+}
+
+const {
+  href,
+  label,
+  variant = "primary",
+  size = "md",
+  tone = "default",
+  interaction = "default",
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  target,
+  rel,
+  ariaCurrent,
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const isDisabled = disabled || loading || isPlaceholderLink(href);
+---
+
+{isDisabled ? (
+  <ActionBase
+    label={label}
+    variant={variant}
+    size={size}
+    tone={tone}
+    interaction={interaction}
+    disabled={true}
+    loading={loading}
+    fullWidth={fullWidth}
+    class={className}
+    {...rest}
+  />
+) : (
+  <ActionBase
+    as="a"
+    href={href}
+    label={label}
+    variant={variant}
+    size={size}
+    tone={tone}
+    interaction={interaction}
+    loading={loading}
+    fullWidth={fullWidth}
+    target={target}
+    rel={rel}
+    ariaCurrent={ariaCurrent}
+    class={className}
+    {...rest}
+  />
+)}

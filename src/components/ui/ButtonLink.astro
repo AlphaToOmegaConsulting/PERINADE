@@ -1,14 +1,20 @@
 ---
-import { isPlaceholderLink } from "../../utils/link";
+import ActionLink from "./actions/ActionLink.astro";
+import SubmitButton from "./actions/SubmitButton.astro";
+import ActionButton from "./actions/ActionButton.astro";
+import type { ActionInteraction, ActionSize, ActionTone, ActionVariant } from "../../types/ui";
 
 interface Props {
   label: string;
-  variant?: "primary" | "secondary" | "ghost" | "text";
-  size?: "sm" | "md" | "lg";
+  variant?: ActionVariant;
+  size?: ActionSize;
+  tone?: ActionTone;
+  interaction?: ActionInteraction;
   disabled?: boolean;
   fullWidth?: boolean;
   href?: string;
   type?: "button" | "submit";
+  loading?: boolean;
   class?: string;
 }
 
@@ -16,32 +22,57 @@ const {
   label,
   variant = "primary",
   size = "md",
+  tone = "default",
+  interaction = "default",
   disabled = false,
   fullWidth = false,
   href,
   type = "button",
-  class: className = ""
+  loading = false,
+  class: className = "",
+  ...rest
 } = Astro.props;
-
-const isPlaceholder = href ? isPlaceholderLink(href) : false;
-const isDisabled = disabled || isPlaceholder;
-
-const classes = [
-  "btn",
-  `btn--${variant}`,
-  `btn--${size}`,
-  fullWidth && "btn--block",
-  isDisabled && "is-disabled",
-  className
-]
-  .filter(Boolean)
-  .join(" ");
 ---
 
-{href && !isDisabled ? (
-  <a class={classes} href={href}>{label}</a>
+{href ? (
+  <ActionLink
+    href={href}
+    label={label}
+    variant={variant}
+    size={size}
+    tone={tone}
+    interaction={interaction}
+    disabled={disabled}
+    loading={loading}
+    fullWidth={fullWidth}
+    class={className}
+    {...rest}
+  />
+) : type === "submit" ? (
+  <SubmitButton
+    label={label}
+    variant={variant}
+    size={size}
+    tone={tone}
+    interaction={interaction}
+    disabled={disabled}
+    loading={loading}
+    fullWidth={fullWidth}
+    class={className}
+    {...rest}
+  />
 ) : (
-  <button class={classes} type={type} disabled={isDisabled} aria-disabled={isDisabled ? "true" : undefined}>
-    {label}
-  </button>
+  <ActionButton
+    label={label}
+    variant={variant}
+    size={size}
+    tone={tone}
+    interaction={interaction}
+    disabled={disabled}
+    loading={loading}
+    fullWidth={fullWidth}
+    type="button"
+    class={className}
+    {...rest}
+  />
 )}

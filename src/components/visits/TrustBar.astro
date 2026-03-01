@@ -7,9 +7,9 @@ const { items } = Astro.props;
 ---
 
 <section class="trust-bar" aria-label="proof points">
-  <div class="shell trust-bar__inner">
+  <div class="shell trust-bar__inner" data-reveal-group data-reveal-stagger="45">
     {items.map((item) => (
-      <p>{item}</p>
+      <p data-reveal="up">{item}</p>
     ))}
   </div>
 </section>

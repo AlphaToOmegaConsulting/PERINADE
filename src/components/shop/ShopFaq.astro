@@ -10,19 +10,19 @@ const { faq } = Astro.props;
 
 <section class="shop-faq section section--soft" aria-labelledby="shop-faq-title">
   <div class="shell shop-shell shop-shell--narrow">
-    <header class="shop-faq__heading">
+    <header class="shop-faq__heading" data-reveal="up">
       <p>{faq.eyebrow}</p>
       <h2 id="shop-faq-title">{faq.title}</h2>
     </header>
 
-    <div class="shop-faq__list" data-faq>
+    <div class="shop-faq__list" data-accordion data-accordion-mode="single" data-reveal-group data-reveal-stagger="65">
       {faq.items.map((item, index) => {
         const panelId = `shop-faq-panel-${index}`;
         const triggerId = `shop-faq-trigger-${index}`;
         const isOpen = index === 0;
 
         return (
-          <article class:list={["shop-faq__item", isOpen && "is-open"]}>
+          <article class:list={["shop-faq__item", isOpen && "is-open"]} data-accordion-item data-reveal="up">
             <h3>
               <button
                 id={triggerId}
@@ -30,7 +30,7 @@ const { faq } = Astro.props;
                 type="button"
                 aria-expanded={isOpen ? "true" : "false"}
                 aria-controls={panelId}
-                data-faq-trigger
+                data-accordion-trigger
               >
                 <span>{item.question}</span>
                 <span class="shop-faq__chevron" aria-hidden="true">⌄</span>
@@ -42,7 +42,7 @@ const { faq } = Astro.props;
               role="region"
               aria-labelledby={triggerId}
               hidden={!isOpen}
-              data-faq-panel
+              data-accordion-panel
             >
               <p>{item.answer}</p>
             </div>

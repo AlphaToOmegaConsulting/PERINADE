@@ -55,6 +55,8 @@ const setStatus = (statusEl: HTMLElement | null, tone: "success" | "error", mess
   statusEl.textContent = message;
   statusEl.classList.remove("is-success", "is-error");
   statusEl.classList.add(tone === "success" ? "is-success" : "is-error");
+  statusEl.classList.remove("is-visible");
+  window.requestAnimationFrame(() => statusEl.classList.add("is-visible"));
 };
 
 const payloadToMeta = (payload: BookingSubmissionPayload): Record<string, string | number | boolean> => {
@@ -150,7 +152,11 @@ const initBookingCalendar = (root: HTMLElement): void => {
 
   const syncFields = () => {
     if (countValue) countValue.textContent = String(state.participants);
-    if (priceValue) priceValue.textContent = String(totalPerPerson());
+    if (priceValue) {
+      priceValue.textContent = String(totalPerPerson());
+      priceValue.classList.remove("is-updating");
+      window.requestAnimationFrame(() => priceValue.classList.add("is-updating"));
+    }
 
     if (dayField) dayField.value = state.selectedDate ? toDateKey(state.selectedDate) : "";
     if (slotField) slotField.value = state.selectedSlot;

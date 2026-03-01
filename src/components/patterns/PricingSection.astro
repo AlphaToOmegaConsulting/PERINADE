@@ -1,0 +1,185 @@
+---
+import type { VisitPageData } from "../../types/visits";
+import SectionHeading from "../ui/SectionHeading.astro";
+import PricingCard from "../ui/surfaces/PricingCard.astro";
+
+interface Props {
+  pricing: VisitPageData["pricing"];
+}
+
+const { pricing } = Astro.props;
+---
+
+<section class="pricing section section--soft" id="pricing">
+  <div class="shell pricing__content" style={`--pricing-max:${pricing.layout.containerMaxWidth}; --pricing-card-min-height:${pricing.layout.cardMinHeight}; --pricing-card-padding:${pricing.layout.cardPadding}; --pricing-title-size:${pricing.layout.titleSize}; --pricing-price-size:${pricing.layout.priceSize};`}>
+    <SectionHeading eyebrow={pricing.eyebrow} title={pricing.title} body={pricing.body} centered />
+
+    <div class="pricing__plans" data-reveal-group data-reveal-stagger="90">
+      {pricing.plans.map((plan) => (
+        <div data-reveal="up"><PricingCard plan={plan} /></div>
+      ))}
+    </div>
+
+    <div class="pricing__meta" data-reveal-group data-reveal-stagger="55">
+      {pricing.meta.map((item) => (
+        <p data-reveal="up">{item}</p>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing.section {
+    padding-block: clamp(3.9rem, 7.5vw, 5.6rem);
+  }
+
+  .pricing__content {
+    max-width: var(--pricing-max);
+  }
+
+  .pricing__plans {
+    display: grid;
+    align-items: stretch;
+    gap: clamp(1.75rem, 3vw, 2.8rem);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: clamp(1.8rem, 3vw, 2.5rem);
+  }
+
+  .pricing__plans :global(.plan) {
+    --motion-border-hover: color-mix(in srgb, var(--visit-accent-primary) 30%, rgba(44, 44, 44, 0.08));
+
+    display: grid;
+    grid-template-rows: auto auto auto 1fr auto;
+    gap: 0;
+    min-height: clamp(19.25rem, 24vw, 21.5rem);
+    padding: var(--pricing-card-padding);
+    position: relative;
+  }
+
+  .pricing__plans :global(.plan:hover),
+  .pricing__plans :global(.plan:focus-within) {
+    box-shadow: 0 0.75rem 1.6rem rgba(18, 18, 18, 0.07);
+    transform: translateY(-0.12rem);
+  }
+
+  .pricing__plans :global(.plan--highlighted) {
+    color: rgba(255, 255, 255, 0.84);
+  }
+
+  .pricing__plans :global(.plan__badge) {
+    background: var(--visit-accent-primary);
+    border-radius: 999px;
+    color: var(--color-white);
+    font-size: 0.76rem;
+    letter-spacing: 0.16em;
+    padding: 0.5rem 0.85rem;
+    position: absolute;
+    right: 1.25rem;
+    text-transform: uppercase;
+    top: 1.25rem;
+  }
+
+  .pricing__plans :global(.plan .ui-card__title) {
+    font-size: var(--pricing-title-size);
+  }
+
+  .pricing__plans :global(.plan__subtitle) {
+    color: var(--color-muted);
+    margin: 0.45rem 0 0.95rem;
+    max-width: 16rem;
+  }
+
+  .pricing__plans :global(.plan--highlighted .plan__subtitle),
+  .pricing__plans :global(.plan--highlighted li),
+  .pricing__plans :global(.plan--highlighted .plan__price span) {
+    color: rgba(255, 255, 255, 0.66);
+  }
+
+  .pricing__plans :global(.plan__price) {
+    align-items: flex-end;
+    display: flex;
+    gap: 0.5rem;
+    margin: 0 0 1rem;
+  }
+
+  .pricing__plans :global(.plan__price strong) {
+    font-family: var(--font-display);
+    font-size: var(--pricing-price-size);
+    line-height: 1;
+  }
+
+  .pricing__plans :global(.plan__price span) {
+    color: var(--color-muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .pricing__plans :global(.plan ul) {
+    border-top: 1px solid var(--visit-stroke-subtle);
+    list-style: none;
+    margin: 0;
+    padding: 1rem 0 0;
+  }
+
+  .pricing__plans :global(.plan li) {
+    font-size: 0.93rem;
+    line-height: 1.46;
+    margin: 0.52rem 0;
+    padding-left: 1.45rem;
+    position: relative;
+  }
+
+  .pricing__plans :global(.plan li::before) {
+    color: var(--visit-accent-primary);
+    content: "✓";
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  .pricing__plans :global(.plan__cta) {
+    align-self: end;
+    margin-top: 1.15rem;
+  }
+
+  .pricing__plans :global(.plan:not(.plan--highlighted) .plan__cta) {
+    --action-secondary-bg: transparent;
+    --action-secondary-bg-hover: rgba(26, 26, 26, 0.06);
+    --action-secondary-border: #1a1a1a;
+    --action-secondary-color: #1a1a1a;
+  }
+
+  .pricing__plans :global(.plan--highlighted .plan__cta) {
+    --action-primary-bg: var(--visit-accent-primary);
+    --action-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
+    --action-primary-border: var(--visit-accent-primary);
+    --action-primary-shadow: none;
+  }
+
+  .pricing__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    justify-content: center;
+    margin-top: clamp(2rem, 3vw, 2.75rem);
+  }
+
+  .pricing__meta p {
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 1023px) {
+    .pricing__content {
+      max-width: none;
+    }
+
+    .pricing__plans {
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+
+    .pricing__plans :global(.plan__subtitle) {
+      max-width: none;
+    }
+  }
+</style>

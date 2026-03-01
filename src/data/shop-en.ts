@@ -132,16 +132,6 @@ export const shopPageEn: ShopPageData = {
         details: "5 bottles · 75 cl each",
         ctaLabel: "Build my case",
         ctaHref: "/en/shop#coffrets"
-      },
-      {
-        title: "Prestige Case",
-        saving: "Save €17.00",
-        lines: ["Grande Réserve 2020 ×2", "Blanc Réserve 2022 ×2", "Rosé Prestige 2024 ×2"],
-        price: "€85.00",
-        strikePrice: "€102.00",
-        details: "6 bottles · 75 cl each",
-        ctaLabel: "Build my case",
-        ctaHref: "/en/shop#coffrets"
       }
     ]
   },

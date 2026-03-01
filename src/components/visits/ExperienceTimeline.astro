@@ -14,14 +14,16 @@ const { timeline } = Astro.props;
   <div class="shell">
     <SectionHeading eyebrow={timeline.eyebrow} title={timeline.title} body={timeline.body} centered />
 
-    <div class="timeline__stack">
+    <div class="timeline__stack" data-reveal-group data-reveal-stagger="90">
       {timeline.steps.map((step, index) => (
         <article
           class:list={[
             "timeline__step",
             index % 2 === 1 && "timeline__step--reverse",
-            step.layout?.align === "start" && "timeline__step--start"
+            step.layout?.align === "start" && "timeline__step--start",
+            "ui-hover-lift"
           ]}
+          data-reveal="up"
           style={[
             step.layout?.mediaMaxWidth && `--timeline-media-max:${step.layout.mediaMaxWidth}`,
             step.layout?.contentMaxWidth && `--timeline-copy-max:${step.layout.contentMaxWidth}`,
@@ -30,7 +32,7 @@ const { timeline } = Astro.props;
             .filter(Boolean)
             .join(";")}
         >
-          <figure>
+          <figure class="ui-hover-media">
             <Image src={step.image} alt={step.imageAlt} loading="lazy" />
           </figure>
           <div class="timeline__copy">

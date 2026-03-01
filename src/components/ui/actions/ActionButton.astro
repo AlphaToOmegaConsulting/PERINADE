@@ -1,0 +1,45 @@
+---
+import ActionBase from "./ActionBase.astro";
+import type { ActionInteraction, ActionTone, ActionVariant, ActionSize } from "../../../types/ui";
+
+interface Props {
+  label: string;
+  variant?: ActionVariant;
+  size?: ActionSize;
+  tone?: ActionTone;
+  interaction?: ActionInteraction;
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
+  type?: "button";
+  class?: string;
+}
+
+const {
+  label,
+  variant = "primary",
+  size = "md",
+  tone = "default",
+  interaction = "default",
+  disabled = false,
+  loading = false,
+  fullWidth = false,
+  type = "button",
+  class: className = "",
+  ...rest
+} = Astro.props;
+---
+
+<ActionBase
+  label={label}
+  variant={variant}
+  size={size}
+  tone={tone}
+  interaction={interaction}
+  disabled={disabled}
+  loading={loading}
+  fullWidth={fullWidth}
+  type={type}
+  class={className}
+  {...rest}
+/>

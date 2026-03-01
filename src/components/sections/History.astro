@@ -1,7 +1,7 @@
 ---
 import type { SiteData } from "../../types/site";
 import { Image } from "astro:assets";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   history: SiteData["history"];
@@ -13,15 +13,15 @@ const { history } = Astro.props;
 <section class="history section" id="histoire" style={`--history-image: url('${history.imagePrimary.src}')`}>
   <div class="history__overlay" aria-hidden="true"></div>
   <div class="shell history__inner">
-    <div class="history__media">
+    <div class="history__media ui-hover-media" data-reveal="left">
       <Image src={history.imagePrimary} alt="Domaine de la Périnade" loading="lazy" />
     </div>
 
-    <div class="history__content">
+    <div class="history__content ui-hover-lift" data-reveal="right">
       <p class="history__eyebrow">{history.eyebrow}</p>
       <h2>{history.title} <span>{history.titleHighlight}</span></h2>
       {history.body.map((paragraph) => <p>{paragraph}</p>)}
-      <ButtonLink href={history.ctaHref} label={history.ctaLabel} variant="text" />
+      <ActionLink href={history.ctaHref} label={history.ctaLabel} variant="text" />
     </div>
   </div>
 </section>

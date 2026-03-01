@@ -18,15 +18,15 @@ const galleryItems = gallery.items.slice(0, 3);
 
   <div class="shell shell--narrow">
     <div class="gallery__intro">
-      <div class="gallery__title-card">
+      <div class="gallery__title-card" data-reveal="up">
         <SectionHeading eyebrow={gallery.eyebrow} title={gallery.title} centered />
       </div>
     </div>
 
-    <div class="gallery__composition">
-      <div class="gallery__track">
+    <div class="gallery__composition" data-reveal="zoom">
+      <div class="gallery__track" data-reveal-group data-reveal-stagger="70">
         {galleryItems.map((item) => (
-          <figure class="gallery__item">
+          <figure class="gallery__item ui-hover-media" data-reveal="zoom">
             <Image src={item.src} alt={item.alt} loading="lazy" />
           </figure>
         ))}
@@ -129,12 +129,7 @@ const galleryItems = gallery.items.slice(0, 3);
   .gallery__item img {
     height: 100%;
     object-fit: cover;
-    transition: transform 360ms ease;
     width: 100%;
-  }
-
-  .gallery__item:hover img {
-    transform: scale(1.04);
   }
 
   @supports not ((-webkit-mask-image: linear-gradient(#000, #000)) or (mask-image: linear-gradient(#000, #000))) {

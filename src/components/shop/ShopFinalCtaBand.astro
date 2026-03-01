@@ -10,13 +10,13 @@ const { finalCta } = Astro.props;
 ---
 
 <section class="shop-band" aria-label={finalCta.sectionAriaLabel}>
-  <div class="shell shop-shell shop-band__shell">
-    <div>
+  <div class="shell shop-shell shop-band__shell" data-reveal-group data-reveal-stagger="90">
+    <div data-reveal="left">
       <h2>{finalCta.title}</h2>
       <p>{finalCta.body}</p>
     </div>
 
-    <ButtonLink class="shop-band__cta" href={finalCta.ctaHref} label={finalCta.ctaLabel} variant="secondary" size="lg" />
+    <ButtonLink class="shop-band__cta" href={finalCta.ctaHref} label={finalCta.ctaLabel} variant="secondary" size="lg" data-reveal="right" />
   </div>
 </section>
 
@@ -45,15 +45,15 @@ const { finalCta } = Astro.props;
     max-width: 38rem;
   }
 
-  .shop-band__shell :global(.shop-band__cta) {
-    --btn-secondary-bg: var(--color-white);
-    --btn-secondary-bg-hover: #f3ede4;
-    --btn-secondary-border: var(--color-white);
-    --btn-secondary-color: var(--color-cta);
+  :global(.shop-band__cta) {
+    --action-secondary-bg: var(--color-white);
+    --action-secondary-bg-hover: #f3ede4;
+    --action-secondary-border: var(--color-white);
+    --action-secondary-color: var(--color-cta);
 
     flex-shrink: 0;
     min-height: 4rem;
-    padding: 0 2.1rem;
+    padding-inline: 2.1rem;
   }
 
   @media (max-width: 1023px) {
@@ -68,7 +68,7 @@ const { finalCta } = Astro.props;
       padding: 2.25rem 0;
     }
 
-    .shop-band__shell :global(.shop-band__cta) {
+    :global(.shop-band__cta) {
       justify-content: center;
       width: 100%;
     }

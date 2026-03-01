@@ -3,7 +3,8 @@ import type { MobileQuickAction, NavItem } from "../../types/site";
 import type { Locale } from "../../i18n/locales";
 import { locales, localeLabels, defaultLocale } from "../../i18n/locales";
 import { getUiStrings } from "../../i18n/ui";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
+import NavLink from "../ui/navigation/NavLink.astro";
 
 interface Props {
   nav: NavItem[];
@@ -21,6 +22,19 @@ const leftNav = nav.filter((item) => item.desktopSlot === "left");
 const rightNav = nav.filter((item) => item.desktopSlot === "right");
 const mobileNav = nav.filter((item) => item.mobile !== false);
 const homeHref = locale === defaultLocale ? "/" : `/${locale}`;
+const currentPath = Astro.url.pathname;
+
+const normalizePath = (value: string) => {
+  if (value === "/") return "/";
+  return value.replace(/\/+$/, "");
+};
+
+const isCurrentLink = (href: string) => {
+  if (href.startsWith("tel:")) return false;
+  const normalizedHref = normalizePath(href.split("#")[0] || href);
+  const normalizedPath = normalizePath(currentPath);
+  return normalizedPath === normalizedHref || normalizedPath.startsWith(`${normalizedHref}/`);
+};
 
 const langLinks = alternateUrls
   ? locales.map((loc) => ({ locale: loc, href: alternateUrls[loc], label: localeLabels[loc], active: loc === locale }))
@@ -32,9 +46,7 @@ const langLinks = alternateUrls
   <nav class="shell site-header__nav" aria-label={ui.navLabel}>
     <div class="site-header__group site-header__group--left">
       {leftNav.map((item) => (
-        <a class="site-header__link" href={item.href}>
-          {item.desktopLabel ?? item.label}
-        </a>
+        <NavLink class="site-header__link" href={item.href} label={item.desktopLabel ?? item.label} isActive={isCurrentLink(item.href)} navKind="primary" />
       ))}
     </div>
 
@@ -44,45 +56,50 @@ const langLinks = alternateUrls
 
     <div class="site-header__group site-header__group--right">
       {rightNav.map((item) => (
-        <a class="site-header__link" href={item.href}>
-          {item.desktopLabel ?? item.label}
-        </a>
+        <NavLink class="site-header__link" href={item.href} label={item.desktopLabel ?? item.label} isActive={isCurrentLink(item.href)} navKind="primary" />
       ))}
       {langLinks.length > 0 && (
         <div class="site-header__lang" aria-label={ui.languageLabel}>
           {langLinks.map((l) => (
-            l.active
-              ? <span class="site-header__lang-item is-active" aria-current="true">{l.locale.toUpperCase()}</span>
-              : <a class="site-header__lang-item" href={l.href}>{l.locale.toUpperCase()}</a>
+            <NavLink class="site-header__lang-item" href={l.href} label={l.locale.toUpperCase()} isActive={l.active} navKind="language" />
           ))}
         </div>
       )}
-      <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__cta" variant="primary" size="sm" />
+      <ActionLink href={ctaHref} label={ctaLabel} class="site-header__cta" variant="primary" size="sm" interaction="emphasis" />
     </div>
 
-    <button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="mobile-nav" data-menu-toggle>
+    <button
+      class="site-header__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-label={ui.menuOpen}
+      data-menu-toggle
+      data-label-open={ui.menuOpen}
+      data-label-close={ui.menuClose}
+    >
       <span></span>
       <span></span>
       <span></span>
-      <span class="sr-only">{ui.menuOpen}</span>
+      <span class="sr-only" data-menu-label>{ui.menuOpen}</span>
     </button>
   </nav>
+
+  <div class="site-header__backdrop" data-menu-backdrop hidden></div>
 
   <div class="site-header__mobile" id="mobile-nav" data-mobile-nav hidden>
     <div class="shell site-header__mobile-inner">
       {mobileNav.map((item) => (
-        <a class="site-header__mobile-link" href={item.href}>{item.label}</a>
+        <NavLink class="site-header__mobile-link" href={item.href} label={item.label} isActive={isCurrentLink(item.href)} navKind="primary" />
       ))}
       {langLinks.length > 0 && (
         <div class="site-header__lang site-header__lang--mobile" aria-label={ui.languageLabel}>
           {langLinks.map((l) => (
-            l.active
-              ? <span class="site-header__lang-item is-active" aria-current="true">{l.locale.toUpperCase()}</span>
-              : <a class="site-header__lang-item" href={l.href}>{l.locale.toUpperCase()}</a>
+            <NavLink class="site-header__lang-item" href={l.href} label={l.locale.toUpperCase()} isActive={l.active} navKind="language" />
           ))}
         </div>
       )}
-      <ButtonLink href={ctaHref} label={ctaLabel} class="site-header__mobile-cta" variant="primary" size="md" fullWidth />
+      <ActionLink href={ctaHref} label={ctaLabel} class="site-header__mobile-cta" variant="primary" size="md" interaction="emphasis" fullWidth />
     </div>
   </div>
 </header>
@@ -91,9 +108,12 @@ const langLinks = alternateUrls
   quickActions.length > 0 && (
     <nav class="mobile-quick-actions" aria-label={ui.mobileNavLabel} data-mobile-quick-actions>
       {quickActions.map((action) => (
-        <a
-          class:list={["mobile-quick-actions__item", action.priority === "primary" && "mobile-quick-actions__item--primary"]}
+        <NavLink
+          class={["mobile-quick-actions__item", action.priority === "primary" && "mobile-quick-actions__item--primary"].filter(Boolean).join(" ")}
           href={action.href}
+          label={action.label}
+          navKind="quick"
+          isActive={isCurrentLink(action.href)}
           data-quick-action={action.id}
         >
           <span class="mobile-quick-actions__icon" aria-hidden="true">
@@ -116,7 +136,7 @@ const langLinks = alternateUrls
             }
           </span>
           <span>{action.label}</span>
-        </a>
+        </NavLink>
       ))}
     </nav>
   )
@@ -128,22 +148,31 @@ const langLinks = alternateUrls
     position: fixed;
     right: 0;
     top: 0;
-    transition: background 180ms ease, box-shadow 180ms ease, backdrop-filter 180ms ease;
+    transition:
+      background var(--motion-duration-sm) var(--motion-ease-standard),
+      box-shadow var(--motion-duration-md) var(--motion-ease-standard),
+      backdrop-filter var(--motion-duration-md) var(--motion-ease-standard);
     z-index: 50;
   }
 
   .site-header.is-scrolled,
   .site-header.is-open {
-    backdrop-filter: blur(0.875rem);
-    background: rgba(15, 15, 15, 0.9);
-    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1rem);
+    background: rgba(15, 15, 15, 0.92);
+    box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.22);
+  }
+
+  .site-header.is-open {
+    bottom: 0;
   }
 
   .site-header__fade {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
     inset: 0;
+    opacity: 1;
     pointer-events: none;
     position: absolute;
+    transition: opacity var(--motion-duration-sm) var(--motion-ease-standard);
   }
 
   .site-header.is-scrolled .site-header__fade,
@@ -164,6 +193,12 @@ const langLinks = alternateUrls
       minmax(0, 1fr);
     height: var(--header-height);
     position: relative;
+    transition: height var(--motion-duration-sm) var(--motion-ease-standard);
+    z-index: 52;
+  }
+
+  .site-header.is-scrolled .site-header__nav {
+    height: calc(var(--header-height) - 0.3rem);
   }
 
   .site-header__group {
@@ -186,14 +221,7 @@ const langLinks = alternateUrls
   }
 
   .site-header__link {
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .site-header__link:hover {
-    color: var(--color-white);
+    --ui-nav-color: rgba(255, 255, 255, 0.8);
   }
 
   .site-header__brand {
@@ -214,14 +242,19 @@ const langLinks = alternateUrls
     object-fit: contain;
     transform: scale(1.3);
     transform-origin: center;
+    transition: transform var(--motion-duration-md) var(--motion-ease-standard);
     inline-size: clamp(3.6rem, 7vw, 5rem);
   }
 
+  .site-header.is-scrolled .site-header__brand img {
+    transform: scale(1.18);
+  }
+
   .site-header__group--right :global(.site-header__cta) {
-    --btn-primary-bg: linear-gradient(180deg, #dc7f0a 0%, #c86d00 100%);
-    --btn-primary-bg-hover: linear-gradient(180deg, #e08a1b 0%, #cf7608 100%);
-    --btn-primary-border: rgba(255, 255, 255, 0.16);
-    --btn-primary-shadow: 0 0.5rem 1.25rem rgba(196, 106, 0, 0.25);
+    --action-primary-bg: linear-gradient(180deg, #dc7f0a 0%, #c86d00 100%);
+    --action-primary-bg-hover: linear-gradient(180deg, #e08a1b 0%, #cf7608 100%);
+    --action-primary-border: rgba(255, 255, 255, 0.16);
+    --action-primary-shadow: 0 0.5rem 1.25rem rgba(196, 106, 0, 0.25);
 
     border-radius: 0.5rem;
     letter-spacing: 0.11em;
@@ -246,11 +279,7 @@ const langLinks = alternateUrls
     padding: 0.2rem 0.35rem;
   }
 
-  .site-header__lang-item:hover {
-    color: var(--color-white);
-  }
-
-  .site-header__lang-item.is-active {
+  .site-header__lang-item:global(.is-active) {
     color: var(--color-white);
     border-bottom: 1.5px solid var(--color-accent);
   }
@@ -260,7 +289,8 @@ const langLinks = alternateUrls
   }
 
   .site-header__toggle,
-  .site-header__mobile {
+  .site-header__mobile,
+  .site-header__backdrop {
     display: none;
   }
 
@@ -278,13 +308,77 @@ const langLinks = alternateUrls
     display: block;
     block-size: 0.125rem;
     margin-block: clamp(0.2rem, 0.8vw, 0.3125rem);
-    transition: transform 160ms ease, opacity 160ms ease;
+    transition:
+      transform var(--motion-duration-sm) var(--motion-ease-standard),
+      opacity var(--motion-duration-sm) var(--motion-ease-standard);
     inline-size: clamp(1.2rem, 4vw, 1.6rem);
   }
 
+  .site-header.is-open .site-header__toggle span:nth-child(1) {
+    transform: translateY(0.45rem) rotate(45deg);
+  }
+
+  .site-header.is-open .site-header__toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .site-header.is-open .site-header__toggle span:nth-child(3) {
+    transform: translateY(-0.45rem) rotate(-45deg);
+  }
+
+  .site-header__backdrop {
+    backdrop-filter: blur(0.375rem);
+    background: linear-gradient(180deg, rgba(6, 6, 6, 0.18), rgba(6, 6, 6, 0.58));
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: var(--header-height);
+    transition: opacity var(--motion-duration-sm) var(--motion-ease-standard);
+    z-index: 48;
+  }
+
+  .site-header__backdrop.is-open {
+    opacity: 1;
+  }
+
   .site-header__mobile {
-    background: rgba(15, 15, 15, 0.96);
+    background:
+      linear-gradient(180deg, rgba(12, 12, 12, 0.985) 0%, rgba(5, 5, 5, 0.985) 100%),
+      radial-gradient(circle at top left, rgba(207, 118, 8, 0.16), transparent 34%),
+      radial-gradient(circle at bottom center, rgba(255, 255, 255, 0.03), transparent 46%);
     border-top: 1px solid rgba(255, 255, 255, 0.08);
+    bottom: 0;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.35);
+    left: 0;
+    opacity: 0;
+    overflow-y: auto;
+    position: absolute;
+    right: 0;
+    top: var(--header-height);
+    transform: translateY(-0.75rem);
+    transition:
+      opacity var(--motion-duration-sm) var(--motion-ease-standard),
+      transform var(--motion-duration-md) var(--motion-ease-standard);
+    width: 100vw;
+    z-index: 49;
+  }
+
+  .site-header__mobile.is-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .site-header__mobile::before {
+    background: linear-gradient(90deg, rgba(207, 118, 8, 0.9), rgba(207, 118, 8, 0.2));
+    border-radius: 999px;
+    content: "";
+    height: 0.18rem;
+    left: clamp(1rem, 4vw, 1.5rem);
+    position: absolute;
+    top: 1rem;
+    width: 3rem;
   }
 
   .site-header__mobile[hidden] {
@@ -292,24 +386,45 @@ const langLinks = alternateUrls
   }
 
   .site-header__mobile-inner {
+    align-content: start;
     display: grid;
-    gap: var(--space-xs);
-    padding-block: var(--space-md) var(--space-lg);
+    gap: 0.7rem;
+    grid-auto-rows: max-content;
+    min-block-size: 100%;
+    padding-block: clamp(2rem, 6vw, 2.4rem) calc(var(--space-xl) + env(safe-area-inset-bottom));
+    padding-inline: clamp(1rem, 4vw, 1.5rem);
   }
 
   .site-header__mobile-link {
-    color: rgba(255, 255, 255, 0.86);
-    font-size: clamp(0.84rem, 2.6vw, 0.95rem);
-    letter-spacing: 0.12em;
-    min-block-size: 2.75rem;
-    padding-block: var(--space-2xs);
+    --ui-nav-color: rgba(255, 255, 255, 0.84);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    font-size: clamp(0.92rem, 3.4vw, 1.05rem);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    min-block-size: 3.5rem;
+    padding-block: 0.9rem;
     text-transform: uppercase;
   }
 
+  .site-header__mobile-link:global(.is-active) {
+    --ui-nav-color: var(--color-white);
+    border-bottom-color: rgba(255, 255, 255, 0.72);
+  }
+
   .site-header__mobile-inner :global(.site-header__mobile-cta) {
-    justify-self: start;
-    margin-top: var(--space-2xs);
+    --action-primary-shadow: 0 1rem 2rem rgba(196, 106, 0, 0.24);
+
+    border-radius: 999px;
+    justify-self: stretch;
+    margin-top: auto;
     min-block-size: var(--control-height-md);
+  }
+
+  .site-header__lang--mobile {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding-block: 0.9rem 1.1rem;
   }
 
   .mobile-quick-actions {
@@ -331,7 +446,6 @@ const langLinks = alternateUrls
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.24);
     border-radius: 0.875rem;
-    color: rgba(255, 255, 255, 0.9);
     display: inline-flex;
     flex: 1 1 0;
     font-size: 0.72rem;
@@ -349,7 +463,7 @@ const langLinks = alternateUrls
     color: var(--color-white);
   }
 
-  .mobile-quick-actions__item.is-active {
+  .mobile-quick-actions__item:global(.is-active) {
     box-shadow: 0 0 0 0.125rem rgba(255, 255, 255, 0.2);
   }
 
@@ -362,6 +476,18 @@ const langLinks = alternateUrls
   .mobile-quick-actions__icon svg {
     block-size: 100%;
     inline-size: 100%;
+  }
+
+  :global(body[data-menu-open="true"]) {
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  .site-header.is-open + .mobile-quick-actions {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(1rem);
+    visibility: hidden;
   }
 
   @media (max-width: 63.9375em) {
@@ -381,7 +507,8 @@ const langLinks = alternateUrls
     }
 
     .site-header__toggle,
-    .site-header__mobile:not([hidden]) {
+    .site-header__mobile:not([hidden]),
+    .site-header__backdrop:not([hidden]) {
       display: block;
     }
 

@@ -1,0 +1,56 @@
+---
+import type { CardElevation, CardPadding, CardSurfaceTone } from "../../../types/ui";
+import { isPlaceholderLink } from "../../../utils/link";
+
+interface Props {
+  interactive?: boolean;
+  mediaInteractive?: boolean;
+  href?: string;
+  surfaceTone?: CardSurfaceTone;
+  padding?: CardPadding;
+  radius?: "md" | "lg" | "xl";
+  elevation?: CardElevation;
+  class?: string;
+  contentClass?: string;
+}
+
+const {
+  interactive = false,
+  mediaInteractive = false,
+  href,
+  surfaceTone = "default",
+  padding = "md",
+  radius = "lg",
+  elevation = "flat",
+  class: className = "",
+  contentClass = ""
+} = Astro.props;
+
+const clickable = href ? !isPlaceholderLink(href) : false;
+const classes = [
+  "ui-card",
+  `ui-card--tone-${surfaceTone}`,
+  `ui-card--padding-${padding}`,
+  `ui-card--radius-${radius}`,
+  `ui-card--elevation-${elevation}`,
+  (interactive || clickable) && "ui-card--interactive",
+  mediaInteractive && "ui-card--media-interactive",
+  className
+]
+  .filter(Boolean)
+  .join(" ");
+---
+
+<article class={classes}>
+  {clickable ? (
+    <a class="ui-card__link" href={href}>
+      <div class:list={["ui-card__content", contentClass]}>
+        <slot />
+      </div>
+    </a>
+  ) : (
+    <div class:list={["ui-card__content", contentClass]}>
+      <slot />
+    </div>
+  )}
+</article>

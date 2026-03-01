@@ -11,25 +11,25 @@ const { pairing } = Astro.props;
 
 <section class="pairing section section--white" id="pairing">
   <div class="shell pairing__inner">
-    <figure>
+    <figure class="ui-hover-media" data-reveal="left">
       <Image src={pairing.image} alt={pairing.imageAlt} loading="lazy" />
     </figure>
 
-    <div class="pairing__content">
-      <p class="pairing__eyebrow">+ {pairing.eyebrow}</p>
-      <h2>
+    <div class="pairing__content" data-reveal-group data-reveal-stagger="85">
+      <p class="pairing__eyebrow" data-reveal="up">+ {pairing.eyebrow}</p>
+      <h2 data-reveal="up">
         {pairing.title[0]}
         <span>{pairing.title[1]}</span>
       </h2>
-      <p class="pairing__body">{pairing.body}</p>
+      <p class="pairing__body" data-reveal="up">{pairing.body}</p>
 
-      <ul>
+      <ul data-reveal-group data-reveal-stagger="55">
         {pairing.bullets.map((item) => (
-          <li>{item}</li>
+          <li data-reveal="up">{item}</li>
         ))}
       </ul>
 
-      <p class="pairing__note">{pairing.note}</p>
+      <p class="pairing__note" data-reveal="up">{pairing.note}</p>
     </div>
   </div>
 </section>

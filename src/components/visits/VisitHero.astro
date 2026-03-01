@@ -2,7 +2,7 @@
 import type { VisitPageData } from "../../types/visits";
 import { Image } from "astro:assets";
 import Icon from "../ui/Icon.astro";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   hero: VisitPageData["hero"];
@@ -13,32 +13,32 @@ const { hero } = Astro.props;
 
 <section class="visit-hero" id="visit-hero">
   <div class="shell visit-hero__inner">
-    <div class="visit-hero__content">
-      <p class="visit-hero__eyebrow">{hero.eyebrow}</p>
-      <h1>
+    <div class="visit-hero__content" data-reveal-group data-reveal-stagger="85">
+      <p class="visit-hero__eyebrow" data-reveal="up">{hero.eyebrow}</p>
+      <h1 data-reveal="up">
         {hero.titleLines[0]}
         <span>{hero.titleLines[1]}</span>
       </h1>
-      <p class="visit-hero__body">{hero.body}</p>
+      <p class="visit-hero__body" data-reveal="up">{hero.body}</p>
 
-      <ul class="visit-hero__badges">
+      <ul class="visit-hero__badges" data-reveal-group data-reveal-stagger="55">
         {hero.badges.map((badge) => (
-          <li>
+          <li data-reveal="up">
             <span class="visit-hero__badge-icon"><Icon name={badge.icon} /></span>
             <span>{badge.label}</span>
           </li>
         ))}
       </ul>
 
-      <div class="visit-hero__actions">
-        <ButtonLink href={hero.primaryCta.href} label={hero.primaryCta.label} variant="primary" size="lg" />
-        <ButtonLink href={hero.secondaryCta.href} label={hero.secondaryCta.label} variant="ghost" size="lg" />
+      <div class="visit-hero__actions" data-reveal="up">
+        <ActionLink href={hero.primaryCta.href} label={hero.primaryCta.label} variant="primary" size="lg" interaction="emphasis" />
+        <ActionLink href={hero.secondaryCta.href} label={hero.secondaryCta.label} variant="ghost" size="lg" />
       </div>
 
-      <p class="visit-hero__helper">{hero.helper}</p>
+      <p class="visit-hero__helper" data-reveal="up">{hero.helper}</p>
     </div>
 
-    <figure class="visit-hero__media">
+    <figure class="visit-hero__media ui-hover-media" data-reveal="zoom">
       <Image src={hero.image} alt={hero.imageAlt} loading="eager" />
     </figure>
   </div>
@@ -130,21 +130,21 @@ const { hero } = Astro.props;
     margin-top: clamp(1rem, 3vw, 1.75rem);
   }
 
-  .visit-hero__actions :global(.btn) {
+  .visit-hero__actions :global(.ui-action) {
     min-inline-size: clamp(10rem, 22vw, 12.5rem);
   }
 
-  .visit-hero__actions :global(.btn--primary) {
-    --btn-primary-bg: var(--visit-accent-primary);
-    --btn-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
-    --btn-primary-border: var(--visit-accent-primary);
-    --btn-primary-shadow: none;
+  .visit-hero__actions :global(.ui-action--primary) {
+    --action-primary-bg: var(--visit-accent-primary);
+    --action-primary-bg-hover: color-mix(in srgb, var(--visit-accent-primary) 82%, black);
+    --action-primary-border: var(--visit-accent-primary);
+    --action-primary-shadow: none;
   }
 
-  .visit-hero__actions :global(.btn--ghost) {
-    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.12);
-    --btn-ghost-border: rgba(255, 255, 255, 0.22);
-    --btn-ghost-color: var(--color-white);
+  .visit-hero__actions :global(.ui-action--ghost) {
+    --action-ghost-bg-hover: rgba(255, 255, 255, 0.12);
+    --action-ghost-border: rgba(255, 255, 255, 0.22);
+    --action-ghost-color: var(--color-white);
   }
 
   .visit-hero__helper {
@@ -187,7 +187,7 @@ const { hero } = Astro.props;
       flex-direction: column;
     }
 
-    .visit-hero__actions :global(.btn) {
+    .visit-hero__actions :global(.ui-action) {
       width: 100%;
     }
 

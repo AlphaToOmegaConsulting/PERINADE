@@ -12,27 +12,34 @@ const { visitCta } = Astro.props;
 
 <section class="visit-cta section">
   <div class="shell visit-cta__inner">
-    <figure class="visit-cta__media">
+    <figure class="visit-cta__media ui-hover-media" data-reveal="left">
       <Image src={visitCta.image} alt={visitCta.imageAlt} loading="lazy" />
     </figure>
 
-    <div class="visit-cta__content">
-      <p class="visit-cta__eyebrow">{visitCta.eyebrow}</p>
-      <h2 class="visit-cta__title">
-        {visitCta.title}
-        <span>{visitCta.titleHighlight}</span>
+    <div class="visit-cta__content" data-reveal-group data-reveal-stagger="85">
+      <p class="visit-cta__eyebrow" data-reveal="up">{visitCta.eyebrow}</p>
+      <h2 class="visit-cta__title" data-reveal="up">
+        <span class="visit-cta__title-main">{visitCta.title}</span>
+        <span class="visit-cta__title-highlight">{visitCta.titleHighlight}</span>
       </h2>
-      <p class="visit-cta__body">{visitCta.body}</p>
+      <p class="visit-cta__body" data-reveal="up">{visitCta.body}</p>
 
-      <ul class="visit-cta__details">
+      <ul class="visit-cta__details" data-reveal-group data-reveal-stagger="55">
         {visitCta.details.map((detail) => (
-          <li>{detail}</li>
+          <li data-reveal="up">{detail}</li>
         ))}
       </ul>
 
-      <div class="visit-cta__actions">
-        <ButtonLink href={visitCta.primaryCta.href} label={visitCta.primaryCta.label} variant="primary" />
-        <ButtonLink class="visit-cta__ghost" href={visitCta.secondaryCta.href} label={visitCta.secondaryCta.label} variant="ghost" />
+      <div class="visit-cta__actions" data-reveal="up">
+        <ButtonLink class="visit-cta__primary" href={visitCta.primaryCta.href} label={visitCta.primaryCta.label} variant="primary" size="lg" interaction="emphasis" />
+        <ButtonLink
+          class="visit-cta__ghost"
+          href={visitCta.secondaryCta.href}
+          label={visitCta.secondaryCta.label}
+          variant="secondary"
+          tone="inverse"
+          size="lg"
+        />
       </div>
     </div>
   </div>
@@ -52,15 +59,23 @@ const { visitCta } = Astro.props;
   }
 
   .visit-cta__media {
+    aspect-ratio: 3 / 2;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 0.9rem;
     margin: 0;
     overflow: hidden;
   }
 
-  .visit-cta__media img {
-    aspect-ratio: 4/5;
+  .visit-cta__media :global(picture) {
+    display: block;
+    height: 100%;
+  }
+
+  .visit-cta__media :global(img) {
+    display: block;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     width: 100%;
   }
 
@@ -78,19 +93,26 @@ const { visitCta } = Astro.props;
   }
 
   .visit-cta__title {
-    color: var(--color-white);
     display: grid;
     font-size: clamp(1.9rem, 3.2vw, 2.7rem);
+    font-weight: 500;
     line-height: 1.05;
     margin: 0;
+    text-wrap: balance;
   }
 
-  .visit-cta__title span {
+  .visit-cta__title-main {
+    color: #f7f2ea;
+    display: block;
+  }
+
+  .visit-cta__title-highlight {
     color: var(--color-cta);
+    display: block;
   }
 
   .visit-cta__body {
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.84);
     margin: 0;
     max-width: 33rem;
   }
@@ -108,7 +130,7 @@ const { visitCta } = Astro.props;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 0.55rem;
-    color: rgba(255, 255, 255, 0.84);
+    color: rgba(255, 255, 255, 0.9);
     font-size: 0.79rem;
     padding: 0.6rem 0.72rem;
   }
@@ -121,13 +143,21 @@ const { visitCta } = Astro.props;
     margin-top: 0.35rem;
   }
 
-  .visit-cta__actions :global(.visit-cta__ghost) {
-    --btn-ghost-border: rgba(255, 255, 255, 0.3);
-    --btn-ghost-color: var(--color-white);
-    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.1);
-
+  :global(.visit-cta__primary),
+  :global(.visit-cta__ghost) {
     min-height: 3.4rem;
     padding-inline: 1.35rem;
+  }
+
+  :global(.visit-cta__primary) {
+    --action-primary-shadow: none;
+  }
+
+  :global(.visit-cta__ghost) {
+    --action-secondary-bg: transparent;
+    --action-secondary-bg-hover: rgba(255, 255, 255, 0.1);
+    --action-secondary-border: rgba(255, 255, 255, 0.3);
+    --action-secondary-color: var(--color-white);
   }
 
   @media (max-width: 1023px) {
@@ -136,7 +166,7 @@ const { visitCta } = Astro.props;
     }
 
     .visit-cta__media {
-      max-width: 27rem;
+      max-width: 32rem;
     }
   }
 
@@ -150,7 +180,8 @@ const { visitCta } = Astro.props;
       width: 100%;
     }
 
-    .visit-cta__actions :global(.visit-cta__ghost) {
+    :global(.visit-cta__primary),
+    :global(.visit-cta__ghost) {
       justify-content: center;
       width: 100%;
     }

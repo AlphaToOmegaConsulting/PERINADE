@@ -1,0 +1,30 @@
+---
+interface Item {
+  id: string;
+  label: string;
+}
+
+interface Props {
+  items: Item[];
+  activeId: string;
+  class?: string;
+}
+
+const { items, activeId, class: className = "" } = Astro.props;
+---
+
+<div class:list={["ui-choice-chip-group", className]}>
+  {items.map((item) => {
+    const active = item.id === activeId;
+    return (
+      <button
+        type="button"
+        class:list={["ui-choice-chip", active && "is-active"]}
+        data-slot={item.id}
+        aria-pressed={active ? "true" : "false"}
+      >
+        {item.label}
+      </button>
+    );
+  })}
+</div>

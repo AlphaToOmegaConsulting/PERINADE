@@ -1,6 +1,6 @@
 ---
 import type { HeroData } from "../../types/site";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 import HeroFeatureDeck from "./HeroFeatureDeck.astro";
 
 interface Props {
@@ -13,26 +13,26 @@ const { hero } = Astro.props;
 <section class="hero" id="hero" style={`--hero-image: url('${hero.backgroundImage.src}')`}>
   <div class="hero__background" aria-hidden="true"></div>
   <div class="shell hero__shell">
-    <div class="hero__content">
-      <div class="hero__eyebrow-wrap">
+    <div class="hero__content" data-reveal-group data-reveal-stagger="95">
+      <div class="hero__eyebrow-wrap" data-reveal="up">
         <span class="hero__eyebrow-line"></span>
         <p class="hero__eyebrow">{hero.eyebrow}</p>
       </div>
 
-      <h1 class="hero__title">
+      <h1 class="hero__title" data-reveal="up">
         {hero.title.map((line) => <span>{line}</span>)}
       </h1>
 
-      <p class="hero__body">{hero.body}</p>
+      <p class="hero__body" data-reveal="up">{hero.body}</p>
 
-      <ButtonLink href={hero.ctaHref} label={hero.ctaLabel} variant="primary" size="lg" />
+      <ActionLink href={hero.ctaHref} label={hero.ctaLabel} variant="primary" size="lg" interaction="emphasis" class="hero-cta" data-reveal="up" />
 
-      <ul class="hero__meta" aria-label="Informations principales">
-        {hero.meta.map((item) => <li>{item}</li>)}
+      <ul class="hero__meta" aria-label="Informations principales" data-reveal-group data-reveal-stagger="60">
+        {hero.meta.map((item) => <li data-reveal="up">{item}</li>)}
       </ul>
     </div>
 
-    <div class="hero__media">
+    <div class="hero__media" data-reveal="zoom">
       <HeroFeatureDeck cards={hero.featuredCards} />
     </div>
   </div>

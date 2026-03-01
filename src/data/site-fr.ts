@@ -59,23 +59,27 @@ export const siteFr: SiteData = {
       }
     ]
   },
-  reasons: [
-    {
-      title: "Un domaine familial",
-      body: "Depuis six générations, notre famille cultive avec passion un vignoble à taille humaine.",
-      icon: "leaf"
-    },
-    {
-      title: "Un terroir d'exception",
-      body: "Niché entre garrigue et collines, notre vignoble bénéficie d'un microclimat unique.",
-      icon: "terrain"
-    },
-    {
-      title: "Une dégustation intime",
-      body: "Pas de visite de masse ici. Nous vous accueillons personnellement dans un cadre chaleureux.",
-      icon: "glass"
-    }
-  ],
+  reasons: {
+    eyebrow: "Pourquoi nous visiter",
+    title: "Trois raisons de venir",
+    items: [
+      {
+        title: "Un domaine familial",
+        body: "Depuis six générations, notre famille cultive avec passion un vignoble à taille humaine.",
+        icon: "leaf"
+      },
+      {
+        title: "Un terroir d'exception",
+        body: "Niché entre garrigue et collines, notre vignoble bénéficie d'un microclimat unique.",
+        icon: "terrain"
+      },
+      {
+        title: "Une dégustation intime",
+        body: "Pas de visite de masse ici. Nous vous accueillons personnellement dans un cadre chaleureux.",
+        icon: "glass"
+      }
+    ]
+  },
   experience: {
     eyebrow: "Visite",
     title: "Vivez l'expérience Périnade",

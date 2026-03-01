@@ -1,5 +1,5 @@
 ---
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 import { Image } from "astro:assets";
 import type { DomaineWinesData } from "../../types/domaine";
 import { isPlaceholderLink } from "../../utils/link";
@@ -13,23 +13,23 @@ const { wines } = Astro.props;
 
 <section class="domain-wines section section--white">
   <div class="shell">
-    <div class="domain-wines__head">
+    <div class="domain-wines__head" data-reveal="up">
       <div>
         <p class="domain-wines__eyebrow">{wines.eyebrow}</p>
         <h2>{wines.title}</h2>
       </div>
-      <ButtonLink href={wines.allHref} label={wines.allLabel} variant="text" />
+      <ActionLink href={wines.allHref} label={wines.allLabel} variant="text" />
     </div>
 
-    <div class="domain-wines__grid">
+    <div class="domain-wines__grid" data-reveal-group data-reveal-stagger="70">
       {wines.items.map((item) => (
-        <article class="domain-wines__card">
+        <article class="domain-wines__card ui-hover-lift" data-reveal="up">
           {isPlaceholderLink(item.ctaHref) ? (
-            <div class="domain-wines__media" aria-disabled="true">
+            <div class="domain-wines__media ui-hover-media" aria-disabled="true">
               <Image src={item.image} alt={item.alt} loading="lazy" />
             </div>
           ) : (
-            <a class="domain-wines__media" href={item.ctaHref}>
+            <a class="domain-wines__media ui-hover-media" href={item.ctaHref}>
               <Image src={item.image} alt={item.alt} loading="lazy" />
             </a>
           )}
@@ -38,7 +38,7 @@ const { wines } = Astro.props;
           <p>{item.body}</p>
           <div class="domain-wines__bottom">
             <strong>{item.price}</strong>
-            <ButtonLink href={item.ctaHref} label={item.ctaLabel} variant="primary" disabled={isPlaceholderLink(item.ctaHref)} />
+            <ActionLink href={item.ctaHref} label={item.ctaLabel} variant="primary" disabled={isPlaceholderLink(item.ctaHref)} />
           </div>
         </article>
       ))}

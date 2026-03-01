@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ShopPageData } from "../../types/shop";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   hero: ShopPageData["hero"];
@@ -11,24 +12,23 @@ const { hero } = Astro.props;
 
 <section class="shop-hero section" aria-labelledby="shop-hero-title">
   <div class="shell shop-shell shop-hero__shell">
-    <figure class="shop-hero__media">
+    <figure class="shop-hero__media ui-hover-media" data-reveal="zoom">
       <Image src={hero.image} alt={hero.imageAlt} loading="eager" />
     </figure>
 
-    <div class="shop-hero__content">
-      <p class="shop-hero__eyebrow">{hero.eyebrow}</p>
-      <h1 id="shop-hero-title" set:html={hero.titleHtml}></h1>
-      <p class="shop-hero__body">{hero.body}</p>
+    <div class="shop-hero__content" data-reveal-group data-reveal-stagger="80">
+      <p class="shop-hero__eyebrow" data-reveal="up">{hero.eyebrow}</p>
+      <h1 id="shop-hero-title" set:html={hero.titleHtml} data-reveal="up"></h1>
+      <p class="shop-hero__body" data-reveal="up">{hero.body}</p>
 
-      <div class="shop-hero__actions">
-        <a class="shop-hero__btn shop-hero__btn--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-
-        <a class="shop-hero__btn shop-hero__btn--ghost" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+      <div class="shop-hero__actions" data-reveal="up">
+        <ActionLink class="shop-hero__btn" href={hero.primaryCta.href} label={hero.primaryCta.label} variant="primary" size="lg" interaction="emphasis" />
+        <ActionLink class="shop-hero__btn" href={hero.secondaryCta.href} label={hero.secondaryCta.label} variant="ghost" size="lg" />
       </div>
 
-      <ul class="shop-hero__meta" aria-label={hero.metaAriaLabel}>
+      <ul class="shop-hero__meta" aria-label={hero.metaAriaLabel} data-reveal-group data-reveal-stagger="55">
         {hero.metaItems.map((item) => (
-          <li>{item}</li>
+          <li data-reveal="up">{item}</li>
         ))}
       </ul>
     </div>
@@ -101,27 +101,22 @@ const { hero } = Astro.props;
     margin-top: 2.2rem;
   }
 
-  .shop-hero__btn {
-    align-items: center;
+  .shop-hero__actions :global(.shop-hero__btn) {
     border-radius: 999px;
-    display: inline-flex;
     font-size: 0.78rem;
     font-weight: 500;
-    justify-content: center;
     letter-spacing: 0.16em;
     min-height: 3.55rem;
-    padding: 0 1.65rem;
     text-transform: uppercase;
-    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
   }
 
-  .shop-hero__btn--primary {
+  .shop-hero__actions :global(.shop-hero__btn.ui-action--primary) {
     background: var(--color-cta);
     box-shadow: 0 14px 24px rgba(214, 116, 0, 0.3);
     color: var(--color-white);
   }
 
-  .shop-hero__btn--ghost {
+  .shop-hero__actions :global(.shop-hero__btn.ui-action--ghost) {
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--color-white);
   }
@@ -171,7 +166,7 @@ const { hero } = Astro.props;
       font-size: 1rem;
     }
 
-    .shop-hero__btn {
+    .shop-hero__actions :global(.shop-hero__btn) {
       min-height: 3.2rem;
       width: 100%;
     }

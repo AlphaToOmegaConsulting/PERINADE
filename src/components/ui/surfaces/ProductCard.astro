@@ -1,0 +1,96 @@
+---
+import { Image } from "astro:assets";
+import type { ShopProduct } from "../../../types/shop";
+import Card from "./Card.astro";
+import ActionLink from "../actions/ActionLink.astro";
+
+interface Props {
+  product: ShopProduct;
+  class?: string;
+}
+
+const { product, class: className = "" } = Astro.props;
+---
+
+<Card class={["shop-card", className].filter(Boolean).join(" ")} mediaInteractive padding="sm" radius="xl" elevation="flat" surfaceTone="default" contentClass="shop-card__content">
+  <div class="shop-card__image-wrap ui-hover-media">
+    <Image src={product.image} alt={product.imageAlt} loading="lazy" />
+  </div>
+
+  <div class="shop-card__body">
+    <p class="ui-card__meta">{product.meta}</p>
+    <h3 class="ui-card__title">{product.name}</h3>
+    <p class="ui-card__body">{product.description}</p>
+
+    <div class="shop-card__footer">
+      <div>
+        <p class="shop-card__price">{product.price}</p>
+        <p class="shop-card__stock">{product.stock}</p>
+      </div>
+      <ActionLink class="shop-card__cta" href={product.ctaHref} label={product.ctaLabel} variant="primary" size="sm" />
+    </div>
+  </div>
+</Card>
+
+<style>
+  .shop-card :global(.shop-card__content) {
+    gap: 0;
+    padding: 0;
+  }
+
+  .shop-card__image-wrap {
+    aspect-ratio: 1.11;
+    position: relative;
+  }
+
+  .shop-card__image-wrap img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .shop-card__body {
+    display: grid;
+    gap: var(--space-xs);
+    padding: clamp(0.8rem, 2.6vw, 1rem) clamp(0.8rem, 2.6vw, 1rem) clamp(0.9rem, 2.9vw, 1.15rem);
+  }
+
+  .shop-card__footer {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-2xs);
+  }
+
+  .shop-card__price {
+    color: var(--color-text-strong);
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 3.2vw, 1.45rem);
+    margin: 0;
+  }
+
+  .shop-card__stock {
+    color: #2d4a2a;
+    font-size: clamp(0.76rem, 2vw, 0.85rem);
+    margin: 0;
+  }
+
+  .shop-card :global(.shop-card__cta) {
+    min-block-size: clamp(2.35rem, 6vw, 2.65rem);
+    padding-inline: clamp(0.75rem, 2.4vw, 0.95rem);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 47.9375em) {
+    .shop-card__footer {
+      align-items: stretch;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .shop-card :global(.shop-card__cta) {
+      justify-content: center;
+      width: 100%;
+    }
+  }
+</style>

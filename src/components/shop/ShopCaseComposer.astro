@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { ShopPageData } from "../../types/shop";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   caseComposer: ShopPageData["caseComposer"];
@@ -19,18 +19,18 @@ const { caseComposer } = Astro.props;
 >
   <div class="shop-composer__backdrop" aria-hidden="true"></div>
   <div class="shell shop-shell shop-composer__shell">
-    <figure class="shop-composer__crate">
+    <figure class="shop-composer__crate ui-hover-media" data-reveal="left">
       <Image src={caseComposer.crateImage} alt={caseComposer.crateImageAlt} loading="lazy" />
     </figure>
 
-    <div class="shop-composer__content">
-      <p class="shop-composer__eyebrow">{caseComposer.eyebrow}</p>
-      <h2 id="shop-composer-title">{caseComposer.title}</h2>
-      <p class="shop-composer__intro">{caseComposer.intro}</p>
+    <div class="shop-composer__content" data-reveal-group data-reveal-stagger="80">
+      <p class="shop-composer__eyebrow" data-reveal="up">{caseComposer.eyebrow}</p>
+      <h2 id="shop-composer-title" data-reveal="up">{caseComposer.title}</h2>
+      <p class="shop-composer__intro" data-reveal="up">{caseComposer.intro}</p>
 
-      <div class="shop-composer__offers">
+      <div class="shop-composer__offers" data-reveal-group data-reveal-stagger="70">
         {caseComposer.offers.map((offer) => (
-          <article class="shop-offer">
+          <article class="shop-offer ui-hover-lift" data-reveal="up">
             <h3>{offer.title}</h3>
             <p class="shop-offer__saving">{offer.saving}</p>
             <ul>
@@ -44,7 +44,7 @@ const { caseComposer } = Astro.props;
             </div>
             <p class="shop-offer__details">{offer.details}</p>
 
-            <ButtonLink class="shop-offer__cta" href={offer.ctaHref} label={offer.ctaLabel} variant="secondary" size="md" />
+            <ActionLink class="shop-offer__cta" href={offer.ctaHref} label={offer.ctaLabel} variant="secondary" size="md" />
           </article>
         ))}
       </div>
@@ -193,10 +193,10 @@ const { caseComposer } = Astro.props;
   }
 
   .shop-offer :global(.shop-offer__cta) {
-    --btn-secondary-bg: transparent;
-    --btn-secondary-bg-hover: rgba(214, 116, 0, 0.14);
-    --btn-secondary-border: var(--color-cta);
-    --btn-secondary-color: var(--color-cta);
+    --action-secondary-bg: transparent;
+    --action-secondary-bg-hover: rgba(214, 116, 0, 0.14);
+    --action-secondary-border: var(--color-cta);
+    --action-secondary-color: var(--color-cta);
 
     margin-top: 1rem;
     min-height: 3rem;

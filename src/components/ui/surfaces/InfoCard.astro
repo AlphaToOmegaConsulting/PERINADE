@@ -1,0 +1,83 @@
+---
+import type { ActionVariant } from "../../../types/ui";
+import Card from "./Card.astro";
+import ActionLink from "../actions/ActionLink.astro";
+import Icon from "../Icon.astro";
+
+interface Props {
+  title: string;
+  subtitle?: string;
+  tag?: string;
+  icon?: string;
+  lines?: string[];
+  body?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+  ctaVariant?: ActionVariant;
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  tag,
+  icon,
+  lines = [],
+  body,
+  ctaLabel,
+  ctaHref,
+  ctaVariant = "text",
+  class: className = ""
+} = Astro.props;
+---
+
+<Card class={className} surfaceTone="soft" radius="md" padding="md">
+  {(icon || tag) && (
+    <div class="ui-info-card__head">
+      {icon && <span class="ui-info-card__icon"><Icon name={icon} /></span>}
+      {tag && <p class="ui-card__tag">{tag}</p>}
+    </div>
+  )}
+  <h3 class="ui-card__title">{title}</h3>
+  {subtitle && <p class="ui-card__meta">{subtitle}</p>}
+  {body && <p class="ui-card__body">{body}</p>}
+  {lines.length > 0 && (
+    <ul class="ui-info-card__list">
+      {lines.map((line) => (
+        <li>{line}</li>
+      ))}
+    </ul>
+  )}
+  {ctaLabel && ctaHref && <ActionLink href={ctaHref} label={ctaLabel} variant={ctaVariant} class="ui-info-card__cta" />}
+</Card>
+
+<style>
+  .ui-info-card__head {
+    align-items: center;
+    display: flex;
+    gap: 0.55rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .ui-info-card__icon {
+    color: var(--visit-accent-primary, var(--color-accent));
+    display: inline-flex;
+    height: 1rem;
+    width: 1rem;
+  }
+
+  .ui-info-card__icon :global(svg) {
+    height: 100%;
+    width: 100%;
+  }
+
+  .ui-info-card__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .ui-info-card__list li {
+    margin: 0.35rem 0;
+  }
+</style>

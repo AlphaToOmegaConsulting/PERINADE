@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import type { ShopPageData } from "../../types/shop";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ProductCard from "../ui/surfaces/ProductCard.astro";
 
 interface Props {
   productGrid: ShopPageData["productGrid"];
@@ -13,37 +12,14 @@ const { productGrid } = Astro.props;
 
 <section id="produits" class="shop-grid section section--soft" aria-labelledby="shop-grid-title">
   <div class="shell shop-shell">
-    <header class="shop-grid__heading">
+    <header class="shop-grid__heading" data-reveal="up">
       <p>{productGrid.eyebrow}</p>
       <h2 id="shop-grid-title">{productGrid.title}</h2>
     </header>
 
-    <div class="shop-grid__cards">
+    <div class="shop-grid__cards" data-reveal-group data-reveal-stagger="80">
       {productGrid.products.map((product) => (
-        <article class="shop-card">
-          <div class="shop-card__image-wrap">
-            <Image src={product.image} alt={product.imageAlt} loading="lazy" />
-            <div class="shop-card__badges">
-              {product.badges.map((badge, idx) => (
-                <span class:list={["shop-card__badge", idx === 0 && badge !== product.tone && "shop-card__badge--accent"]}>{badge}</span>
-              ))}
-            </div>
-          </div>
-
-          <div class="shop-card__body">
-            <p class="shop-card__meta">{product.meta}</p>
-            <h3>{product.name}</h3>
-            <p class="shop-card__desc">{product.description}</p>
-
-            <div class="shop-card__footer">
-              <div>
-                <p class="shop-card__price">{product.price}</p>
-                <p class="shop-card__stock">{product.stock}</p>
-              </div>
-              <ButtonLink class="shop-card__cta" href={product.ctaHref} label={product.ctaLabel} variant="primary" size="sm" />
-            </div>
-          </div>
-        </article>
+        <div data-reveal="up"><ProductCard product={product} /></div>
       ))}
     </div>
 
@@ -83,101 +59,6 @@ const { productGrid } = Astro.props;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .shop-card {
-    background: var(--color-white);
-    border: 1px solid rgba(44, 44, 44, 0.1);
-    border-radius: 1.25rem;
-    overflow: hidden;
-  }
-
-  .shop-card__image-wrap {
-    aspect-ratio: 1.11;
-    position: relative;
-  }
-
-  .shop-card__image-wrap img {
-    height: 100%;
-    object-fit: cover;
-    width: 100%;
-  }
-
-  .shop-card__badges {
-    display: flex;
-    gap: var(--space-2xs);
-    left: clamp(0.55rem, 2vw, 0.85rem);
-    position: absolute;
-    right: clamp(0.55rem, 2vw, 0.85rem);
-    top: clamp(0.55rem, 2vw, 0.85rem);
-  }
-
-  .shop-card__badge {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 100vmax;
-    color: #6b6b6b;
-    font-size: clamp(0.62rem, 1.6vw, 0.68rem);
-    letter-spacing: 0.08em;
-    padding: clamp(0.2rem, 0.8vw, 0.3rem) clamp(0.45rem, 1.6vw, 0.58rem);
-    text-transform: uppercase;
-  }
-
-  .shop-card__badge--accent {
-    background: rgba(214, 116, 0, 0.14);
-    color: var(--color-cta);
-  }
-
-  .shop-card__body {
-    display: grid;
-    gap: var(--space-xs);
-    padding: clamp(0.8rem, 2.6vw, 1rem) clamp(0.8rem, 2.6vw, 1rem) clamp(0.9rem, 2.9vw, 1.15rem);
-  }
-
-  .shop-card__meta {
-    color: var(--color-muted);
-    font-size: clamp(0.66rem, 1.7vw, 0.72rem);
-    letter-spacing: 0.11em;
-    margin: 0;
-    text-transform: uppercase;
-  }
-
-  .shop-card h3 {
-    font-size: clamp(1.2rem, 3.2vw, 1.45rem);
-    line-height: 1.1;
-    margin: 0;
-  }
-
-  .shop-card__desc {
-    color: var(--color-muted);
-    font-size: clamp(0.88rem, 2.2vw, 0.95rem);
-    line-height: 1.55;
-    margin: 0;
-  }
-
-  .shop-card__footer {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin-top: var(--space-2xs);
-  }
-
-  .shop-card__price {
-    color: var(--color-text-strong);
-    font-family: var(--font-display);
-    font-size: clamp(1.15rem, 3.2vw, 1.45rem);
-    margin: 0;
-  }
-
-  .shop-card__stock {
-    color: #2d4a2a;
-    font-size: clamp(0.76rem, 2vw, 0.85rem);
-    margin: 0;
-  }
-
-  .shop-card__footer :global(.shop-card__cta) {
-    min-block-size: clamp(2.35rem, 6vw, 2.65rem);
-    padding-inline: clamp(0.75rem, 2.4vw, 0.95rem);
-    white-space: nowrap;
-  }
-
   .shop-grid__dots {
     display: flex;
     gap: clamp(0.28rem, 1vw, 0.42rem);
@@ -207,17 +88,6 @@ const { productGrid } = Astro.props;
   @media (max-width: 47.9375em) {
     .shop-grid__cards {
       grid-template-columns: 1fr;
-    }
-
-    .shop-card__footer {
-      align-items: stretch;
-      flex-direction: column;
-      gap: var(--space-xs);
-    }
-
-    .shop-card__footer :global(.shop-card__cta) {
-      justify-content: center;
-      width: 100%;
     }
   }
 </style>

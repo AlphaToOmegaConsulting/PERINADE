@@ -14,10 +14,10 @@ const { wines } = Astro.props;
   <div class="shell">
     <SectionHeading eyebrow={wines.eyebrow} title={wines.title} body={wines.body} centered light />
 
-    <div class="wines-showcase__grid">
+    <div class="wines-showcase__grid" data-reveal-group data-reveal-stagger="75">
       {wines.cards.map((card) => (
-        <article class="wine-card">
-          <div class="wine-card__media">
+        <article class="wine-card ui-hover-lift" data-reveal="up">
+          <div class="wine-card__media ui-hover-media">
             <Image src={card.image} alt={card.imageAlt} loading="lazy" />
             <span class:list={["wine-card__tag", `wine-card__tag--${card.tagTone}`]}>{card.tag}</span>
           </div>

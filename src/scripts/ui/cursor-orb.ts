@@ -4,6 +4,10 @@ const INTERACTIVE_SELECTOR = 'a, button, input, textarea, select, label, [role="
 
 export const initCursorOrb = (): void => {
   if (cursorOrbReady) return;
+  if (document.body.dataset.disableCursorOrb === "true") {
+    cursorOrbReady = true;
+    return;
+  }
 
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canHover = window.matchMedia("(hover: hover)").matches;

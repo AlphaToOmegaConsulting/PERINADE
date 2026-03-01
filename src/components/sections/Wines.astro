@@ -1,7 +1,7 @@
 ---
 import type { SiteData } from "../../types/site";
 import { Image } from "astro:assets";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   wines: SiteData["wines"];
@@ -12,25 +12,25 @@ const { wines } = Astro.props;
 
 <section class="wines section section--soft" id="cuvees">
   <div class="shell shell--narrow">
-    <div class="wines__header">
+    <div class="wines__header" data-reveal="up">
       <div>
         <p class="wines__eyebrow">{wines.eyebrow}</p>
         <h2>{wines.title}</h2>
       </div>
-      <ButtonLink href={wines.allWinesHref} label={wines.allWinesLabel} variant="text" />
+      <ActionLink href={wines.allWinesHref} label={wines.allWinesLabel} variant="text" />
     </div>
 
-    <div class="wines__grid">
+    <div class="wines__grid" data-reveal-group data-reveal-stagger="70">
       {wines.items.map((wine) => (
-        <article class="wines__card">
-          <div class="wines__media">
+        <article class="wines__card ui-hover-lift" data-reveal="up">
+          <div class="wines__media ui-hover-media">
             <Image src={wine.image} alt={wine.title} loading="lazy" />
           </div>
           <div class="wines__body">
             <p class="wines__subtitle">{wine.subtitle}</p>
             <h3>{wine.title}</h3>
             <p class="wines__description">{wine.description}</p>
-            <ButtonLink href={wine.ctaHref} label={wine.ctaLabel} variant="text" />
+            <ActionLink href={wine.ctaHref} label={wine.ctaLabel} variant="text" />
           </div>
         </article>
       ))}
@@ -116,7 +116,7 @@ const { wines } = Astro.props;
     margin: 0;
   }
 
-  .wines__body :global(.btn--text) {
+  .wines__body :global(.ui-action--text) {
     align-self: end;
     margin-top: auto;
   }

@@ -12,27 +12,27 @@ const { terroir } = Astro.props;
 
 <section class="terroir section section--white">
   <div class="shell terroir__inner">
-    <figure class="terroir__media">
+    <figure class="terroir__media ui-hover-media" data-reveal="left">
       <Image src={terroir.image} alt={terroir.imageAlt} loading="lazy" />
     </figure>
 
-    <div class="terroir__content">
+    <div class="terroir__content" data-reveal-group data-reveal-stagger="80">
       <SectionHeading eyebrow={terroir.eyebrow} title={terroir.title} body={terroir.body} />
 
-      <div class="terroir__block">
+      <div class="terroir__block" data-reveal="up">
         <h3>{terroir.grapesTitle}</h3>
-        <ul class="terroir__chips">
+        <ul class="terroir__chips" data-reveal-group data-reveal-stagger="45">
           {terroir.grapes.map((grape) => (
-            <li>{grape}</li>
+            <li data-reveal="up">{grape}</li>
           ))}
         </ul>
       </div>
 
-      <div class="terroir__block">
+      <div class="terroir__block" data-reveal="up">
         <h3>{terroir.commitmentsTitle}</h3>
-        <ul class="terroir__commitments">
+        <ul class="terroir__commitments" data-reveal-group data-reveal-stagger="55">
           {terroir.commitments.map((item) => (
-            <li>
+            <li data-reveal="up">
               <p>{item.title}</p>
               <span>{item.body}</span>
             </li>

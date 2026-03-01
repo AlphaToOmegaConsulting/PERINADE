@@ -1,0 +1,64 @@
+---
+import type { AccordionItem, AccordionMode } from "../../../types/ui";
+
+interface Props {
+  items: AccordionItem[];
+  mode?: AccordionMode;
+  class?: string;
+  rootClass?: string;
+  itemClass?: string;
+  triggerClass?: string;
+  panelClass?: string;
+  headingTag?: "h2" | "h3" | "h4";
+}
+
+const {
+  items,
+  mode = "single",
+  class: className = "",
+  rootClass = "",
+  itemClass = "",
+  triggerClass = "",
+  panelClass = "",
+  headingTag = "h3"
+} = Astro.props;
+
+const HeadingTag = headingTag;
+const rootClasses = [className, rootClass].filter(Boolean).join(" ");
+---
+
+<div class={rootClasses} data-accordion data-accordion-mode={mode}>
+  {items.map((item, index) => {
+    const panelId = `accordion-panel-${item.id}`;
+    const triggerId = `accordion-trigger-${item.id}`;
+    const isOpen = item.expanded ?? index === 0;
+
+    return (
+      <article class:list={["ui-accordion__item", itemClass, isOpen && "is-open"]}>
+        <HeadingTag>
+          <button
+            id={triggerId}
+            class:list={["ui-accordion__trigger", triggerClass]}
+            type="button"
+            aria-expanded={isOpen ? "true" : "false"}
+            aria-controls={panelId}
+            data-accordion-trigger
+          >
+            <span>{item.heading}</span>
+            <span class="ui-accordion__chevron" aria-hidden="true">⌄</span>
+          </button>
+        </HeadingTag>
+        <div
+          id={panelId}
+          class:list={["ui-accordion__panel", panelClass]}
+          role="region"
+          aria-labelledby={triggerId}
+          hidden={!isOpen}
+          data-accordion-panel
+        >
+          <p>{item.content}</p>
+        </div>
+      </article>
+    );
+  })}
+</div>

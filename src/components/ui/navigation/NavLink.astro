@@ -1,0 +1,46 @@
+---
+import type { ActionTone, NavLinkKind } from "../../../types/ui";
+import { isPlaceholderLink } from "../../../utils/link";
+
+interface Props {
+  href: string;
+  label: string;
+  isActive?: boolean;
+  navKind?: NavLinkKind;
+  tone?: ActionTone;
+  class?: string;
+}
+
+const {
+  href,
+  label,
+  isActive = false,
+  navKind = "primary",
+  tone = "default",
+  class: className = "",
+  ...rest
+} = Astro.props;
+
+const tag = isPlaceholderLink(href) ? "span" : "a";
+const classes = [
+  "ui-nav-link",
+  "ui-hover-underline",
+  `ui-nav-link--${navKind}`,
+  `ui-nav-link--tone-${tone}`,
+  isActive && "is-active",
+  className
+]
+  .filter(Boolean)
+  .join(" ");
+const Tag = tag;
+---
+
+{Tag === "a" ? (
+  <a class={classes} href={href} aria-current={isActive ? "page" : undefined} {...rest}>
+    <slot>{label}</slot>
+  </a>
+) : (
+  <span class={classes} aria-current={isActive ? "page" : undefined} {...rest}>
+    <slot>{label}</slot>
+  </span>
+)}

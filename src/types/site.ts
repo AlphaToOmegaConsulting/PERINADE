@@ -93,7 +93,11 @@ export interface SiteData {
   nav: NavItem[];
   mobileQuickActions: MobileQuickAction[];
   hero: HeroData;
-  reasons: ReasonItem[];
+  reasons: {
+    eyebrow: string;
+    title: string;
+    items: ReasonItem[];
+  };
   experience: {
     eyebrow: string;
     title: string;

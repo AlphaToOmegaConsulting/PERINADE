@@ -10,9 +10,9 @@ const { stats } = Astro.props;
 
 <section class="domain-stats section">
   <div class="shell">
-    <ul class="domain-stats__grid" aria-label="Indicateurs du domaine">
+    <ul class="domain-stats__grid" aria-label="Indicateurs du domaine" data-reveal-group data-reveal-stagger="45">
       {stats.map((item) => (
-        <li class="domain-stats__card">
+        <li class="domain-stats__card" data-reveal="up">
           <span class="domain-stats__dot" aria-hidden="true"></span>
           <strong>{item.value}</strong>
           <p>{item.label}</p>

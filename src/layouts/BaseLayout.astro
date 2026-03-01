@@ -16,6 +16,7 @@ interface Props {
   canonicalPath?: string;
   alternates?: Alternate[];
   ogImage?: string;
+  disableCursorOrb?: boolean;
   /** URL of the LCP hero image — enables early preload hint */
   heroImageUrl?: string;
   /** Serialised JSON-LD object (use JSON.stringify) */
@@ -30,6 +31,7 @@ const {
   canonicalPath,
   alternates = [],
   ogImage = "/assets/perinade/hero-vineyard.png",
+  disableCursorOrb = false,
   heroImageUrl,
   jsonLd
 } = Astro.props;
@@ -84,9 +86,9 @@ const xDefault = alternates.find((a) => a.locale === "fr");
     <link rel="apple-touch-icon" href="/assets/perinade/logo.png" />
 
     <!-- Structured data -->
-    {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
+    {jsonLd && <script is:inline type="application/ld+json" set:html={jsonLd} />}
   </head>
-  <body>
+  <body data-disable-cursor-orb={disableCursorOrb ? "true" : undefined}>
     <a href="#main-content" class="skip-link">{ui.skipToContent}</a>
     <slot />
     <script>

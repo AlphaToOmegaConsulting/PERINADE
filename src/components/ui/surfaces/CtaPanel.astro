@@ -1,0 +1,125 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import ActionLink from "../actions/ActionLink.astro";
+
+interface ActionItem {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary" | "ghost" | "text";
+}
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  body: string;
+  actions: ActionItem[];
+  details?: string[];
+  titleHighlight?: string;
+  image?: ImageMetadata;
+  imageAlt?: string;
+  class?: string;
+  tone?: "default" | "inverse";
+}
+
+const {
+  eyebrow,
+  title,
+  body,
+  actions,
+  details = [],
+  titleHighlight,
+  image,
+  imageAlt = "",
+  class: className = "",
+  tone = "default"
+} = Astro.props;
+---
+
+<section class:list={["ui-pattern-cta-band", `ui-pattern-cta-band--${tone}`, className]}>
+  {image && (
+    <figure class="ui-pattern-cta-band__media">
+      <Image src={image} alt={imageAlt} loading="lazy" />
+    </figure>
+  )}
+
+  <div class="ui-pattern-cta-band__content">
+    <p class="ui-pattern-cta-band__eyebrow">{eyebrow}</p>
+    <h2 class="ui-pattern-cta-band__title">
+      {title}
+      {titleHighlight && <span>{titleHighlight}</span>}
+    </h2>
+    <p class="ui-pattern-cta-band__body">{body}</p>
+
+    {details.length > 0 && (
+      <ul class="ui-pattern-cta-band__details">
+        {details.map((detail) => (
+          <li>{detail}</li>
+        ))}
+      </ul>
+    )}
+
+    <div class="ui-pattern-cta-band__actions">
+      {actions.map((action) => (
+        <ActionLink href={action.href} label={action.label} variant={action.variant ?? "primary"} tone={tone === "inverse" ? "inverse" : "default"} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .ui-pattern-cta-band {
+    align-items: center;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  .ui-pattern-cta-band--inverse {
+    color: var(--color-white);
+  }
+
+  .ui-pattern-cta-band__media {
+    margin: 0;
+  }
+
+  .ui-pattern-cta-band__content {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .ui-pattern-cta-band__eyebrow {
+    color: var(--color-accent);
+    letter-spacing: 0.2em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .ui-pattern-cta-band__title {
+    display: grid;
+    margin: 0;
+  }
+
+  .ui-pattern-cta-band__body {
+    margin: 0;
+  }
+
+  .ui-pattern-cta-band__details {
+    list-style: none;
+    margin: 0.35rem 0 0;
+    padding: 0;
+  }
+
+  .ui-pattern-cta-band__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.35rem;
+  }
+
+  @media (max-width: 1023px) {
+    .ui-pattern-cta-band {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

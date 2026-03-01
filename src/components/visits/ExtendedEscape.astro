@@ -2,7 +2,7 @@
 import type { VisitPageData } from "../../types/visits";
 import { Image } from "astro:assets";
 import Icon from "../ui/Icon.astro";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   escape: VisitPageData["escape"];
@@ -18,28 +18,28 @@ const { escape } = Astro.props;
 >
   <div class="escape__bg" aria-hidden="true"></div>
   <div class="shell escape__inner">
-    <figure>
+    <figure class="ui-hover-media" data-reveal="left">
       <Image src={escape.image} alt={escape.imageAlt} loading="lazy" />
     </figure>
 
-    <div class="escape__content">
-      <p class="escape__eyebrow">{escape.eyebrow}</p>
-      <h2>
+    <div class="escape__content" data-reveal-group data-reveal-stagger="85">
+      <p class="escape__eyebrow" data-reveal="up">{escape.eyebrow}</p>
+      <h2 data-reveal="up">
         {escape.title[0]}
         <span>{escape.title[1]}</span>
       </h2>
-      <p class="escape__body">{escape.body}</p>
+      <p class="escape__body" data-reveal="up">{escape.body}</p>
 
-      <ul>
+      <ul data-reveal-group data-reveal-stagger="55">
         {escape.features.map((item) => (
-          <li>
+          <li data-reveal="up">
             <span><Icon name={item.icon} /></span>
             <span>{item.label}</span>
           </li>
         ))}
       </ul>
 
-      <ButtonLink class="escape__cta" href={escape.cta.href} label={escape.cta.label} variant="ghost" size="lg" />
+      <ActionLink class="escape__cta" href={escape.cta.href} label={escape.cta.label} variant="ghost" size="lg" data-reveal="up" />
     </div>
   </div>
 </section>
@@ -148,9 +148,9 @@ const { escape } = Astro.props;
   }
 
   .escape :global(.escape__cta) {
-    --btn-ghost-bg-hover: rgba(255, 255, 255, 0.12);
-    --btn-ghost-border: rgba(255, 255, 255, 0.26);
-    --btn-ghost-color: var(--color-white);
+    --action-ghost-bg-hover: rgba(255, 255, 255, 0.12);
+    --action-ghost-border: rgba(255, 255, 255, 0.26);
+    --action-ghost-color: var(--color-white);
 
     margin-top: 1.9rem;
     min-height: 3.2rem;

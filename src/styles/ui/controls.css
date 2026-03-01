@@ -1,0 +1,84 @@
+.ui-accordion__item,
+.ui-tabs,
+.ui-booking-panel {
+  position: relative;
+}
+
+.ui-accordion__trigger,
+.ui-tabs__trigger,
+.ui-counter__button,
+.ui-choice-chip,
+.ui-booking-panel button:not(.ui-action) {
+  transition:
+    border-color var(--motion-duration-sm) var(--motion-ease-standard),
+    color var(--motion-duration-sm) var(--motion-ease-standard),
+    background-color var(--motion-duration-sm) var(--motion-ease-standard),
+    transform var(--motion-duration-sm) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-md) var(--motion-ease-standard),
+    opacity var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.ui-accordion__trigger:hover,
+.ui-accordion__trigger:focus-visible,
+.ui-tabs__trigger:hover,
+.ui-tabs__trigger:focus-visible,
+.ui-counter__button:hover,
+.ui-counter__button:focus-visible,
+.ui-choice-chip:hover,
+.ui-choice-chip:focus-visible,
+.ui-booking-panel button:not(.ui-action):hover,
+.ui-booking-panel button:not(.ui-action):focus-visible {
+  box-shadow: 0 0.65rem 1.25rem rgba(24, 20, 14, 0.08);
+  border-color: var(--control-accent, var(--color-accent));
+  color: var(--control-accent, var(--color-accent));
+}
+
+.ui-accordion__trigger:active,
+.ui-tabs__trigger:active,
+.ui-counter__button:active,
+.ui-choice-chip:active,
+.ui-booking-panel button:not(.ui-action):active {
+  transform: scale(0.98);
+}
+
+.ui-accordion__trigger[aria-expanded="true"],
+.ui-tabs__trigger[aria-selected="true"],
+.ui-choice-chip[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--control-accent, var(--color-accent)) 6%, white);
+  border-color: var(--control-accent, var(--color-accent));
+  color: var(--control-accent, var(--color-accent));
+}
+
+.ui-accordion__chevron {
+  display: inline-block;
+  transition: transform var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.ui-accordion__trigger[aria-expanded="true"] .ui-accordion__chevron {
+  transform: rotate(180deg);
+}
+
+.ui-accordion__panel,
+.ui-tabs__panel {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity var(--motion-duration-sm) var(--motion-ease-standard),
+    transform var(--motion-duration-sm) var(--motion-ease-standard);
+}
+
+.ui-accordion__panel[hidden],
+.ui-tabs__panel[hidden] {
+  opacity: 0;
+  transform: translateY(0.35rem);
+}
+
+.ui-toggle {
+  align-items: center;
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.ui-toggle input {
+  accent-color: var(--control-accent, var(--color-accent));
+}

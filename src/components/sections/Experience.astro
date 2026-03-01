@@ -1,6 +1,6 @@
 ---
 import type { SiteData } from "../../types/site";
-import ButtonLink from "../ui/ButtonLink.astro";
+import ActionLink from "../ui/actions/ActionLink.astro";
 import Icon from "../ui/Icon.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 
@@ -22,9 +22,9 @@ const { experience } = Astro.props;
       light
     />
 
-    <div class="experience__grid">
+    <div class="experience__grid" data-reveal-group data-reveal-stagger="75">
       {experience.details.map((detail) => (
-        <article class="experience__card">
+        <article class="experience__card ui-hover-lift" data-reveal="zoom">
           <span class="experience__icon"><Icon name={detail.icon} /></span>
           <p class="experience__label">{detail.label}</p>
           <p class="experience__value">{detail.value}</p>
@@ -32,8 +32,8 @@ const { experience } = Astro.props;
       ))}
     </div>
 
-    <div class="experience__cta">
-      <ButtonLink href={experience.ctaHref} label={experience.ctaLabel} />
+    <div class="experience__cta" data-reveal="up">
+      <ActionLink href={experience.ctaHref} label={experience.ctaLabel} interaction="emphasis" />
       <p>{experience.infoLine}</p>
     </div>
   </div>

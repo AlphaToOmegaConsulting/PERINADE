@@ -27,7 +27,7 @@ const alternates = [
 ];
 ---
 
-<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description} locale={locale} canonicalPath="/visites" alternates={alternates}>
+<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description} locale={locale} canonicalPath="/visites" alternates={alternates} disableCursorOrb>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/visites", en: "/en/visits", es: "/es/visitas" }} />
   <main id="main-content" class="visits-page" style={visitsThemeStyle}>
     <VisitHero hero={visitsPage.hero} />
@@ -61,12 +61,3 @@ const alternates = [
     }
   }
 </style>
-
-<script>
-  import { initBookingCalendars } from "../scripts/ui/booking-calendar";
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => initBookingCalendars(), { once: true });
-  } else {
-    initBookingCalendars();
-  }
-</script>

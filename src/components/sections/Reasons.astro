@@ -1,10 +1,10 @@
 ---
-import type { ReasonItem } from "../../types/site";
+import type { SiteData } from "../../types/site";
 import Icon from "../ui/Icon.astro";
 import SectionHeading from "../ui/SectionHeading.astro";
 
 interface Props {
-  reasons: ReasonItem[];
+  reasons: SiteData["reasons"];
 }
 
 const { reasons } = Astro.props;
@@ -12,11 +12,11 @@ const { reasons } = Astro.props;
 
 <section class="reasons section section--soft">
   <div class="shell shell--narrow">
-    <SectionHeading eyebrow="Pourquoi nous visiter" title="Trois raisons de venir" centered />
+    <SectionHeading eyebrow={reasons.eyebrow} title={reasons.title} centered />
 
-    <div class="reasons__grid">
-      {reasons.map((reason) => (
-        <article class="reasons__card">
+    <div class="reasons__grid" data-reveal-group data-reveal-stagger="90">
+      {reasons.items.map((reason) => (
+        <article class="reasons__card ui-hover-lift" data-reveal="up">
           <span class="reasons__icon"><Icon name={reason.icon} /></span>
           <h3>{reason.title}</h3>
           <p>{reason.body}</p>

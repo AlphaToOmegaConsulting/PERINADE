@@ -59,23 +59,27 @@ export const siteEn: SiteData = {
       }
     ]
   },
-  reasons: [
-    {
-      title: "A family estate",
-      body: "For six generations, our family has passionately cultivated a human-scale vineyard.",
-      icon: "leaf"
-    },
-    {
-      title: "An exceptional terroir",
-      body: "Nestled between garrigue and hills, our vineyard benefits from a unique microclimate.",
-      icon: "terrain"
-    },
-    {
-      title: "An intimate tasting",
-      body: "No mass tours here. We welcome you personally in a warm and friendly setting.",
-      icon: "glass"
-    }
-  ],
+  reasons: {
+    eyebrow: "Why visit us",
+    title: "Three reasons to come",
+    items: [
+      {
+        title: "A family estate",
+        body: "For six generations, our family has passionately cultivated a human-scale vineyard.",
+        icon: "leaf"
+      },
+      {
+        title: "An exceptional terroir",
+        body: "Nestled between garrigue and hills, our vineyard benefits from a unique microclimate.",
+        icon: "terrain"
+      },
+      {
+        title: "An intimate tasting",
+        body: "No mass tours here. We welcome you personally in a warm and friendly setting.",
+        icon: "glass"
+      }
+    ]
+  },
   experience: {
     eyebrow: "Visit",
     title: "Live the Périnade Experience",
