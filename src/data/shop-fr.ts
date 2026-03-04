@@ -7,21 +7,26 @@ import shopImage5 from "../assets/perinade/shop/img-5.png";
 import shopImage7 from "../assets/perinade/shop/img-7.png";
 
 export const shopPageFr: ShopPageData = {
+  seo: {
+    title: "Acheter Vin AOP Minervois en Ligne | Boutique Domaine de la Périnade",
+    description:
+      "Commandez nos vins Languedoc directement en ligne : AOP Minervois, IGP Pays d'Oc, rouges, blancs et rosés. Livraison 48-72 h en France. Domaine viticole familial près de Carcassonne."
+  },
   hero: {
     image: shopImage1,
-    imageAlt: "Cave avec étagères de bouteilles",
+    imageAlt: "Cave avec étagères de bouteilles du domaine viticole Minervois",
     eyebrow: "Boutique en ligne",
     titleHtml: "Nos vins,<br /><span>chez vous</span>",
     body:
-      "Du domaine à votre table : commandez nos cuvées en ligne et recevez-les directement chez vous. Livraison gratuite dès 80 €.",
+      "Du domaine à votre table : commandez nos cuvées AOP Minervois et IGP Pays d'Oc en ligne et recevez-les directement chez vous. Livraison gratuite dès 80 €.",
     primaryCta: { label: "Découvrir", href: "/boutique#produits" },
     secondaryCta: { label: "Composer ma caisse", href: "/boutique#coffrets" },
     metaAriaLabel: "Informations livraison boutique",
     metaItems: ["Livraison 48-72 h", "Paiement sécurisé", "Retours 14 jours"]
   },
   productGrid: {
-    eyebrow: "Votre parcours",
-    title: "L'expérience pas à pas",
+    eyebrow: "Nos cuvées",
+    title: "Vins AOP Minervois et IGP Pays d'Oc",
     products: [
       {
         name: "Cuvée du Domaine",

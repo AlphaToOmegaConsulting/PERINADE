@@ -6,6 +6,7 @@ import type { SiteData } from "../types/site";
 import type { DomainePageData } from "../types/domaine";
 import type { VisitPageData } from "../types/visits";
 import type { ShopPageData } from "../types/shop";
+import type { NewsPageData } from "../types/news";
 
 /* ── Site data ───────────────────────────────────────────── */
 
@@ -44,5 +45,15 @@ export async function getShopData(locale: Locale): Promise<ShopPageData> {
     case "en": return (await import("./shop-en")).shopPageEn;
     case "es": return (await import("./shop-es")).shopPageEs;
     default:   return (await import("./shop-fr")).shopPageFr;
+  }
+}
+
+/* ── News data ───────────────────────────────────────────── */
+
+export async function getNewsData(locale: Locale): Promise<NewsPageData> {
+  switch (locale) {
+    case "en": return (await import("./news-en")).newsPageEn;
+    case "es": return (await import("./news-es")).newsPageEs;
+    default:   return (await import("./news-fr")).newsPageFr;
   }
 }

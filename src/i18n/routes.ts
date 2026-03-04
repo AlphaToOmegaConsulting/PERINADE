@@ -8,7 +8,8 @@ export const pageRoutes: Record<string, Record<Locale, string>> = {
   home:     { fr: "/",           en: "/",           es: "/"           },
   domaine:  { fr: "/domaine",    en: "/domaine",    es: "/domaine"    },
   visites:  { fr: "/visites",    en: "/visits",     es: "/visitas"    },
-  boutique: { fr: "/boutique",   en: "/shop",       es: "/tienda"     }
+  boutique: { fr: "/boutique",   en: "/shop",       es: "/tienda"     },
+  actualites: { fr: "/actualites", en: "/news",     es: "/noticias"   }
 };
 
 /** Get the full path for a page in a given locale. */

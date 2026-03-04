@@ -7,21 +7,26 @@ import shopImage5 from "../assets/perinade/shop/img-5.png";
 import shopImage7 from "../assets/perinade/shop/img-7.png";
 
 export const shopPageEs: ShopPageData = {
+  seo: {
+    title: "Comprar Vino AOP Minervois Online | Tienda Domaine de la Périnade",
+    description:
+      "Pida nuestros vinos del Languedoc online: AOP Minervois, IGP Pays d'Oc, tintos, blancos y rosados. Entrega en 48-72 h en Francia. Dominio familiar cerca de Carcassonne."
+  },
   hero: {
     image: shopImage1,
-    imageAlt: "Bodega con estanterías de botellas",
+    imageAlt: "Bodega con estanterías de botellas del dominio Minervois",
     eyebrow: "Tienda en línea",
     titleHtml: "Nuestros vinos,<br /><span>en su casa</span>",
     body:
-      "De la finca a su mesa: pida nuestros vinos en línea y recíbalos directamente en casa. Envío gratuito a partir de 80 €.",
+      "De la finca a su mesa: pida nuestros vinos AOP Minervois e IGP Pays d'Oc en línea y recíbalos directamente en casa. Envío gratuito a partir de 80 €.",
     primaryCta: { label: "Ver vinos", href: "/es/tienda#produits" },
     secondaryCta: { label: "Componer mi caja", href: "/es/tienda#coffrets" },
     metaAriaLabel: "Información de entrega de la tienda",
     metaItems: ["Entrega en 48-72 h", "Pago seguro", "Devoluciones 14 días"]
   },
   productGrid: {
-    eyebrow: "Su recorrido",
-    title: "La experiencia paso a paso",
+    eyebrow: "Nuestras cuvées",
+    title: "Vinos AOP Minervois e IGP Pays d'Oc",
     products: [
       {
         name: "Cuvée du Domaine",

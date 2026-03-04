@@ -1,0 +1,96 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/sections/Header.astro";
+import Footer from "../../components/sections/Footer.astro";
+import NewsHero from "../../components/news/NewsHero.astro";
+import NewsFeatured from "../../components/news/NewsFeatured.astro";
+import NewsArticles from "../../components/news/NewsArticles.astro";
+import NewsAgenda from "../../components/news/NewsAgenda.astro";
+import NewsVisitCta from "../../components/news/NewsVisitCta.astro";
+import { getNewsData, getSiteData } from "../../data/index";
+
+const locale = "es";
+const site = await getSiteData(locale);
+const news = await getNewsData(locale);
+
+const alternates = [
+  { locale: "fr", href: "/actualites" },
+  { locale: "en", href: "/en/news" },
+  { locale: "es", href: "/es/noticias" }
+];
+
+const jsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Noticias — Domaine de la Périnade",
+  "url": "https://www.perinade.fr/es/noticias",
+  "description": news.seo.description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Domaine de la Périnade",
+    "url": "https://www.perinade.fr"
+  },
+  "blogPost": news.blogPosts.map((post) => ({
+    "@type": "BlogPosting",
+    "headline": post.headline,
+    "description": post.description,
+    "datePublished": post.datePublished,
+    "url": post.url,
+    "articleSection": post.category,
+    "author": {
+      "@type": "Organization",
+      "name": "Domaine de la Périnade"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Domaine de la Périnade",
+      "url": "https://www.perinade.fr"
+    }
+  }))
+});
+---
+
+<BaseLayout
+  title={news.seo.title}
+  description={news.seo.description}
+  locale={locale}
+  canonicalPath="/es/noticias"
+  alternates={alternates}
+  jsonLd={jsonLd}
+>
+  <Header
+    nav={site.nav}
+    quickActions={site.mobileQuickActions}
+    ctaLabel={site.experience.ctaLabel}
+    ctaHref={site.experience.ctaHref}
+    locale={locale}
+    alternateUrls={{ fr: "/actualites", en: "/en/news", es: "/es/noticias" }}
+  />
+
+  <main id="main-content" class="news-page" style={`--news-section-desktop:${news.theme.sectionDesktop};--news-section-tablet:${news.theme.sectionTablet};--news-section-mobile:${news.theme.sectionMobile};`}>
+    <NewsHero hero={news.hero} />
+    <NewsFeatured featured={news.featured} />
+    <NewsArticles articles={news.articles} />
+    <NewsAgenda agenda={news.agenda} />
+    <NewsVisitCta visitCta={news.visitCta} />
+  </main>
+
+  <Footer footer={site.footer} />
+</BaseLayout>
+
+<style>
+  .news-page :global(.section:not(.news-hero):not(.news-featured):not(.news-visit-cta)) {
+    padding-block: var(--news-section-desktop);
+  }
+  @media (max-width: 63.9375em) {
+    .news-page :global(.section:not(.news-hero):not(.news-featured):not(.news-visit-cta)) {
+      padding-block: var(--news-section-tablet);
+    }
+  }
+
+  @media (max-width: 47.9375em) {
+    .news-page :global(.section:not(.news-hero):not(.news-featured):not(.news-visit-cta)) {
+      padding-block: var(--news-section-mobile);
+    }
+  }
+</style>

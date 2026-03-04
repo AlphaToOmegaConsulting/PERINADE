@@ -1,0 +1,98 @@
+import type { ImageMetadata } from "astro";
+
+export interface NewsStatItem {
+  value: string;
+  label: string;
+}
+
+export interface NewsArticleCard {
+  category: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  readLabel: string;
+  href: string;
+  image: ImageMetadata;
+  imageAlt: string;
+}
+
+export interface NewsEventItem {
+  day: string;
+  month: string;
+  type: string;
+  title: string;
+  time: string;
+  location: string;
+  href: string;
+}
+
+export interface NewsBlogPost {
+  headline: string;
+  description: string;
+  datePublished: string;
+  url: string;
+  category: string;
+}
+
+export interface NewsPageData {
+  seo: {
+    title: string;
+    description: string;
+  };
+  theme: {
+    sectionDesktop: string;
+    sectionTablet: string;
+    sectionMobile: string;
+  };
+  hero: {
+    eyebrow: string;
+    titleLines: [string, string];
+    lead: string;
+    watermarkYear: string;
+    stats: NewsStatItem[];
+    updatedLabel: string;
+  };
+  featured: {
+    eyebrow: string;
+    category: string;
+    title: string;
+    excerpt: string;
+    date: string;
+    readTime: string;
+    ctaLabel: string;
+    ctaHref: string;
+    image: ImageMetadata;
+    imageAlt: string;
+  };
+  articles: {
+    eyebrow: string;
+    title: string;
+    chips: string[];
+    activeChip: string;
+    leadCtaLabel: string;
+    leadCard: NewsArticleCard;
+    cards: NewsArticleCard[];
+    viewMoreLabel: string;
+    viewMoreHref: string;
+  };
+  agenda: {
+    eyebrow: string;
+    title: string;
+    viewAllLabel: string;
+    viewAllHref: string;
+    events: NewsEventItem[];
+  };
+  visitCta: {
+    eyebrow: string;
+    titleLines: [string, string];
+    body: string;
+    ctaLabel: string;
+    ctaHref: string;
+    newsletterPlaceholder: string;
+    newsletterAction: string;
+    newsletterSubmitLabel: string;
+    backgroundImage: ImageMetadata;
+    backgroundAlt: string;
+  };
+  blogPosts: NewsBlogPost[];
+}

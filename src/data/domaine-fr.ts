@@ -16,9 +16,9 @@ export const domainePageFr: DomainePageData = {
     sectionMobile: "3.8rem"
   },
   seo: {
-    title: "Le Domaine | Domaine de la Périnade",
+    title: "Le Domaine | Domaine de la Périnade — Vignoble AOP Minervois, Languedoc",
     description:
-      "Découvrez l'histoire du Domaine de la Périnade, son terroir, ses vins et les possibilités de visite au cœur du Minervois."
+      "Découvrez le Domaine de la Périnade : 100 ha de vignes AOP Minervois près de Carcassonne, dans l'Aude. Six générations de viticulture familiale en Languedoc depuis 1830. Oenotourisme, visite cave et dégustation."
   },
   hero: {
     eyebrow: "Le Domaine",
@@ -34,7 +34,7 @@ export const domainePageFr: DomainePageData = {
       href: "/boutique"
     },
     badges: ["Viticulture", "Terroir", "Transmission"],
-    highlights: ["100 ha de domaine", "40 ha de vignes", "6 générations", "Minervois · Languedoc"],
+    highlights: ["100 ha de domaine", "40 ha vignes AOP Minervois", "6 générations", "Oenotourisme Languedoc-Aude"],
     image: heroImg,
     imageAlt: "Personne consultant son téléphone au crépuscule dans le domaine"
   },
@@ -42,7 +42,7 @@ export const domainePageFr: DomainePageData = {
     eyebrow: "Terroir & Savoir-faire",
     title: "Un emplacement d'exception",
     body:
-      "Le domaine s'étend entre le Canal du Midi et la rivière Fresquel, dans le périmètre de l'AOP Minervois. Cette situation géographique rare — entre eau et garrigue — façonne la minéralité et la fraîcheur de nos cuvées.",
+      "Le domaine s'étend entre le Canal du Midi et la rivière Fresquel, dans le périmètre de l'AOP Minervois, à 15 km de Carcassonne (Aude, Occitanie). Cette situation géographique rare — entre eau, garrigue et collines ensoleillées du Languedoc — façonne la minéralité et la fraîcheur singulières de nos cuvées.",
     grapesTitle: "Cépages cultivés",
     commitmentsTitle: "Engagements environnementaux",
     grapes: ["Grenache noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot"],

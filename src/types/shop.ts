@@ -89,7 +89,13 @@ export interface ShopFaqData {
   items: ShopFaqItem[];
 }
 
+export interface ShopSeoData {
+  title: string;
+  description: string;
+}
+
 export interface ShopPageData {
+  seo: ShopSeoData;
   hero: ShopHeroData;
   productGrid: ShopProductGridData;
   domainSelection: ShopDomainSelectionData;

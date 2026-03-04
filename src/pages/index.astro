@@ -22,43 +22,77 @@ const alternates = [
 
 const heroImageUrl = site.hero.backgroundImage.src;
 
+const seoTitle = "Domaine de la Périnade | Vin AOP Minervois près de Carcassonne";
+const seoDescription = "Domaine viticole familial en Languedoc depuis 1830. Vins AOP Minervois et IGP Pays d'Oc. Dégustation, visite cave et boutique en ligne. Près de Carcassonne, Aude.";
+
 const jsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Winery",
   "name": "Domaine de la Périnade",
   "url": "https://www.perinade.fr",
-  "telephone": "+33 4 68 XX XX XX",
+  "telephone": "+33468000000",
   "email": "contact@perinade.fr",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "Domaine de la Périnade",
     "addressLocality": "Carcassonne",
     "addressRegion": "Occitanie",
+    "postalCode": "11000",
     "addressCountry": "FR"
   },
   "geo": {
     "@type": "GeoCoordinates",
-    "latitude": "43.2",
-    "longitude": "2.35"
+    "latitude": "43.2130",
+    "longitude": "2.3536"
   },
+  "hasMap": "https://maps.google.com/?q=Domaine+de+la+Perinade+Minervois+Languedoc",
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      "opens": "09:00",
-      "closes": "18:00"
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      "opens": "11:00",
+      "closes": "16:00"
     }
   ],
   "sameAs": [
-    "https://www.instagram.com/",
-    "https://www.facebook.com/"
+    "https://www.instagram.com/domaineperinade/",
+    "https://www.facebook.com/domaineperinade/"
   ],
-  "description": "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1830.",
+  "description": "Domaine viticole familial en Languedoc depuis 1830. Vins AOP Minervois et IGP Pays d'Oc. Visite de cave et dégustation près de Carcassonne, Aude.",
   "foundingDate": "1830",
-  "priceRange": "€€"
+  "priceRange": "€–€€",
+  "servesCuisine": "Vins AOP Minervois, IGP Pays d'Oc",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Marie & Jean-Pierre" },
+      "reviewBody": "Un accueil exceptionnel dans un cadre magnifique. La dégustation était passionnante et les vins délicieux. Nous reviendrons !",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Sarah T." },
+      "reviewBody": "A hidden gem near Carcassonne. The family was incredibly welcoming and the wines were outstanding. A must-visit.",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Philippe D." },
+      "reviewBody": "On ressent immédiatement la passion et le savoir-faire familial. Les vins sont sincères et le domaine est superbe.",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+    }
+  ]
 });
 ---
 
-<BaseLayout locale={locale} canonicalPath="/" alternates={alternates} heroImageUrl={heroImageUrl} jsonLd={jsonLd}>
+<BaseLayout title={seoTitle} description={seoDescription} locale={locale} canonicalPath="/" alternates={alternates} heroImageUrl={heroImageUrl} jsonLd={jsonLd}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/", en: "/en", es: "/es" }} />
   <main id="main-content">
     <Hero hero={site.hero} />

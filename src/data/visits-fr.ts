@@ -67,15 +67,15 @@ export const visitsPageFr: VisitPageData = {
     }
   },
   seo: {
-    title: "Visites & Dégustations | Domaine de la Périnade",
+    title: "Visite & Dégustation Vin Minervois | Domaine de la Périnade, Carcassonne",
     description:
-      "Réservez votre visite du domaine : promenade dans les vignes, découverte du chai, dégustation commentée et options gourmandes."
+      "Réservez votre dégustation vin près de Carcassonne : promenade dans le vignoble Minervois, visite cave, dégustation commentée 5 cuvées. Oenotourisme Languedoc, Aude. Dès 15 €."
   },
   hero: {
-    eyebrow: "Visites & Dégustations",
+    eyebrow: "Visites & Dégustations — Minervois, Languedoc",
     titleLines: ["Découvrez le Languedoc", "verre en main"],
     body:
-      "Une immersion guidée par le vigneron : promenade dans les vignes, visite du chai et dégustation de 5 cuvées dans un cadre familial d'exception.",
+      "Une immersion guidée par le vigneron : promenade dans le vignoble Minervois, visite du chai et dégustation de 5 cuvées AOP dans un cadre familial d'exception, à 15 minutes de Carcassonne.",
     badges: [
       { icon: "clock", label: "1 h 30" },
       { icon: "ticket", label: "À partir de 15 €" },
@@ -117,9 +117,9 @@ export const visitsPageFr: VisitPageData = {
         id: "step-2",
         number: "02",
         title: "Promenade dans les vignes",
-        body: "Découverte du terroir languedocien, des cépages et des méthodes de culture. Une immersion entre garrigue et collines ensoleillées.",
+        body: "Découverte du terroir languedocien et du vignoble Minervois : cépages (Grenache, Cabernet, Merlot), méthodes de culture, garrigue et collines ensoleillées de l'Aude.",
         image: visitsStep2,
-        imageAlt: "Chemin de vigne et végétation du domaine",
+        imageAlt: "Chemin de vigne et végétation du domaine viticole Minervois",
         layout: {
           mediaRatio: "568/420",
           mediaMaxWidth: "21rem",
@@ -131,9 +131,9 @@ export const visitsPageFr: VisitPageData = {
         id: "step-3",
         number: "03",
         title: "Visite du chai & vinification",
-        body: "Explication des techniques de vinification, de la vendange aux fûts de chêne. Comprenez le processus qui donne vie à nos cuvées.",
+        body: "Explication des techniques de vinification, de la vendange aux fûts de chêne. Découvrez comment naissent nos cuvées AOP Minervois dans ce chai familial du Languedoc.",
         image: visitsStep3,
-        imageAlt: "Intérieur du chai avec barriques",
+        imageAlt: "Intérieur du chai avec barriques — domaine viticole Languedoc",
         layout: {
           mediaRatio: "568/420",
           mediaMaxWidth: "21rem",

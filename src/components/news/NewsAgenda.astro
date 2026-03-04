@@ -1,0 +1,206 @@
+---
+import type { NewsPageData } from "../../types/news";
+
+interface Props {
+  agenda: NewsPageData["agenda"];
+}
+
+const { agenda } = Astro.props;
+---
+
+<section class="news-agenda section">
+  <div class="shell news-agenda__shell">
+    <header class="news-agenda__header" data-reveal="up">
+      <div>
+        <p class="news-agenda__eyebrow">{agenda.eyebrow}</p>
+        <h2>{agenda.title}</h2>
+      </div>
+      <a href={agenda.viewAllHref} class="news-agenda__view-all">{agenda.viewAllLabel}</a>
+    </header>
+
+    <div class="news-agenda__list" data-reveal-group data-reveal-stagger="60">
+      {agenda.events.map((event) => (
+        <article class="news-agenda__event" data-reveal="up">
+          <div class="news-agenda__date">
+            <strong>{event.day}</strong>
+            <span>{event.month}</span>
+          </div>
+          <div class="news-agenda__content">
+            <p class="news-agenda__type">{event.type}</p>
+            <h3>
+              <a href={event.href}>{event.title}</a>
+            </h3>
+            <p class="news-agenda__details">
+              <span>{event.time}</span>
+              <span>{event.location}</span>
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+  <div class="news-agenda__glow" aria-hidden="true"></div>
+</section>
+
+<style>
+  .news-agenda {
+    background: #1a1a1a;
+    color: #f5f0e8;
+    padding-bottom: 10rem;
+    padding-top: 6rem;
+    position: relative;
+  }
+
+  .news-agenda__shell {
+    margin-inline: auto;
+    max-width: 55.625rem;
+    position: relative;
+    width: min(100%, calc(100vw - 12rem));
+    z-index: 2;
+  }
+
+  .news-agenda__header {
+    align-items: end;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+  }
+
+  .news-agenda__eyebrow {
+    color: #c49c6e;
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .news-agenda__header h2 {
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    margin: 0.9rem 0 0;
+  }
+
+  .news-agenda__view-all {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .news-agenda__view-all::after {
+    content: "  →";
+  }
+
+  .news-agenda__list {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .news-agenda__event {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    display: grid;
+    grid-template-columns: 7.25rem 1fr;
+    gap: 2rem;
+    padding: 1.5rem 0;
+  }
+
+  .news-agenda__date {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .news-agenda__date strong {
+    color: #c49c6e;
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .news-agenda__date span {
+    color: rgba(255, 255, 255, 0.32);
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .news-agenda__content {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .news-agenda__type {
+    color: rgba(196, 156, 110, 0.8);
+    font-size: 0.625rem;
+    letter-spacing: 0.24em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .news-agenda__content h3 {
+    font-size: 1.15rem;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .news-agenda__content h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .news-agenda__details {
+    color: rgba(255, 255, 255, 0.48);
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.75rem;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .news-agenda__details span + span::before {
+    content: "·";
+    margin-right: 0.75rem;
+  }
+
+  .news-agenda__glow {
+    background: linear-gradient(180deg, rgba(196, 156, 110, 0), rgba(196, 123, 35, 0.9) 70%, rgba(196, 123, 35, 0));
+    bottom: 0;
+    height: 6rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: 1;
+  }
+
+  @media (max-width: 63.9375em) {
+    .news-agenda {
+      padding-bottom: 7rem;
+      padding-top: 5rem;
+    }
+
+    .news-agenda__shell {
+      width: min(100%, calc(100vw - 4rem));
+    }
+  }
+
+  @media (max-width: 47.9375em) {
+    .news-agenda {
+      padding-bottom: 5rem;
+      padding-top: 3.75rem;
+    }
+
+    .news-agenda__shell {
+      width: min(100%, calc(100vw - 2.5rem));
+    }
+
+    .news-agenda__header {
+      align-items: start;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .news-agenda__event {
+      gap: 1rem;
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

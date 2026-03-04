@@ -19,7 +19,7 @@ export const siteEn: SiteData = {
     { label: "Visits", href: "/en/visits", desktopSlot: "left", desktopLabel: "VISITS" },
     { label: "Shop", href: "/en/shop", desktopSlot: "left", desktopLabel: "SHOP" },
     { label: "The Estate", href: "/en/domaine", desktopSlot: "left", desktopLabel: "ESTATE" },
-    { label: "News", href: "/en#contact", desktopSlot: "right", desktopLabel: "NEWS" },
+    { label: "News", href: "/en/news", desktopSlot: "right", desktopLabel: "NEWS" },
     { label: "Contact", href: "/en#contact" }
   ],
   mobileQuickActions: [

@@ -25,6 +25,16 @@ export const initScrollReveals = (): void => {
   if (revealInitialized) return;
   registerDeclarativeRevealGroups();
 
+  const url = new URL(window.location.href);
+  const qaMode = url.searchParams.get("qa");
+  const forceStaticReveal = qaMode === "static" || qaMode === "1";
+
+  if (forceStaticReveal) {
+    revealImmediately();
+    revealInitialized = true;
+    return;
+  }
+
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reducedMotion || !("IntersectionObserver" in window)) {
     revealImmediately();

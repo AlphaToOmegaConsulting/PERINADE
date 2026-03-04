@@ -1,41 +1,81 @@
 const siteUrl = "https://www.perinade.fr";
 
-const pages = [
-  /* French (default) */
-  { path: "/", changefreq: "weekly", priority: "1.0" },
-  { path: "/visites", changefreq: "weekly", priority: "0.9" },
-  { path: "/boutique", changefreq: "weekly", priority: "0.8" },
-  { path: "/domaine", changefreq: "monthly", priority: "0.8" },
-
-  /* English */
-  { path: "/en", changefreq: "weekly", priority: "0.9" },
-  { path: "/en/visits", changefreq: "weekly", priority: "0.8" },
-  { path: "/en/shop", changefreq: "weekly", priority: "0.7" },
-  { path: "/en/domaine", changefreq: "monthly", priority: "0.7" },
-
-  /* Spanish */
-  { path: "/es", changefreq: "weekly", priority: "0.9" },
-  { path: "/es/visitas", changefreq: "weekly", priority: "0.8" },
-  { path: "/es/tienda", changefreq: "weekly", priority: "0.7" },
-  { path: "/es/domaine", changefreq: "monthly", priority: "0.7" }
+/**
+ * URL groups: each group lists all locale variants for the same page.
+ * Used to generate <xhtml:link rel="alternate"> tags for multilingual SEO.
+ */
+const urlGroups = [
+  {
+    fr: "/",
+    en: "/en",
+    es: "/es",
+    changefreq: "weekly",
+    priority: { fr: "1.0", en: "0.9", es: "0.9" }
+  },
+  {
+    fr: "/visites",
+    en: "/en/visits",
+    es: "/es/visitas",
+    changefreq: "weekly",
+    priority: { fr: "0.9", en: "0.8", es: "0.8" }
+  },
+  {
+    fr: "/boutique",
+    en: "/en/shop",
+    es: "/es/tienda",
+    changefreq: "weekly",
+    priority: { fr: "0.8", en: "0.7", es: "0.7" }
+  },
+  {
+    fr: "/domaine",
+    en: "/en/domaine",
+    es: "/es/domaine",
+    changefreq: "monthly",
+    priority: { fr: "0.8", en: "0.7", es: "0.7" }
+  },
+  {
+    fr: "/actualites",
+    en: "/en/news",
+    es: "/es/noticias",
+    changefreq: "weekly",
+    priority: { fr: "0.7", en: "0.6", es: "0.6" }
+  }
 ];
 
 export async function GET() {
   const today = new Date().toISOString().split("T")[0];
-  const urls = pages
-    .map(
-      (p) => `  <url>
-    <loc>${siteUrl}${p.path}</loc>
+
+  const urls: string[] = [];
+
+  for (const group of urlGroups) {
+    const locales: Array<"fr" | "en" | "es"> = ["fr", "en", "es"];
+
+    for (const locale of locales) {
+      const path = group[locale];
+      const priority = group.priority[locale];
+
+      // Build xhtml:link alternates for all locales in this group
+      const alternates = [
+        `    <xhtml:link rel="alternate" hreflang="fr" href="${siteUrl}${group.fr}"/>`,
+        `    <xhtml:link rel="alternate" hreflang="en" href="${siteUrl}${group.en}"/>`,
+        `    <xhtml:link rel="alternate" hreflang="es" href="${siteUrl}${group.es}"/>`,
+        `    <xhtml:link rel="alternate" hreflang="x-default" href="${siteUrl}${group.fr}"/>`
+      ].join("\n");
+
+      urls.push(`  <url>
+    <loc>${siteUrl}${path}</loc>
+${alternates}
     <lastmod>${today}</lastmod>
-    <changefreq>${p.changefreq}</changefreq>
-    <priority>${p.priority}</priority>
-  </url>`
-    )
-    .join("\n");
+    <changefreq>${group.changefreq}</changefreq>
+    <priority>${priority}</priority>
+  </url>`);
+    }
+  }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${urls.join("\n")}
 </urlset>`;
 
   return new Response(xml, {

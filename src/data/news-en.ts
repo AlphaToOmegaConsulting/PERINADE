@@ -1,0 +1,203 @@
+import type { NewsPageData } from "../types/news";
+import featuredHero from "../assets/perinade/news/featured-hero.jpg";
+import highlightHeritage from "../assets/perinade/news/highlight-heritage.jpg";
+import articleTastingAdvice from "../assets/perinade/news/article-tasting-advice.jpg";
+import articleHachette from "../assets/perinade/news/article-hachette.jpg";
+import articleWinterPruning from "../assets/perinade/news/article-winter-pruning.jpg";
+import articleChristmasEvening from "../assets/perinade/news/article-christmas-evening.jpg";
+import visitCtaVineyardBand from "../assets/perinade/news/visit-cta-vineyard-band.jpg";
+
+export const newsPageEn: NewsPageData = {
+  seo: {
+    title: "News | Domaine de la Périnade — AOP Minervois Wines, Languedoc",
+    description:
+      "Harvest updates, new cuvées and estate events at Domaine de la Périnade in Minervois, near Carcassonne."
+  },
+  theme: {
+    sectionDesktop: "8rem",
+    sectionTablet: "5.75rem",
+    sectionMobile: "4rem"
+  },
+  hero: {
+    eyebrow: "Estate journal",
+    titleLines: ["News", "from the estate"],
+    lead:
+      "Harvests, new cuvées, events at the estate — follow life at Périnade through the seasons, between vineyard and cellar.",
+    watermarkYear: "2026",
+    stats: [
+      { value: "9", label: "Articles" },
+      { value: "3", label: "Upcoming events" }
+    ],
+    updatedLabel: "Updated · March 2026"
+  },
+  featured: {
+    eyebrow: "Featured",
+    category: "Harvest",
+    title: "Harvest 2025: an exceptional crop under the Languedoc sun",
+    excerpt:
+      "A look back at a harvest marked by ideal ripeness and generous sunshine. The first juices already reveal rare complexity, promising a memorable vintage for the estate.",
+    date: "15 February 2026",
+    readTime: "6 min read",
+    ctaLabel: "Read full article",
+    ctaHref: "/en/news",
+    image: featuredHero,
+    imageAlt: "Manual grape harvest at Domaine de la Périnade"
+  },
+  articles: {
+    eyebrow: "All stories",
+    title: "Estate chronicles",
+    chips: ["All", "Harvest", "New cuvées", "Events", "Estate life"],
+    activeChip: "All",
+    leadCtaLabel: "Read article",
+    leadCard: {
+      category: "New cuvées",
+      date: "8 Feb 2026",
+      title: "The ‘Héritage’ 2024 cuvée enters barrel ageing",
+      excerpt:
+        "Our flagship cuvée now rests in French oak barrels for 14 months. First impressions from the cellar.",
+      readLabel: "4 min read",
+      href: "/en/news",
+      image: highlightHeritage,
+      imageAlt: "Barrels in the estate cellar"
+    },
+    cards: [
+      {
+        category: "Estate life",
+        date: "1 Feb 2026",
+        title: "How to taste our wines: advice from the estate",
+        excerpt:
+          "Serving temperature, aeration and food pairings — our recommendations for enjoying each cuvée.",
+        readLabel: "Read more",
+        href: "/en/news",
+        image: articleTastingAdvice,
+        imageAlt: "Wine tasting glass and pouring ritual"
+      },
+      {
+        category: "Estate life",
+        date: "22 Jan 2026",
+        title: "Périnade featured in the Guide Hachette 2026",
+        excerpt:
+          "Our 2023 Minervois red earns two stars. A proud moment shared by the whole team.",
+        readLabel: "Read more",
+        href: "/en/news",
+        image: articleHachette,
+        imageAlt: "Awarded bottles from the estate"
+      },
+      {
+        category: "Estate life",
+        date: "10 Jan 2026",
+        title: "Winter pruning: an ancestral gesture to prepare the vintage",
+        excerpt:
+          "Our growers prune vine by vine — a ritual that shapes every future harvest.",
+        readLabel: "Read more",
+        href: "/en/news",
+        image: articleWinterPruning,
+        imageAlt: "Winter vineyard landscape in Minervois"
+      },
+      {
+        category: "Events",
+        date: "18 Dec 2025",
+        title: "Christmas evening at the estate: highlights in pictures",
+        excerpt:
+          "Fireside tasting, food-and-wine pairings and live music for a warm and memorable evening.",
+        readLabel: "Read more",
+        href: "/en/news",
+        image: articleChristmasEvening,
+        imageAlt: "Wine glass in warm evening light"
+      }
+    ],
+    viewMoreLabel: "View 4 more articles",
+    viewMoreHref: "TODO_LINK_NEWS_ARCHIVE_EN"
+  },
+  agenda: {
+    eyebrow: "Agenda",
+    title: "Upcoming events",
+    viewAllLabel: "View all",
+    viewAllHref: "TODO_LINK_NEWS_EVENTS_EN",
+    events: [
+      {
+        day: "15",
+        month: "Mar 2026",
+        type: "Workshop",
+        title: "Pruning day: introduction to vineyard craft",
+        time: "10am – 1pm",
+        location: "At the estate",
+        href: "TODO_LINK_NEWS_EVENT_1_EN"
+      },
+      {
+        day: "05",
+        month: "Apr 2026",
+        type: "Tasting",
+        title: "Evening tasting: Minervois red vertical session",
+        time: "6:30pm – 9pm",
+        location: "Tasting cellar",
+        href: "TODO_LINK_NEWS_EVENT_2_EN"
+      },
+      {
+        day: "24",
+        month: "May 2026",
+        type: "Event",
+        title: "Spring open day — free entrance",
+        time: "10am – 6pm",
+        location: "Domaine de la Périnade",
+        href: "TODO_LINK_NEWS_EVENT_3_EN"
+      }
+    ]
+  },
+  visitCta: {
+    eyebrow: "Live the estate",
+    titleLines: ["Every visit is", "a promise kept"],
+    body: "Walk through the vines, feel the cellar, taste the wine at its source.",
+    ctaLabel: "Book a visit",
+    ctaHref: "/en/visits#booking",
+    newsletterPlaceholder: "Receive our news by email",
+    newsletterAction: "mailto:contact@perinade.fr",
+    newsletterSubmitLabel: "Submit newsletter",
+    backgroundImage: visitCtaVineyardBand,
+    backgroundAlt: "Sunset over the estate vineyards"
+  },
+  blogPosts: [
+    {
+      headline: "Harvest 2025: an exceptional crop under the Languedoc sun",
+      description: "A look back at a harvest marked by ideal ripeness and generous sunshine.",
+      datePublished: "2026-02-15",
+      url: "https://www.perinade.fr/en/news",
+      category: "Harvest"
+    },
+    {
+      headline: "The ‘Héritage’ 2024 cuvée enters barrel ageing",
+      description: "Our flagship cuvée now rests in French oak barrels for 14 months.",
+      datePublished: "2026-02-08",
+      url: "https://www.perinade.fr/en/news",
+      category: "New cuvées"
+    },
+    {
+      headline: "How to taste our wines: advice from the estate",
+      description: "Serving temperature, aeration and food pairings for each cuvée.",
+      datePublished: "2026-02-01",
+      url: "https://www.perinade.fr/en/news",
+      category: "Estate life"
+    },
+    {
+      headline: "Périnade featured in the Guide Hachette 2026",
+      description: "Our 2023 Minervois red earns two stars.",
+      datePublished: "2026-01-22",
+      url: "https://www.perinade.fr/en/news",
+      category: "Estate life"
+    },
+    {
+      headline: "Winter pruning: an ancestral gesture to prepare the vintage",
+      description: "Vine-by-vine pruning that prepares each upcoming harvest.",
+      datePublished: "2026-01-10",
+      url: "https://www.perinade.fr/en/news",
+      category: "Estate life"
+    },
+    {
+      headline: "Christmas evening at the estate: highlights in pictures",
+      description: "A warm evening with pairings and live music.",
+      datePublished: "2025-12-18",
+      url: "https://www.perinade.fr/en/news",
+      category: "Events"
+    }
+  ]
+};

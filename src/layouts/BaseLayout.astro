@@ -26,7 +26,7 @@ interface Props {
 const siteUrl = "https://www.perinade.fr";
 const {
   title = "Domaine de la Périnade",
-  description = "Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1987.",
+  description = "Domaine familial près de Carcassonne. Vins AOP Minervois et IGP Pays d'Oc depuis 1830.",
   locale = defaultLocale,
   canonicalPath,
   alternates = [],
@@ -72,6 +72,9 @@ const xDefault = alternates.find((a) => a.locale === "fr");
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content={lang} />
+    {locale !== "fr" && <meta property="og:locale:alternate" content="fr" />}
+    {locale !== "en" && <meta property="og:locale:alternate" content="en" />}
+    {locale !== "es" && <meta property="og:locale:alternate" content="es" />}
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={`${siteUrl}${ogImage}`} />
     <meta property="og:site_name" content="Domaine de la Périnade" />

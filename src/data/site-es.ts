@@ -19,7 +19,7 @@ export const siteEs: SiteData = {
     { label: "Visitas", href: "/es/visitas", desktopSlot: "left", desktopLabel: "VISITAS" },
     { label: "Tienda", href: "/es/tienda", desktopSlot: "left", desktopLabel: "TIENDA" },
     { label: "La Finca", href: "/es/domaine", desktopSlot: "left", desktopLabel: "FINCA" },
-    { label: "Noticias", href: "/es#contact", desktopSlot: "right", desktopLabel: "NOTICIAS" },
+    { label: "Noticias", href: "/es/noticias", desktopSlot: "right", desktopLabel: "NOTICIAS" },
     { label: "Contacto", href: "/es#contact" }
   ],
   mobileQuickActions: [
