@@ -9,6 +9,7 @@ interface CartItem {
   name: string;
   unitAmount: number;
   qty: number;
+  description?: string;
 }
 
 interface RequestBody {
@@ -31,6 +32,7 @@ const isCartItem = (value: unknown): value is CartItem => {
     item.id.length > 0 &&
     typeof item.name === "string" &&
     item.name.length > 0 &&
+    (item.description === undefined || typeof item.description === "string") &&
     Number.isFinite(item.unitAmount) &&
     Number(item.unitAmount) > 0 &&
     Number.isInteger(item.qty) &&
@@ -70,6 +72,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
           currency: "eur",
           product_data: {
             name: item.name,
+            ...(item.description ? { description: item.description } : {}),
           },
           unit_amount: item.unitAmount,
         },
