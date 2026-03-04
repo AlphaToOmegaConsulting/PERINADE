@@ -1,7 +1,6 @@
 ---
-import { Image } from "astro:assets";
 import type { NewsPageData } from "../../types/news";
-import ActionLink from "../ui/actions/ActionLink.astro";
+import CtaBandSection from "../patterns/CtaBandSection.astro";
 
 interface Props {
   visitCta: NewsPageData["visitCta"];
@@ -11,163 +10,91 @@ const { visitCta } = Astro.props;
 ---
 
 <section class="news-visit-cta section">
-  <div class="news-visit-cta__band" aria-hidden="true">
-    <Image src={visitCta.backgroundImage} alt={visitCta.backgroundAlt} loading="lazy" />
-  </div>
-
-  <div class="news-visit-cta__content" data-reveal-group data-reveal-stagger="65">
-    <p class="news-visit-cta__eyebrow" data-reveal="up">{visitCta.eyebrow}</p>
-    <h2 data-reveal="up">
-      <span>{visitCta.titleLines[0]}</span>
-      <span class="is-accent">{visitCta.titleLines[1]}</span>
-    </h2>
-    <p class="news-visit-cta__body" data-reveal="up">{visitCta.body}</p>
-    <ActionLink href={visitCta.ctaHref} label={visitCta.ctaLabel} class="news-visit-cta__action" variant="primary" size="md" interaction="emphasis" />
-
-    <form class="news-visit-cta__newsletter" action={visitCta.newsletterAction} method="post" data-reveal="up">
-      <input type="email" name="email" placeholder={visitCta.newsletterPlaceholder} required />
-      <button type="submit" aria-label={visitCta.newsletterSubmitLabel}>→</button>
-    </form>
+  <div class="shell news-visit-cta__shell" data-reveal-group data-reveal-stagger="70">
+    <CtaBandSection
+      class="news-visit-cta__panel"
+      tone="inverse"
+      eyebrow={visitCta.eyebrow}
+      title={visitCta.titleLines[0]}
+      titleHighlight={visitCta.titleLines[1]}
+      body={visitCta.body}
+      actions={[{ label: visitCta.ctaLabel, href: visitCta.ctaHref, variant: "primary" }]}
+      image={visitCta.backgroundImage}
+      imageAlt={visitCta.backgroundAlt}
+    />
   </div>
 </section>
 
 <style>
   .news-visit-cta {
     background: #1a1a1a;
-    color: #f5f0e8;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .news-visit-cta__shell {
+    max-width: 74rem;
+  }
+
+  .news-visit-cta :global(.news-visit-cta__panel) {
+    align-items: stretch;
+    gap: clamp(1.1rem, 2.8vw, 2rem);
+  }
+
+  .news-visit-cta :global(.news-visit-cta__panel .ui-pattern-cta-band__media) {
+    border-radius: 1.25rem;
+    margin: 0;
+    min-height: clamp(14rem, 27vw, 20rem);
     overflow: hidden;
-    padding: 0 0 5.2rem;
-    position: relative;
   }
 
-  .news-visit-cta__band {
-    height: 22.5rem;
-    position: relative;
-  }
-
-  .news-visit-cta__band :global(img) {
-    display: block;
+  .news-visit-cta :global(.news-visit-cta__panel .ui-pattern-cta-band__media img) {
     height: 100%;
     object-fit: cover;
     width: 100%;
   }
 
-  .news-visit-cta__band::before,
-  .news-visit-cta__band::after {
-    content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
+  .news-visit-cta :global(.news-visit-cta__panel .ui-pattern-cta-band__content) {
+    align-content: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1.25rem;
+    padding: clamp(1.2rem, 3vw, 2rem);
   }
 
-  .news-visit-cta__band::before {
-    background: linear-gradient(180deg, #1a1a1a 0%, rgba(26, 26, 26, 0) 100%);
-    height: 9rem;
-    top: 0;
+  .news-visit-cta :global(.news-visit-cta__panel .ui-pattern-cta-band__eyebrow) {
+    color: var(--color-accent);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
   }
 
-  .news-visit-cta__band::after {
-    background: linear-gradient(180deg, rgba(26, 26, 26, 0) 0%, #1a1a1a 100%);
-    bottom: 0;
-    height: 13rem;
+  .news-visit-cta :global(.news-visit-cta__panel .ui-pattern-cta-band__title) {
+    color: var(--color-white);
+    font-size: clamp(1.8rem, 3.2vw, 2.75rem);
+    line-height: 1.08;
   }
 
-  .news-visit-cta__content {
-    margin: -6.25rem auto 0;
-    max-width: 28rem;
-    position: relative;
-    text-align: center;
-    z-index: 2;
+  .news-visit-cta :global(.news-visit-cta__panel .ui-pattern-cta-band__title span) {
+    color: var(--color-accent);
   }
 
-  .news-visit-cta__eyebrow {
-    color: #c49c6e;
-    font-size: 0.625rem;
-    letter-spacing: 0.3em;
-    margin: 0;
-    text-transform: uppercase;
+  .news-visit-cta :global(.news-visit-cta__panel .ui-pattern-cta-band__body) {
+    color: rgba(255, 255, 255, 0.72);
+    line-height: 1.7;
+    max-width: 32rem;
   }
 
-  .news-visit-cta h2 {
-    display: grid;
-    font-size: clamp(2rem, 4vw, 3.05rem);
-    line-height: 1.05;
-    margin: 1.7rem 0 0;
-  }
-
-  .news-visit-cta h2 .is-accent {
-    color: #c49c6e;
-    font-style: italic;
-  }
-
-  .news-visit-cta__body {
-    color: rgba(245, 240, 232, 0.6);
-    font-size: 0.875rem;
-    line-height: 1.8;
-    margin: 1.3rem auto 0;
-    max-width: 20rem;
-  }
-
-  .news-visit-cta :global(.news-visit-cta__action) {
-    --action-primary-bg: #c49c6e;
-    --action-primary-bg-hover: #b18758;
-    --action-primary-border: #c49c6e;
+  .news-visit-cta :global(.news-visit-cta__panel .ui-action--primary) {
+    --action-primary-bg: var(--color-accent);
+    --action-primary-bg-hover: color-mix(in srgb, var(--color-accent) 82%, black);
+    --action-primary-border: var(--color-accent);
     --action-primary-shadow: none;
 
-    margin-top: 2rem;
-    min-block-size: 3rem;
+    min-height: 3rem;
     padding-inline: 1.6rem;
   }
 
-  .news-visit-cta__newsletter {
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-    display: grid;
-    grid-template-columns: 1fr auto;
-    margin: 2.75rem auto 0;
-    max-width: 16.25rem;
-  }
-
-  .news-visit-cta__newsletter input {
-    background: transparent;
-    border: 0;
-    color: rgba(255, 255, 255, 0.82);
-    font: inherit;
-    font-size: 0.75rem;
-    min-height: 2.3rem;
-    outline: none;
-    padding: 0.3rem 0;
-  }
-
-  .news-visit-cta__newsletter input::placeholder {
-    color: rgba(255, 255, 255, 0.35);
-  }
-
-  .news-visit-cta__newsletter button {
-    background: transparent;
-    border: 0;
-    color: rgba(255, 255, 255, 0.35);
-    cursor: pointer;
-    font-size: 0.875rem;
-    min-height: 2.3rem;
-    padding: 0;
-  }
-
   @media (max-width: 47.9375em) {
-    .news-visit-cta {
-      padding-bottom: 4rem;
-    }
-
-    .news-visit-cta__band {
-      height: 16rem;
-    }
-
-    .news-visit-cta__content {
-      margin-top: -4.6rem;
-      max-width: min(100%, calc(100vw - 2.5rem));
-    }
-
-    .news-visit-cta :global(.news-visit-cta__action) {
+    .news-visit-cta :global(.news-visit-cta__panel .ui-action) {
       width: 100%;
     }
   }

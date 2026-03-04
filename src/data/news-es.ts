@@ -23,12 +23,17 @@ export const newsPageEs: NewsPageData = {
     titleLines: ["Noticias", "de la finca"],
     lead:
       "Vendimias, nuevas cuvées y eventos en la finca: siga la vida de la Périnade a lo largo de las estaciones, entre viñedo y bodega.",
-    watermarkYear: "2026",
-    stats: [
-      { value: "9", label: "Artículos" },
-      { value: "3", label: "Eventos próximos" }
+    primaryCta: {
+      label: "Ver últimas noticias",
+      href: "/es/noticias"
+    },
+    metaItems: [
+      "9 artículos publicados",
+      "3 eventos próximos",
+      "Actualizado · Marzo 2026"
     ],
-    updatedLabel: "Actualizado · Marzo 2026"
+    image: featuredHero,
+    imageAlt: "Vendimia manual en el Domaine de la Périnade"
   },
   featured: {
     eyebrow: "Destacado",
@@ -150,9 +155,6 @@ export const newsPageEs: NewsPageData = {
     body: "Camine entre viñedos, sienta la bodega y pruebe el vino en su origen.",
     ctaLabel: "Reservar una visita",
     ctaHref: "/es/visitas#booking",
-    newsletterPlaceholder: "Recibir nuestras noticias por correo",
-    newsletterAction: "mailto:contact@perinade.fr",
-    newsletterSubmitLabel: "Enviar newsletter",
     backgroundImage: visitCtaVineyardBand,
     backgroundAlt: "Atardecer sobre los viñedos de la finca"
   },

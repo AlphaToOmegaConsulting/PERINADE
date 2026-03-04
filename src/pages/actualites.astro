@@ -79,18 +79,18 @@ const jsonLd = JSON.stringify({
 </BaseLayout>
 
 <style>
-  .news-page :global(.section:not(.news-hero):not(.news-featured):not(.news-visit-cta)) {
+  .news-page :global(.section:not(.news-hero):not(.news-featured)) {
     padding-block: var(--news-section-desktop);
   }
 
   @media (max-width: 63.9375em) {
-    .news-page :global(.section:not(.news-hero):not(.news-featured):not(.news-visit-cta)) {
+    .news-page :global(.section:not(.news-hero):not(.news-featured)) {
       padding-block: var(--news-section-tablet);
     }
   }
 
   @media (max-width: 47.9375em) {
-    .news-page :global(.section:not(.news-hero):not(.news-featured):not(.news-visit-cta)) {
+    .news-page :global(.section:not(.news-hero):not(.news-featured)) {
       padding-block: var(--news-section-mobile);
     }
   }

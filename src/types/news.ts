@@ -1,10 +1,5 @@
 import type { ImageMetadata } from "astro";
 
-export interface NewsStatItem {
-  value: string;
-  label: string;
-}
-
 export interface NewsArticleCard {
   category: string;
   date: string;
@@ -48,9 +43,13 @@ export interface NewsPageData {
     eyebrow: string;
     titleLines: [string, string];
     lead: string;
-    watermarkYear: string;
-    stats: NewsStatItem[];
-    updatedLabel: string;
+    primaryCta: {
+      label: string;
+      href: string;
+    };
+    metaItems: string[];
+    image: ImageMetadata;
+    imageAlt: string;
   };
   featured: {
     eyebrow: string;
@@ -88,9 +87,6 @@ export interface NewsPageData {
     body: string;
     ctaLabel: string;
     ctaHref: string;
-    newsletterPlaceholder: string;
-    newsletterAction: string;
-    newsletterSubmitLabel: string;
     backgroundImage: ImageMetadata;
     backgroundAlt: string;
   };

@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import type { NewsPageData } from "../../types/news";
+import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
   hero: NewsPageData["hero"];
@@ -8,186 +10,166 @@ interface Props {
 const { hero } = Astro.props;
 ---
 
-<section class="news-hero section">
+<section class="news-hero section" aria-labelledby="news-hero-title">
   <div class="shell news-hero__shell">
-    <div class="news-hero__line" aria-hidden="true"></div>
-    <p class="news-hero__eyebrow" data-reveal="up">{hero.eyebrow}</p>
-    <h1 class="news-hero__title" data-reveal="up">
-      <span>{hero.titleLines[0]}</span>
-      <span class="is-accent">{hero.titleLines[1]}</span>
-    </h1>
-    <p class="news-hero__lead" data-reveal="up">{hero.lead}</p>
+    <div class="news-hero__content" data-reveal-group data-reveal-stagger="85">
+      <p class="news-hero__eyebrow" data-reveal="up">{hero.eyebrow}</p>
+      <h1 id="news-hero-title" data-reveal="up">
+        {hero.titleLines[0]}
+        <span>{hero.titleLines[1]}</span>
+      </h1>
+      <p class="news-hero__lead" data-reveal="up">{hero.lead}</p>
 
-    <div class="news-hero__stats" aria-label="News key metrics" data-reveal="up">
-      {hero.stats.map((stat) => (
-        <div class="news-hero__stat">
-          <strong>{stat.value}</strong>
-          <span>{stat.label}</span>
-        </div>
-      ))}
-      <p class="news-hero__updated">{hero.updatedLabel}</p>
+      <div class="news-hero__actions" data-reveal="up">
+        <ActionLink
+          href={hero.primaryCta.href}
+          label={hero.primaryCta.label}
+          variant="primary"
+          size="lg"
+          interaction="emphasis"
+        />
+      </div>
+
+      <ul class="news-hero__meta" data-reveal-group data-reveal-stagger="55">
+        {hero.metaItems.map((item) => (
+          <li data-reveal="up">{item}</li>
+        ))}
+      </ul>
     </div>
 
-    <p class="news-hero__year" aria-hidden="true">{hero.watermarkYear}</p>
+    <figure class="news-hero__media ui-hover-media" data-reveal="zoom">
+      <Image src={hero.image} alt={hero.imageAlt} loading="eager" />
+    </figure>
   </div>
 </section>
 
 <style>
   .news-hero {
-    background: #1a1a1a;
-    color: #f5f0e8;
-    min-height: 49.890625rem;
-    overflow: hidden;
-    padding-bottom: 9rem;
-    padding-top: calc(var(--header-height) + 8.25rem);
-    position: relative;
+    background: radial-gradient(circle at 75% 25%, rgba(196, 156, 110, 0.13), transparent 45%), #1a1a1a;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--color-white);
+    padding-top: calc(var(--header-height) + clamp(1rem, 4vw, 2rem));
   }
 
   .news-hero__shell {
-    margin-inline: auto;
-    max-width: 55.625rem;
-    position: relative;
-    width: min(100%, calc(100vw - 12rem));
+    align-items: center;
+    display: grid;
+    gap: clamp(1.8rem, 5vw, 3.75rem);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
 
-  .news-hero__line {
-    background: linear-gradient(180deg, rgba(196, 156, 110, 0.6), rgba(196, 156, 110, 0));
-    height: 5rem;
-    left: 0;
-    position: absolute;
-    top: -6rem;
-    width: 1px;
+  .news-hero__content {
+    max-width: 34rem;
   }
 
   .news-hero__eyebrow {
-    color: #c49c6e;
-    font-size: 0.6875rem;
-    letter-spacing: 0.26em;
+    color: var(--color-accent);
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
     margin: 0;
     text-transform: uppercase;
   }
 
-  .news-hero__title {
-    color: #f5f0e8;
-    display: grid;
-    font-size: clamp(2.8rem, 7.2vw, 4.8rem);
-    line-height: 1.04;
-    margin: 2.6rem 0 1.75rem;
+  .news-hero__content h1 {
+    color: var(--color-white);
+    font-size: clamp(2.8rem, 6vw, 4.6rem);
+    line-height: 0.98;
+    margin: 0.9rem 0 0;
   }
 
-  .news-hero__title .is-accent {
-    color: #c49c6e;
-    font-style: italic;
+  .news-hero__content h1 span {
+    color: var(--color-accent);
+    display: block;
   }
 
   .news-hero__lead {
-    color: rgba(245, 240, 232, 0.6);
-    font-size: clamp(1rem, 1.55vw, 1.125rem);
-    line-height: 1.625;
-    margin: 0;
-    max-width: 36rem;
+    color: rgba(255, 255, 255, 0.74);
+    font-size: 1.06rem;
+    line-height: 1.62;
+    margin: 1.3rem 0 0;
   }
 
-  .news-hero__stats {
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  .news-hero__actions {
+    margin-top: 1.9rem;
+  }
+
+  .news-hero__actions :global(.ui-action--primary) {
+    --action-primary-bg: var(--color-accent);
+    --action-primary-bg-hover: color-mix(in srgb, var(--color-accent) 82%, black);
+    --action-primary-border: var(--color-accent);
+    --action-primary-shadow: none;
+  }
+
+  .news-hero__meta {
+    color: rgba(255, 255, 255, 0.54);
     display: flex;
-    gap: 2rem;
-    margin-top: 4rem;
-    padding-top: 2rem;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.2rem;
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
   }
 
-  .news-hero__stat {
-    align-items: baseline;
-    display: inline-flex;
-    gap: 0.7rem;
-    position: relative;
-  }
-
-  .news-hero__stat + .news-hero__stat::before {
-    background: rgba(255, 255, 255, 0.18);
-    content: "";
-    height: 1.5rem;
-    left: -1rem;
-    position: absolute;
-    top: 0.25rem;
-    width: 1px;
-  }
-
-  .news-hero__stat strong {
-    color: #c49c6e;
-    font-family: var(--font-display);
-    font-size: 1.5rem;
-    font-weight: 400;
-  }
-
-  .news-hero__stat span {
-    color: rgba(255, 255, 255, 0.32);
-    font-size: 0.6875rem;
-    letter-spacing: 0.18em;
+  .news-hero__meta li {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    line-height: 1.4;
     text-transform: uppercase;
   }
 
-  .news-hero__updated {
-    color: rgba(255, 255, 255, 0.22);
-    font-size: 0.6875rem;
-    letter-spacing: 0.18em;
-    margin: 0 0 0 0.2rem;
-    text-transform: uppercase;
+  .news-hero__meta li::before {
+    content: "•";
+    margin-right: 0.45rem;
   }
 
-  .news-hero__year {
-    color: rgba(255, 255, 255, 0.03);
-    font-family: var(--font-display);
-    font-size: clamp(8rem, 20vw, 15rem);
-    line-height: 1;
+  .news-hero__media {
+    border-radius: 1.75rem;
+    box-shadow: 0 1.875rem 4.5rem rgba(0, 0, 0, 0.35);
     margin: 0;
-    position: absolute;
-    right: -8rem;
-    top: 2.5rem;
+    overflow: hidden;
+  }
+
+  .news-hero__media :global(img) {
+    aspect-ratio: 4 / 5;
+    height: auto;
+    object-fit: cover;
+    width: 100%;
   }
 
   @media (max-width: 63.9375em) {
     .news-hero {
-      min-height: auto;
-      padding-bottom: 6rem;
-      padding-top: calc(var(--header-height) + 6rem);
+      padding-top: calc(var(--header-height) + clamp(0.9rem, 3vw, 1.5rem));
     }
 
     .news-hero__shell {
-      width: min(100%, calc(100vw - 4rem));
+      grid-template-columns: 1fr;
     }
 
-    .news-hero__year {
-      right: -2rem;
-      top: 6rem;
+    .news-hero__content {
+      max-width: 100%;
+    }
+
+    .news-hero__media {
+      max-width: clamp(24rem, 80vw, 38rem);
+      width: 100%;
     }
   }
 
   @media (max-width: 47.9375em) {
-    .news-hero {
-      padding-bottom: 4.25rem;
-      padding-top: calc(var(--header-height) + 4.2rem);
+    .news-hero__lead {
+      font-size: 1rem;
     }
 
-    .news-hero__shell {
-      width: min(100%, calc(100vw - 2.5rem));
+    .news-hero__actions :global(.ui-action) {
+      width: 100%;
     }
 
-    .news-hero__stats {
-      align-items: flex-start;
-      flex-wrap: wrap;
-      gap: 1rem 1.4rem;
-      margin-top: 2.4rem;
-      padding-top: 1.4rem;
+    .news-hero__meta {
+      gap: 0.45rem 0.85rem;
     }
 
-    .news-hero__stat + .news-hero__stat::before {
-      display: none;
-    }
-
-    .news-hero__year {
-      display: none;
+    .news-hero__meta li {
+      font-size: 0.72rem;
     }
   }
 </style>

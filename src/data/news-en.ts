@@ -23,12 +23,17 @@ export const newsPageEn: NewsPageData = {
     titleLines: ["News", "from the estate"],
     lead:
       "Harvests, new cuvées, events at the estate — follow life at Périnade through the seasons, between vineyard and cellar.",
-    watermarkYear: "2026",
-    stats: [
-      { value: "9", label: "Articles" },
-      { value: "3", label: "Upcoming events" }
+    primaryCta: {
+      label: "See latest stories",
+      href: "/en/news"
+    },
+    metaItems: [
+      "9 stories published",
+      "3 upcoming events",
+      "Updated · March 2026"
     ],
-    updatedLabel: "Updated · March 2026"
+    image: featuredHero,
+    imageAlt: "Manual grape harvest at Domaine de la Périnade"
   },
   featured: {
     eyebrow: "Featured",
@@ -150,9 +155,6 @@ export const newsPageEn: NewsPageData = {
     body: "Walk through the vines, feel the cellar, taste the wine at its source.",
     ctaLabel: "Book a visit",
     ctaHref: "/en/visits#booking",
-    newsletterPlaceholder: "Receive our news by email",
-    newsletterAction: "mailto:contact@perinade.fr",
-    newsletterSubmitLabel: "Submit newsletter",
     backgroundImage: visitCtaVineyardBand,
     backgroundAlt: "Sunset over the estate vineyards"
   },

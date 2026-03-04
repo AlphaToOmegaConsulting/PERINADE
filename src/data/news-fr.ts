@@ -23,12 +23,17 @@ export const newsPageFr: NewsPageData = {
     titleLines: ["Actualités", "du Domaine"],
     lead:
       "Vendanges, nouvelles cuvées, événements au domaine — suivez la vie de la Périnade au fil des saisons, entre vignes et chai.",
-    watermarkYear: "2026",
-    stats: [
-      { value: "9", label: "Articles" },
-      { value: "3", label: "Événements à venir" }
+    primaryCta: {
+      label: "Voir les dernières actualités",
+      href: "/actualites"
+    },
+    metaItems: [
+      "9 articles publiés",
+      "3 événements à venir",
+      "Mis à jour · Mars 2026"
     ],
-    updatedLabel: "Mis à jour · Mars 2026"
+    image: featuredHero,
+    imageAlt: "Vendanges manuelles au domaine de la Périnade"
   },
   featured: {
     eyebrow: "À la une",
@@ -150,9 +155,6 @@ export const newsPageFr: NewsPageData = {
     body: "Marchez entre les vignes, sentez le chai, goûtez le vin à sa source.",
     ctaLabel: "Réserver une visite",
     ctaHref: "/visites#booking",
-    newsletterPlaceholder: "Recevoir nos actualités par email",
-    newsletterAction: "mailto:contact@perinade.fr",
-    newsletterSubmitLabel: "Soumettre newsletter",
     backgroundImage: visitCtaVineyardBand,
     backgroundAlt: "Coucher de soleil sur les vignes du domaine"
   },
