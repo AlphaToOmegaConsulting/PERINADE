@@ -40,7 +40,20 @@ const alternates = [
 
         <p class="cart-empty" data-cart-empty>Your cart is empty.</p>
 
-        <div class="cart-list" data-cart-items aria-live="polite"></div>
+        <div class="cart-table-wrap" data-cart-table-wrap hidden>
+          <table class="cart-table" aria-live="polite">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total excl. VAT</th>
+                <th scope="col">Total incl. VAT</th>
+                <th scope="col" aria-hidden="true"></th>
+              </tr>
+            </thead>
+            <tbody data-cart-items></tbody>
+          </table>
+        </div>
 
         <footer class="cart-total" data-cart-total-wrap>
           <p class="cart-total__line">
@@ -91,11 +104,12 @@ const alternates = [
   import { cartTotalCents, getCart, removeFromCart, setQty } from "../../lib/cart/cart";
   import type { CartItem } from "../../lib/cart/cart";
 
-  const formatCurrencyFromCents = (cents: number): string =>
+  const formatEuroFromCents = (cents: number): string =>
     `€${(Math.max(0, Number(cents) || 0) / 100).toFixed(2)}`;
 
   const selectors = {
     items: "[data-cart-items]",
+    tableWrap: "[data-cart-table-wrap]",
     empty: "[data-cart-empty]",
     total: "[data-cart-total]",
     totalHt: "[data-cart-total-ht]",
@@ -103,13 +117,14 @@ const alternates = [
     totalWrap: "[data-cart-total-wrap]",
     ackAge: "[data-cart-ack-age]",
     ackInfo: "[data-cart-ack-info]",
-    submit: "[data-cart-submit]"
+    submit: "[data-cart-submit]",
+    submitStatus: "[data-cart-submit-status]"
   };
 
   const VAT_RATE = 0.2;
 
-  const createCell = (label: string, value: string, className: string): HTMLDivElement => {
-    const cell = document.createElement("div");
+  const createCell = (label: string, value: string, className: string): HTMLTableCellElement => {
+    const cell = document.createElement("td");
     cell.className = className;
 
     const labelEl = document.createElement("span");
@@ -124,8 +139,8 @@ const alternates = [
     return cell;
   };
 
-  const createQtyControls = (item: CartItem): HTMLDivElement => {
-    const cell = document.createElement("div");
+  const createQtyControls = (item: CartItem): HTMLTableCellElement => {
+    const cell = document.createElement("td");
     cell.className = "cart-item__qty";
 
     const labelEl = document.createElement("span");
@@ -162,8 +177,8 @@ const alternates = [
     return cell;
   };
 
-  const createRemoveButton = (item: CartItem): HTMLDivElement => {
-    const cell = document.createElement("div");
+  const createRemoveButton = (item: CartItem): HTMLTableCellElement => {
+    const cell = document.createElement("td");
     cell.className = "cart-item__remove-wrap";
 
     const button = document.createElement("button");
@@ -191,17 +206,63 @@ const alternates = [
 
     ackAge.disabled = !hasItems;
     ackInfo.disabled = !hasItems;
-    submit.disabled = !(hasItems && ackAge.checked && ackInfo.checked);
+    const isBusy = submit.dataset.busy === "true";
+    submit.disabled = isBusy || !(hasItems && ackAge.checked && ackInfo.checked);
+  };
+
+  const handleCheckout = async () => {
+    const submit = document.querySelector<HTMLButtonElement>(selectors.submit);
+    const statusEl = document.querySelector<HTMLElement>(selectors.submitStatus);
+    if (!submit || !statusEl) return;
+
+    const cartItems = getCart().items.map((item) => ({
+      id: item.id,
+      name: item.name,
+      unitAmount: item.unitAmount,
+      qty: item.qty,
+    }));
+
+    if (!cartItems.length) {
+      statusEl.textContent = "Your cart is empty.";
+      updateCheckoutState(false);
+      return;
+    }
+
+    submit.dataset.busy = "true";
+    updateCheckoutState(true);
+    statusEl.textContent = "Redirecting to payment...";
+
+    try {
+      const response = await fetch("/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ items: cartItems }),
+      });
+
+      const payload = (await response.json().catch(() => ({}))) as { url?: string; error?: string };
+      if (!response.ok || !payload.url) {
+        throw new Error(payload.error || "Unable to create checkout session.");
+      }
+
+      window.location.assign(payload.url);
+    } catch (error) {
+      statusEl.textContent = error instanceof Error ? error.message : "Payment error. Please try again.";
+      submit.dataset.busy = "false";
+      updateCheckoutState(true);
+    }
   };
 
   const render = () => {
-    const itemsWrap = document.querySelector<HTMLDivElement>(selectors.items);
+    const itemsWrap = document.querySelector<HTMLTableSectionElement>(selectors.items);
+    const tableWrap = document.querySelector<HTMLElement>(selectors.tableWrap);
     const emptyEl = document.querySelector<HTMLParagraphElement>(selectors.empty);
     const totalEl = document.querySelector<HTMLElement>(selectors.total);
     const totalHtEl = document.querySelector<HTMLElement>(selectors.totalHt);
     const totalVatEl = document.querySelector<HTMLElement>(selectors.totalVat);
     const totalWrap = document.querySelector<HTMLElement>(selectors.totalWrap);
-    if (!itemsWrap || !emptyEl || !totalEl || !totalHtEl || !totalVatEl || !totalWrap) return;
+    if (!itemsWrap || !tableWrap || !emptyEl || !totalEl || !totalHtEl || !totalVatEl || !totalWrap) return;
 
     const cart = getCart();
     const items = cart.items;
@@ -210,30 +271,33 @@ const alternates = [
 
     if (!items.length) {
       emptyEl.hidden = false;
-      itemsWrap.hidden = true;
+      tableWrap.hidden = true;
       totalWrap.hidden = true;
-      totalEl.textContent = formatCurrencyFromCents(0);
-      totalHtEl.textContent = formatCurrencyFromCents(0);
-      totalVatEl.textContent = formatCurrencyFromCents(0);
+      totalEl.textContent = formatEuroFromCents(0);
+      totalHtEl.textContent = formatEuroFromCents(0);
+      totalVatEl.textContent = formatEuroFromCents(0);
       updateCheckoutState(false);
       return;
     }
 
     emptyEl.hidden = true;
-    itemsWrap.hidden = false;
+    tableWrap.hidden = false;
     totalWrap.hidden = false;
 
     items.forEach((item) => {
-      const row = document.createElement("article");
+      const row = document.createElement("tr");
       row.className = "cart-item";
 
+      const lineTtcCents = item.unitAmount * item.qty;
+      const lineHtCents = Math.round(lineTtcCents / (1 + VAT_RATE));
+
       const name = createCell("Product", item.name, "cart-item__name");
-      const unit = createCell("Unit price", formatCurrencyFromCents(item.unitAmount), "cart-item__unit");
-      const line = createCell("Line total", formatCurrencyFromCents(item.unitAmount * item.qty), "cart-item__line");
+      const lineHt = createCell("Total excl. VAT", formatEuroFromCents(lineHtCents), "cart-item__line-ht");
+      const lineTtc = createCell("Total incl. VAT", formatEuroFromCents(lineTtcCents), "cart-item__line-ttc");
       const qty = createQtyControls(item);
       const remove = createRemoveButton(item);
 
-      row.append(name, qty, unit, line, remove);
+      row.append(name, qty, lineHt, lineTtc, remove);
       itemsWrap.append(row);
     });
 
@@ -241,9 +305,9 @@ const alternates = [
     const totalHtCents = Math.round(totalTtcCents / (1 + VAT_RATE));
     const totalVatCents = totalTtcCents - totalHtCents;
 
-    totalEl.textContent = formatCurrencyFromCents(totalTtcCents);
-    totalHtEl.textContent = formatCurrencyFromCents(totalHtCents);
-    totalVatEl.textContent = formatCurrencyFromCents(totalVatCents);
+    totalEl.textContent = formatEuroFromCents(totalTtcCents);
+    totalHtEl.textContent = formatEuroFromCents(totalHtCents);
+    totalVatEl.textContent = formatEuroFromCents(totalVatCents);
     updateCheckoutState(true);
   };
 
@@ -280,10 +344,11 @@ const alternates = [
   };
 
   const initCartPage = () => {
-    const itemsWrap = document.querySelector<HTMLDivElement>(selectors.items);
+    const itemsWrap = document.querySelector<HTMLTableSectionElement>(selectors.items);
     const ackAge = document.querySelector<HTMLInputElement>(selectors.ackAge);
     const ackInfo = document.querySelector<HTMLInputElement>(selectors.ackInfo);
-    if (!itemsWrap || !ackAge || !ackInfo) return;
+    const submit = document.querySelector<HTMLButtonElement>(selectors.submit);
+    if (!itemsWrap || !ackAge || !ackInfo || !submit) return;
 
     if (itemsWrap.dataset.cartBound !== "true") {
       itemsWrap.dataset.cartBound = "true";
@@ -304,6 +369,14 @@ const alternates = [
       });
     }
 
+    if (submit.dataset.cartBound !== "true") {
+      submit.dataset.cartBound = "true";
+      submit.dataset.busy = "false";
+      submit.addEventListener("click", () => {
+        void handleCheckout();
+      });
+    }
+
     render();
   };
 
@@ -317,13 +390,15 @@ const alternates = [
   document.addEventListener("astro:after-swap", initCartPage);
 </script>
 
-<style>
+<style is:global>
   .cart-page {
     background: radial-gradient(circle at 10% 5%, rgba(214, 116, 0, 0.08), transparent 28%), #f8f7f5;
     min-height: calc(100svh - var(--header-height) * 2);
   }
 
   .cart-shell {
+    --cart-grid-cols: 1.7fr 1fr 1fr 1fr auto;
+    --cart-row-px: 1.1rem;
     margin-inline: auto;
     max-width: 64rem;
   }
@@ -345,29 +420,66 @@ const alternates = [
     padding: 1.1rem 1.2rem;
   }
 
-  .cart-list {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .cart-item {
-    align-items: center;
-    background: linear-gradient(180deg, #ffffff 0%, #fdfcfb 100%);
-    border: 1px solid rgba(44, 44, 44, 0.1);
+  .cart-table-wrap {
     border-radius: 1rem;
-    box-shadow: 0 10px 22px rgba(16, 24, 40, 0.05);
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1.6fr 1fr 1fr 1fr auto;
-    padding: 1.05rem 1.1rem;
+    overflow: hidden;
   }
 
-  .cart-item__name,
-  .cart-item__qty,
-  .cart-item__unit,
-  .cart-item__line {
-    display: grid;
-    gap: 0.35rem;
+  .cart-table {
+    border-collapse: separate;
+    border-spacing: 0 0.75rem;
+    table-layout: auto;
+    width: 100%;
+  }
+
+  .cart-table thead th {
+    color: #7a7f88;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    padding: 0 0.85rem 0.2rem;
+    text-align: left;
+    text-transform: uppercase;
+  }
+
+  .cart-table thead th:nth-child(1) {
+    width: 31%;
+  }
+
+  .cart-table thead th:nth-child(2),
+  .cart-table thead th:nth-child(3),
+  .cart-table thead th:nth-child(4) {
+    width: 18%;
+  }
+
+  .cart-table thead th:nth-child(5) {
+    text-align: right;
+    width: 15%;
+  }
+
+  .cart-table tbody td {
+    background: linear-gradient(180deg, #ffffff 0%, #fdfcfb 100%);
+    border-bottom: 1px solid rgba(44, 44, 44, 0.1);
+    border-top: 1px solid rgba(44, 44, 44, 0.1);
+    padding: 0.92rem 0.85rem;
+    vertical-align: middle;
+  }
+
+  .cart-table tbody td:first-child {
+    border-left: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 1rem 0 0 1rem;
+  }
+
+  .cart-table tbody td:last-child {
+    border-radius: 0 1rem 1rem 0;
+    border-right: 1px solid rgba(44, 44, 44, 0.1);
+    padding-right: 1rem;
+    text-align: right;
+  }
+
+  .cart-item__remove-wrap {
+    min-width: 8.3rem;
+    white-space: nowrap;
   }
 
   .cart-item__label {
@@ -388,6 +500,10 @@ const alternates = [
   .cart-item__name .cart-item__value {
     font-size: 1.08rem;
     font-weight: 600;
+  }
+
+  .cart-item__line-ttc .cart-item__value {
+    font-weight: 700;
   }
 
   .cart-item__qty-controls {
@@ -455,8 +571,8 @@ const alternates = [
     display: grid;
     gap: 0.45rem;
     margin-top: 1.35rem;
-    margin-left: auto;
-    max-width: 29rem;
+    margin-left: 0;
+    max-width: 100%;
     padding: 1rem 1.1rem 1.1rem;
   }
 
@@ -560,17 +676,43 @@ const alternates = [
   }
 
   @media (max-width: 63.9375em) {
-    .cart-item {
-      grid-template-columns: 1fr 1fr;
+    .cart-table thead {
+      display: none;
     }
 
-    .cart-item__name {
-      grid-column: 1 / -1;
+    .cart-table,
+    .cart-table tbody,
+    .cart-table tr,
+    .cart-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .cart-table {
+      border-spacing: 0;
+    }
+
+    .cart-table tbody tr {
+      background: linear-gradient(180deg, #ffffff 0%, #fdfcfb 100%);
+      border: 1px solid rgba(44, 44, 44, 0.1);
+      border-radius: 1rem;
+      margin-bottom: 0.9rem;
+      padding: 0.18rem;
+    }
+
+    .cart-table tbody td,
+    .cart-table tbody td:first-child,
+    .cart-table tbody td:last-child {
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      padding: 0.42rem 0.68rem;
+      text-align: left;
     }
 
     .cart-item__remove-wrap {
-      grid-column: 1 / -1;
-      justify-self: start;
+      margin-top: 0.2rem;
     }
 
     .cart-total,
@@ -581,8 +723,22 @@ const alternates = [
   }
 
   @media (max-width: 47.9375em) {
-    .cart-item {
-      grid-template-columns: 1fr;
+    .cart-table tbody td {
+      padding-inline: 0.56rem;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .cart-item__label {
+      display: none;
+    }
+
+    .cart-item__name .cart-item__value,
+    .cart-item__line-ht .cart-item__value,
+    .cart-item__line-ttc .cart-item__value {
+      align-items: center;
+      display: inline-flex;
+      min-height: 2.05rem;
     }
   }
 </style>

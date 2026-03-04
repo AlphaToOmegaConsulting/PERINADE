@@ -117,7 +117,8 @@ const alternates = [
     totalWrap: "[data-cart-total-wrap]",
     ackAge: "[data-cart-ack-age]",
     ackInfo: "[data-cart-ack-info]",
-    submit: "[data-cart-submit]"
+    submit: "[data-cart-submit]",
+    submitStatus: "[data-cart-submit-status]"
   };
 
   const VAT_RATE = 0.2;
@@ -205,7 +206,52 @@ const alternates = [
 
     ackAge.disabled = !hasItems;
     ackInfo.disabled = !hasItems;
-    submit.disabled = !(hasItems && ackAge.checked && ackInfo.checked);
+    const isBusy = submit.dataset.busy === "true";
+    submit.disabled = isBusy || !(hasItems && ackAge.checked && ackInfo.checked);
+  };
+
+  const handleCheckout = async () => {
+    const submit = document.querySelector<HTMLButtonElement>(selectors.submit);
+    const statusEl = document.querySelector<HTMLElement>(selectors.submitStatus);
+    if (!submit || !statusEl) return;
+
+    const cartItems = getCart().items.map((item) => ({
+      id: item.id,
+      name: item.name,
+      unitAmount: item.unitAmount,
+      qty: item.qty,
+    }));
+
+    if (!cartItems.length) {
+      statusEl.textContent = "Votre panier est vide.";
+      updateCheckoutState(false);
+      return;
+    }
+
+    submit.dataset.busy = "true";
+    updateCheckoutState(true);
+    statusEl.textContent = "Redirection vers le paiement...";
+
+    try {
+      const response = await fetch("/create-checkout-session", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ items: cartItems }),
+      });
+
+      const payload = (await response.json().catch(() => ({}))) as { url?: string; error?: string };
+      if (!response.ok || !payload.url) {
+        throw new Error(payload.error || "Impossible de créer la session de paiement.");
+      }
+
+      window.location.assign(payload.url);
+    } catch (error) {
+      statusEl.textContent = error instanceof Error ? error.message : "Erreur de paiement. Merci de réessayer.";
+      submit.dataset.busy = "false";
+      updateCheckoutState(true);
+    }
   };
 
   const render = () => {
@@ -301,7 +347,8 @@ const alternates = [
     const itemsWrap = document.querySelector<HTMLTableSectionElement>(selectors.items);
     const ackAge = document.querySelector<HTMLInputElement>(selectors.ackAge);
     const ackInfo = document.querySelector<HTMLInputElement>(selectors.ackInfo);
-    if (!itemsWrap || !ackAge || !ackInfo) return;
+    const submit = document.querySelector<HTMLButtonElement>(selectors.submit);
+    if (!itemsWrap || !ackAge || !ackInfo || !submit) return;
 
     if (itemsWrap.dataset.cartBound !== "true") {
       itemsWrap.dataset.cartBound = "true";
@@ -319,6 +366,14 @@ const alternates = [
       ackInfo.dataset.cartBound = "true";
       ackInfo.addEventListener("change", () => {
         updateCheckoutState(getCart().items.length > 0);
+      });
+    }
+
+    if (submit.dataset.cartBound !== "true") {
+      submit.dataset.cartBound = "true";
+      submit.dataset.busy = "false";
+      submit.addEventListener("click", () => {
+        void handleCheckout();
       });
     }
 
