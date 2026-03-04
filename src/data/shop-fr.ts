@@ -1,110 +1,197 @@
 import type { ShopPageData } from "../types/shop";
-import shopImage1 from "../assets/perinade/shop/img-1.png";
-import shopImage2 from "../assets/perinade/shop/img-2.png";
-import shopImage3 from "../assets/perinade/shop/img-3.png";
-import shopImage4 from "../assets/perinade/shop/img-4.png";
-import shopImage5 from "../assets/perinade/shop/img-5.png";
-import shopImage7 from "../assets/perinade/shop/img-7.png";
+import heroImage from "../assets/perinade/shop/img-1.png";
+import arenesImage from "../assets/perinade/shop/catalog/arenes.webp";
+import renaissance75Image from "../assets/perinade/shop/catalog/renaissance_75.webp";
+import renaissanceMagnumImage from "../assets/perinade/shop/catalog/renaissance_magnum.webp";
+import chardonnayImage from "../assets/perinade/shop/catalog/chardonnay.webp";
+import sauvignonImage from "../assets/perinade/shop/catalog/sauvignon.webp";
+import viognierImage from "../assets/perinade/shop/catalog/viognier.webp";
+import crazyHorseImage from "../assets/perinade/shop/catalog/crazy_horse.webp";
+import chardoFrenchiesImage from "../assets/perinade/shop/catalog/chardo_frenchies.webp";
+import redFrenchiesImage from "../assets/perinade/shop/catalog/red_frenchies.webp";
+import roseFrenchiesImage from "../assets/perinade/shop/catalog/rose_frenchies.webp";
+import frenchies3MixImage from "../assets/perinade/shop/catalog/frenchies_3mix.webp";
+import frenchies6MixImage from "../assets/perinade/shop/catalog/frenchies_6mix.webp";
 
 export const shopPageFr: ShopPageData = {
   seo: {
-    title: "Acheter Vin AOP Minervois en Ligne | Boutique Domaine de la Périnade",
+    title: "Acheter Vin en Ligne | Boutique Domaine de la Périnade",
     description:
-      "Commandez nos vins Languedoc directement en ligne : AOP Minervois, IGP Pays d'Oc, rouges, blancs et rosés. Livraison 48-72 h en France. Domaine viticole familial près de Carcassonne."
+      "Commandez nos vins du domaine en ligne : rouges, blancs, rosés et éditions spéciales. Livraison 48-72 h en France."
   },
   hero: {
-    image: shopImage1,
+    image: heroImage,
     imageAlt: "Cave avec étagères de bouteilles du domaine viticole Minervois",
     eyebrow: "Boutique en ligne",
     titleHtml: "Nos vins,<br /><span>chez vous</span>",
     body:
-      "Du domaine à votre table : commandez nos cuvées AOP Minervois et IGP Pays d'Oc en ligne et recevez-les directement chez vous. Livraison gratuite dès 80 €.",
+      "Découvrez nos cuvées du domaine et nos collaborations en édition limitée. Livraison gratuite dès 80 €.",
     primaryCta: { label: "Découvrir", href: "/boutique#produits" },
-    secondaryCta: { label: "Composer ma caisse", href: "/boutique#coffrets" },
+    secondaryCta: { label: "Voir les coffrets", href: "/boutique#coffrets" },
     metaAriaLabel: "Informations livraison boutique",
     metaItems: ["Livraison 48-72 h", "Paiement sécurisé", "Retours 14 jours"]
   },
   productGrid: {
-    eyebrow: "Nos cuvées",
-    title: "Vins AOP Minervois et IGP Pays d'Oc",
+    eyebrow: "Catalogue complet",
+    title: "Nos 12 cuvées disponibles",
+    previousLabel: "Produits précédents",
+    nextLabel: "Produits suivants",
     products: [
       {
-        name: "Cuvée du Domaine",
-        meta: "AOP Minervois · 2022 · 75 cl",
-        description: "Fruits noirs, garrigue, épices douces. Bouche soyeuse, belle longueur.",
-        price: "12,50 € TTC",
-        stock: "En stock",
-        image: shopImage2,
-        imageAlt: "Bouteille rouge en close-up",
-        badges: ["Meilleure vente", "Rouge"],
+        name: "Les Arènes, Rouge",
+        meta: "2023 · 75 cl",
+        description:
+          "Fruits rouges et réglisse, avec une bouche souple et persistante.",
+        price: "15,00 € TTC",
+        image: arenesImage,
+        imageAlt: "Bouteille Les Arènes rouge",
+        badges: ["Rouge"],
         tone: "Rouge",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
       },
       {
-        name: "Blanc de Périnade",
-        meta: "IGP Pays d'Oc · 2023 · 75 cl",
-        description: "Agrumes, fleurs blanches. Fraîcheur remarquable, finale minérale.",
-        price: "10,00 € TTC",
-        stock: "En stock",
-        image: shopImage3,
-        imageAlt: "Bouteille de blanc sur fond clair",
-        badges: ["Meilleure vente", "Blanc"],
-        tone: "Blanc",
-        ctaLabel: "Ajouter au panier",
-        ctaHref: "/boutique#produits"
-      },
-      {
-        name: "Grande Réserve",
-        meta: "AOP Minervois · 2020 · 75 cl",
-        description: "Élevé en fûts de chêne. Puissant, complexe, tanins fondus.",
-        price: "22,00 € TTC",
-        stock: "En stock",
-        image: shopImage4,
-        imageAlt: "Étagères de vins",
-        badges: ["Meilleure vente", "Rouge"],
-        tone: "Rouge",
-        ctaLabel: "Ajouter au panier",
-        ctaHref: "/boutique#produits"
-      },
-      {
-        name: "Rosé d'Été",
-        meta: "IGP Pays d'Oc · 2024 · 75 cl",
-        description: "Pêche, fraise. Bouche vive et gourmande, idéale pour l'apéritif.",
-        price: "9,50 € TTC",
-        stock: "En stock",
-        image: shopImage5,
-        imageAlt: "Scène rosé et panier",
-        badges: ["Favori visite", "Rosé"],
+        name: "Cuvée Renaissance Rosé",
+        meta: "2022 · 75 cl",
+        description:
+          "Pêche blanche et agrumes, avec une finale fraîche et délicate.",
+        price: "14,40 € TTC",
+        image: renaissance75Image,
+        imageAlt: "Bouteille Cuvée Renaissance Rosé 2022",
+        badges: ["Rosé"],
         tone: "Rosé",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
       },
       {
-        name: "Blanc Réserve",
-        meta: "AOP Minervois · 2022 · 75 cl",
-        description: "Fruits exotiques, vanille subtile. Bouche ample et élégante.",
-        price: "16,00 € TTC",
-        stock: "En stock",
-        image: shopImage3,
-        imageAlt: "Bouteille blanc réserve",
+        name: "Cuvée Renaissance Rosé",
+        meta: "2024 · 150 cl",
+        description:
+          "Rosé fruité et rond, à l'attaque fraîche et élégante.",
+        price: "33,00 € TTC",
+        image: renaissanceMagnumImage,
+        imageAlt: "Magnum Cuvée Renaissance Rosé 2024",
+        badges: ["Rosé", "Magnum"],
+        tone: "Rosé",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#produits"
+      },
+      {
+        name: "Chardonnay",
+        meta: "2023 · 75 cl",
+        description:
+          "Fruits tropicaux, belle acidité et finale nette.",
+        price: "14,00 € TTC",
+        image: chardonnayImage,
+        imageAlt: "Bouteille Chardonnay 2023",
         badges: ["Blanc"],
         tone: "Blanc",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
       },
       {
-        name: "Rosé Prestige",
-        meta: "IGP Pays d'Oc · 2024 · 75 cl",
-        description: "Pétale de rose, fruits printaniers. Finale fraîche, structurée et vive.",
-        price: "13,00 € TTC",
-        stock: "En stock",
-        image: shopImage5,
-        imageAlt: "Rosé prestige",
-        badges: ["Rosé"],
+        name: "Sauvignon Blanc cuvée 1830",
+        meta: "Sans millésime · 75 cl",
+        description:
+          "Notes de cassis et pamplemousse, profil vif et expressif.",
+        price: "15,00 € TTC",
+        image: sauvignonImage,
+        imageAlt: "Bouteille Sauvignon Blanc cuvée 1830",
+        badges: ["Blanc", "Cuvée 1830"],
+        tone: "Blanc",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#produits"
+      },
+      {
+        name: "Viognier",
+        meta: "2024 · 75 cl",
+        description:
+          "Agrumes et abricot, avec un équilibre entre rondeur et fraîcheur.",
+        price: "14,00 € TTC",
+        image: viognierImage,
+        imageAlt: "Bouteille Viognier 2024",
+        badges: ["Blanc"],
+        tone: "Blanc",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#produits"
+      },
+      {
+        name: "Édition limitée CRAZY HORSE PARIS",
+        meta: "Sans millésime · 75 cl",
+        description:
+          "Édition spéciale aux notes de pêche blanche et d'agrumes.",
+        price: "25,00 € TTC",
+        image: crazyHorseImage,
+        imageAlt: "Bouteille Édition limitée Crazy Horse Paris",
+        badges: ["Édition limitée", "Rosé"],
         tone: "Rosé",
         ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#produits"
+      },
+      {
+        name: "Chardonnay Les Frenchies",
+        meta: "Sans millésime · 75 cl",
+        description:
+          "Chardonnay ample, avec une touche boisée et une belle structure.",
+        price: "26,00 € TTC",
+        image: chardoFrenchiesImage,
+        imageAlt: "Bouteille Chardonnay Les Frenchies",
+        badges: ["Les Frenchies", "Blanc"],
+        tone: "Blanc",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#produits"
+      },
+      {
+        name: "Red Blend Les Frenchies",
+        meta: "2023 · 75 cl",
+        description:
+          "Assemblage rouge fruité, non boisé, à la finale fraîche.",
+        price: "29,00 € TTC",
+        image: redFrenchiesImage,
+        imageAlt: "Bouteille Red Blend Les Frenchies",
+        badges: ["Les Frenchies", "Rouge"],
+        tone: "Rouge",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#produits"
+      },
+      {
+        name: "Rosé Les Frenchies — Foulard Rouge",
+        meta: "Sans millésime · 75 cl",
+        description:
+          "Rosé délicat et lumineux, au style frais et gourmand.",
+        price: "24,00 € TTC",
+        image: roseFrenchiesImage,
+        imageAlt: "Bouteille Rosé Les Frenchies Foulard Rouge",
+        badges: ["Les Frenchies", "Rosé"],
+        tone: "Rosé",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#produits"
+      },
+      {
+        name: "Cuvées Les Frenchies — Mix Box of 3",
+        meta: "Sans millésime · 3 × 75 cl",
+        description:
+          "Coffret découverte avec un rouge, un rosé et un blanc.",
+        price: "79,00 € TTC",
+        image: frenchies3MixImage,
+        imageAlt: "Coffret Les Frenchies Mix Box of 3",
+        badges: ["Coffret", "Les Frenchies"],
+        tone: "Coffret",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#coffrets"
+      },
+      {
+        name: "Cuvées Les Frenchies — Mix Box of 6",
+        meta: "Sans millésime · 6 × 75 cl",
+        description:
+          "Coffret complet avec six bouteilles pour découvrir la gamme.",
+        price: "158,00 € TTC",
+        image: frenchies6MixImage,
+        imageAlt: "Coffret Les Frenchies Mix Box of 6",
+        badges: ["Coffret", "Les Frenchies"],
+        tone: "Coffret",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#coffrets"
       }
     ]
   },
@@ -140,22 +227,28 @@ export const shopPageFr: ShopPageData = {
     ]
   },
   caseComposer: {
-    backdropImage: shopImage4,
-    crateImage: shopImage7,
-    crateImageAlt: "Panier de dégustation",
+    backdropImage: frenchies6MixImage,
+    crateImage: frenchies3MixImage,
+    crateImageAlt: "Coffret Les Frenchies",
     eyebrow: "Coffrets & lots",
-    title: "Composez votre caisse",
+    title: "Coffrets Les Frenchies",
     intro:
-      "Nos coffrets sont composés de cuvées sélectionnées, en quantité limitée pour offrir ou découvrir toute la gamme, avec une remise immédiate.",
+      "Retrouvez aussi nos coffrets mix dans une section dédiée, parfaits pour offrir ou découvrir toute la gamme Les Frenchies.",
     offers: [
       {
-        title: "Coffret Découverte",
-        saving: "Économie : 8,00 €",
-        lines: ["Blanc de Périnade 2023 ×2", "Grande Réserve 2020 ×1", "Rosé d'Été 2024 ×2"],
-        price: "62,00 €",
-        strikePrice: "70,00 €",
-        details: "5 bouteilles · 75 cl chacune",
-        ctaLabel: "Composer ma caisse",
+        title: "Mix Box of 3",
+        lines: ["1 rouge", "1 rosé", "1 blanc"],
+        price: "79,00 € TTC",
+        details: "3 bouteilles",
+        ctaLabel: "Ajouter au panier",
+        ctaHref: "/boutique#coffrets"
+      },
+      {
+        title: "Mix Box of 6",
+        lines: ["2 rouges", "2 rosés", "2 blancs"],
+        price: "158,00 € TTC",
+        details: "6 bouteilles",
+        ctaLabel: "Ajouter au panier",
         ctaHref: "/boutique#coffrets"
       }
     ]

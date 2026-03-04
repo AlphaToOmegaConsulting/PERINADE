@@ -1,110 +1,197 @@
 import type { ShopPageData } from "../types/shop";
-import shopImage1 from "../assets/perinade/shop/img-1.png";
-import shopImage2 from "../assets/perinade/shop/img-2.png";
-import shopImage3 from "../assets/perinade/shop/img-3.png";
-import shopImage4 from "../assets/perinade/shop/img-4.png";
-import shopImage5 from "../assets/perinade/shop/img-5.png";
-import shopImage7 from "../assets/perinade/shop/img-7.png";
+import heroImage from "../assets/perinade/shop/img-1.png";
+import arenesImage from "../assets/perinade/shop/catalog/arenes.webp";
+import renaissance75Image from "../assets/perinade/shop/catalog/renaissance_75.webp";
+import renaissanceMagnumImage from "../assets/perinade/shop/catalog/renaissance_magnum.webp";
+import chardonnayImage from "../assets/perinade/shop/catalog/chardonnay.webp";
+import sauvignonImage from "../assets/perinade/shop/catalog/sauvignon.webp";
+import viognierImage from "../assets/perinade/shop/catalog/viognier.webp";
+import crazyHorseImage from "../assets/perinade/shop/catalog/crazy_horse.webp";
+import chardoFrenchiesImage from "../assets/perinade/shop/catalog/chardo_frenchies.webp";
+import redFrenchiesImage from "../assets/perinade/shop/catalog/red_frenchies.webp";
+import roseFrenchiesImage from "../assets/perinade/shop/catalog/rose_frenchies.webp";
+import frenchies3MixImage from "../assets/perinade/shop/catalog/frenchies_3mix.webp";
+import frenchies6MixImage from "../assets/perinade/shop/catalog/frenchies_6mix.webp";
 
 export const shopPageEn: ShopPageData = {
   seo: {
-    title: "Buy AOP Minervois Wine Online | Domaine de la Périnade Shop",
+    title: "Buy Wine Online | Domaine de la Périnade Shop",
     description:
-      "Order our Languedoc wines online: AOP Minervois, IGP Pays d'Oc, reds, whites and rosés. 48-72 h delivery across France. Family estate near Carcassonne, Aude."
+      "Order our estate wines online: reds, whites, rosés and limited editions. 48-72 h delivery in France."
   },
   hero: {
-    image: shopImage1,
+    image: heroImage,
     imageAlt: "Wine cellar with bottle shelves — Minervois estate",
     eyebrow: "Online shop",
     titleHtml: "Our wines,<br /><span>to your door</span>",
     body:
-      "From the estate to your table: order our AOP Minervois and IGP Pays d'Oc wines online and receive them directly at home. Free delivery from €80.",
+      "Discover our estate wines and limited-edition collaborations. Free delivery from €80.",
     primaryCta: { label: "Browse wines", href: "/en/shop#produits" },
-    secondaryCta: { label: "Build my case", href: "/en/shop#coffrets" },
+    secondaryCta: { label: "View bundles", href: "/en/shop#coffrets" },
     metaAriaLabel: "Shop delivery information",
     metaItems: ["48-72 h delivery", "Secure payment", "14-day returns"]
   },
   productGrid: {
-    eyebrow: "Our vintages",
-    title: "AOP Minervois & IGP Pays d'Oc Wines",
+    eyebrow: "Full catalogue",
+    title: "Our 12 available cuvees",
+    previousLabel: "Previous products",
+    nextLabel: "Next products",
     products: [
       {
-        name: "Cuvée du Domaine",
-        meta: "AOP Minervois · 2022 · 75 cl",
-        description: "Dark fruit, garrigue, gentle spice. Silky palate, long finish.",
-        price: "€12.50 incl. VAT",
-        stock: "In stock",
-        image: shopImage2,
-        imageAlt: "Red wine bottle close-up",
-        badges: ["Best Seller", "Red"],
+        name: "Les Arenes",
+        meta: "2023 · 75 cl",
+        description:
+          "Red fruit and licorice notes with a supple, persistent palate.",
+        price: "€15.00 incl. VAT",
+        image: arenesImage,
+        imageAlt: "Les Arenes red bottle",
+        badges: ["Red"],
         tone: "Red",
         ctaLabel: "Add to cart",
         ctaHref: "/en/shop#produits"
       },
       {
-        name: "Blanc de Périnade",
-        meta: "IGP Pays d'Oc · 2023 · 75 cl",
-        description: "Citrus and white flowers. Remarkably fresh with a mineral finish.",
-        price: "€10.00 incl. VAT",
-        stock: "In stock",
-        image: shopImage3,
-        imageAlt: "White bottle on light background",
-        badges: ["Best Seller", "White"],
-        tone: "White",
+        name: "Renaissance Rose Cuvee",
+        meta: "2022 · 75 cl",
+        description:
+          "White peach and citrus aromas with a fresh, delicate finish.",
+        price: "€14.40 incl. VAT",
+        image: renaissance75Image,
+        imageAlt: "Renaissance Rose Cuvee 2022 bottle",
+        badges: ["Rose"],
+        tone: "Rose",
         ctaLabel: "Add to cart",
         ctaHref: "/en/shop#produits"
       },
       {
-        name: "Grande Réserve",
-        meta: "AOP Minervois · 2020 · 75 cl",
-        description: "Oak-aged. Powerful, complex, with smooth tannins.",
-        price: "€22.00 incl. VAT",
-        stock: "In stock",
-        image: shopImage4,
-        imageAlt: "Wine shelf",
-        badges: ["Best Seller", "Red"],
-        tone: "Red",
+        name: "Renaissance Rose Cuvee",
+        meta: "2024 · 150 cl",
+        description:
+          "Fruity and rounded rose with a fresh, elegant attack.",
+        price: "€33.00 incl. VAT",
+        image: renaissanceMagnumImage,
+        imageAlt: "Renaissance Rose Cuvee 2024 magnum",
+        badges: ["Rose", "Magnum"],
+        tone: "Rose",
         ctaLabel: "Add to cart",
         ctaHref: "/en/shop#produits"
       },
       {
-        name: "Rosé d'Été",
-        meta: "IGP Pays d'Oc · 2024 · 75 cl",
-        description: "Peach and strawberry. Fresh and generous, ideal for aperitif.",
-        price: "€9.50 incl. VAT",
-        stock: "In stock",
-        image: shopImage5,
-        imageAlt: "Rosé scene with basket",
-        badges: ["Visit favorite", "Rosé"],
-        tone: "Rosé",
-        ctaLabel: "Add to cart",
-        ctaHref: "/en/shop#produits"
-      },
-      {
-        name: "Blanc Réserve",
-        meta: "AOP Minervois · 2022 · 75 cl",
-        description: "Exotic fruit, subtle vanilla. Full and elegant palate.",
-        price: "€16.00 incl. VAT",
-        stock: "In stock",
-        image: shopImage3,
-        imageAlt: "Reserve white bottle",
+        name: "Chardonnay",
+        meta: "2023 · 75 cl",
+        description:
+          "Tropical fruit, lively acidity and a clean finish.",
+        price: "€14.00 incl. VAT",
+        image: chardonnayImage,
+        imageAlt: "Chardonnay 2023 bottle",
         badges: ["White"],
         tone: "White",
         ctaLabel: "Add to cart",
         ctaHref: "/en/shop#produits"
       },
       {
-        name: "Rosé Prestige",
-        meta: "IGP Pays d'Oc · 2024 · 75 cl",
-        description: "Rose and spring fruit. Fresh, structured and lively finish.",
-        price: "€13.00 incl. VAT",
-        stock: "In stock",
-        image: shopImage5,
-        imageAlt: "Rosé prestige bottle",
-        badges: ["Rosé"],
-        tone: "Rosé",
+        name: "Sauvignon Blanc Cuvee 1830",
+        meta: "No vintage · 75 cl",
+        description:
+          "Cassis and grapefruit notes with a bright, expressive profile.",
+        price: "€15.00 incl. VAT",
+        image: sauvignonImage,
+        imageAlt: "Sauvignon Blanc Cuvee 1830 bottle",
+        badges: ["White", "Cuvee 1830"],
+        tone: "White",
         ctaLabel: "Add to cart",
         ctaHref: "/en/shop#produits"
+      },
+      {
+        name: "Viognier",
+        meta: "2024 · 75 cl",
+        description:
+          "Citrus and apricot aromas, balanced and refreshing.",
+        price: "€14.00 incl. VAT",
+        image: viognierImage,
+        imageAlt: "Viognier 2024 bottle",
+        badges: ["White"],
+        tone: "White",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#produits"
+      },
+      {
+        name: "CRAZY HORSE PARIS",
+        meta: "No vintage · 75 cl",
+        description:
+          "Special edition with white peach and citrus notes.",
+        price: "€25.00 incl. VAT",
+        image: crazyHorseImage,
+        imageAlt: "Crazy Horse Paris limited edition bottle",
+        badges: ["Limited edition", "Rose"],
+        tone: "Rose",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#produits"
+      },
+      {
+        name: "Les Frenchies Chardonnay",
+        meta: "No vintage · 75 cl",
+        description:
+          "Full Chardonnay with a light oak touch and fine structure.",
+        price: "€26.00 incl. VAT",
+        image: chardoFrenchiesImage,
+        imageAlt: "Les Frenchies Chardonnay bottle",
+        badges: ["Les Frenchies", "White"],
+        tone: "White",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#produits"
+      },
+      {
+        name: "Les Frenchies Red Blend",
+        meta: "2023 · 75 cl",
+        description:
+          "Fruit-forward red blend, unoaked, with a fresh finish.",
+        price: "€29.00 incl. VAT",
+        image: redFrenchiesImage,
+        imageAlt: "Les Frenchies Red Blend bottle",
+        badges: ["Les Frenchies", "Red"],
+        tone: "Red",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#produits"
+      },
+      {
+        name: "Les Frenchies Rose — Red Scarf",
+        meta: "No vintage · 75 cl",
+        description:
+          "Delicate rose style with a bright and lively profile.",
+        price: "€24.00 incl. VAT",
+        image: roseFrenchiesImage,
+        imageAlt: "Les Frenchies Rose Red Scarf bottle",
+        badges: ["Les Frenchies", "Rose"],
+        tone: "Rose",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#produits"
+      },
+      {
+        name: "Les Frenchies Cuvees — Mix Box of 3",
+        meta: "No vintage · 3 × 75 cl",
+        description:
+          "Discovery bundle with one red, one rose and one white.",
+        price: "€79.00 incl. VAT",
+        image: frenchies3MixImage,
+        imageAlt: "Les Frenchies Mix Box of 3 bundle",
+        badges: ["Bundle", "Les Frenchies"],
+        tone: "Bundle",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#coffrets"
+      },
+      {
+        name: "Les Frenchies Cuvees — Mix Box of 6",
+        meta: "No vintage · 6 × 75 cl",
+        description:
+          "Full bundle with six bottles to explore the range.",
+        price: "€158.00 incl. VAT",
+        image: frenchies6MixImage,
+        imageAlt: "Les Frenchies Mix Box of 6 bundle",
+        badges: ["Bundle", "Les Frenchies"],
+        tone: "Bundle",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#coffrets"
       }
     ]
   },
@@ -120,22 +207,28 @@ export const shopPageEn: ShopPageData = {
     ]
   },
   caseComposer: {
-    backdropImage: shopImage4,
-    crateImage: shopImage7,
-    crateImageAlt: "Tasting basket",
+    backdropImage: frenchies6MixImage,
+    crateImage: frenchies3MixImage,
+    crateImageAlt: "Les Frenchies bundle",
     eyebrow: "Cases & bundles",
-    title: "Build your case",
+    title: "Les Frenchies Bundles",
     intro:
-      "Our cases include selected wines, available in limited quantities to gift or discover the full range with an instant discount.",
+      "Find our mix boxes in a dedicated section, ideal for gifting or discovering the full Les Frenchies range.",
     offers: [
       {
-        title: "Discovery Case",
-        saving: "Save €8.00",
-        lines: ["Blanc de Périnade 2023 ×2", "Grande Réserve 2020 ×1", "Rosé d'Été 2024 ×2"],
-        price: "€62.00",
-        strikePrice: "€70.00",
-        details: "5 bottles · 75 cl each",
-        ctaLabel: "Build my case",
+        title: "Mix Box of 3",
+        lines: ["1 red", "1 rose", "1 white"],
+        price: "€79.00 incl. VAT",
+        details: "3 bottles",
+        ctaLabel: "Add to cart",
+        ctaHref: "/en/shop#coffrets"
+      },
+      {
+        title: "Mix Box of 6",
+        lines: ["2 reds", "2 roses", "2 whites"],
+        price: "€158.00 incl. VAT",
+        details: "6 bottles",
+        ctaLabel: "Add to cart",
         ctaHref: "/en/shop#coffrets"
       }
     ]

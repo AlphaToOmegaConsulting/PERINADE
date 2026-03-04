@@ -22,7 +22,7 @@ export interface ShopProduct {
   meta: string;
   description: string;
   price: string;
-  stock: string;
+  stock?: string;
   image: ImageMetadata;
   imageAlt: string;
   badges: string[];
@@ -34,6 +34,8 @@ export interface ShopProduct {
 export interface ShopProductGridData {
   eyebrow: string;
   title: string;
+  previousLabel: string;
+  nextLabel: string;
   products: ShopProduct[];
 }
 
@@ -51,10 +53,10 @@ export interface ShopDomainSelectionData {
 
 export interface ShopOffer {
   title: string;
-  saving: string;
+  saving?: string;
   lines: string[];
   price: string;
-  strikePrice: string;
+  strikePrice?: string;
   details: string;
   ctaLabel: string;
   ctaHref: string;

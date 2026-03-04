@@ -1,110 +1,197 @@
 import type { ShopPageData } from "../types/shop";
-import shopImage1 from "../assets/perinade/shop/img-1.png";
-import shopImage2 from "../assets/perinade/shop/img-2.png";
-import shopImage3 from "../assets/perinade/shop/img-3.png";
-import shopImage4 from "../assets/perinade/shop/img-4.png";
-import shopImage5 from "../assets/perinade/shop/img-5.png";
-import shopImage7 from "../assets/perinade/shop/img-7.png";
+import heroImage from "../assets/perinade/shop/img-1.png";
+import arenesImage from "../assets/perinade/shop/catalog/arenes.webp";
+import renaissance75Image from "../assets/perinade/shop/catalog/renaissance_75.webp";
+import renaissanceMagnumImage from "../assets/perinade/shop/catalog/renaissance_magnum.webp";
+import chardonnayImage from "../assets/perinade/shop/catalog/chardonnay.webp";
+import sauvignonImage from "../assets/perinade/shop/catalog/sauvignon.webp";
+import viognierImage from "../assets/perinade/shop/catalog/viognier.webp";
+import crazyHorseImage from "../assets/perinade/shop/catalog/crazy_horse.webp";
+import chardoFrenchiesImage from "../assets/perinade/shop/catalog/chardo_frenchies.webp";
+import redFrenchiesImage from "../assets/perinade/shop/catalog/red_frenchies.webp";
+import roseFrenchiesImage from "../assets/perinade/shop/catalog/rose_frenchies.webp";
+import frenchies3MixImage from "../assets/perinade/shop/catalog/frenchies_3mix.webp";
+import frenchies6MixImage from "../assets/perinade/shop/catalog/frenchies_6mix.webp";
 
 export const shopPageEs: ShopPageData = {
   seo: {
-    title: "Comprar Vino AOP Minervois Online | Tienda Domaine de la Périnade",
+    title: "Comprar Vino Online | Tienda Domaine de la Périnade",
     description:
-      "Pida nuestros vinos del Languedoc online: AOP Minervois, IGP Pays d'Oc, tintos, blancos y rosados. Entrega en 48-72 h en Francia. Dominio familiar cerca de Carcassonne."
+      "Pida nuestros vinos de la finca online: tintos, blancos, rosados y ediciones limitadas. Entrega en 48-72 h en Francia."
   },
   hero: {
-    image: shopImage1,
+    image: heroImage,
     imageAlt: "Bodega con estanterías de botellas del dominio Minervois",
     eyebrow: "Tienda en línea",
     titleHtml: "Nuestros vinos,<br /><span>en su casa</span>",
     body:
-      "De la finca a su mesa: pida nuestros vinos AOP Minervois e IGP Pays d'Oc en línea y recíbalos directamente en casa. Envío gratuito a partir de 80 €.",
+      "Descubra nuestras cuvées de la finca y colaboraciones de edición limitada. Envío gratuito a partir de 80 €.",
     primaryCta: { label: "Ver vinos", href: "/es/tienda#produits" },
-    secondaryCta: { label: "Componer mi caja", href: "/es/tienda#coffrets" },
+    secondaryCta: { label: "Ver lotes", href: "/es/tienda#coffrets" },
     metaAriaLabel: "Información de entrega de la tienda",
     metaItems: ["Entrega en 48-72 h", "Pago seguro", "Devoluciones 14 días"]
   },
   productGrid: {
-    eyebrow: "Nuestras cuvées",
-    title: "Vinos AOP Minervois e IGP Pays d'Oc",
+    eyebrow: "Catálogo completo",
+    title: "Nuestras 12 cuvées disponibles",
+    previousLabel: "Productos anteriores",
+    nextLabel: "Productos siguientes",
     products: [
       {
-        name: "Cuvée du Domaine",
-        meta: "AOP Minervois · 2022 · 75 cl",
-        description: "Frutos negros, garriga y especias suaves. Boca sedosa, gran longitud.",
-        price: "12,50 € IVA incl.",
-        stock: "En stock",
-        image: shopImage2,
-        imageAlt: "Primer plano de botella tinta",
-        badges: ["Más vendido", "Tinto"],
+        name: "Les Arènes",
+        meta: "2023 · 75 cl",
+        description:
+          "Notas de fruta roja y regaliz con una boca suave y persistente.",
+        price: "15,00 € IVA incl.",
+        image: arenesImage,
+        imageAlt: "Botella Les Arènes tinto",
+        badges: ["Tinto"],
         tone: "Tinto",
         ctaLabel: "Añadir al carrito",
         ctaHref: "/es/tienda#produits"
       },
       {
-        name: "Blanc de Périnade",
-        meta: "IGP Pays d'Oc · 2023 · 75 cl",
-        description: "Cítricos y flores blancas. Frescura notable y final mineral.",
-        price: "10,00 € IVA incl.",
-        stock: "En stock",
-        image: shopImage3,
-        imageAlt: "Botella blanca sobre fondo claro",
-        badges: ["Más vendido", "Blanco"],
-        tone: "Blanco",
-        ctaLabel: "Añadir al carrito",
-        ctaHref: "/es/tienda#produits"
-      },
-      {
-        name: "Grande Réserve",
-        meta: "AOP Minervois · 2020 · 75 cl",
-        description: "Criado en barrica. Potente, complejo y de taninos fundidos.",
-        price: "22,00 € IVA incl.",
-        stock: "En stock",
-        image: shopImage4,
-        imageAlt: "Estanterías de vinos",
-        badges: ["Más vendido", "Tinto"],
-        tone: "Tinto",
-        ctaLabel: "Añadir al carrito",
-        ctaHref: "/es/tienda#produits"
-      },
-      {
-        name: "Rosé d'Été",
-        meta: "IGP Pays d'Oc · 2024 · 75 cl",
-        description: "Melocotón y fresa. Boca viva y golosa, ideal para aperitivo.",
-        price: "9,50 € IVA incl.",
-        stock: "En stock",
-        image: shopImage5,
-        imageAlt: "Escena de rosado con cesta",
-        badges: ["Favorito de visita", "Rosado"],
+        name: "Cuvée Renaissance Rosé",
+        meta: "2022 · 75 cl",
+        description:
+          "Aromas de melocotón blanco y cítricos con final fresco y delicado.",
+        price: "14,40 € IVA incl.",
+        image: renaissance75Image,
+        imageAlt: "Botella Cuvée Renaissance Rosé 2022",
+        badges: ["Rosado"],
         tone: "Rosado",
         ctaLabel: "Añadir al carrito",
         ctaHref: "/es/tienda#produits"
       },
       {
-        name: "Blanc Réserve",
-        meta: "AOP Minervois · 2022 · 75 cl",
-        description: "Fruta exótica y vainilla sutil. Boca amplia y elegante.",
-        price: "16,00 € IVA incl.",
-        stock: "En stock",
-        image: shopImage3,
-        imageAlt: "Botella blanco reserva",
+        name: "Cuvée Renaissance Rosé",
+        meta: "2024 · 150 cl",
+        description:
+          "Rosado afrutado y redondo con entrada fresca y elegante.",
+        price: "33,00 € IVA incl.",
+        image: renaissanceMagnumImage,
+        imageAlt: "Magnum Cuvée Renaissance Rosé 2024",
+        badges: ["Rosado", "Magnum"],
+        tone: "Rosado",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#produits"
+      },
+      {
+        name: "Chardonnay",
+        meta: "2023 · 75 cl",
+        description:
+          "Fruta tropical, buena acidez y final limpio.",
+        price: "14,00 € IVA incl.",
+        image: chardonnayImage,
+        imageAlt: "Botella Chardonnay 2023",
         badges: ["Blanco"],
         tone: "Blanco",
         ctaLabel: "Añadir al carrito",
         ctaHref: "/es/tienda#produits"
       },
       {
-        name: "Rosé Prestige",
-        meta: "IGP Pays d'Oc · 2024 · 75 cl",
-        description: "Rosa y frutos de primavera. Final fresco, estructurado y vivo.",
-        price: "13,00 € IVA incl.",
-        stock: "En stock",
-        image: shopImage5,
-        imageAlt: "Botella rosado prestige",
-        badges: ["Rosado"],
+        name: "Sauvignon Blanc cuvée 1830",
+        meta: "Sin añada · 75 cl",
+        description:
+          "Notas de casis y pomelo en un perfil vivo y expresivo.",
+        price: "15,00 € IVA incl.",
+        image: sauvignonImage,
+        imageAlt: "Botella Sauvignon Blanc cuvée 1830",
+        badges: ["Blanco", "Cuvée 1830"],
+        tone: "Blanco",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#produits"
+      },
+      {
+        name: "Viognier",
+        meta: "2024 · 75 cl",
+        description:
+          "Cítricos y albaricoque con un perfil equilibrado y fresco.",
+        price: "14,00 € IVA incl.",
+        image: viognierImage,
+        imageAlt: "Botella Viognier 2024",
+        badges: ["Blanco"],
+        tone: "Blanco",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#produits"
+      },
+      {
+        name: "CRAZY HORSE PARIS",
+        meta: "Sin añada · 75 cl",
+        description:
+          "Edición especial con notas de melocotón blanco y cítricos.",
+        price: "25,00 € IVA incl.",
+        image: crazyHorseImage,
+        imageAlt: "Botella edición limitada Crazy Horse Paris",
+        badges: ["Edición limitada", "Rosado"],
         tone: "Rosado",
         ctaLabel: "Añadir al carrito",
         ctaHref: "/es/tienda#produits"
+      },
+      {
+        name: "Chardonnay Les Frenchies",
+        meta: "Sin añada · 75 cl",
+        description:
+          "Chardonnay amplio, con un toque de madera y buena estructura.",
+        price: "26,00 € IVA incl.",
+        image: chardoFrenchiesImage,
+        imageAlt: "Botella Chardonnay Les Frenchies",
+        badges: ["Les Frenchies", "Blanco"],
+        tone: "Blanco",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#produits"
+      },
+      {
+        name: "Red Blend Les Frenchies",
+        meta: "2023 · 75 cl",
+        description:
+          "Mezcla tinta afrutada, sin madera, con final fresco.",
+        price: "29,00 € IVA incl.",
+        image: redFrenchiesImage,
+        imageAlt: "Botella Red Blend Les Frenchies",
+        badges: ["Les Frenchies", "Tinto"],
+        tone: "Tinto",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#produits"
+      },
+      {
+        name: "Rosé Les Frenchies — Foulard Rouge",
+        meta: "Sin añada · 75 cl",
+        description:
+          "Rosado delicado y luminoso, de perfil fresco y goloso.",
+        price: "24,00 € IVA incl.",
+        image: roseFrenchiesImage,
+        imageAlt: "Botella Rosé Les Frenchies Foulard Rouge",
+        badges: ["Les Frenchies", "Rosado"],
+        tone: "Rosado",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#produits"
+      },
+      {
+        name: "Cuvées Les Frenchies — Mix Box of 3",
+        meta: "Sin añada · 3 × 75 cl",
+        description:
+          "Lote descubrimiento con un tinto, un rosado y un blanco.",
+        price: "79,00 € IVA incl.",
+        image: frenchies3MixImage,
+        imageAlt: "Lote Les Frenchies Mix Box of 3",
+        badges: ["Lote", "Les Frenchies"],
+        tone: "Lote",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#coffrets"
+      },
+      {
+        name: "Cuvées Les Frenchies — Mix Box of 6",
+        meta: "Sin añada · 6 × 75 cl",
+        description:
+          "Lote completo de seis botellas para explorar la gama.",
+        price: "158,00 € IVA incl.",
+        image: frenchies6MixImage,
+        imageAlt: "Lote Les Frenchies Mix Box of 6",
+        badges: ["Lote", "Les Frenchies"],
+        tone: "Lote",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#coffrets"
       }
     ]
   },
@@ -120,22 +207,28 @@ export const shopPageEs: ShopPageData = {
     ]
   },
   caseComposer: {
-    backdropImage: shopImage4,
-    crateImage: shopImage7,
-    crateImageAlt: "Cesta de degustación",
+    backdropImage: frenchies6MixImage,
+    crateImage: frenchies3MixImage,
+    crateImageAlt: "Lote Les Frenchies",
     eyebrow: "Cajas y lotes",
-    title: "Componga su caja",
+    title: "Lotes Les Frenchies",
     intro:
-      "Nuestras cajas incluyen vinos seleccionados, en cantidades limitadas para regalar o descubrir toda la gama con descuento inmediato.",
+      "Encuentre nuestros lotes mix en una sección dedicada, ideales para regalar o descubrir toda la gama Les Frenchies.",
     offers: [
       {
-        title: "Caja Descubrimiento",
-        saving: "Ahorro: 8,00 €",
-        lines: ["Blanc de Périnade 2023 ×2", "Grande Réserve 2020 ×1", "Rosé d'Été 2024 ×2"],
-        price: "62,00 €",
-        strikePrice: "70,00 €",
-        details: "5 botellas · 75 cl cada una",
-        ctaLabel: "Componer mi caja",
+        title: "Mix Box of 3",
+        lines: ["1 tinto", "1 rosado", "1 blanco"],
+        price: "79,00 € IVA incl.",
+        details: "3 botellas",
+        ctaLabel: "Añadir al carrito",
+        ctaHref: "/es/tienda#coffrets"
+      },
+      {
+        title: "Mix Box of 6",
+        lines: ["2 tintos", "2 rosados", "2 blancos"],
+        price: "158,00 € IVA incl.",
+        details: "6 botellas",
+        ctaLabel: "Añadir al carrito",
         ctaHref: "/es/tienda#coffrets"
       }
     ]
@@ -154,7 +247,7 @@ export const shopPageEs: ShopPageData = {
       {
         question: "¿Cuáles son los plazos de entrega?",
         answer:
-          "Los pedidos se envían en 24h y se entregan en 48-72 h en Francia metropolitana. Embalaje isotérmico incluido en periodos de calor."
+          "Los pedidos se envían en 24h y se entregan en 48-72 h en Francia metropolitana. Embalaje isotérmico incluido en períodos de calor."
       },
       {
         question: "¿La entrega es gratuita?",

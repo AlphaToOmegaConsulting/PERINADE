@@ -8,86 +8,260 @@ interface Props {
 
 const { productGrid } = Astro.props;
 
+const groupBy = <T,>(items: T[], size: number): T[][] => {
+  const groups: T[][] = [];
+  for (let i = 0; i < items.length; i += size) groups.push(items.slice(i, i + size));
+  return groups;
+};
+
+const pages = groupBy(productGrid.products, 6);
+const pageCount = pages.length;
 ---
 
-<section id="produits" class="shop-grid section section--soft" aria-labelledby="shop-grid-title">
+<section
+  id="produits"
+  class="shop-grid section section--soft"
+  aria-labelledby="shop-grid-title"
+  data-shop-carousel
+  data-page-count={pageCount}
+>
   <div class="shell shop-shell">
     <header class="shop-grid__heading" data-reveal="up">
       <p>{productGrid.eyebrow}</p>
       <h2 id="shop-grid-title">{productGrid.title}</h2>
     </header>
 
-    <div class="shop-grid__cards" data-reveal-group data-reveal-stagger="80">
-      {productGrid.products.map((product) => (
-        <div data-reveal="up"><ProductCard product={product} /></div>
-      ))}
+    <div class="shop-grid__viewport" data-carousel-viewport>
+      <div class="shop-grid__track" data-carousel-track>
+        {pages.map((page, pageIndex) => (
+          <div class="shop-grid__page" data-carousel-page data-page-index={pageIndex}>
+            {page.map((product) => (
+              <div class="shop-grid__item">
+                <ProductCard product={product} />
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
     </div>
 
-    <div class="shop-grid__dots" aria-hidden="true">
-      <span class="is-active"></span><span></span><span></span>
+    <div class="shop-grid__dots" data-carousel-dots>
+      {pages.map((_, index) => (
+        <button
+          type="button"
+          class:list={["shop-grid__dot", index === 0 && "is-active"]}
+          data-carousel-dot
+          data-dot-index={index}
+          aria-label={`${productGrid.nextLabel} ${index + 1}`}
+        />
+      ))}
     </div>
   </div>
 </section>
 
+<script is:inline>
+  (() => {
+    const setup = (root) => {
+      if (root.dataset.carouselReady === "true") return;
+      root.dataset.carouselReady = "true";
+
+      const viewport = root.querySelector("[data-carousel-viewport]");
+      const track = root.querySelector("[data-carousel-track]");
+      const dotsWrap = root.querySelector("[data-carousel-dots]");
+      const pages = Array.from(track?.querySelectorAll("[data-carousel-page]") || []);
+      const dots = Array.from(dotsWrap?.querySelectorAll("[data-carousel-dot]") || []);
+      const total = Number(root.dataset.pageCount || pages.length || 0);
+
+      if (!viewport || !track || total <= 1) return;
+      let index = 0;
+      let timer;
+      let startX = 0;
+      let deltaX = 0;
+      let hovering = false;
+
+      const setTransform = (animated) => {
+        const pageWidth = viewport.clientWidth;
+        track.style.transition = animated ? "transform 420ms ease" : "none";
+        track.style.transform = `translate3d(-${index * pageWidth}px, 0, 0)`;
+      };
+
+      const activeDot = () => {
+        dots.forEach((dot, dotIndex) => dot.classList.toggle("is-active", dotIndex === index));
+      };
+
+      const next = () => {
+        index = (index + 1) % total;
+        setTransform(true);
+        activeDot();
+      };
+
+      const prev = () => {
+        index = (index - 1 + total) % total;
+        setTransform(true);
+        activeDot();
+      };
+
+      const startAutoplay = () => {
+        window.clearInterval(timer);
+        timer = window.setInterval(() => {
+          if (!hovering) next();
+        }, 4500);
+      };
+
+      dots.forEach((dot, dotIndex) => {
+        dot.addEventListener("click", () => {
+          index = dotIndex;
+          setTransform(true);
+          activeDot();
+          startAutoplay();
+        });
+      });
+
+      viewport.addEventListener("pointerdown", (event) => {
+        startX = event.clientX;
+        deltaX = 0;
+      });
+
+      viewport.addEventListener("pointermove", (event) => {
+        deltaX = event.clientX - startX;
+      });
+
+      viewport.addEventListener("pointerup", () => {
+        if (Math.abs(deltaX) > 45) {
+          if (deltaX < 0) next();
+          else prev();
+        }
+        deltaX = 0;
+        startAutoplay();
+      });
+
+      root.addEventListener("mouseenter", () => {
+        hovering = true;
+      });
+
+      root.addEventListener("mouseleave", () => {
+        hovering = false;
+      });
+
+      root.addEventListener("focusin", () => window.clearInterval(timer));
+      root.addEventListener("focusout", startAutoplay);
+
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(() => setTransform(false), 120);
+      });
+
+      setTransform(false);
+      activeDot();
+      startAutoplay();
+    };
+
+    const init = () => {
+      document.querySelectorAll("[data-shop-carousel]").forEach(setup);
+    };
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init, { once: true });
+    } else {
+      init();
+    }
+
+    document.addEventListener("astro:after-swap", init);
+  })();
+</script>
+
 <style>
   .shop-grid {
+    background: #f5f5f5;
     border-bottom: 1px solid rgba(44, 44, 44, 0.08);
   }
 
   .shop-grid__heading {
-    margin: 0 auto clamp(1.3rem, 4vw, 2.5rem);
-    max-inline-size: clamp(20rem, 45vw, 32rem);
+    margin: 0 auto clamp(1.8rem, 4vw, 2.6rem);
+    max-inline-size: 44rem;
     text-align: center;
   }
 
   .shop-grid__heading p {
-    color: var(--color-accent);
-    font-size: clamp(0.72rem, 1.9vw, 0.8rem);
-    letter-spacing: 0.22em;
+    color: #c49c6e;
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
     margin: 0;
     text-transform: uppercase;
   }
 
   .shop-grid__heading h2 {
-    font-size: clamp(2rem, 4vw, 2.85rem);
-    margin: clamp(0.45rem, 1.4vw, 0.75rem) 0 0;
+    color: #2c2c2c;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin: 0.55rem 0 0;
   }
 
-  .shop-grid__cards {
+  .shop-grid__viewport {
+    overflow: hidden;
+    touch-action: pan-y;
+  }
+
+  .shop-grid__track {
+    display: flex;
+    will-change: transform;
+  }
+
+  .shop-grid__page {
+    align-items: stretch;
     display: grid;
-    gap: var(--space-md);
+    flex: 0 0 100%;
+    gap: 1.5rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .shop-grid__dots {
+  .shop-grid__item {
     display: flex;
-    gap: clamp(0.28rem, 1vw, 0.42rem);
+    min-width: 0;
+  }
+
+  .shop-grid__item > * {
+    width: 100%;
+  }
+
+  .shop-grid__dots {
+    align-items: center;
+    display: flex;
+    gap: 0.9rem;
     justify-content: center;
-    margin-top: clamp(1rem, 4vw, 1.75rem);
+    margin-top: 1.8rem;
   }
 
-  .shop-grid__dots span {
-    background: rgba(26, 26, 26, 0.24);
-    border-radius: 100vmax;
-    display: block;
-    block-size: clamp(0.34rem, 1.4vw, 0.44rem);
-    inline-size: clamp(0.34rem, 1.4vw, 0.44rem);
+  .shop-grid__dot {
+    background: #ccc;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    height: 0.78rem;
+    padding: 0;
+    transition: width 0.2s ease, background-color 0.2s ease;
+    width: 0.78rem;
   }
 
-  .shop-grid__dots .is-active {
-    background: #1c2738;
-    inline-size: clamp(0.62rem, 2.2vw, 0.78rem);
+  .shop-grid__dot.is-active {
+    background: #101828;
+    width: 1.4rem;
   }
 
-  @media (max-width: 63.9375em) {
-    .shop-grid__cards {
+  @media (max-width: 74.9375em) {
+    .shop-grid__page {
+      gap: 1.1rem;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 47.9375em) {
-    .shop-grid__cards {
+    .shop-grid__page {
       grid-template-columns: 1fr;
+    }
+
+    .shop-grid__heading {
+      margin-bottom: 1.35rem;
     }
   }
 </style>
