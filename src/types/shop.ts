@@ -112,6 +112,38 @@ export interface ShopSeoData {
   description: string;
 }
 
+export interface ShopConfirmationPageData {
+  seo: {
+    title: string;
+    description: string;
+  };
+  hero: {
+    title: string;
+    body: string;
+  };
+  status: {
+    labelPaid: string;
+    labelRefPrefix: string;
+  };
+  nextSteps: {
+    title: string;
+    items: string[];
+  };
+  support: {
+    title: string;
+    body: string;
+    emailLabel: string;
+    phoneLabel: string;
+  };
+  actions: {
+    backShopLabel: string;
+    backHomeLabel: string;
+  };
+  legal: {
+    moderationNotice: string;
+  };
+}
+
 export interface ShopPageData {
   seo: ShopSeoData;
   hero: ShopHeroData;
@@ -121,4 +153,5 @@ export interface ShopPageData {
   caseComposer: ShopCaseComposerData;
   finalCta: ShopFinalCtaData;
   faq: ShopFaqData;
+  confirmationPage: ShopConfirmationPageData;
 }

@@ -2,14 +2,15 @@ import Stripe from "stripe";
 
 interface Env {
   STRIPE_SECRET_KEY?: string;
+  SITE_BASE_URL?: string;
 }
 
 interface CartItem {
   id: string;
   name: string;
+  description: string;
   unitAmount: number;
   qty: number;
-  description?: string;
 }
 
 interface RequestBody {
@@ -24,6 +25,20 @@ const json = (data: unknown, status = 200): Response =>
     },
   });
 
+const normalizeBaseUrl = (value: string | undefined): string | null => {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+
+  try {
+    const parsed = new URL(trimmed);
+    if (parsed.protocol !== "http:" && parsed.protocol !== "https:") return null;
+    return parsed.origin;
+  } catch {
+    return null;
+  }
+};
+
 const isCartItem = (value: unknown): value is CartItem => {
   if (!value || typeof value !== "object") return false;
   const item = value as Partial<CartItem>;
@@ -32,7 +47,8 @@ const isCartItem = (value: unknown): value is CartItem => {
     item.id.length > 0 &&
     typeof item.name === "string" &&
     item.name.length > 0 &&
-    (item.description === undefined || typeof item.description === "string") &&
+    typeof item.description === "string" &&
+    item.description.trim().length > 0 &&
     Number.isFinite(item.unitAmount) &&
     Number(item.unitAmount) > 0 &&
     Number.isInteger(item.qty) &&
@@ -43,6 +59,8 @@ const isCartItem = (value: unknown): value is CartItem => {
 export const onRequestPost = async (context: { request: Request; env: Env }): Promise<Response> => {
   const secretKey = context.env.STRIPE_SECRET_KEY;
   if (!secretKey) return json({ error: "Missing STRIPE_SECRET_KEY" }, 500);
+  const siteBaseUrl = normalizeBaseUrl(context.env.SITE_BASE_URL);
+  if (!siteBaseUrl) return json({ error: "Missing or invalid SITE_BASE_URL" }, 500);
 
   let body: RequestBody;
   try {
@@ -65,14 +83,14 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: "https://www.perinade.fr/confirmation",
-      cancel_url: "https://www.perinade.fr/panier",
+      success_url: `${siteBaseUrl}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteBaseUrl}/panier`,
       line_items: items.map((item) => ({
         price_data: {
           currency: "eur",
           product_data: {
             name: item.name,
-            ...(item.description ? { description: item.description } : {}),
+            description: item.description.trim(),
           },
           unit_amount: item.unitAmount,
         },

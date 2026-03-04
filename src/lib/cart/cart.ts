@@ -5,7 +5,7 @@ export type CartItem = {
   name: string;
   unitAmount: number;
   qty: number;
-  description?: string;
+  description: string;
   image?: string;
   weightGrams?: number;
 };
@@ -42,10 +42,11 @@ const normalizeState = (value: unknown): CartState => {
     const candidate = rawItem as Partial<CartItem>;
     const id = typeof candidate.id === "string" ? candidate.id : "";
     const name = typeof candidate.name === "string" ? candidate.name : "";
+    const description = typeof candidate.description === "string" ? candidate.description.trim() : "";
     const unitAmount = Number(candidate.unitAmount);
     const qty = normalizeQty(candidate.qty);
 
-    if (!id || !name || !Number.isFinite(unitAmount) || qty <= 0) continue;
+    if (!id || !name || !description || !Number.isFinite(unitAmount) || qty <= 0) continue;
 
     const existing = mergedById.get(id);
     const nextQty = (existing?.qty ?? 0) + qty;
@@ -53,9 +54,9 @@ const normalizeState = (value: unknown): CartState => {
     const nextItem: CartItem = {
       id,
       name,
+      description,
       unitAmount,
       qty: nextQty,
-      description: typeof candidate.description === "string" ? candidate.description : existing?.description,
       image: typeof candidate.image === "string" ? candidate.image : existing?.image,
       weightGrams: Number.isFinite(Number(candidate.weightGrams))
         ? Number(candidate.weightGrams)
@@ -106,6 +107,8 @@ export function getCart(): CartState {
 
 export function addToCart(item: Omit<CartItem, "qty"> & { qty?: number }): CartState {
   const current = readCartFromStorage();
+  const description = item.description.trim();
+  if (!description) return current;
   const addQty = normalizeQty(item.qty ?? 1);
 
   const items = [...current.items];
@@ -120,7 +123,7 @@ export function addToCart(item: Omit<CartItem, "qty"> & { qty?: number }): CartS
         ...items[index],
         name: item.name,
         unitAmount: item.unitAmount,
-        description: item.description,
+        description,
         image: item.image,
         weightGrams: item.weightGrams,
         qty: nextQty,
@@ -130,9 +133,9 @@ export function addToCart(item: Omit<CartItem, "qty"> & { qty?: number }): CartS
     items.push({
       id: item.id,
       name: item.name,
+      description,
       unitAmount: item.unitAmount,
       qty: addQty,
-      description: item.description,
       image: item.image,
       weightGrams: item.weightGrams,
     });

@@ -285,5 +285,40 @@ export const shopPageEn: ShopPageData = {
         answer: "By phone at +33 4 68 XX XX XX or by email via the website contact form."
       }
     ]
+  },
+  confirmationPage: {
+    seo: {
+      title: "Order Confirmation | Domaine de la Périnade",
+      description: "Your payment has been confirmed. Find your order recap and next steps."
+    },
+    hero: {
+      title: "Payment confirmed",
+      body: "Thank you for your order. Your payment was successful and our team is now preparing shipment."
+    },
+    status: {
+      labelPaid: "Status: paid",
+      labelRefPrefix: "Payment reference"
+    },
+    nextSteps: {
+      title: "What happens next",
+      items: [
+        "You will receive a confirmation email with your order details.",
+        "Your order is prepared within 24 business hours.",
+        "Shipping is then completed within 48 to 72 hours in mainland France."
+      ]
+    },
+    support: {
+      title: "Need help?",
+      body: "Our team remains available if you have any question about your order.",
+      emailLabel: "contact@perinade.fr",
+      phoneLabel: "+33 4 68 XX XX XX"
+    },
+    actions: {
+      backShopLabel: "Back to shop",
+      backHomeLabel: "Back to home"
+    },
+    legal: {
+      moderationNotice: "Alcohol abuse is dangerous for your health. Drink responsibly."
+    }
   }
 };

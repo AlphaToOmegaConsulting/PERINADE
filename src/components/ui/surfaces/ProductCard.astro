@@ -82,10 +82,10 @@ const imageSrc = product.image?.src;
         const id = cta.dataset.cartId ?? "";
         const name = cta.dataset.cartName ?? "";
         const unitAmount = Number(cta.dataset.cartUnitAmount ?? "0");
-        const description = cta.dataset.cartDescription || undefined;
+        const description = cta.dataset.cartDescription?.trim() ?? "";
         const image = cta.dataset.cartImage || undefined;
 
-        if (!id || !name || !Number.isFinite(unitAmount) || unitAmount <= 0) return;
+        if (!id || !name || !description || !Number.isFinite(unitAmount) || unitAmount <= 0) return;
 
         addToCart({
           id,

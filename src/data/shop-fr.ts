@@ -305,5 +305,40 @@ export const shopPageFr: ShopPageData = {
         answer: "Par téléphone au +33 4 68 XX XX XX ou par e-mail via le formulaire de contact du site."
       }
     ]
+  },
+  confirmationPage: {
+    seo: {
+      title: "Confirmation de commande | Domaine de la Périnade",
+      description: "Votre paiement a été confirmé. Retrouvez le récapitulatif et les prochaines étapes de votre commande."
+    },
+    hero: {
+      title: "Paiement confirmé",
+      body: "Merci pour votre commande. Votre transaction a bien été validée et notre équipe prépare maintenant l'expédition."
+    },
+    status: {
+      labelPaid: "Statut: payé",
+      labelRefPrefix: "Référence de paiement"
+    },
+    nextSteps: {
+      title: "Prochaines étapes",
+      items: [
+        "Vous recevez un e-mail de confirmation avec le détail de la commande.",
+        "La commande est préparée sous 24 h ouvrées.",
+        "L'expédition est ensuite assurée sous 48 à 72 h en France métropolitaine."
+      ]
+    },
+    support: {
+      title: "Besoin d'aide ?",
+      body: "Notre équipe reste disponible pour toute question sur votre commande.",
+      emailLabel: "contact@perinade.fr",
+      phoneLabel: "+33 4 68 XX XX XX"
+    },
+    actions: {
+      backShopLabel: "Retour à la boutique",
+      backHomeLabel: "Retour à l'accueil"
+    },
+    legal: {
+      moderationNotice: "L'abus d'alcool est dangereux pour la santé. À consommer avec modération."
+    }
   }
 };
