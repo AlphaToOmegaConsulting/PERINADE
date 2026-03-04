@@ -373,7 +373,7 @@ const alternates = [
   .cart-table {
     border-collapse: separate;
     border-spacing: 0 0.75rem;
-    table-layout: fixed;
+    table-layout: auto;
     width: 100%;
   }
 
@@ -388,7 +388,7 @@ const alternates = [
   }
 
   .cart-table thead th:nth-child(1) {
-    width: 34%;
+    width: 31%;
   }
 
   .cart-table thead th:nth-child(2),
@@ -399,7 +399,7 @@ const alternates = [
 
   .cart-table thead th:nth-child(5) {
     text-align: right;
-    width: 12%;
+    width: 15%;
   }
 
   .cart-table tbody td {
@@ -418,7 +418,13 @@ const alternates = [
   .cart-table tbody td:last-child {
     border-radius: 0 1rem 1rem 0;
     border-right: 1px solid rgba(44, 44, 44, 0.1);
+    padding-right: 1rem;
     text-align: right;
+  }
+
+  .cart-item__remove-wrap {
+    min-width: 8.3rem;
+    white-space: nowrap;
   }
 
   .cart-item__label {
