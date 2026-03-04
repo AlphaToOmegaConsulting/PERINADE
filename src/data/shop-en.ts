@@ -31,6 +31,21 @@ export const shopPageEn: ShopPageData = {
     metaAriaLabel: "Shop delivery information",
     metaItems: ["48-72 h delivery", "Secure payment", "14-day returns"]
   },
+  compliance: {
+    marketingBannerAriaLabel: "Alcohol legal information",
+    marketingBannerTitle: "Legal information",
+    ageNotice: "The sale of alcohol to persons under 18 is prohibited.",
+    healthNotice: "Alcohol abuse is dangerous for your health. Drink responsibly.",
+    checkoutTitle: "Alcohol compliance",
+    checkoutAdultOnlyNote: "Orders are reserved for adults only.",
+    checkoutAcknowledgements: {
+      age: "I certify that I am 18 years old or over.",
+      information: "I confirm that I have read the displayed order information."
+    },
+    payOrderLabel: "Place order (payment obligation)",
+    payOrderHelp: "This action places a payable order.",
+    payOrderPendingLabel: "Payment finalization is currently being prepared."
+  },
   productGrid: {
     eyebrow: "Full catalogue",
     title: "Our 12 available cuvees",
@@ -235,8 +250,8 @@ export const shopPageEn: ShopPageData = {
   },
   finalCta: {
     sectionAriaLabel: "Shop call to action",
-    title: "Ready to taste?",
-    body: "Add your favorite wines and enjoy free delivery from €80.",
+    title: "Discover our cuvees",
+    body: "Add your favorite wines to your cart and complete your order online.",
     ctaLabel: "Browse wines",
     ctaHref: "/en/shop#produits"
   },

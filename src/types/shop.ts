@@ -91,6 +91,22 @@ export interface ShopFaqData {
   items: ShopFaqItem[];
 }
 
+export interface ShopComplianceData {
+  marketingBannerAriaLabel: string;
+  marketingBannerTitle: string;
+  ageNotice: string;
+  healthNotice: string;
+  checkoutTitle: string;
+  checkoutAdultOnlyNote: string;
+  checkoutAcknowledgements: {
+    age: string;
+    information: string;
+  };
+  payOrderLabel: string;
+  payOrderHelp: string;
+  payOrderPendingLabel: string;
+}
+
 export interface ShopSeoData {
   title: string;
   description: string;
@@ -99,6 +115,7 @@ export interface ShopSeoData {
 export interface ShopPageData {
   seo: ShopSeoData;
   hero: ShopHeroData;
+  compliance: ShopComplianceData;
   productGrid: ShopProductGridData;
   domainSelection: ShopDomainSelectionData;
   caseComposer: ShopCaseComposerData;

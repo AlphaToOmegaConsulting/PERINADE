@@ -40,6 +40,7 @@ const { footer } = Astro.props;
     <div class="footer__newsletter">
       <h3>{footer.newsletterTitle}</h3>
       <p>{footer.newsletterBody}</p>
+      <p class="footer__newsletter-adult">{footer.newsletterAdultNotice}</p>
       <form data-ui-form action={footer.newsletterAction} method="post">
         <input type="email" name="email" inputmode="email" autocomplete="email" placeholder={footer.newsletterPlaceholder} required />
         <SubmitButton class="footer__newsletter-submit" label="OK" variant="primary" size="sm" />
@@ -96,6 +97,12 @@ const { footer } = Astro.props;
   .footer__newsletter p {
     line-height: 1.75;
     margin: 0;
+  }
+
+  .footer__newsletter-adult {
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.84rem;
+    margin-top: 0.55rem;
   }
 
   .footer__group h3,

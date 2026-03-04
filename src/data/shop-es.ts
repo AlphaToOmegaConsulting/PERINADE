@@ -31,6 +31,21 @@ export const shopPageEs: ShopPageData = {
     metaAriaLabel: "Información de entrega de la tienda",
     metaItems: ["Entrega en 48-72 h", "Pago seguro", "Devoluciones 14 días"]
   },
+  compliance: {
+    marketingBannerAriaLabel: "Información legal sobre alcohol",
+    marketingBannerTitle: "Información legal",
+    ageNotice: "Se prohíbe la venta de alcohol a menores de 18 años.",
+    healthNotice: "El abuso de alcohol es peligroso para la salud. Consuma con moderación.",
+    checkoutTitle: "Conformidad alcohol",
+    checkoutAdultOnlyNote: "Pedido reservado únicamente a personas adultas.",
+    checkoutAcknowledgements: {
+      age: "Certifico que tengo 18 años o más.",
+      information: "Confirmo que he leído la información del pedido mostrada."
+    },
+    payOrderLabel: "Validar pedido (obligación de pago)",
+    payOrderHelp: "Esta acción implica un pedido con obligación de pago.",
+    payOrderPendingLabel: "La finalización del pago está en preparación técnica."
+  },
   productGrid: {
     eyebrow: "Catálogo completo",
     title: "Nuestras 12 cuvées disponibles",
@@ -235,8 +250,8 @@ export const shopPageEs: ShopPageData = {
   },
   finalCta: {
     sectionAriaLabel: "Llamada a la acción de la tienda",
-    title: "¿Listo para degustar?",
-    body: "Añada sus vinos favoritos y disfrute de envío gratuito a partir de 80 €.",
+    title: "Descubra nuestras cuvées",
+    body: "Añada sus vinos favoritos al carrito y complete su pedido en línea.",
     ctaLabel: "Ver vinos",
     ctaHref: "/es/tienda#produits"
   },

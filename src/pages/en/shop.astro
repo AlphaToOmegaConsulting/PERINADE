@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/sections/Header.astro";
 import Footer from "../../components/sections/Footer.astro";
 import ShopHero from "../../components/shop/ShopHero.astro";
+import ShopComplianceBand from "../../components/shop/ShopComplianceBand.astro";
 import ShopProductGrid from "../../components/shop/ShopProductGrid.astro";
 import ShopDomainSelection from "../../components/shop/ShopDomainSelection.astro";
 import ShopCaseComposer from "../../components/shop/ShopCaseComposer.astro";
@@ -25,6 +26,7 @@ const alternates = [
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/boutique", en: "/en/shop", es: "/es/tienda" }} />
   <main id="main-content" class="shop-page">
     <ShopHero hero={shopPage.hero} />
+    <ShopComplianceBand compliance={shopPage.compliance} />
     <ShopProductGrid productGrid={shopPage.productGrid} />
     <ShopDomainSelection domainSelection={shopPage.domainSelection} />
     <ShopCaseComposer caseComposer={shopPage.caseComposer} />

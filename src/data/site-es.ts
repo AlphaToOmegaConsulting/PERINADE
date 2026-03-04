@@ -246,6 +246,7 @@ export const siteEs: SiteData = {
     ],
     newsletterTitle: "Newsletter",
     newsletterBody: "Reciba nuestras novedades y ofertas exclusivas.",
+    newsletterAdultNotice: "Contenido destinado únicamente a personas adultas.",
     newsletterPlaceholder: "su@email.es",
     newsletterAction: `mailto:${contactInfo.email}`,
     social: [

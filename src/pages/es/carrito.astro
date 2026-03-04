@@ -1,0 +1,588 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/sections/Header.astro";
+import Footer from "../../components/sections/Footer.astro";
+import { getShopData, getSiteData } from "../../data/index";
+
+const locale = "es";
+const site = await getSiteData(locale);
+const shopPage = await getShopData(locale);
+
+const alternates = [
+  { locale: "fr", href: "/panier" },
+  { locale: "en", href: "/en/cart" },
+  { locale: "es", href: "/es/carrito" }
+];
+---
+
+<BaseLayout
+  title="Carrito | Domaine de la Périnade"
+  description="Revise y ajuste los artículos de su carrito."
+  locale={locale}
+  canonicalPath="/es/carrito"
+  alternates={alternates}
+>
+  <Header
+    nav={site.nav}
+    quickActions={site.mobileQuickActions}
+    ctaLabel={site.experience.ctaLabel}
+    ctaHref={site.experience.ctaHref}
+    locale={locale}
+    alternateUrls={{ fr: "/panier", en: "/en/cart", es: "/es/carrito" }}
+  />
+
+  <main id="main-content" class="cart-page">
+    <section class="section">
+      <div class="shell cart-shell">
+        <header class="cart-header">
+          <h1>Carrito</h1>
+        </header>
+
+        <p class="cart-empty" data-cart-empty>Su carrito está vacío.</p>
+
+        <div class="cart-list" data-cart-items aria-live="polite"></div>
+
+        <footer class="cart-total" data-cart-total-wrap>
+          <p class="cart-total__line">
+            <span>Subtotal (sin IVA)</span>
+            <strong data-cart-total-ht>0,00 €</strong>
+          </p>
+          <p class="cart-total__line">
+            <span>IVA (20 %)</span>
+            <strong data-cart-total-vat>0,00 €</strong>
+          </p>
+          <p class="cart-total__line cart-total__line--ttc">
+            <span>Total (con IVA)</span>
+            <strong data-cart-total>0,00 €</strong>
+          </p>
+        </footer>
+
+        <section class="cart-compliance" aria-labelledby="cart-compliance-title">
+          <h2 id="cart-compliance-title">{shopPage.compliance.checkoutTitle}</h2>
+          <p>{shopPage.compliance.ageNotice}</p>
+          <p>{shopPage.compliance.healthNotice}</p>
+          <p class="cart-compliance__adult">{shopPage.compliance.checkoutAdultOnlyNote}</p>
+
+          <label class="cart-check">
+            <input type="checkbox" data-cart-ack-age />
+            <span>{shopPage.compliance.checkoutAcknowledgements.age}</span>
+          </label>
+          <label class="cart-check">
+            <input type="checkbox" data-cart-ack-info />
+            <span>{shopPage.compliance.checkoutAcknowledgements.information}</span>
+          </label>
+
+          <button type="button" class="cart-submit" data-cart-submit disabled>
+            {shopPage.compliance.payOrderLabel}
+          </button>
+          <p class="cart-submit__help">{shopPage.compliance.payOrderHelp}</p>
+          <p class="cart-submit__status" data-cart-submit-status>
+            {shopPage.compliance.payOrderPendingLabel}
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <Footer footer={site.footer} />
+</BaseLayout>
+
+<script>
+  import { cartTotalCents, getCart, removeFromCart, setQty } from "../../lib/cart/cart";
+  import type { CartItem } from "../../lib/cart/cart";
+
+  const formatEuroFromCents = (cents: number): string =>
+    `${(Math.max(0, Number(cents) || 0) / 100).toFixed(2).replace(".", ",")} €`;
+
+  const selectors = {
+    items: "[data-cart-items]",
+    empty: "[data-cart-empty]",
+    total: "[data-cart-total]",
+    totalHt: "[data-cart-total-ht]",
+    totalVat: "[data-cart-total-vat]",
+    totalWrap: "[data-cart-total-wrap]",
+    ackAge: "[data-cart-ack-age]",
+    ackInfo: "[data-cart-ack-info]",
+    submit: "[data-cart-submit]"
+  };
+
+  const VAT_RATE = 0.2;
+
+  const createCell = (label: string, value: string, className: string): HTMLDivElement => {
+    const cell = document.createElement("div");
+    cell.className = className;
+
+    const labelEl = document.createElement("span");
+    labelEl.className = "cart-item__label";
+    labelEl.textContent = label;
+
+    const valueEl = document.createElement("span");
+    valueEl.className = "cart-item__value";
+    valueEl.textContent = value;
+
+    cell.append(labelEl, valueEl);
+    return cell;
+  };
+
+  const createQtyControls = (item: CartItem): HTMLDivElement => {
+    const cell = document.createElement("div");
+    cell.className = "cart-item__qty";
+
+    const labelEl = document.createElement("span");
+    labelEl.className = "cart-item__label";
+    labelEl.textContent = "Cantidad";
+
+    const controls = document.createElement("div");
+    controls.className = "cart-item__qty-controls";
+
+    const dec = document.createElement("button");
+    dec.type = "button";
+    dec.className = "cart-item__qty-btn";
+    dec.dataset.action = "dec";
+    dec.dataset.id = item.id;
+    dec.dataset.qty = String(item.qty);
+    dec.setAttribute("aria-label", `Disminuir cantidad de ${item.name}`);
+    dec.textContent = "-";
+
+    const qty = document.createElement("span");
+    qty.className = "cart-item__qty-value";
+    qty.textContent = String(item.qty);
+
+    const inc = document.createElement("button");
+    inc.type = "button";
+    inc.className = "cart-item__qty-btn";
+    inc.dataset.action = "inc";
+    inc.dataset.id = item.id;
+    inc.dataset.qty = String(item.qty);
+    inc.setAttribute("aria-label", `Aumentar cantidad de ${item.name}`);
+    inc.textContent = "+";
+
+    controls.append(dec, qty, inc);
+    cell.append(labelEl, controls);
+    return cell;
+  };
+
+  const createRemoveButton = (item: CartItem): HTMLDivElement => {
+    const cell = document.createElement("div");
+    cell.className = "cart-item__remove-wrap";
+
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "cart-item__remove";
+    button.dataset.action = "remove";
+    button.dataset.id = item.id;
+    button.setAttribute("aria-label", `Eliminar ${item.name} del carrito`);
+    button.textContent = "Eliminar";
+
+    cell.append(button);
+    return cell;
+  };
+
+  const updateCheckoutState = (hasItems: boolean) => {
+    const ackAge = document.querySelector<HTMLInputElement>(selectors.ackAge);
+    const ackInfo = document.querySelector<HTMLInputElement>(selectors.ackInfo);
+    const submit = document.querySelector<HTMLButtonElement>(selectors.submit);
+    if (!ackAge || !ackInfo || !submit) return;
+
+    if (!hasItems) {
+      ackAge.checked = false;
+      ackInfo.checked = false;
+    }
+
+    ackAge.disabled = !hasItems;
+    ackInfo.disabled = !hasItems;
+    submit.disabled = !(hasItems && ackAge.checked && ackInfo.checked);
+  };
+
+  const render = () => {
+    const itemsWrap = document.querySelector<HTMLDivElement>(selectors.items);
+    const emptyEl = document.querySelector<HTMLParagraphElement>(selectors.empty);
+    const totalEl = document.querySelector<HTMLElement>(selectors.total);
+    const totalHtEl = document.querySelector<HTMLElement>(selectors.totalHt);
+    const totalVatEl = document.querySelector<HTMLElement>(selectors.totalVat);
+    const totalWrap = document.querySelector<HTMLElement>(selectors.totalWrap);
+    if (!itemsWrap || !emptyEl || !totalEl || !totalHtEl || !totalVatEl || !totalWrap) return;
+
+    const cart = getCart();
+    const items = cart.items;
+
+    itemsWrap.innerHTML = "";
+
+    if (!items.length) {
+      emptyEl.hidden = false;
+      itemsWrap.hidden = true;
+      totalWrap.hidden = true;
+      totalEl.textContent = formatEuroFromCents(0);
+      totalHtEl.textContent = formatEuroFromCents(0);
+      totalVatEl.textContent = formatEuroFromCents(0);
+      updateCheckoutState(false);
+      return;
+    }
+
+    emptyEl.hidden = true;
+    itemsWrap.hidden = false;
+    totalWrap.hidden = false;
+
+    items.forEach((item) => {
+      const row = document.createElement("article");
+      row.className = "cart-item";
+
+      const name = createCell("Producto", item.name, "cart-item__name");
+      const unit = createCell("Precio unitario", formatEuroFromCents(item.unitAmount), "cart-item__unit");
+      const line = createCell("Total de línea", formatEuroFromCents(item.unitAmount * item.qty), "cart-item__line");
+      const qty = createQtyControls(item);
+      const remove = createRemoveButton(item);
+
+      row.append(name, qty, unit, line, remove);
+      itemsWrap.append(row);
+    });
+
+    const totalTtcCents = cartTotalCents();
+    const totalHtCents = Math.round(totalTtcCents / (1 + VAT_RATE));
+    const totalVatCents = totalTtcCents - totalHtCents;
+
+    totalEl.textContent = formatEuroFromCents(totalTtcCents);
+    totalHtEl.textContent = formatEuroFromCents(totalHtCents);
+    totalVatEl.textContent = formatEuroFromCents(totalVatCents);
+    updateCheckoutState(true);
+  };
+
+  const onCartAction = (event: MouseEvent) => {
+    const target = event.target;
+    if (!(target instanceof HTMLElement)) return;
+
+    const button = target.closest("button[data-action]");
+    if (!(button instanceof HTMLButtonElement)) return;
+
+    const action = button.dataset.action;
+    const id = button.dataset.id ?? "";
+    if (!id) return;
+
+    if (action === "remove") {
+      removeFromCart(id);
+      render();
+      return;
+    }
+
+    const qty = Number(button.dataset.qty ?? "0");
+    if (!Number.isFinite(qty)) return;
+
+    if (action === "inc") {
+      setQty(id, qty + 1);
+      render();
+      return;
+    }
+
+    if (action === "dec") {
+      setQty(id, qty - 1);
+      render();
+    }
+  };
+
+  const initCartPage = () => {
+    const itemsWrap = document.querySelector<HTMLDivElement>(selectors.items);
+    const ackAge = document.querySelector<HTMLInputElement>(selectors.ackAge);
+    const ackInfo = document.querySelector<HTMLInputElement>(selectors.ackInfo);
+    if (!itemsWrap || !ackAge || !ackInfo) return;
+
+    if (itemsWrap.dataset.cartBound !== "true") {
+      itemsWrap.dataset.cartBound = "true";
+      itemsWrap.addEventListener("click", onCartAction);
+    }
+
+    if (ackAge.dataset.cartBound !== "true") {
+      ackAge.dataset.cartBound = "true";
+      ackAge.addEventListener("change", () => {
+        updateCheckoutState(getCart().items.length > 0);
+      });
+    }
+
+    if (ackInfo.dataset.cartBound !== "true") {
+      ackInfo.dataset.cartBound = "true";
+      ackInfo.addEventListener("change", () => {
+        updateCheckoutState(getCart().items.length > 0);
+      });
+    }
+
+    render();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCartPage, { once: true });
+  } else {
+    initCartPage();
+  }
+
+  window.addEventListener("cart:changed", render);
+  document.addEventListener("astro:after-swap", initCartPage);
+</script>
+
+<style>
+  .cart-page {
+    background: radial-gradient(circle at 10% 5%, rgba(214, 116, 0, 0.08), transparent 28%), #f8f7f5;
+    min-height: calc(100svh - var(--header-height) * 2);
+  }
+
+  .cart-shell {
+    margin-inline: auto;
+    max-width: 64rem;
+  }
+
+  .cart-header h1 {
+    color: #2c2c2c;
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 1.65rem;
+  }
+
+  .cart-empty {
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 0.9rem;
+    color: #4f5257;
+    font-size: 1.03rem;
+    margin: 0;
+    padding: 1.1rem 1.2rem;
+  }
+
+  .cart-list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .cart-item {
+    align-items: center;
+    background: linear-gradient(180deg, #ffffff 0%, #fdfcfb 100%);
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 10px 22px rgba(16, 24, 40, 0.05);
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr auto;
+    padding: 1.05rem 1.1rem;
+  }
+
+  .cart-item__name,
+  .cart-item__qty,
+  .cart-item__unit,
+  .cart-item__line {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .cart-item__label {
+    color: #7a7f88;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+
+  .cart-item__value {
+    color: #22252a;
+    font-size: 1.02rem;
+    font-weight: 500;
+    line-height: 1.35;
+  }
+
+  .cart-item__name .cart-item__value {
+    font-size: 1.08rem;
+    font-weight: 600;
+  }
+
+  .cart-item__qty-controls {
+    align-items: center;
+    background: #f5f4f2;
+    border: 1px solid rgba(44, 44, 44, 0.08);
+    border-radius: 0.7rem;
+    display: inline-flex;
+    gap: 0.5rem;
+    padding: 0.3rem;
+  }
+
+  .cart-item__qty-btn {
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.12);
+    border-radius: 0.55rem;
+    color: #1f1f1f;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.08rem;
+    font-weight: 600;
+    height: 2.05rem;
+    justify-content: center;
+    transition: border-color 120ms ease, background-color 120ms ease, transform 120ms ease;
+    width: 2.05rem;
+  }
+
+  .cart-item__qty-value {
+    color: #1f1f1f;
+    font-size: 0.98rem;
+    font-weight: 600;
+    min-width: 1.5ch;
+    text-align: center;
+  }
+
+  .cart-item__remove {
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.14);
+    border-radius: 0.62rem;
+    color: #3a3f46;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: 500;
+    min-height: 2.15rem;
+    padding: 0.5rem 0.85rem;
+    transition: border-color 120ms ease, color 120ms ease, background-color 120ms ease;
+  }
+
+  .cart-item__remove:hover,
+  .cart-item__remove:focus-visible,
+  .cart-item__qty-btn:hover,
+  .cart-item__qty-btn:focus-visible {
+    background: #fffaf2;
+    border-color: rgba(200, 109, 0, 0.42);
+    color: #1f1f1f;
+  }
+
+  .cart-total,
+  .cart-compliance {
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 10px 26px rgba(16, 24, 40, 0.06);
+    display: grid;
+    gap: 0.45rem;
+    margin-top: 1.35rem;
+    margin-left: auto;
+    max-width: 29rem;
+    padding: 1rem 1.1rem 1.1rem;
+  }
+
+  .cart-total__line {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+  .cart-total span {
+    color: #585d65;
+    font-size: 0.98rem;
+  }
+
+  .cart-total strong {
+    color: #22252a;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .cart-total__line--ttc {
+    border-top: 1px dashed rgba(44, 44, 44, 0.2);
+    margin-top: 0.3rem;
+    padding-top: 0.65rem;
+  }
+
+  .cart-total__line--ttc strong {
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  }
+
+  .cart-compliance h2 {
+    color: #8a4900;
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    margin: 0 0 0.2rem;
+    text-transform: uppercase;
+  }
+
+  .cart-compliance p {
+    color: #2f3338;
+    font-size: 0.93rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .cart-compliance__adult {
+    font-weight: 600;
+  }
+
+  .cart-check {
+    align-items: flex-start;
+    display: grid;
+    gap: 0.55rem;
+    grid-template-columns: auto 1fr;
+    margin-top: 0.2rem;
+  }
+
+  .cart-check input {
+    accent-color: #b46200;
+    margin-top: 0.18rem;
+  }
+
+  .cart-check span {
+    color: #2f3338;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .cart-submit {
+    align-items: center;
+    background: linear-gradient(180deg, #dc7f0a 0%, #c86d00 100%);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 0.7rem;
+    box-shadow: 0 10px 20px rgba(200, 109, 0, 0.22);
+    color: #fff;
+    display: inline-flex;
+    font-size: 0.78rem;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+    min-height: 3rem;
+    text-transform: uppercase;
+    transition: filter 140ms ease;
+    width: 100%;
+  }
+
+  .cart-submit:disabled {
+    cursor: not-allowed;
+    filter: saturate(0.15) brightness(1.08);
+    opacity: 0.7;
+  }
+
+  .cart-submit__help,
+  .cart-submit__status {
+    color: #5b616a;
+    font-size: 0.84rem;
+    margin: 0;
+  }
+
+  @media (max-width: 63.9375em) {
+    .cart-item {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .cart-item__name {
+      grid-column: 1 / -1;
+    }
+
+    .cart-item__remove-wrap {
+      grid-column: 1 / -1;
+      justify-self: start;
+    }
+
+    .cart-total,
+    .cart-compliance {
+      margin-left: 0;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 47.9375em) {
+    .cart-item {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

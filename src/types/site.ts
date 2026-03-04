@@ -169,6 +169,7 @@ export interface SiteData {
     groups: FooterLinkGroup[];
     newsletterTitle: string;
     newsletterBody: string;
+    newsletterAdultNotice: string;
     newsletterPlaceholder: string;
     newsletterAction: LinkTarget;
     social: NavItem[];

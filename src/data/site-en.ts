@@ -246,6 +246,7 @@ export const siteEn: SiteData = {
     ],
     newsletterTitle: "Newsletter",
     newsletterBody: "Receive our latest news and exclusive offers.",
+    newsletterAdultNotice: "Content intended for adults only.",
     newsletterPlaceholder: "your@email.com",
     newsletterAction: `mailto:${contactInfo.email}`,
     social: [

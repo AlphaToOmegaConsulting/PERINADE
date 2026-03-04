@@ -1,0 +1,52 @@
+---
+import type { ShopPageData } from "../../types/shop";
+
+interface Props {
+  compliance: ShopPageData["compliance"];
+}
+
+const { compliance } = Astro.props;
+---
+
+<section class="shop-compliance section section--soft" aria-label={compliance.marketingBannerAriaLabel}>
+  <div class="shell shop-shell">
+    <div class="shop-compliance__card">
+      <p class="shop-compliance__title">{compliance.marketingBannerTitle}</p>
+      <p>{compliance.ageNotice}</p>
+      <p>{compliance.healthNotice}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .shop-compliance {
+    padding-block: clamp(1.3rem, 2.2vw, 1.8rem);
+  }
+
+  .shop-compliance__card {
+    background: #fffaf2;
+    border: 1px solid rgba(200, 109, 0, 0.24);
+    border-radius: 0.9rem;
+    color: #2e3136;
+    display: grid;
+    gap: 0.45rem;
+    padding: 0.95rem 1.1rem;
+  }
+
+  .shop-compliance__card p {
+    margin: 0;
+  }
+
+  .shop-compliance__title {
+    color: #8a4900;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 47.9375em) {
+    .shop-compliance {
+      padding-block: 1rem;
+    }
+  }
+</style>
