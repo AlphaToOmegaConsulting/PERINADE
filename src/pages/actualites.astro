@@ -3,10 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/sections/Header.astro";
 import Footer from "../components/sections/Footer.astro";
 import NewsHero from "../components/news/NewsHero.astro";
-import NewsFeatured from "../components/news/NewsFeatured.astro";
 import NewsArticles from "../components/news/NewsArticles.astro";
-import NewsAgenda from "../components/news/NewsAgenda.astro";
-import NewsVisitCta from "../components/news/NewsVisitCta.astro";
 import { getNewsData, getSiteData } from "../data/index";
 
 const locale = "fr";
@@ -69,28 +66,25 @@ const jsonLd = JSON.stringify({
 
   <main id="main-content" class="news-page" style={`--news-section-desktop:${news.theme.sectionDesktop};--news-section-tablet:${news.theme.sectionTablet};--news-section-mobile:${news.theme.sectionMobile};`}>
     <NewsHero hero={news.hero} />
-    <NewsFeatured featured={news.featured} />
     <NewsArticles articles={news.articles} />
-    <NewsAgenda agenda={news.agenda} />
-    <NewsVisitCta visitCta={news.visitCta} />
   </main>
 
   <Footer footer={site.footer} />
 </BaseLayout>
 
 <style>
-  .news-page :global(.section:not(.news-hero):not(.news-featured)) {
+  .news-page :global(.section:not(.news-hero)) {
     padding-block: var(--news-section-desktop);
   }
 
   @media (max-width: 63.9375em) {
-    .news-page :global(.section:not(.news-hero):not(.news-featured)) {
+    .news-page :global(.section:not(.news-hero)) {
       padding-block: var(--news-section-tablet);
     }
   }
 
   @media (max-width: 47.9375em) {
-    .news-page :global(.section:not(.news-hero):not(.news-featured)) {
+    .news-page :global(.section:not(.news-hero)) {
       padding-block: var(--news-section-mobile);
     }
   }
