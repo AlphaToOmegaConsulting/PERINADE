@@ -5,6 +5,7 @@ export type CartItem = {
   name: string;
   unitAmount: number;
   qty: number;
+  description?: string;
   image?: string;
   weightGrams?: number;
 };
@@ -54,6 +55,7 @@ const normalizeState = (value: unknown): CartState => {
       name,
       unitAmount,
       qty: nextQty,
+      description: typeof candidate.description === "string" ? candidate.description : existing?.description,
       image: typeof candidate.image === "string" ? candidate.image : existing?.image,
       weightGrams: Number.isFinite(Number(candidate.weightGrams))
         ? Number(candidate.weightGrams)
@@ -118,6 +120,7 @@ export function addToCart(item: Omit<CartItem, "qty"> & { qty?: number }): CartS
         ...items[index],
         name: item.name,
         unitAmount: item.unitAmount,
+        description: item.description,
         image: item.image,
         weightGrams: item.weightGrams,
         qty: nextQty,
@@ -129,6 +132,7 @@ export function addToCart(item: Omit<CartItem, "qty"> & { qty?: number }): CartS
       name: item.name,
       unitAmount: item.unitAmount,
       qty: addQty,
+      description: item.description,
       image: item.image,
       weightGrams: item.weightGrams,
     });
