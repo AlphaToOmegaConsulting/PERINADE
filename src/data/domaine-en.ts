@@ -25,7 +25,7 @@ export const domainePageEn: DomainePageData = {
     eyebrow: "The Estate",
     titleLines: ["Since 1830,", "nurturing the terroir"],
     body:
-      "Between the Canal du Midi and the Fresquel river, Domaine de la Périnade carries on six generations of viticulture across 100 ha, including 40 ha of vines. A family story rooted in the Minervois, revived in 2019 with exacting standards.",
+      "Between the Canal du Midi and the Fresquel river, Domaine de la Périnade carries on six generations of viticulture across 53 ha, including 17 ha of vines. A family story founded by Hippolyte Arnal in 1830, rooted in IGP Pays d'Oc near Pezens, revived in 2019 with exacting standards.",
     primaryCta: {
       label: "Book a visit to the estate",
       href: "/en/visits#booking"
@@ -35,7 +35,7 @@ export const domainePageEn: DomainePageData = {
       href: "/en/shop"
     },
     badges: ["Viticulture", "Terroir", "Heritage"],
-    highlights: ["100 ha estate", "40 ha of vines", "6 generations", "Minervois · Languedoc"],
+    highlights: ["53 ha estate", "17 ha of vines", "6 generations", "IGP Pays d'Oc · Languedoc"],
     image: heroImg,
     imageAlt: "Person checking their phone at dusk in the estate"
   },
@@ -43,14 +43,14 @@ export const domainePageEn: DomainePageData = {
     eyebrow: "Terroir & Expertise",
     title: "An exceptional location",
     body:
-      "The estate stretches between the Canal du Midi and the Fresquel river, within the AOP Minervois appellation. This rare geographical setting — between water and garrigue — shapes the minerality and freshness of our wines.",
+      "The estate stretches between the Canal du Midi and the Fresquel river, in the IGP Pays d'Oc appellation, 10 km from Carcassonne (Aude, Occitanie). Sandy soils at the foot of gentle slopes, with open views over the Pyrenees and the Montagne Noire — a rare geographical setting that shapes the minerality and freshness of our wines.",
     grapesTitle: "Grape varieties",
     commitmentsTitle: "Environmental commitments",
-    grapes: ["Grenache Noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot"],
+    grapes: ["Grenache Noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot", "Chardonnay", "Sauvignon Blanc", "Viognier"],
     commitments: [
       {
-        title: "HVE approach",
-        body: "High Environmental Value — certification in progress."
+        title: "HVE certification",
+        body: "High Environmental Value — certified since 2019. Zero synthetic hormones, mechanical work prioritised."
       },
       {
         title: "Zero glyphosate",
@@ -68,24 +68,24 @@ export const domainePageEn: DomainePageData = {
     eyebrow: "The family",
     title: "The Arnal family today",
     body: [
-      "In 2019, the 6th and 7th generations of the Arnal family took over the estate with the ambition of restoring this historic terroir to its full glory.",
-      "The construction of the winery in 2020, the restoration of the cellars and the plot-by-plot selection marked a fresh start. The goal remains the same: to produce wines that are precise, elegant and true to their origin.",
-      "At the estate, heritage is a daily reality: precision in the vineyard, attentiveness to each vintage, and hospitality at every visit."
+      "In 2019, the 6th and 7th generations of the Arnal family took over the estate with the ambition of restoring this historic terroir to its full glory. Stéphane Arnal, after a twelve-year career at BNP Paribas (2007–2019), joined the estate to lead its commercial development.",
+      "The construction of the winery in 2020, the restoration of the cellars and the plot-by-plot selection marked a fresh start. Oenologist Claude Serra has guided the estate since its revival, bringing his expertise in Languedoc wines. The goal remains the same: to produce wines that are precise, elegant and true to their origin.",
+      "At the estate, heritage is a daily reality: precision in the vineyard, attentiveness to each vintage, and hospitality at every visit. Each bottle receives an injection of liquid nitrogen at filling, ensuring optimal preservation without excess sulphites."
     ],
     milestones: [
-      { year: "1830", label: "Foundation" },
-      { year: "2019", label: "Revival" },
+      { year: "1830", label: "Founded by Hippolyte Arnal" },
+      { year: "2019", label: "Revival & trademark" },
       { year: "2020", label: "1st winery" }
     ],
     image: familyImg,
     imageAlt: "Dream Big inscription on a dark background"
   },
   statsBar: [
-    { value: "100 ha", label: "Total estate" },
-    { value: "~40 ha", label: "Of vines" },
+    { value: "53 ha", label: "Total estate" },
+    { value: "17 ha", label: "Of vines" },
     { value: "6th & 7th", label: "Generations" },
-    { value: "HVE", label: "In progress" },
-    { value: "AOP", label: "Minervois" },
+    { value: "HVE", label: "Certified since 2019" },
+    { value: "IGP", label: "Pays d'Oc" },
     { value: "365 d", label: "Visitor welcome" }
   ],
   timeline: {
@@ -98,7 +98,7 @@ export const domainePageEn: DomainePageData = {
         year: "1830",
         tabLabel: "~1830",
         title: "Foundation",
-        detail: "First plots cultivated in the heart of the Minervois, birth of the family estate.",
+        detail: "Hippolyte Arnal plants the first plots on this lieu-dit between the Canal du Midi and the Fresquel, giving birth to the family estate.",
         images: [
           { src: timelineLeftImg, alt: "Artisanal precision work" },
           { src: timelineRightImg, alt: "Convivial tasting moment" }
@@ -145,7 +145,7 @@ export const domainePageEn: DomainePageData = {
         tabLabel: "2022",
         title: "Moving upmarket",
         detail:
-          "Enhanced plot selection, refined cuvees and higher standards across wine-merchant and restaurant channels.",
+          "Enhanced plot selection, refined cuvees and higher standards across wine-merchant and restaurant channels. Membership of the Collège Culinaire de France, awarded the 'quality producer & artisan' label.",
         images: [
           { src: wine2Img, alt: "Estate bottle on display" },
           { src: wine3Img, alt: "Collection of bottles in the cellar" }
@@ -157,7 +157,7 @@ export const domainePageEn: DomainePageData = {
         tabLabel: "2023",
         title: "Wine-tourism expansion",
         detail:
-          "Launch of private tours and signature tastings connecting the family story with the guest experience.",
+          "Launch of private tours and signature tastings connecting the family story with the guest experience. Silver medal at the Concours des Vignerons Indépendants for the first rosé vinification.",
         images: [
           { src: wine1Img, alt: "Close-up of an estate cuvee" },
           { src: visitCtaImg, alt: "Row of bottles in the tasting room" }

@@ -86,7 +86,7 @@ export const siteEn: SiteData = {
     body: "A guided tour of the estate followed by a commented tasting of our wines, in an authentic and welcoming setting.",
     details: [
       { label: "Duration", value: "About 1h30", icon: "clock" },
-      { label: "Group", value: "2 to 10 people", icon: "users" },
+      { label: "Group", value: "2 to 12 people", icon: "users" },
       { label: "Languages", value: "French, English, Spanish", icon: "globe" },
       { label: "Location", value: "Near Carcassonne", icon: "pin" },
       { label: "Price", value: "€15 / person", icon: "ticket" }
@@ -109,7 +109,7 @@ export const siteEn: SiteData = {
     eyebrow: "Testimonials",
     title: "What they say",
     pressLabel: "Featured in",
-    pressLogos: ["Le Figaro Vin", "Revue du Vin", "Decanter", "Wine Spectator"],
+    pressLogos: ["Collège Culinaire de France", "Concours des Vignerons Indépendants", "TripAdvisor Travelers' Choice", "Club Lavender"],
     items: [
       {
         quote: "An exceptional welcome in a magnificent setting. The tasting was fascinating and the wines delicious. We'll be back!",
@@ -136,8 +136,8 @@ export const siteEn: SiteData = {
     title: "Six generations of",
     titleHighlight: "passion",
     body: [
-      "Founded in 1830, Domaine de la Périnade is a family adventure born from a love of the Languedoc terroir. On these sun-drenched lands between garrigue and hills, we cultivate our vines with respect for tradition and particular attention to the environment.",
-      "Today, the sixth generation carries on this expertise, blending ancestral methods with modern winemaking to produce wines that express the uniqueness of our terroir."
+      "Founded around 1830 by Hippolyte Arnal, Domaine de la Périnade is a family adventure born from a love of the Languedoc terroir. On these sun-drenched lands between garrigue and hills, we cultivate our vines with respect for tradition and particular attention to the environment.",
+      "Today, the 6th and 7th generations carry on this expertise, blending ancestral methods with innovations such as liquid nitrogen injection at bottling to preserve every cuvée."
     ],
     imagePrimary: historyFamily,
     ctaLabel: "Discover the full story",

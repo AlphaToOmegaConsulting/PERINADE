@@ -75,17 +75,17 @@ export const visitsPageFr: VisitPageData = {
     eyebrow: "Visites & Dégustations — Minervois, Languedoc",
     titleLines: ["Découvrez le Languedoc", "verre en main"],
     body:
-      "Une immersion guidée par le vigneron : promenade dans le vignoble Minervois, visite du chai et dégustation de 5 cuvées AOP dans un cadre familial d'exception, à 15 minutes de Carcassonne.",
+      "Une immersion guidée par le vigneron : promenade dans le vignoble IGP Pays d'Oc, visite du chai et dégustation de nos cuvées dans un cadre familial d'exception, à 10 minutes de Carcassonne.",
     badges: [
       { icon: "clock", label: "1 h 30" },
       { icon: "ticket", label: "À partir de 15 €" },
       { icon: "globe", label: "FR / EN" },
-      { icon: "calendar", label: "11 h – 16 h, tous les jours" },
+      { icon: "calendar", label: "9 h – 18 h, tous les jours" },
       { icon: "car", label: "Parking gratuit" }
     ],
     primaryCta: { label: "Réserver", href: "/visites#booking" },
-    secondaryCta: { label: "Appeler", href: "tel:+33468000000" },
-    helper: "+33 4 68 XX XX XX · Réponse sous 24 h",
+    secondaryCta: { label: "Appeler", href: "tel:+33661999377" },
+    helper: "+33 6 61 99 93 77 · Réponse sous 24 h",
     image: visitsHeroGrapes,
     imageAlt: "Raisins fraîchement récoltés dans une cuve"
   },
@@ -131,7 +131,7 @@ export const visitsPageFr: VisitPageData = {
         id: "step-3",
         number: "03",
         title: "Visite du chai & vinification",
-        body: "Explication des techniques de vinification, de la vendange aux fûts de chêne. Découvrez comment naissent nos cuvées AOP Minervois dans ce chai familial du Languedoc.",
+        body: "Explication des techniques de vinification, de la vendange aux fûts de chêne. Découvrez comment naissent nos cuvées IGP Pays d'Oc dans ce chai familial du Languedoc.",
         image: visitsStep3,
         imageAlt: "Intérieur du chai avec barriques — domaine viticole Languedoc",
         layout: {
@@ -253,7 +253,7 @@ export const visitsPageFr: VisitPageData = {
       }
     ],
     meta: [
-      "Disponible tous les jours, 11 h – 16 h",
+      "Disponible tous les jours, 9 h – 18 h",
       "Groupes privés sur demande",
       "Expérience premium, tarification juste"
     ]
@@ -265,11 +265,11 @@ export const visitsPageFr: VisitPageData = {
     leftCard: {
       icon: "pin",
       tag: "Adresse",
-      title: "Carcassonne",
-      subtitle: "Aude, Occitanie",
-      content: ["Domaine de la Périnade", "Coordonnées GPS partagées après réservation", "Parking visiteur gratuit"],
+      title: "Pezens",
+      subtitle: "Aude (11170), Occitanie",
+      content: ["Lieu-dit La Périnade", "Coordonnées GPS partagées après réservation", "Parking visiteur gratuit"],
       ctaLabel: "Voir sur la carte",
-      ctaHref: "https://maps.google.com/?q=Domaine+de+la+Perinade+Minervois+Languedoc"
+      ctaHref: "https://maps.google.com/?q=Lieu-dit+La+P%C3%A9rinade+11170+Pezens"
     },
     rightCards: [
       {
@@ -277,7 +277,7 @@ export const visitsPageFr: VisitPageData = {
         tag: "Le plus pratique",
         title: "En voiture",
         subtitle: "Le plus pratique",
-        content: ["15 min depuis Carcassonne", "Accès direct et parking sur place"]
+        content: ["10 min depuis Carcassonne", "Accès direct et parking sur place"]
       },
       {
         icon: "plane",

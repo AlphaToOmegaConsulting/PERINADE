@@ -25,7 +25,7 @@ export const domainePageEs: DomainePageData = {
     eyebrow: "La Finca",
     titleLines: ["Desde 1830,", "el cuidado del terroir"],
     body:
-      "Entre el Canal du Midi y el río Fresquel, el Domaine de la Périnade perpetúa seis generaciones de viticultura en 100 ha, de las cuales 40 ha son de viñedo. Una historia familiar arraigada en el Minervois, relanzada en 2019 con la máxima exigencia.",
+      "Entre el Canal du Midi y el río Fresquel, el Domaine de la Périnade perpetúa seis generaciones de viticultura en 53 ha, de las cuales 17 ha son de viñedo. Una historia familiar fundada por Hippolyte Arnal en 1830, arraigada en IGP Pays d'Oc cerca de Pezens, relanzada en 2019 con la máxima exigencia.",
     primaryCta: {
       label: "Reservar una visita a la finca",
       href: "/es/visitas#booking"
@@ -35,7 +35,7 @@ export const domainePageEs: DomainePageData = {
       href: "/es/tienda"
     },
     badges: ["Viticultura", "Terroir", "Transmisión"],
-    highlights: ["100 ha de finca", "40 ha de viñedo", "6 generaciones", "Minervois · Languedoc"],
+    highlights: ["53 ha de finca", "17 ha de viñedo", "6 generaciones", "IGP Pays d'Oc · Languedoc"],
     image: heroImg,
     imageAlt: "Persona consultando su teléfono al atardecer en la finca"
   },
@@ -43,14 +43,14 @@ export const domainePageEs: DomainePageData = {
     eyebrow: "Terroir y saber hacer",
     title: "Una ubicación excepcional",
     body:
-      "La finca se extiende entre el Canal du Midi y el río Fresquel, dentro del perímetro de la AOP Minervois. Esta situación geográfica singular — entre agua y garriga — moldea la mineralidad y la frescura de nuestros vinos.",
+      "La finca se extiende entre el Canal du Midi y el río Fresquel, en la IGP Pays d'Oc, a 10 km de Carcasona (Aude, Occitanie). Suelos arenosos al pie de las colinas, con vistas abiertas a los Pirineos y la Montaña Negra — una situación geográfica singular que moldea la mineralidad y la frescura de nuestros vinos.",
     grapesTitle: "Variedades de uva",
     commitmentsTitle: "Compromisos medioambientales",
-    grapes: ["Grenache Noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot"],
+    grapes: ["Grenache Noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot", "Chardonnay", "Sauvignon Blanc", "Viognier"],
     commitments: [
       {
-        title: "Enfoque HVE",
-        body: "Alto Valor Medioambiental — certificación en curso."
+        title: "Certificación HVE",
+        body: "Alto Valor Medioambiental — certificado desde 2019. Cero hormonas sintéticas, trabajo mecánico prioritario."
       },
       {
         title: "Cero glifosato",
@@ -68,24 +68,24 @@ export const domainePageEs: DomainePageData = {
     eyebrow: "La familia",
     title: "La familia Arnal hoy",
     body: [
-      "En 2019, la 6.ª y 7.ª generación de la familia Arnal retomaron la finca con la voluntad de devolver todo su esplendor a este terroir histórico.",
-      "La construcción de la bodega en 2020, la restauración de las cavas y la selección parcelaria marcaron un nuevo comienzo. El objetivo sigue siendo el mismo: producir vinos auténticos, elegantes y fieles a su origen.",
-      "En la finca, la herencia se vive a diario: precisión en el viñedo, escucha de cada añada y hospitalidad en cada visita."
+      "En 2019, la 6.ª y 7.ª generación de la familia Arnal retomaron la finca con la voluntad de devolver todo su esplendor a este terroir histórico. Stéphane Arnal, tras una carrera de doce años en BNP Paribas (2007-2019), se incorporó para liderar el desarrollo comercial de la finca.",
+      "La construcción de la bodega en 2020, la restauración de las cavas y la selección parcelaria marcaron un nuevo comienzo. El enólogo Claude Serra acompaña la finca desde su relanzamiento, aportando su experiencia en vinos del Languedoc. El objetivo sigue siendo el mismo: producir vinos auténticos, elegantes y fieles a su origen.",
+      "En la finca, la herencia se vive a diario: precisión en el viñedo, escucha de cada añada y hospitalidad en cada visita. Cada botella recibe una inyección de nitrógeno líquido en el embotellado, garantizando una conservación óptima sin exceso de sulfitos."
     ],
     milestones: [
-      { year: "1830", label: "Fundación" },
-      { year: "2019", label: "Relanzamiento" },
+      { year: "1830", label: "Fundada por Hippolyte Arnal" },
+      { year: "2019", label: "Relanzamiento y marca registrada" },
       { year: "2020", label: "1.ª bodega" }
     ],
     image: familyImg,
     imageAlt: "Inscripción Dream Big sobre fondo oscuro"
   },
   statsBar: [
-    { value: "100 ha", label: "Finca total" },
-    { value: "~40 ha", label: "De viñedo" },
+    { value: "53 ha", label: "Finca total" },
+    { value: "17 ha", label: "De viñedo" },
     { value: "6.ª y 7.ª", label: "Generaciones" },
-    { value: "HVE", label: "En curso" },
-    { value: "AOP", label: "Minervois" },
+    { value: "HVE", label: "Certificado desde 2019" },
+    { value: "IGP", label: "Pays d'Oc" },
     { value: "365 d", label: "Acogida de visitantes" }
   ],
   timeline: {
@@ -98,7 +98,7 @@ export const domainePageEs: DomainePageData = {
         year: "1830",
         tabLabel: "~1830",
         title: "Fundación",
-        detail: "Primeras parcelas cultivadas en el corazón del Minervois, nacimiento de la finca familiar.",
+        detail: "Hippolyte Arnal planta las primeras parcelas en este paraje entre el Canal du Midi y el Fresquel, dando nacimiento a la finca familiar.",
         images: [
           { src: timelineLeftImg, alt: "Trabajo artesanal de precisión" },
           { src: timelineRightImg, alt: "Momento de degustación convivial" }
@@ -145,7 +145,7 @@ export const domainePageEs: DomainePageData = {
         tabLabel: "2022",
         title: "Ascenso de gama",
         detail:
-          "Selección parcelaria reforzada, afinamiento de los vinos y mayor exigencia en los circuitos de vinotecas y restauración.",
+          "Selección parcelaria reforzada, afinamiento de los vinos y mayor exigencia en los circuitos de vinotecas y restauración. Adhesión al Collège Culinaire de France, sello de «productor y artesano de calidad».",
         images: [
           { src: wine2Img, alt: "Botella de la finca en presentación" },
           { src: wine3Img, alt: "Colección de botellas en la cava" }
@@ -157,7 +157,7 @@ export const domainePageEs: DomainePageData = {
         tabLabel: "2023",
         title: "Proyección enoturística",
         detail:
-          "Despliegue de visitas privadas y degustaciones exclusivas para conectar la historia familiar con la experiencia del cliente.",
+          "Despliegue de visitas privadas y degustaciones exclusivas para conectar la historia familiar con la experiencia del cliente. Medalla de plata en el Concours des Vignerons Indépendants por la primera vinificación en rosado.",
         images: [
           { src: wine1Img, alt: "Primer plano de un vino de la finca" },
           { src: visitCtaImg, alt: "Hilera de botellas en la sala de catas" }

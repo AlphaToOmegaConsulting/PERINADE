@@ -24,7 +24,7 @@ export const domainePageFr: DomainePageData = {
     eyebrow: "Le Domaine",
     titleLines: ["Depuis 1830,", "le soin du terroir"],
     body:
-      "Entre le Canal du Midi et le Fresquel, le Domaine de la Périnade perpétue six générations de viticulture depuis 1830 sur 100 ha, dont 40 ha de vignes. Une histoire familiale ancrée dans le Minervois, relancée en 2019 avec exigence.",
+      "Entre le Canal du Midi et le Fresquel, le Domaine de la Périnade perpétue six générations de viticulture depuis 1830 sur 53 ha, dont 17 ha de vignes. Une histoire familiale fondée par Hippolyte Arnal, ancrée en IGP Pays d'Oc à Pezens, relancée en 2019 avec exigence.",
     primaryCta: {
       label: "Réserver une visite du domaine",
       href: "/visites#booking"
@@ -34,7 +34,7 @@ export const domainePageFr: DomainePageData = {
       href: "/boutique"
     },
     badges: ["Viticulture", "Terroir", "Transmission"],
-    highlights: ["100 ha de domaine", "40 ha vignes AOP Minervois", "6 générations", "Oenotourisme Languedoc-Aude"],
+    highlights: ["53 ha de domaine", "17 ha de vignes cultivées", "6 générations", "Oenotourisme Languedoc-Aude"],
     image: heroImg,
     imageAlt: "Personne consultant son téléphone au crépuscule dans le domaine"
   },
@@ -42,14 +42,14 @@ export const domainePageFr: DomainePageData = {
     eyebrow: "Terroir & Savoir-faire",
     title: "Un emplacement d'exception",
     body:
-      "Le domaine s'étend entre le Canal du Midi et la rivière Fresquel, dans le périmètre de l'AOP Minervois, à 15 km de Carcassonne (Aude, Occitanie). Cette situation géographique rare — entre eau, garrigue et collines ensoleillées du Languedoc — façonne la minéralité et la fraîcheur singulières de nos cuvées.",
+      "Le domaine s'étend entre le Canal du Midi et la rivière Fresquel, en IGP Pays d'Oc, à 10 km de Carcassonne (Aude, Occitanie). Sols sableux au pied des coteaux, avec une vue dégagée sur les Pyrénées et la Montagne Noire — une situation géographique rare qui façonne la minéralité et la fraîcheur singulières de nos cuvées.",
     grapesTitle: "Cépages cultivés",
     commitmentsTitle: "Engagements environnementaux",
-    grapes: ["Grenache noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot"],
+    grapes: ["Grenache noir", "Cabernet Franc", "Cabernet Sauvignon", "Merlot", "Chardonnay", "Sauvignon Blanc", "Viognier"],
     commitments: [
       {
         title: "Démarche HVE",
-        body: "Haute Valeur Environnementale — certification en cours."
+        body: "Haute Valeur Environnementale — certifié depuis 2019. Zéro hormone de synthèse, travail mécanique favorisé."
       },
       {
         title: "Zéro glyphosate",
@@ -67,24 +67,24 @@ export const domainePageFr: DomainePageData = {
     eyebrow: "La famille",
     title: "La famille Arnal aujourd'hui",
     body: [
-      "En 2019, les 6e et 7e générations de la famille Arnal reprennent le domaine avec la volonté de redonner tout son rayonnement à ce terroir historique.",
-      "La création du chai en 2020, la restauration des caves et la sélection parcellaire ont marqué un nouveau départ. L'objectif reste inchangé : produire des vins justes, élégants et fidèles au lieu.",
-      "Au domaine, l'héritage se vit au quotidien : précision dans la vigne, écoute du millésime et hospitalité lors de chaque visite."
+      "En 2019, les 6e et 7e générations de la famille Arnal reprennent le domaine avec la volonté de redonner tout son rayonnement à ce terroir historique. Stéphane Arnal, après une carrière de douze ans chez BNP Paribas (2007-2019), rejoint le domaine pour en prendre la direction commerciale.",
+      "La création du chai en 2020, la restauration des caves et la sélection parcellaire ont marqué un nouveau départ. L'œnologue Claude Serra accompagne le domaine depuis sa relance, apportant son expertise du Languedoc. L'objectif reste inchangé : produire des vins justes, élégants et fidèles au lieu.",
+      "Au domaine, l'héritage se vit au quotidien : précision dans la vigne, écoute du millésime et hospitalité lors de chaque visite. Chaque bouteille reçoit une injection d'azote liquide au remplissage, garantissant une conservation optimale sans recours aux sulfites excessifs."
     ],
     milestones: [
-      { year: "1830", label: "Fondation" },
-      { year: "2019", label: "Relance" },
+      { year: "1830", label: "Fondation par Hippolyte Arnal" },
+      { year: "2019", label: "Relance & marque déposée" },
       { year: "2020", label: "1er chai" }
     ],
     image: familyImg,
     imageAlt: "Inscription Dream Big sur fond sombre"
   },
   statsBar: [
-    { value: "100 ha", label: "Domaine total" },
-    { value: "~40 ha", label: "Surface viticole" },
+    { value: "53 ha", label: "Domaine total" },
+    { value: "17 ha", label: "Surface viticole" },
     { value: "6e & 7e", label: "Générations" },
-    { value: "HVE", label: "Démarche en cours" },
-    { value: "AOP", label: "Minervois" },
+    { value: "HVE", label: "Certifié depuis 2019" },
+    { value: "IGP", label: "Pays d'Oc" },
     { value: "365 j/an", label: "Accueil visiteurs" }
   ],
   timeline: {
@@ -97,7 +97,7 @@ export const domainePageFr: DomainePageData = {
         year: "1830",
         tabLabel: "~1830",
         title: "Fondation",
-        detail: "Premières parcelles cultivées au cœur du Minervois, naissance du domaine familial.",
+        detail: "Hippolyte Arnal plante les premières parcelles sur ce lieu-dit entre le Canal du Midi et le Fresquel, donnant naissance au domaine familial.",
         images: [
           { src: timelineLeftImg, alt: "Travail artisanal de précision" },
           { src: timelineRightImg, alt: "Moment de dégustation conviviale" }
@@ -144,7 +144,7 @@ export const domainePageFr: DomainePageData = {
         tabLabel: "2022",
         title: "Montée en gamme",
         detail:
-          "Sélection parcellaire renforcée, affinage des cuvées et montée en exigence sur les circuits cavistes et restauration.",
+          "Sélection parcellaire renforcée, affinage des cuvées et montée en exigence sur les circuits cavistes et restauration. Adhésion au Collège Culinaire de France, label « producteur & artisan de qualité ».",
         images: [
           { src: wine2Img, alt: "Bouteille du domaine en présentation" },
           { src: wine3Img, alt: "Collection de bouteilles en cave" }
@@ -156,7 +156,7 @@ export const domainePageFr: DomainePageData = {
         tabLabel: "2023",
         title: "Rayonnement œnotouristique",
         detail:
-          "Déploiement des visites privées et dégustations signatures pour relier histoire familiale et expérience client.",
+          "Déploiement des visites privées et dégustations signatures pour relier histoire familiale et expérience client. Médaille d'argent au Concours des Vignerons Indépendants pour la première vinification en rosé.",
         images: [
           { src: wine1Img, alt: "Cuvée du domaine en gros plan" },
           { src: visitCtaImg, alt: "Rangée de bouteilles au caveau" }
@@ -226,11 +226,11 @@ export const domainePageFr: DomainePageData = {
     body:
       "L'équipe répond sous 24h. Vous pouvez aussi nous appeler directement pendant les heures d'ouverture du domaine.",
     cards: [
-      { label: "Téléphone", value: "+33 4 68 XX XX XX", href: "tel:+33468XXXXXX" },
+      { label: "Téléphone", value: "+33 6 61 99 93 77", href: "tel:+33661999377" },
       {
         label: "Adresse",
-        value: "Domaine de la Périnade · Minervois, Languedoc",
-        href: "https://maps.google.com/?q=Domaine+de+la+P%C3%A9rinade+Minervois+Languedoc"
+        value: "Lieu-dit La Périnade · 11170 Pezens, Aude",
+        href: "https://maps.google.com/?q=Lieu-dit+La+P%C3%A9rinade+11170+Pezens"
       },
       { label: "Formulaire", value: "Via notre page contact", href: "#domaine-contact" }
     ],

@@ -80,12 +80,12 @@ export const visitsPageEs: VisitPageData = {
       { icon: "clock", label: "1h30" },
       { icon: "ticket", label: "Desde 15 €" },
       { icon: "globe", label: "FR / EN / ES" },
-      { icon: "calendar", label: "11:00 – 16:00, todos los días" },
+      { icon: "calendar", label: "9:00 – 18:00, todos los días" },
       { icon: "car", label: "Aparcamiento gratuito" }
     ],
     primaryCta: { label: "Reservar", href: "/es/visitas#booking" },
-    secondaryCta: { label: "Llamar", href: "tel:+33468000000" },
-    helper: "+33 4 68 XX XX XX · Respuesta en 24h",
+    secondaryCta: { label: "Llamar", href: "tel:+33661999377" },
+    helper: "+33 6 61 99 93 77 · Respuesta en 24h",
     image: visitsHeroGrapes,
     imageAlt: "Uvas recién cosechadas en una cuba"
   },
@@ -253,7 +253,7 @@ export const visitsPageEs: VisitPageData = {
       }
     ],
     meta: [
-      "Disponible todos los días, 11:00 – 16:00",
+      "Disponible todos los días, 9:00 – 18:00",
       "Grupos privados a petición",
       "Experiencia premium, precio justo"
     ]
@@ -267,9 +267,9 @@ export const visitsPageEs: VisitPageData = {
       tag: "Dirección",
       title: "Carcassonne",
       subtitle: "Aude, Occitania",
-      content: ["Domaine de la Périnade", "Coordenadas GPS compartidas tras la reserva", "Aparcamiento gratuito para visitantes"],
+      content: ["Lieu-dit La Périnade, Pezens", "Coordenadas GPS compartidas tras la reserva", "Aparcamiento gratuito para visitantes"],
       ctaLabel: "Ver en el mapa",
-      ctaHref: "https://maps.google.com/?q=Domaine+de+la+Perinade+Minervois+Languedoc"
+      ctaHref: "https://maps.google.com/?q=Lieu-dit+La+P%C3%A9rinade+11170+Pezens"
     },
     rightCards: [
       {
@@ -277,7 +277,7 @@ export const visitsPageEs: VisitPageData = {
         tag: "Lo más práctico",
         title: "En coche",
         subtitle: "Lo más cómodo",
-        content: ["15 min desde Carcassonne", "Acceso directo y aparcamiento en el lugar"]
+        content: ["10 min desde Carcassonne", "Acceso directo y aparcamiento en el lugar"]
       },
       {
         icon: "plane",

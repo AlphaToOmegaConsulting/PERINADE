@@ -80,12 +80,12 @@ export const visitsPageEn: VisitPageData = {
       { icon: "clock", label: "1h30" },
       { icon: "ticket", label: "From 15 \u20AC" },
       { icon: "globe", label: "FR / EN" },
-      { icon: "calendar", label: "11am \u2013 4pm, every day" },
+      { icon: "calendar", label: "9am \u2013 6pm, every day" },
       { icon: "car", label: "Free parking" }
     ],
     primaryCta: { label: "Book now", href: "/en/visits#booking" },
-    secondaryCta: { label: "Call us", href: "tel:+33468000000" },
-    helper: "+33 4 68 XX XX XX \u00B7 Reply within 24h",
+    secondaryCta: { label: "Call us", href: "tel:+33661999377" },
+    helper: "+33 6 61 99 93 77 \u00B7 Reply within 24h",
     image: visitsHeroGrapes,
     imageAlt: "Freshly harvested grapes in a vat"
   },
@@ -269,7 +269,7 @@ export const visitsPageEn: VisitPageData = {
       subtitle: "Aude, Occitanie",
       content: ["Domaine de la P\u00E9rinade", "GPS coordinates shared after booking", "Free visitor parking"],
       ctaLabel: "View on map",
-      ctaHref: "https://maps.google.com/?q=Domaine+de+la+Perinade+Minervois+Languedoc"
+      ctaHref: "https://maps.google.com/?q=Lieu-dit+La+P%C3%A9rinade+11170+Pezens"
     },
     rightCards: [
       {
@@ -277,7 +277,7 @@ export const visitsPageEn: VisitPageData = {
         tag: "Most convenient",
         title: "By car",
         subtitle: "Most convenient",
-        content: ["15 min from Carcassonne", "Direct access and on-site parking"]
+        content: ["10 min from Carcassonne", "Direct access and on-site parking"]
       },
       {
         icon: "plane",

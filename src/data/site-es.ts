@@ -86,7 +86,7 @@ export const siteEs: SiteData = {
     body: "Una visita guiada por la finca seguida de una degustación comentada de nuestros vinos, en un entorno auténtico y acogedor.",
     details: [
       { label: "Duración", value: "Aprox. 1h30", icon: "clock" },
-      { label: "Grupo", value: "2 a 10 personas", icon: "users" },
+      { label: "Grupo", value: "2 a 12 personas", icon: "users" },
       { label: "Idiomas", value: "Francés, Inglés, Español", icon: "globe" },
       { label: "Ubicación", value: "Cerca de Carcassonne", icon: "pin" },
       { label: "Precio", value: "15 € / persona", icon: "ticket" }
@@ -109,7 +109,7 @@ export const siteEs: SiteData = {
     eyebrow: "Testimonios",
     title: "Lo que dicen",
     pressLabel: "Destacado en",
-    pressLogos: ["Le Figaro Vin", "Revue du Vin", "Decanter", "Wine Spectator"],
+    pressLogos: ["Collège Culinaire de France", "Concours des Vignerons Indépendants", "TripAdvisor Travelers' Choice", "Club Lavender"],
     items: [
       {
         quote: "Una acogida excepcional en un marco magnífico. La degustación fue apasionante y los vinos deliciosos. ¡Volveremos!",
@@ -136,8 +136,8 @@ export const siteEs: SiteData = {
     title: "Seis generaciones de",
     titleHighlight: "pasión",
     body: [
-      "Fundada en 1830, el Domaine de la Périnade es una aventura familiar nacida del amor por el terruño del Languedoc. En estas tierras bañadas por el sol, entre garriga y colinas, cultivamos nuestros viñedos con respeto por las tradiciones y especial atención al medio ambiente.",
-      "Hoy es la sexta generación la que perpetúa este saber hacer, combinando métodos ancestrales y vinificación moderna para producir vinos que expresan la singularidad de nuestro terruño."
+      "Fundada hacia 1830 por Hippolyte Arnal, el Domaine de la Périnade es una aventura familiar nacida del amor por el terruño del Languedoc. En estas tierras bañadas por el sol, entre garriga y colinas, cultivamos nuestros viñedos con respeto por las tradiciones y especial atención al medio ambiente.",
+      "Hoy, la 6.ª y 7.ª generación perpetúan este saber hacer, combinando métodos ancestrales con innovaciones como la inyección de nitrógeno líquido en el embotellado para preservar cada añada."
     ],
     imagePrimary: historyFamily,
     ctaLabel: "Descubrir la historia completa",

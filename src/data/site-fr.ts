@@ -86,7 +86,7 @@ export const siteFr: SiteData = {
     body: "Une visite guidée du domaine suivie d'une dégustation commentée de nos cuvées, dans un cadre authentique et chaleureux.",
     details: [
       { label: "Durée", value: "1h30 environ", icon: "clock" },
-      { label: "Groupe", value: "2 à 10 personnes", icon: "users" },
+      { label: "Groupe", value: "2 à 12 personnes", icon: "users" },
       { label: "Langues", value: "Français, anglais, espagnol", icon: "globe" },
       { label: "Lieu", value: "Près de Carcassonne", icon: "pin" },
       { label: "Tarif", value: "15 € / personne", icon: "ticket" }
@@ -109,7 +109,7 @@ export const siteFr: SiteData = {
     eyebrow: "Témoignages",
     title: "Ce qu'ils en disent",
     pressLabel: "Vu dans",
-    pressLogos: ["Le Figaro Vin", "Revue du Vin", "Decanter", "Wine Spectator"],
+    pressLogos: ["Collège Culinaire de France", "Concours des Vignerons Indépendants", "TripAdvisor Travelers' Choice", "Club Lavender"],
     items: [
       {
         quote: "Un accueil exceptionnel dans un cadre magnifique. La dégustation était passionnante et les vins délicieux. Nous reviendrons !",
@@ -133,11 +133,11 @@ export const siteFr: SiteData = {
   },
   history: {
     eyebrow: "Notre histoire",
-    title: "Trois générations de",
+    title: "Six générations de",
     titleHighlight: "passion",
     body: [
-      "Fondé en 1830, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes dans le respect des traditions et avec une attention particulière portée à l'environnement.",
-      "Aujourd'hui, c'est la troisième génération qui perpétue ce savoir-faire, alliant méthodes ancestrales et vinification moderne pour produire des vins qui expriment la singularité de notre terroir."
+      "Fondé vers 1830 par Hippolyte Arnal, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes dans le respect des traditions et avec une attention particulière portée à l'environnement.",
+      "Aujourd'hui, les 6e et 7e générations perpétuent ce savoir-faire, alliant méthodes ancestrales et innovations comme l'injection d'azote liquide à la mise en bouteille pour préserver chaque cuvée."
     ],
     imagePrimary: historyFamily,
     ctaLabel: "Découvrir l'histoire complète",
