@@ -54,7 +54,7 @@ export const shopPageFr: ShopPageData = {
         name: "Cuvée Renaissance Rosé",
         meta: "2022 · 75 cl",
         description:
-          "Pêche blanche et agrumes, avec une finale fraîche et délicate.",
+          "100% Grenache Noir. Pêche blanche et agrumes, avec une finale fraîche et délicate.",
         price: "14,40 € TTC",
         image: renaissance75Image,
         imageAlt: "Bouteille Cuvée Renaissance Rosé 2022",
@@ -93,7 +93,7 @@ export const shopPageFr: ShopPageData = {
         name: "Sauvignon Blanc cuvée 1830",
         meta: "Sans millésime · 75 cl",
         description:
-          "Notes de cassis et pamplemousse, profil vif et expressif.",
+          "Cuvée hommage à l'année de fondation du domaine. 100% Sauvignon Blanc, notes de cassis et pamplemousse, profil vif et expressif.",
         price: "15,00 € TTC",
         image: sauvignonImage,
         imageAlt: "Bouteille Sauvignon Blanc cuvée 1830",
@@ -119,7 +119,7 @@ export const shopPageFr: ShopPageData = {
         name: "Édition limitée CRAZY HORSE PARIS",
         meta: "Sans millésime · 75 cl",
         description:
-          "Édition spéciale aux notes de pêche blanche et d'agrumes.",
+          "Édition exclusive créée pour le Crazy Horse Paris. 100% Grenache Noir, notes de pêche blanche et d'agrumes, style délicat et lumineux.",
         price: "25,00 € TTC",
         image: crazyHorseImage,
         imageAlt: "Bouteille Édition limitée Crazy Horse Paris",
@@ -222,7 +222,7 @@ export const shopPageFr: ShopPageData = {
       {
         icon: "support",
         title: "Support direct",
-        body: "Réponse sous 24 h au +33 4 68 XX XX XX"
+        body: "Réponse sous 24 h au +33 6 61 99 93 77"
       }
     ]
   },
@@ -287,7 +287,7 @@ export const shopPageFr: ShopPageData = {
       },
       {
         question: "Comment contacter le domaine ?",
-        answer: "Par téléphone au +33 4 68 XX XX XX ou par e-mail via le formulaire de contact du site."
+        answer: "Par téléphone au +33 6 61 99 93 77 ou par e-mail via le formulaire de contact du site."
       }
     ]
   }

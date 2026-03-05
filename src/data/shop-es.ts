@@ -54,7 +54,7 @@ export const shopPageEs: ShopPageData = {
         name: "Cuvée Renaissance Rosé",
         meta: "2022 · 75 cl",
         description:
-          "Aromas de melocotón blanco y cítricos con final fresco y delicado.",
+          "100% Grenache Noir. Aromas de melocotón blanco y cítricos con final fresco y delicado.",
         price: "14,40 € IVA incl.",
         image: renaissance75Image,
         imageAlt: "Botella Cuvée Renaissance Rosé 2022",
@@ -93,7 +93,7 @@ export const shopPageEs: ShopPageData = {
         name: "Sauvignon Blanc cuvée 1830",
         meta: "Sin añada · 75 cl",
         description:
-          "Notas de casis y pomelo en un perfil vivo y expresivo.",
+          "Cuvée homenaje al año de fundación de la finca. 100% Sauvignon Blanc, notas de grosella negra y pomelo con un perfil vivo y expresivo.",
         price: "15,00 € IVA incl.",
         image: sauvignonImage,
         imageAlt: "Botella Sauvignon Blanc cuvée 1830",
@@ -119,7 +119,7 @@ export const shopPageEs: ShopPageData = {
         name: "CRAZY HORSE PARIS",
         meta: "Sin añada · 75 cl",
         description:
-          "Edición especial con notas de melocotón blanco y cítricos.",
+          "Edición exclusiva creada para el Crazy Horse París. 100% Grenache Noir, notas de melocotón blanco y cítricos, estilo delicado y luminoso.",
         price: "25,00 € IVA incl.",
         image: crazyHorseImage,
         imageAlt: "Botella edición limitada Crazy Horse Paris",
@@ -203,7 +203,7 @@ export const shopPageEs: ShopPageData = {
       { icon: "map", title: "Zonas de entrega", body: "Francia metropolitana, Europa bajo solicitud" },
       { icon: "return", title: "Devoluciones", body: "14 días tras recepción, reembolso completo" },
       { icon: "lock", title: "Pago seguro", body: "CB, Visa, Mastercard, conexión SSL" },
-      { icon: "support", title: "Soporte directo", body: "Respuesta en 24 h al +33 4 68 XX XX XX" }
+      { icon: "support", title: "Soporte directo", body: "Respuesta en 24 h al +33 6 61 99 93 77" }
     ]
   },
   caseComposer: {
@@ -267,7 +267,7 @@ export const shopPageEs: ShopPageData = {
       },
       {
         question: "¿Cómo contactar con la finca?",
-        answer: "Por teléfono al +33 4 68 XX XX XX o por correo electrónico mediante el formulario de contacto del sitio."
+        answer: "Por teléfono al +33 6 61 99 93 77 o por correo electrónico mediante el formulario de contacto del sitio."
       }
     ]
   }

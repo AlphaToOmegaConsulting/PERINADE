@@ -54,7 +54,7 @@ export const shopPageEn: ShopPageData = {
         name: "Renaissance Rose Cuvee",
         meta: "2022 · 75 cl",
         description:
-          "White peach and citrus aromas with a fresh, delicate finish.",
+          "100% Grenache Noir. White peach and citrus aromas with a fresh, delicate finish.",
         price: "€14.40 incl. VAT",
         image: renaissance75Image,
         imageAlt: "Renaissance Rose Cuvee 2022 bottle",
@@ -93,7 +93,7 @@ export const shopPageEn: ShopPageData = {
         name: "Sauvignon Blanc Cuvee 1830",
         meta: "No vintage · 75 cl",
         description:
-          "Cassis and grapefruit notes with a bright, expressive profile.",
+          "A tribute cuvée to the founding year of the estate. 100% Sauvignon Blanc, cassis and grapefruit notes with a bright, expressive profile.",
         price: "€15.00 incl. VAT",
         image: sauvignonImage,
         imageAlt: "Sauvignon Blanc Cuvee 1830 bottle",
@@ -119,7 +119,7 @@ export const shopPageEn: ShopPageData = {
         name: "CRAZY HORSE PARIS",
         meta: "No vintage · 75 cl",
         description:
-          "Special edition with white peach and citrus notes.",
+          "Exclusive edition created for Crazy Horse Paris. 100% Grenache Noir, white peach and citrus notes, delicate and luminous style.",
         price: "€25.00 incl. VAT",
         image: crazyHorseImage,
         imageAlt: "Crazy Horse Paris limited edition bottle",
@@ -203,7 +203,7 @@ export const shopPageEn: ShopPageData = {
       { icon: "map", title: "Delivery zones", body: "Metropolitan France, Europe on request" },
       { icon: "return", title: "Returns", body: "14 days after delivery, full refund" },
       { icon: "lock", title: "Secure payment", body: "CB, Visa, Mastercard, SSL connection" },
-      { icon: "support", title: "Direct support", body: "Reply within 24 h at +33 4 68 XX XX XX" }
+      { icon: "support", title: "Direct support", body: "Reply within 24 h at +33 6 61 99 93 77" }
     ]
   },
   caseComposer: {
@@ -267,7 +267,7 @@ export const shopPageEn: ShopPageData = {
       },
       {
         question: "How can I contact the estate?",
-        answer: "By phone at +33 4 68 XX XX XX or by email via the website contact form."
+        answer: "By phone at +33 6 61 99 93 77 or by email via the website contact form."
       }
     ]
   }
