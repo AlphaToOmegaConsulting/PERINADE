@@ -74,7 +74,13 @@ Vanilla TypeScript modules, no UI framework (no React/Vue/Svelte):
 ## Architecture
 
 ```
-content/                  # (migration en cours) YAML éditoriaux pour Pages CMS
+content/                  # Source de vérité éditoriale — YAML par section et locale
+├── domaine/{fr,en,es}.yaml
+├── news/{fr,en,es}.yaml
+├── site/{fr,en,es}.yaml
+├── ui/{fr,en,es}.yaml
+└── visits/{fr,en,es}.yaml
+
 src/
 ├── components/
 │   ├── sections/   # Page sections (Header, Hero, Gallery, Contact…)
@@ -83,8 +89,10 @@ src/
 │   ├── shop/       # Shop/e-commerce components
 │   ├── visits/     # Visit booking components
 │   └── ui/         # Reusable UI primitives
-├── data/           # Loaders localisés (src de vérité → migre vers content/ YAML)
-├── i18n/           # Routing helpers, locale types, UI strings, contact info
+├── config/         # Design tokens non-éditoriaux (visits-theme-config.ts)
+├── content.config.ts  # Astro Content Collections — Zod schemas
+├── data/           # Loaders centralisés (getEntry / getCollection) + shop-*.ts
+├── i18n/           # Routing helpers, locale types, UI strings loader
 ├── lib/cart/       # Panier logic (Stripe)
 ├── types/          # TypeScript type definitions
 ├── scripts/        # Client-side TS modules (vanilla TS)
@@ -95,7 +103,7 @@ src/
     └── es/*.astro        # ES (/es/*)
 ```
 
-**Pages publiques (23 fichiers) :**
+**Pages publiques (22 fichiers) :**
 - FR : `/`, `/domaine`, `/visites`, `/boutique`, `/actualites`, `/panier`, `/confirmation`
 - EN : `/en`, `/en/domaine`, `/en/visits`, `/en/shop`, `/en/news`, `/en/cart`, `/en/confirmation`
 - ES : `/es`, `/es/domaine`, `/es/visitas`, `/es/tienda`, `/es/noticias`, `/es/carrito`, `/es/confirmacion`
@@ -133,12 +141,14 @@ npm run verify   # check + build (pre-deploy validation)
 - Source de vérité éditoriale : FR — les contenus EN et ES sont mis à jour manuellement
 - Helpers de routing : `src/i18n/locales.ts`, `src/i18n/routes.ts`
 
-## CMS (migration planifiée)
+---
 
-- **Pages CMS** (Git-based) sera intégré pour permettre l'édition non-dev du contenu
-- Contenu cible : `content/{section}/{fr/en/es}.yaml` — Astro Content Collections + Zod
-- Boutique/Stripe : restera dans le code, migration future vers **Cloudflare D1 + KV**
-- Plan détaillé : [docs/plans/2026-03-07-cms-migration-design.md](/Users/codex/Desktop/WEBDEV/PERINADE/docs/plans/2026-03-07-cms-migration-design.md)
+## CMS
+
+- **Pages CMS** (Git-based) — interface d'édition YAML pour le propriétaire non-dev
+- Contenu éditorial : `content/{section}/{fr/en/es}.yaml` — Astro Content Collections + Zod
+- Boutique/Stripe : `src/data/shop-*.ts` — reste dans le code, migration future vers **Cloudflare D1 + KV**
+- Config design visits : `src/config/visits-theme-config.ts` — hors CMS (tokens de design)
 
 ---
 
@@ -148,4 +158,5 @@ npm run verify   # check + build (pre-deploy validation)
 |-----|---------|
 | TypeScript strict mode | Type safety |
 | `astro check` | Component validation |
+| Zod schemas | Validation du contenu YAML au build |
 | Zero runtime vulnerabilities | Static site, no server-side attack surface |
