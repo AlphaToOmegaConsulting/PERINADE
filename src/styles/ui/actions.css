@@ -97,7 +97,7 @@
 .ui-action--text {
   --_action-bg: transparent;
   --_action-bg-hover: transparent;
-  --_action-color: var(--action-text-color, var(--color-accent));
+  --_action-color: var(--action-text-color, var(--color-cta-strong));
   --_action-border: transparent;
   --_action-shadow: none;
 

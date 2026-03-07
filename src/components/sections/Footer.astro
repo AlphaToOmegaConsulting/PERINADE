@@ -41,7 +41,7 @@ const { footer } = Astro.props;
       <h3>{footer.newsletterTitle}</h3>
       <p>{footer.newsletterBody}</p>
       <p class="footer__newsletter-adult">{footer.newsletterAdultNotice}</p>
-      <form data-ui-form action={footer.newsletterAction} method="post">
+      <form data-ui-form>
         <input type="email" name="email" inputmode="email" autocomplete="email" placeholder={footer.newsletterPlaceholder} required />
         <SubmitButton class="footer__newsletter-submit" label="OK" variant="primary" size="sm" />
       </form>
