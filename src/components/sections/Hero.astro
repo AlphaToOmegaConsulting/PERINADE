@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import type { HeroData } from "../../types/site";
 import ActionLink from "../ui/actions/ActionLink.astro";
 import HeroFeatureDeck from "./HeroFeatureDeck.astro";
@@ -8,9 +9,10 @@ interface Props {
 }
 
 const { hero } = Astro.props;
+const heroBg = await getImage({ src: hero.backgroundImage, format: "webp", quality: 80, width: 1920 });
 ---
 
-<section class="hero" id="hero" style={`--hero-image: url('${hero.backgroundImage.src}')`}>
+<section class="hero" id="hero" style={`--hero-image: url('${heroBg.src}')`}>
   <div class="hero__background" aria-hidden="true"></div>
   <div class="shell hero__shell">
     <div class="hero__content" data-reveal-group data-reveal-stagger="95">

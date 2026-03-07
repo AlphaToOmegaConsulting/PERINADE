@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import type { SiteData } from "../../types/site";
 import ActionLink from "../ui/actions/ActionLink.astro";
 import Icon from "../ui/Icon.astro";
@@ -9,9 +10,10 @@ interface Props {
 }
 
 const { experience } = Astro.props;
+const experienceBg = await getImage({ src: experience.backgroundImage, format: "webp", quality: 80, width: 1920 });
 ---
 
-<section class="experience section" id="experience" style={`--experience-image: url('${experience.backgroundImage.src}')`}>
+<section class="experience section" id="experience" style={`--experience-image: url('${experienceBg.src}')`}>
   <div class="experience__bg" aria-hidden="true"></div>
   <div class="shell shell--narrow experience__inner">
     <SectionHeading

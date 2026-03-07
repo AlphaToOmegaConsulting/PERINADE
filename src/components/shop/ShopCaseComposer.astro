@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { getImage, Image } from "astro:assets";
 import type { ShopPageData } from "../../types/shop";
 import ActionLink from "../ui/actions/ActionLink.astro";
 
@@ -8,14 +8,14 @@ interface Props {
 }
 
 const { caseComposer } = Astro.props;
-
+const composerBg = await getImage({ src: caseComposer.backdropImage, format: "webp", quality: 80, width: 1920 });
 ---
 
 <section
   id="coffrets"
   class="shop-composer section"
   aria-labelledby="shop-composer-title"
-  style={`--shop-composer-bg:url('${caseComposer.backdropImage.src}')`}
+  style={`--shop-composer-bg:url('${composerBg.src}')`}
 >
   <div class="shop-composer__backdrop" aria-hidden="true"></div>
   <div class="shell shop-shell shop-composer__shell">

@@ -1,6 +1,6 @@
 ---
+import { getImage, Image } from "astro:assets";
 import type { SiteData } from "../../types/site";
-import { Image } from "astro:assets";
 import ActionLink from "../ui/actions/ActionLink.astro";
 
 interface Props {
@@ -8,9 +8,10 @@ interface Props {
 }
 
 const { history } = Astro.props;
+const historyBg = await getImage({ src: history.imagePrimary, format: "webp", quality: 80, width: 1920 });
 ---
 
-<section class="history section" id="histoire" style={`--history-image: url('${history.imagePrimary.src}')`}>
+<section class="history section" id="histoire" style={`--history-image: url('${historyBg.src}')`}>
   <div class="history__overlay" aria-hidden="true"></div>
   <div class="shell history__inner">
     <div class="history__media ui-hover-media" data-reveal="left">

@@ -1,6 +1,6 @@
 ---
+import { getImage, Image } from "astro:assets";
 import type { VisitPageData } from "../../types/visits";
-import { Image } from "astro:assets";
 import Icon from "../ui/Icon.astro";
 import ActionLink from "../ui/actions/ActionLink.astro";
 
@@ -9,12 +9,13 @@ interface Props {
 }
 
 const { escape } = Astro.props;
+const escapeBg = await getImage({ src: escape.layout.backgroundImage, format: "webp", quality: 80, width: 1920 });
 ---
 
 <section
   class="escape section"
   id="escape"
-  style={`--escape-bg:url('${escape.layout.backgroundImage.src}'); --escape-overlay:${escape.layout.overlayOpacity}; --escape-image-radius:${escape.layout.imagePanelRadius};`}
+  style={`--escape-bg:url('${escapeBg.src}'); --escape-overlay:${escape.layout.overlayOpacity}; --escape-image-radius:${escape.layout.imagePanelRadius};`}
 >
   <div class="escape__bg" aria-hidden="true"></div>
   <div class="shell escape__inner">

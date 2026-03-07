@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import type { VisitPageData } from "../../types/visits";
 
 interface Props {
@@ -6,11 +7,12 @@ interface Props {
 }
 
 const { finalCta } = Astro.props;
+const finalCtaBg = await getImage({ src: finalCta.image, format: "webp", quality: 80, width: 1920 });
 ---
 
 <section
   class="visits-final-cta"
-  style={`--visits-final-bg: url('${finalCta.image.src}'); --visits-final-min-h:${finalCta.layout.sectionMinHeight}; --visits-final-content-max:${finalCta.layout.contentMaxWidth}; --visits-final-gap-eyebrow-title:${finalCta.layout.eyebrowToTitleGap}; --visits-final-gap-title-body:${finalCta.layout.titleToBodyGap};`}
+  style={`--visits-final-bg: url('${finalCtaBg.src}'); --visits-final-min-h:${finalCta.layout.sectionMinHeight}; --visits-final-content-max:${finalCta.layout.contentMaxWidth}; --visits-final-gap-eyebrow-title:${finalCta.layout.eyebrowToTitleGap}; --visits-final-gap-title-body:${finalCta.layout.titleToBodyGap};`}
 >
   <div class="visits-final-cta__overlay" aria-hidden="true"></div>
   <div class="shell visits-final-cta__inner" data-reveal-group data-reveal-stagger="85">

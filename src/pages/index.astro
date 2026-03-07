@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import Contact from "../components/sections/Contact.astro";
 import Experience from "../components/sections/Experience.astro";
 import Footer from "../components/sections/Footer.astro";
@@ -20,7 +21,8 @@ const alternates = [
   { locale: "es", href: "/es" }
 ];
 
-const heroImageUrl = site.hero.backgroundImage.src;
+const heroImageOpt = await getImage({ src: site.hero.backgroundImage, format: "webp", quality: 80, width: 1920 });
+const heroImageUrl = heroImageOpt.src;
 
 const seoTitle = "Domaine de la Périnade | Vin AOP Minervois près de Carcassonne";
 const seoDescription = "Domaine viticole familial en Languedoc depuis 1830. Vins AOP Minervois et IGP Pays d'Oc. Dégustation, visite cave et boutique en ligne. Près de Carcassonne, Aude.";
