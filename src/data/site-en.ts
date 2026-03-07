@@ -215,7 +215,6 @@ export const siteEn: SiteData = {
       fieldPhone: "Phone",
       fieldMessage: "Message"
     },
-    formAction: `mailto:${contactInfo.email}`,
     formSuccessMessage: "Message ready. Please check your email draft before sending.",
     formErrorMessage: `Unable to prepare message. Please call us at ${contactInfo.phone}.`
   },

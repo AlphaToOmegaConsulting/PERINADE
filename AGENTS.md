@@ -9,6 +9,7 @@
 - Default locale: `fr`
 - Routing rule: default locale is not prefixed; English uses `/en/*`; Spanish uses `/es/*`
 - Localized content is loaded from [src/data/index.ts](/Users/codex/Desktop/WEBDEV/PERINADE/src/data/index.ts)
+- **Migration en cours (planifiée)** : le contenu éditorial de `src/data/` migre progressivement vers `content/` (fichiers YAML) via Astro Content Collections + Pages CMS. Voir [docs/plans/2026-03-07-cms-migration-design.md](/Users/codex/Desktop/WEBDEV/PERINADE/docs/plans/2026-03-07-cms-migration-design.md).
 
 ## Operating Preferences
 
@@ -37,12 +38,13 @@
 ## Coding and Editing Rules
 
 - Never add business or page-copy text directly to shared components under `src/components/sections`, `src/components/shop`, `src/components/domaine`, or `src/components/visits`.
-- Put visible content in locale data files under `src/data/`.
-- Use these page-to-data mappings:
-  - Home: `src/data/site-fr.ts`, `src/data/site-en.ts`, `src/data/site-es.ts`
-  - Domaine: `src/data/domaine-fr.ts`, `src/data/domaine-en.ts`, `src/data/domaine-es.ts`
-  - Visites: `src/data/visits-fr.ts`, `src/data/visits-en.ts`, `src/data/visits-es.ts`
-  - Boutique: `src/data/shop-fr.ts`, `src/data/shop-en.ts`, `src/data/shop-es.ts`
+- Put visible content in locale data files. Current source of truth is `src/data/`; after each migration phase, the source shifts to `content/{section}/{locale}.yaml`.
+- Use these page-to-data mappings (current state — `src/data/`; will shift to `content/` per phase):
+  - Home: `src/data/site-{fr/en/es}.ts` → cible `content/site/{fr/en/es}.yaml`
+  - Domaine: `src/data/domaine-{fr/en/es}.ts` → cible `content/domaine/{fr/en/es}.yaml`
+  - Visites: `src/data/visits-{fr/en/es}.ts` → cible `content/visits/{fr/en/es}.yaml`
+  - Actualités: `src/data/news-{fr/en/es}.ts` → cible `content/news/{fr/en/es}.yaml`
+  - Boutique: `src/data/shop-{fr/en/es}.ts` → **reste dans le code** (migration future Cloudflare D1/KV, pas dans le CMS)
 - If a new visible field is needed:
   1. update the matching type in `src/types/`
   2. add the field to all locale data files
@@ -66,6 +68,15 @@
   - no shared component gained hardcoded copy
   - localized routes, canonical paths, and alternate links still match locale expectations
 - If the change touches content structure, also verify the corresponding type definitions in `src/types/`.
+
+## Migration Pages CMS — Règles pendant la transition
+
+- Ne jamais mettre les données `shop-*.ts` dans le CMS (couplées Stripe → migration future D1/KV).
+- Ne jamais mettre le `theme` object de `visits-*.ts` dans le CMS (design config, pas éditorial).
+- Pendant une phase de migration, ne pas modifier les pages concernées par la phase en cours (risque de conflit Git).
+- Ne pas supprimer un fichier `src/data/*-{locale}.ts` avant d'avoir validé que son équivalent YAML fonctionne en build et en navigation sur les 3 locales.
+- Les images actuellement importées en TypeScript (`import heroImg from '../assets/...'`) doivent être déplacées vers `public/assets/` et référencées par string URL avant de migrer le contenu correspondant vers YAML.
+- Se référer au plan complet : [docs/plans/2026-03-07-cms-migration-design.md](/Users/codex/Desktop/WEBDEV/PERINADE/docs/plans/2026-03-07-cms-migration-design.md)
 
 ## Safety and Escalation
 

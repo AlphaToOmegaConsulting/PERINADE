@@ -159,7 +159,6 @@ export interface SiteData {
       fieldPhone: string;
       fieldMessage: string;
     };
-    formAction: LinkTarget;
     formSuccessMessage?: string;
     formErrorMessage?: string;
   };

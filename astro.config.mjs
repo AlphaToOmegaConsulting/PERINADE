@@ -1,7 +1,7 @@
 import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: "https://www.perinade.fr",
+  site: process.env.SITE_URL || "https://www.perinade.fr",
   server: {
     host: import.meta.env.DEV ? true : false
   },

@@ -3,20 +3,21 @@
 .ui-hover-underline,
 .ui-hover-arrow,
 .ui-status-animate {
-  will-change: transform, opacity, box-shadow, border-color;
+  will-change: transform, opacity, filter;
 }
 
 .ui-hover-lift {
+  filter: drop-shadow(0 0 0 transparent);
   transition:
     transform var(--motion-duration-md) var(--motion-ease-standard),
-    box-shadow var(--motion-duration-md) var(--motion-ease-standard),
+    filter var(--motion-duration-md) var(--motion-ease-standard),
     border-color var(--motion-duration-sm) var(--motion-ease-standard);
 }
 
 .ui-hover-lift:hover,
 .ui-hover-lift:focus-within {
   border-color: var(--motion-border-hover);
-  box-shadow: var(--motion-shadow-hover);
+  filter: drop-shadow(var(--motion-shadow-hover));
   transform: translateY(var(--motion-distance-md));
 }
 

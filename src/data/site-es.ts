@@ -215,7 +215,6 @@ export const siteEs: SiteData = {
       fieldPhone: "Teléfono",
       fieldMessage: "Mensaje"
     },
-    formAction: `mailto:${contactInfo.email}`,
     formSuccessMessage: "Mensaje listo. Por favor, revise su borrador de correo antes de enviar.",
     formErrorMessage: `No se pudo preparar el mensaje. Por favor, llámenos al ${contactInfo.phone}.`
   },

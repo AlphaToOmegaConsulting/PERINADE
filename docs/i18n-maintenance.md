@@ -356,6 +356,39 @@ Donc, aujourd'hui :
 
 ---
 
+## Migration en cours — Pages CMS
+
+Une migration progressive est planifiée pour faire passer les contenus éditoriaux de `src/data/*.ts` vers des fichiers YAML dans `content/`, éditables via **Pages CMS** (Git-based).
+
+### Ce qui change (progressivement)
+
+| Actuel | Cible | Statut |
+|---|---|---|
+| `src/data/site-{locale}.ts` | `content/site/{locale}.yaml` | Planifié |
+| `src/data/domaine-{locale}.ts` | `content/domaine/{locale}.yaml` | Planifié |
+| `src/data/visits-{locale}.ts` (éditorial) | `content/visits/{locale}.yaml` | Planifié |
+| `src/data/news-{locale}.ts` | `content/news/{locale}.yaml` | Planifié |
+| `src/i18n/ui.ts` | `content/ui/{locale}.yaml` | Planifié |
+| `src/i18n/contact.ts` | `content/contact.yaml` | Planifié |
+| `src/data/shop-{locale}.ts` | **reste dans le code** (D1/KV plus tard) | Non migré |
+
+### Ce qui ne change pas
+
+- `src/i18n/locales.ts` et `routes.ts` — logique de routing, reste dans le code
+- `src/types/` — définitions TypeScript, reste dans le code
+- `src/data/index.ts` — devient un loader de collections Astro
+- Workflow i18n : les 3 locales restent à mettre à jour manuellement
+
+### Pendant la migration
+
+- Les règles de modification restent les mêmes (mise à jour des 3 locales, pas de texte en dur dans les composants)
+- Pour chaque section migrée, le fichier source de vérité bascule de `src/data/*.ts` vers `content/*.yaml`
+- Ne pas supprimer les anciens fichiers `.ts` avant d'avoir validé le YAML en build complet
+
+Plan détaillé : [docs/plans/2026-03-07-cms-migration-design.md](/Users/codex/Desktop/WEBDEV/PERINADE/docs/plans/2026-03-07-cms-migration-design.md)
+
+---
+
 ## Fichiers utiles
 
 - Loader central : [src/data/index.ts](/Users/codex/Desktop/WEBDEV/PERINADE/src/data/index.ts)
