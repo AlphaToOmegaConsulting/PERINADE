@@ -12,6 +12,7 @@ import ShopFaq from "../components/shop/ShopFaq.astro";
 import CartPopup from "../components/shop/CartPopup.astro";
 import { getShopData, getSiteData, getVins, getCoffrets } from "../data/index";
 import { getUiStrings } from "../i18n/ui";
+import { parsePriceToDecimal } from "../utils/price";
 
 const locale = "fr";
 const [site, shopPage, vins, coffretsCollection, ui] = await Promise.all([
@@ -56,12 +57,6 @@ const alternates = [
   { locale: "es", href: "/es/tienda" }
 ];
 
-const parsePriceToNumber = (value: string): string => {
-  const normalized = value.replace(",", ".").replace(/[^0-9.]/g, "");
-  const [integer = "0", decimal = "00"] = normalized.split(".");
-  return `${integer}.${decimal.padEnd(2, "0").slice(0, 2)}`;
-};
-
 const jsonLd = JSON.stringify([
   {
     "@context": "https://schema.org",
@@ -81,7 +76,7 @@ const jsonLd = JSON.stringify([
         "category": product.meta,
         "offers": {
           "@type": "Offer",
-          "price": parsePriceToNumber(product.price),
+          "price": parsePriceToDecimal(product.price),
           "priceCurrency": "EUR",
           "availability": "https://schema.org/InStock",
           "priceValidUntil": "2026-12-31",
