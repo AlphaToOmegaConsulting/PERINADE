@@ -8,12 +8,6 @@ export const localeLabels: Record<Locale, string> = {
   es: "Español"
 };
 
-export const localeHtmlLang: Record<Locale, string> = {
-  fr: "fr",
-  en: "en",
-  es: "es"
-};
-
 export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }

@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import type { Locale } from "../i18n/locales";
-import { defaultLocale, localeHtmlLang } from "../i18n/locales";
+import { defaultLocale, locales } from "../i18n/locales";
 import { getUiStrings } from "../i18n/ui";
 
 interface Alternate {
@@ -21,9 +22,11 @@ interface Props {
   heroImageUrl?: string;
   /** Serialised JSON-LD object (use JSON.stringify) */
   jsonLd?: string;
+  /** Empêche l'indexation de la page (confirmation, 404, etc.) */
+  noindex?: boolean;
 }
 
-const siteUrl = "https://www.perinade.fr";
+const siteUrl = Astro.site?.toString().replace(/\/$/, "") ?? "https://www.perinade.fr";
 const {
   title = "Domaine de la Périnade",
   description = "Domaine familial près de Carcassonne. Vins AOP Minervois et IGP Pays d'Oc depuis 1830.",
@@ -33,11 +36,12 @@ const {
   ogImage = "/assets/perinade/hero-vineyard.png",
   disableCursorOrb = false,
   heroImageUrl,
-  jsonLd
+  jsonLd,
+  noindex = false
 } = Astro.props;
 
-const lang = localeHtmlLang[locale];
-const ui = getUiStrings(locale);
+const lang = locale;
+const ui = await getUiStrings(locale);
 const canonical = canonicalPath ? `${siteUrl}${canonicalPath}` : undefined;
 
 const hreflangLinks = alternates.map((a) => ({
@@ -46,6 +50,7 @@ const hreflangLinks = alternates.map((a) => ({
 }));
 
 const xDefault = alternates.find((a) => a.locale === "fr");
+const safeJsonLd = jsonLd?.replace(/<\/script>/gi, "<\\/script>");
 ---
 
 <!doctype html>
@@ -72,9 +77,9 @@ const xDefault = alternates.find((a) => a.locale === "fr");
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content={lang} />
-    {locale !== "fr" && <meta property="og:locale:alternate" content="fr" />}
-    {locale !== "en" && <meta property="og:locale:alternate" content="en" />}
-    {locale !== "es" && <meta property="og:locale:alternate" content="es" />}
+    {locales.filter((l) => l !== locale).map((l) => (
+      <meta property="og:locale:alternate" content={l} />
+    ))}
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={`${siteUrl}${ogImage}`} />
     <meta property="og:site_name" content="Domaine de la Périnade" />
@@ -88,8 +93,12 @@ const xDefault = alternates.find((a) => a.locale === "fr");
     <link rel="icon" type="image/png" href="/assets/perinade/logo.png" />
     <link rel="apple-touch-icon" href="/assets/perinade/logo.webp" />
 
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
     <!-- Structured data -->
-    {jsonLd && <script is:inline type="application/ld+json" set:html={jsonLd} />}
+    {safeJsonLd && <script is:inline type="application/ld+json" set:html={safeJsonLd} />}
+
+    <ClientRouter />
   </head>
   <body data-disable-cursor-orb={disableCursorOrb ? "true" : undefined}>
     <a href="#main-content" class="skip-link">{ui.skipToContent}</a>
