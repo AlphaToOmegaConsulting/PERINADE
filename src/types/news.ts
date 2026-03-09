@@ -41,7 +41,7 @@ export interface NewsPageData {
   };
   hero: {
     eyebrow: string;
-    titleLines: [string, string];
+    titleLines: string[];
     lead: string;
     primaryCta: {
       label: string;
@@ -83,7 +83,7 @@ export interface NewsPageData {
   };
   visitCta: {
     eyebrow: string;
-    titleLines: [string, string];
+    titleLines: string[];
     body: string;
     ctaLabel: string;
     ctaHref: string;

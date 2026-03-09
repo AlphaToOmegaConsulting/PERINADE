@@ -1,9 +1,9 @@
 ---
-import type { ShopPageData } from "../../types/shop";
+import type { ShopPageData, ShopProduct } from "../../types/shop";
 import ProductCard from "../ui/surfaces/ProductCard.astro";
 
 interface Props {
-  productGrid: ShopPageData["productGrid"];
+  productGrid: ShopPageData["productGrid"] & { products: ShopProduct[] };
 }
 
 const { productGrid } = Astro.props;

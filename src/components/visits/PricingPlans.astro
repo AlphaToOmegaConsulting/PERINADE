@@ -1,9 +1,9 @@
 ---
-import type { VisitPageData } from "../../types/visits";
+import type { VisitPageData, PricingFeatureGroup } from "../../types/visits";
 import PricingSection from "../patterns/PricingSection.astro";
 
 interface Props {
-  pricing: VisitPageData["pricing"];
+  pricing: VisitPageData["pricing"] & { plans: PricingFeatureGroup[] };
 }
 
 const { pricing } = Astro.props;

@@ -206,7 +206,6 @@ export interface FinalCtaLayout {
 }
 
 export interface VisitPageData {
-  theme: VisitThemeTokens;
   seo: {
     title: string;
     description: string;
@@ -249,7 +248,6 @@ export interface VisitPageData {
     title: string;
     body: string;
     layout: PricingLayout;
-    plans: PricingFeatureGroup[];
     meta: string[];
   };
   access: {

@@ -36,7 +36,6 @@ export interface ShopProductGridData {
   title: string;
   previousLabel: string;
   nextLabel: string;
-  products: ShopProduct[];
 }
 
 export interface ShopSelectionItem {

@@ -1,10 +1,10 @@
 ---
-import type { VisitPageData } from "../../types/visits";
+import type { VisitPageData, PricingFeatureGroup } from "../../types/visits";
 import SectionHeading from "../ui/SectionHeading.astro";
 import PricingCard from "../ui/surfaces/PricingCard.astro";
 
 interface Props {
-  pricing: VisitPageData["pricing"];
+  pricing: VisitPageData["pricing"] & { plans: PricingFeatureGroup[] };
 }
 
 const { pricing } = Astro.props;

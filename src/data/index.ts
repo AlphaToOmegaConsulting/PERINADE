@@ -1,6 +1,7 @@
 /**
  * Central data loader — resolves locale-specific content at build time.
  */
+import { getCollection, getEntry } from "astro:content";
 import type { Locale } from "../i18n/locales";
 import type { SiteData } from "../types/site";
 import type { DomainePageData } from "../types/domaine";
@@ -8,52 +9,60 @@ import type { VisitPageData } from "../types/visits";
 import type { ShopPageData } from "../types/shop";
 import type { NewsPageData } from "../types/news";
 
-/* ── Site data ───────────────────────────────────────────── */
+/* ── Page data loaders ───────────────────────────────────── */
 
 export async function getSiteData(locale: Locale): Promise<SiteData> {
-  switch (locale) {
-    case "en": return (await import("./site-en")).siteEn;
-    case "es": return (await import("./site-es")).siteEs;
-    default:   return (await import("./site-fr")).siteFr;
-  }
+  const entry = await getEntry("site", locale);
+  if (!entry) throw new Error(`site entry not found for locale: ${locale}`);
+  return entry.data;
 }
-
-/* ── Domaine data ────────────────────────────────────────── */
 
 export async function getDomaineData(locale: Locale): Promise<DomainePageData> {
-  switch (locale) {
-    case "en": return (await import("./domaine-en")).domainePageEn;
-    case "es": return (await import("./domaine-es")).domainePageEs;
-    default:   return (await import("./domaine-fr")).domainePageFr;
-  }
+  const entry = await getEntry("domaine", locale);
+  if (!entry) throw new Error(`domaine entry not found for locale: ${locale}`);
+  return entry.data;
 }
-
-/* ── Visits data ─────────────────────────────────────────── */
 
 export async function getVisitsData(locale: Locale): Promise<VisitPageData> {
-  switch (locale) {
-    case "en": return (await import("./visits-en")).visitsPageEn;
-    case "es": return (await import("./visits-es")).visitsPageEs;
-    default:   return (await import("./visits-fr")).visitsPageFr;
-  }
+  const entry = await getEntry("visits", locale);
+  if (!entry) throw new Error(`visits entry not found for locale: ${locale}`);
+  return entry.data;
 }
-
-/* ── Shop data ───────────────────────────────────────────── */
 
 export async function getShopData(locale: Locale): Promise<ShopPageData> {
-  switch (locale) {
-    case "en": return (await import("./shop-en")).shopPageEn;
-    case "es": return (await import("./shop-es")).shopPageEs;
-    default:   return (await import("./shop-fr")).shopPageFr;
-  }
+  const entry = await getEntry("shop", locale);
+  if (!entry) throw new Error(`shop entry not found for locale: ${locale}`);
+  return entry.data;
 }
 
-/* ── News data ───────────────────────────────────────────── */
-
 export async function getNewsData(locale: Locale): Promise<NewsPageData> {
-  switch (locale) {
-    case "en": return (await import("./news-en")).newsPageEn;
-    case "es": return (await import("./news-es")).newsPageEs;
-    default:   return (await import("./news-fr")).newsPageFr;
-  }
+  const entry = await getEntry("news", locale);
+  if (!entry) throw new Error(`news entry not found for locale: ${locale}`);
+  return entry.data;
+}
+
+/* ── Content Collections ─────────────────────────────────── */
+
+/** Retourne les coffrets triés par ordre pour la locale donnée. */
+export async function getCoffrets(locale: Locale) {
+  const entries = await getCollection("coffrets", (e) =>
+    e.id.endsWith(`.${locale}.yaml`)
+  );
+  return entries.sort((a, b) => a.data.ordre - b.data.ordre);
+}
+
+/** Retourne les vins triés par ordre pour la locale donnée. */
+export async function getVins(locale: Locale) {
+  const entries = await getCollection("vins", (e) =>
+    e.id.endsWith(`.${locale}.yaml`)
+  );
+  return entries.sort((a, b) => a.data.ordre - b.data.ordre);
+}
+
+/** Retourne les visites triées par ordre pour la locale donnée. */
+export async function getVisites(locale: Locale) {
+  const entries = await getCollection("visites", (e) =>
+    e.id.endsWith(`.${locale}.yaml`)
+  );
+  return entries.sort((a, b) => a.data.ordre - b.data.ordre);
 }
