@@ -11,14 +11,30 @@ import TrustBar from "../components/visits/TrustBar.astro";
 import ExtendedEscape from "../components/visits/ExtendedEscape.astro";
 import Footer from "../components/sections/Footer.astro";
 import Header from "../components/sections/Header.astro";
-import { getSiteData, getVisitsData } from "../data/index";
+import { getSiteData, getVisitsData, getVisites } from "../data/index";
 import { buildVisitsThemeStyle } from "../utils/visits-theme";
+import { visitsTheme } from "../config/visits-theme-config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const locale = "fr";
-const site = await getSiteData(locale);
-const visitsPage = await getVisitsData(locale);
-const visitsThemeStyle = buildVisitsThemeStyle(visitsPage.theme);
+const [site, visitsPage, visites] = await Promise.all([
+  getSiteData(locale),
+  getVisitsData(locale),
+  getVisites(locale),
+]);
+const visitsThemeStyle = buildVisitsThemeStyle(visitsTheme);
+const mappedPlans = visites.map((visite) => ({
+  title: visite.data.titre,
+  subtitle: visite.data.sousTitre,
+  price: `${visite.data.prix} €`,
+  perLabel: visite.data.perLabel,
+  features: visite.data.inclus,
+  ctaLabel: visitsPage.booking.config.ctaLabel,
+  ctaHref: visitsPage.booking.config.ctaHref,
+  isHighlighted: visite.data.highlighted,
+  badge: visite.data.badge,
+}));
+const pricing = { ...visitsPage.pricing, plans: mappedPlans };
 
 const alternates = [
   { locale: "fr", href: "/visites" },
@@ -153,7 +169,7 @@ const jsonLd = JSON.stringify({
     <ExperienceTimeline timeline={visitsPage.timeline} />
     <WinesShowcase wines={visitsPage.wines} />
     <PairingAddon pairing={visitsPage.pairing} />
-    <PricingPlans pricing={visitsPage.pricing} />
+    <PricingPlans pricing={pricing} />
     <AccessSection access={visitsPage.access} />
     <ExtendedEscape escape={visitsPage.escape} />
     <BookingSection booking={visitsPage.booking} />
