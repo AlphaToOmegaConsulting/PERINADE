@@ -3,10 +3,14 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/sections/Header.astro";
 import Footer from "../../components/sections/Footer.astro";
 import { getShopData, getSiteData } from "../../data/index";
+import { getContactInfo } from "../../i18n/contact";
 
 const locale = "es";
-const site = await getSiteData(locale);
-const shopPage = await getShopData(locale);
+const [site, shopPage, contact] = await Promise.all([
+  getSiteData(locale),
+  getShopData(locale),
+  getContactInfo(),
+]);
 const confirmation = shopPage.confirmationPage;
 const sessionId = Astro.url.searchParams.get("session_id") ?? "";
 
@@ -23,6 +27,7 @@ const alternates = [
   locale={locale}
   canonicalPath="/es/confirmacion"
   alternates={alternates}
+  noindex={true}
 >
   <Header
     nav={site.nav}
@@ -65,12 +70,12 @@ const alternates = [
             <a href={`mailto:${confirmation.support.emailLabel}`}>{confirmation.support.emailLabel}</a>
           </p>
           <p>
-            <strong>Teléfono:</strong>{" "}
-            <a href="tel:+33468XXXXXX">{confirmation.support.phoneLabel}</a>
+            <strong>Telefono:</strong>{" "}
+            <a href={contact.phoneTel}>{confirmation.support.phoneLabel}</a>
           </p>
         </section>
 
-        <nav class="confirmation-actions" aria-label="Acciones de confirmación">
+        <nav class="confirmation-actions" aria-label="Acciones de confirmacion">
           <a href="/es/tienda" class="confirmation-actions__primary">{confirmation.actions.backShopLabel}</a>
           <a href="/es" class="confirmation-actions__secondary">{confirmation.actions.backHomeLabel}</a>
         </nav>

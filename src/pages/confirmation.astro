@@ -3,10 +3,14 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/sections/Header.astro";
 import Footer from "../components/sections/Footer.astro";
 import { getShopData, getSiteData } from "../data/index";
+import { getContactInfo } from "../i18n/contact";
 
 const locale = "fr";
-const site = await getSiteData(locale);
-const shopPage = await getShopData(locale);
+const [site, shopPage, contact] = await Promise.all([
+  getSiteData(locale),
+  getShopData(locale),
+  getContactInfo(),
+]);
 const confirmation = shopPage.confirmationPage;
 const sessionId = Astro.url.searchParams.get("session_id") ?? "";
 
@@ -23,6 +27,7 @@ const alternates = [
   locale={locale}
   canonicalPath="/confirmation"
   alternates={alternates}
+  noindex={true}
 >
   <Header
     nav={site.nav}
@@ -66,7 +71,7 @@ const alternates = [
           </p>
           <p>
             <strong>Téléphone :</strong>{" "}
-            <a href="tel:+33468XXXXXX">{confirmation.support.phoneLabel}</a>
+            <a href={contact.phoneTel}>{confirmation.support.phoneLabel}</a>
           </p>
         </section>
 
