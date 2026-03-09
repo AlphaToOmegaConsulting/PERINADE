@@ -1,0 +1,354 @@
+- generic [ref=e1]:
+  - link "Aller au contenu" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - navigation "Navigation principale" [ref=e4]:
+      - link "Accueil" [ref=e5] [cursor=pointer]:
+        - /url: /
+      - button "Fermer le menu" [expanded] [ref=e408]:
+        - generic [ref=e10]: Fermer le menu
+    - generic [ref=e411]:
+      - link "Visites" [active] [ref=e412] [cursor=pointer]:
+        - /url: /visites
+      - link "Boutique" [ref=e413] [cursor=pointer]:
+        - /url: /boutique
+      - link "Le Domaine" [ref=e414] [cursor=pointer]:
+        - /url: /domaine
+      - link "Actualités" [ref=e415] [cursor=pointer]:
+        - /url: /actualites
+      - link "Contact" [ref=e416] [cursor=pointer]:
+        - /url: /#contact
+      - generic "Langue" [ref=e417]:
+        - link "FR" [ref=e418] [cursor=pointer]:
+          - /url: /
+        - link "EN" [ref=e419] [cursor=pointer]:
+          - /url: /en
+        - link "ES" [ref=e420] [cursor=pointer]:
+          - /url: /es
+      - link "Réserver une visite" [ref=e421] [cursor=pointer]:
+        - /url: /visites#booking
+        - generic [ref=e422]: Réserver une visite
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - paragraph [ref=e36]: Près de Carcassonne
+        - heading "Domaine de la Périnade" [level=1] [ref=e37]:
+          - generic [ref=e38]: Domaine
+          - generic [ref=e39]: de la
+          - generic [ref=e40]: Périnade
+        - paragraph [ref=e41]: Au cœur du Languedoc, notre domaine familial vous ouvre ses portes pour une parenthèse authentique entre vignes, caveau et dégustation. Découvrez des cuvées de caractère, façonnées avec passion et respect du terroir.
+        - link "Réserver une visite" [ref=e42] [cursor=pointer]:
+          - /url: /visites#booking
+          - generic [ref=e43]: Réserver une visite
+        - list "Informations principales" [ref=e44]:
+          - listitem [ref=e45]: Sur rendez-vous
+          - listitem [ref=e46]: Domaine familial
+          - listitem [ref=e47]: Depuis 1830
+      - generic:
+        - generic:
+          - generic:
+            - link "Bouteilles et caveau du domaine Dégustation Visite du Caveau":
+              - /url: "#experience"
+              - img "Bouteilles et caveau du domaine"
+              - generic [ref=e48] [cursor=pointer]:
+                - paragraph: Dégustation
+                - heading "Visite du Caveau" [level=2]
+            - link "Vue des vignes du domaine Terroir Balade dans les Vignes":
+              - /url: "#histoire"
+              - img "Vue des vignes du domaine"
+              - generic [ref=e51] [cursor=pointer]:
+                - paragraph: Terroir
+                - heading "Balade dans les Vignes" [level=2]
+            - link "Sélection de bouteilles du domaine Boutique Nos Cuvées d'Exception":
+              - /url: /boutique
+              - img "Sélection de bouteilles du domaine"
+              - generic [ref=e52] [cursor=pointer]:
+                - paragraph: Boutique
+                - heading "Nos Cuvées d'Exception" [level=2]
+            - img [ref=e56]
+            - img [ref=e59]
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - paragraph [ref=e64]: Pourquoi nous visiter
+        - heading "Trois raisons de venir" [level=2] [ref=e65]
+      - generic [ref=e66]:
+        - article [ref=e67]:
+          - img [ref=e70]
+          - heading "Un domaine familial" [level=3] [ref=e72]
+          - paragraph [ref=e73]: Depuis six générations, notre famille cultive avec passion un vignoble à taille humaine.
+        - article [ref=e74]:
+          - img [ref=e77]
+          - heading "Un terroir d'exception" [level=3] [ref=e79]
+          - paragraph [ref=e80]: Niché entre garrigue et collines, notre vignoble bénéficie d'un microclimat unique.
+        - article [ref=e81]:
+          - img [ref=e84]
+          - heading "Une dégustation intime" [level=3] [ref=e86]
+          - paragraph [ref=e87]: Pas de visite de masse ici. Nous vous accueillons personnellement dans un cadre chaleureux.
+    - generic [ref=e90]:
+      - generic [ref=e91]:
+        - paragraph [ref=e92]: Visite
+        - heading "Vivez l'expérience Périnade" [level=2] [ref=e93]
+        - paragraph [ref=e94]: Une visite guidée du domaine suivie d'une dégustation commentée de nos cuvées, dans un cadre authentique et chaleureux.
+      - generic [ref=e95]:
+        - article [ref=e96]:
+          - img [ref=e99]
+          - paragraph [ref=e102]: Durée
+          - paragraph [ref=e103]: 1h30 environ
+        - article [ref=e104]:
+          - img [ref=e107]
+          - paragraph [ref=e109]: Groupe
+          - paragraph [ref=e110]: 2 à 10 personnes
+        - article [ref=e111]:
+          - img [ref=e114]
+          - paragraph [ref=e117]: Langues
+          - paragraph [ref=e118]: Français, anglais, espagnol
+        - article [ref=e119]:
+          - img [ref=e122]
+          - paragraph [ref=e125]: Lieu
+          - paragraph [ref=e126]: Près de Carcassonne
+        - article [ref=e127]:
+          - img [ref=e130]
+          - paragraph [ref=e133]: Tarif
+          - paragraph [ref=e134]: 15 € / personne
+      - generic [ref=e135]:
+        - link "Réserver une visite" [ref=e136] [cursor=pointer]:
+          - /url: /visites#booking
+          - generic [ref=e137]: Réserver une visite
+        - paragraph [ref=e138]: Sur rendez-vous uniquement · Parking gratuit · Accès facile depuis Carcassonne
+    - generic [ref=e140]:
+      - generic [ref=e143]:
+        - paragraph [ref=e144]: Notre univers
+        - heading "Galerie du Domaine" [level=2] [ref=e145]
+      - generic [ref=e147]:
+        - figure [ref=e148]:
+          - img "Vue du vignoble au coucher du soleil" [ref=e149]
+        - figure [ref=e150]:
+          - img "Caveau et dégustation" [ref=e151]
+        - figure [ref=e152]:
+          - img "Détail d'une vigne du domaine" [ref=e153]
+    - generic [ref=e155]:
+      - generic [ref=e156]:
+        - paragraph [ref=e157]: Témoignages
+        - heading "Ce qu'ils en disent" [level=2] [ref=e158]
+      - generic [ref=e159]:
+        - article [ref=e160]:
+          - generic [ref=e161]:
+            - generic [ref=e162]: ★
+            - generic [ref=e163]: ★
+            - generic [ref=e164]: ★
+            - generic [ref=e165]: ★
+            - generic [ref=e166]: ★
+          - paragraph [ref=e167]: “Un accueil exceptionnel dans un cadre magnifique. La dégustation était passionnante et les vins délicieux. Nous reviendrons !”
+          - paragraph [ref=e168]:
+            - strong [ref=e169]: Marie & Jean-Pierre
+            - text: — Toulouse
+          - text: "99"
+        - article [ref=e170]:
+          - generic [ref=e171]:
+            - generic [ref=e172]: ★
+            - generic [ref=e173]: ★
+            - generic [ref=e174]: ★
+            - generic [ref=e175]: ★
+            - generic [ref=e176]: ★
+          - paragraph [ref=e177]: “Un joyau caché près de Carcassonne. La famille a été incroyablement accueillante et les vins remarquables. Une visite incontournable.”
+          - paragraph [ref=e178]:
+            - strong [ref=e179]: Sarah T.
+            - text: — London, UK
+          - text: "99"
+        - article [ref=e180]:
+          - generic [ref=e181]:
+            - generic [ref=e182]: ★
+            - generic [ref=e183]: ★
+            - generic [ref=e184]: ★
+            - generic [ref=e185]: ★
+            - generic [ref=e186]: ★
+          - paragraph [ref=e187]: “On ressent immédiatement la passion et le savoir-faire familial. Les vins sont sincères et le domaine est superbe. Coup de cœur.”
+          - paragraph [ref=e188]:
+            - strong [ref=e189]: Philippe D.
+            - text: — Paris
+          - text: "99"
+      - generic [ref=e190]:
+        - paragraph [ref=e191]: Vu dans
+        - generic [ref=e192]:
+          - generic [ref=e193]: Le Figaro Vin
+          - generic [ref=e194]: Revue du Vin
+          - generic [ref=e195]: Decanter
+          - generic [ref=e196]: Wine Spectator
+    - generic [ref=e199]:
+      - img "Domaine de la Périnade" [ref=e201]
+      - generic [ref=e202]:
+        - paragraph [ref=e203]: Notre histoire
+        - heading "Trois générations de passion" [level=2] [ref=e204]
+        - paragraph [ref=e205]: Fondé en 1830, le Domaine de la Périnade est une aventure familiale née de l'amour du terroir languedocien. Sur ces terres baignées de soleil, entre garrigue et collines, nous cultivons nos vignes dans le respect des traditions et avec une attention particulière portée à l'environnement.
+        - paragraph [ref=e206]: Aujourd'hui, c'est la troisième génération qui perpétue ce savoir-faire, alliant méthodes ancestrales et vinification moderne pour produire des vins qui expriment la singularité de notre terroir.
+        - link "Découvrir l'histoire complète →" [ref=e207] [cursor=pointer]:
+          - /url: /domaine
+          - generic [ref=e208]: Découvrir l'histoire complète →
+    - generic [ref=e210]:
+      - generic [ref=e211]:
+        - generic [ref=e212]:
+          - paragraph [ref=e213]: Nos vins
+          - heading "Cuvées sélectionnées" [level=2] [ref=e214]
+        - link "Voir toute la boutique →" [ref=e215] [cursor=pointer]:
+          - /url: /boutique
+          - generic [ref=e216]: Voir toute la boutique →
+      - generic [ref=e217]:
+        - article [ref=e218]:
+          - img "Cuvée du Domaine" [ref=e220]
+          - generic [ref=e221]:
+            - paragraph [ref=e222]: Rouge · AOP Minervois
+            - heading "Cuvée du Domaine" [level=3] [ref=e223]
+            - paragraph [ref=e224]: Un rouge soyeux aux notes de fruits noirs, de garrigue et d'épices douces, élevé pour accompagner les belles tables.
+            - link "Voir le vin →" [ref=e225] [cursor=pointer]:
+              - /url: /boutique
+              - generic [ref=e226]: Voir le vin →
+        - article [ref=e227]:
+          - img "Blanc de Périnade" [ref=e229]
+          - generic [ref=e230]:
+            - paragraph [ref=e231]: Blanc · IGP Pays d'Oc
+            - heading "Blanc de Périnade" [level=3] [ref=e232]
+            - paragraph [ref=e233]: Une cuvée fraîche et florale, portée par les agrumes, la tension minérale et une finale nette.
+            - link "Voir le vin →" [ref=e234] [cursor=pointer]:
+              - /url: /boutique
+              - generic [ref=e235]: Voir le vin →
+        - article [ref=e236]:
+          - img "Rosé d'Été" [ref=e238]
+          - generic [ref=e239]:
+            - paragraph [ref=e240]: Rosé · IGP Pays d'Oc
+            - heading "Rosé d'Été" [level=3] [ref=e241]
+            - paragraph [ref=e242]: Un rosé lumineux aux accents de pêche blanche et de fraise, pensé pour les repas d'été et l'apéritif.
+            - link "Voir le vin →" [ref=e243] [cursor=pointer]:
+              - /url: /boutique
+              - generic [ref=e244]: Voir le vin →
+        - article [ref=e245]:
+          - img "Grande Réserve" [ref=e247]
+          - generic [ref=e248]:
+            - paragraph [ref=e249]: Rouge · AOP Minervois
+            - heading "Grande Réserve" [level=3] [ref=e250]
+            - paragraph [ref=e251]: Une cuvée de caractère élevée en fût, ample et persistante, avec des tanins fondus et une matière profonde.
+            - link "Voir le vin →" [ref=e252] [cursor=pointer]:
+              - /url: /boutique
+              - generic [ref=e253]: Voir le vin →
+    - generic [ref=e255]:
+      - generic [ref=e256]:
+        - paragraph [ref=e257]: Contactez-nous
+        - heading "Parlons de votre prochaine visite" [level=2] [ref=e258]
+        - paragraph [ref=e259]: Vous souhaitez réserver une visite, passer commande ou simplement en savoir plus sur nos vins ? N'hésitez pas à nous contacter.
+        - list [ref=e260]:
+          - listitem [ref=e261]:
+            - img [ref=e264]
+            - generic [ref=e266]:
+              - strong [ref=e267]: Téléphone
+              - generic [ref=e268]: +33 4 68 XX XX XX
+          - listitem [ref=e269]:
+            - img [ref=e272]
+            - generic [ref=e275]:
+              - strong [ref=e276]: E-mail
+              - generic [ref=e277]: contact@perinade.fr
+          - listitem [ref=e278]:
+            - img [ref=e281]
+            - generic [ref=e284]:
+              - strong [ref=e285]: Site
+              - generic [ref=e286]: www.perinade.fr
+          - listitem [ref=e287]:
+            - img [ref=e290]
+            - generic [ref=e293]:
+              - strong [ref=e294]: Adresse
+              - generic [ref=e295]: Près de Carcassonne, Aude (11)
+      - generic [ref=e296]:
+        - generic [ref=e297]:
+          - generic [ref=e298]:
+            - generic [ref=e299]: Prénom *
+            - textbox "Prénom *" [ref=e300]
+          - generic [ref=e302]:
+            - generic [ref=e303]: Nom *
+            - textbox "Nom *" [ref=e304]
+          - generic [ref=e306]:
+            - generic [ref=e307]: E-mail *
+            - textbox "E-mail *" [ref=e308]
+          - generic [ref=e310]:
+            - generic [ref=e311]: Téléphone *
+            - textbox "Téléphone *" [ref=e312]
+        - generic [ref=e314]:
+          - generic [ref=e315]: Sujet *
+          - textbox "Sujet *" [ref=e316]
+        - generic [ref=e318]:
+          - generic [ref=e319]: Message *
+          - textbox "Message *" [ref=e320]
+        - button "Envoyer le message" [ref=e324] [cursor=pointer]:
+          - generic [ref=e325]: Envoyer le message
+        - paragraph [ref=e326]
+  - contentinfo [ref=e327]:
+    - generic [ref=e328]:
+      - generic [ref=e329]:
+        - heading "Périnade" [level=2] [ref=e330]
+        - paragraph [ref=e331]: Domaine familial près de Carcassonne. Vins authentiques du Languedoc depuis 1830.
+      - generic [ref=e332]:
+        - heading "Navigation" [level=3] [ref=e333]
+        - list [ref=e334]:
+          - listitem [ref=e335]:
+            - link "Accueil" [ref=e336] [cursor=pointer]:
+              - /url: /
+          - listitem [ref=e337]:
+            - link "Visites" [ref=e338] [cursor=pointer]:
+              - /url: /visites
+          - listitem [ref=e339]:
+            - link "Boutique" [ref=e340] [cursor=pointer]:
+              - /url: /boutique
+          - listitem [ref=e341]:
+            - link "Le Domaine" [ref=e342] [cursor=pointer]:
+              - /url: /domaine
+          - listitem [ref=e343]:
+            - link "Actualités" [ref=e344] [cursor=pointer]:
+              - /url: /#contact
+          - listitem [ref=e345]:
+            - link "Contact" [ref=e346] [cursor=pointer]:
+              - /url: /#contact
+      - generic [ref=e347]:
+        - heading "Informations" [level=3] [ref=e348]
+        - list [ref=e349]:
+          - listitem [ref=e350]:
+            - link "Mentions légales" [ref=e351] [cursor=pointer]:
+              - /url: /#contact
+          - listitem [ref=e352]:
+            - link "Politique de confidentialité" [ref=e353] [cursor=pointer]:
+              - /url: /#contact
+          - listitem [ref=e354]:
+            - link "Conditions de vente" [ref=e355] [cursor=pointer]:
+              - /url: /#contact
+          - listitem [ref=e356]:
+            - link "Presse" [ref=e357] [cursor=pointer]:
+              - /url: /#contact
+      - generic [ref=e358]:
+        - heading "Newsletter" [level=3] [ref=e359]
+        - paragraph [ref=e360]: Recevez nos actualités et offres exclusives.
+        - paragraph [ref=e361]: Contenu réservé aux personnes majeures.
+        - generic [ref=e362]:
+          - textbox "votre@email.fr" [ref=e363]
+          - button "OK" [ref=e364] [cursor=pointer]:
+            - generic [ref=e365]: OK
+        - generic [ref=e366]:
+          - link "Instagram" [ref=e367] [cursor=pointer]:
+            - /url: https://www.instagram.com/
+            - img [ref=e370]
+          - link "Facebook" [ref=e374] [cursor=pointer]:
+            - /url: https://www.facebook.com/
+            - img [ref=e377]
+    - generic [ref=e379]:
+      - paragraph [ref=e380]: © 2026 Domaine de la Périnade. Tous droits réservés.
+      - paragraph [ref=e381]: L'abus d'alcool est dangereux pour la santé. À consommer avec modération.
+  - generic [ref=e384]:
+    - button "Menu" [ref=e385]:
+      - img [ref=e387]
+      - generic: Menu
+    - button "Inspect" [ref=e391]:
+      - img [ref=e393]
+      - generic: Inspect
+    - button "Audit" [ref=e395]:
+      - generic [ref=e396]:
+        - img [ref=e397]
+        - img [ref=e423]
+      - generic: Audit
+    - button "Settings" [ref=e403]:
+      - img [ref=e405]
+      - generic: Settings
