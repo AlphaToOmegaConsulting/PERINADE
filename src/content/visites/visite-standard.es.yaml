@@ -1,0 +1,23 @@
+titre: "Visita Estándar"
+sousTitre: "La experiencia esencial"
+prix: 15
+perLabel: "/ persona"
+dureeMinutes: 90
+capaciteMin: 1
+capaciteMax: 12
+langues:
+  - "Francés"
+  - "Inglés"
+inclus:
+  - "Visita guiada de 1h30"
+  - "Paseo por los viñedos"
+  - "Recorrido por la bodega"
+  - "Degustación de 5 vinos de la finca"
+  - "Comentarios del enólogo"
+  - "Disponible en francés e inglés"
+horaires: "11:00 – 16:00"
+joursOuverts: "Todos los días"
+politiqueAnnulation: "Cancelación gratuita hasta 48h antes de la visita."
+highlighted: false
+ordre: 1
+locale: "es"

@@ -1,0 +1,16 @@
+nom: "Chardonnay"
+couleur: "Blanc"
+couleurTone: "Blanc"
+appellation: "IGP Pays d'Oc"
+millesime: 2023
+volume: 75
+prix: 14
+stock: "En stock"
+description: "Tropical fruit, lively acidity and a clean finish."
+badges:
+  - "White"
+image: "../../assets/perinade/shop/catalog/chardonnay.webp"
+imageAlt: "Chardonnay 2023 bottle"
+featured: false
+ordre: 4
+locale: "en"

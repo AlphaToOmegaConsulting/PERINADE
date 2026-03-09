@@ -1,0 +1,16 @@
+nom: "Édition limitée CRAZY HORSE PARIS"
+couleur: "Rosé"
+couleurTone: "Rosé"
+appellation: "IGP Pays d'Oc"
+volume: 75
+prix: 25
+stock: "Stock limité"
+description: "Édition spéciale aux notes de pêche blanche et d'agrumes."
+badges:
+  - "Édition limitée"
+  - "Rosé"
+image: "../../assets/perinade/shop/catalog/crazy_horse.webp"
+imageAlt: "Bouteille Édition limitée Crazy Horse Paris"
+featured: true
+ordre: 7
+locale: "fr"

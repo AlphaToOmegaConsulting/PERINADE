@@ -1,0 +1,17 @@
+nom: "Red Blend Les Frenchies"
+couleur: "Rouge"
+couleurTone: "Rouge"
+appellation: "IGP Pays d'Oc"
+millesime: 2023
+volume: 75
+prix: 29
+stock: "En stock"
+description: "Assemblage rouge fruité, non boisé, à la finale fraîche."
+badges:
+  - "Les Frenchies"
+  - "Rouge"
+image: "../../assets/perinade/shop/catalog/red_frenchies.webp"
+imageAlt: "Bouteille Red Blend Les Frenchies"
+featured: false
+ordre: 9
+locale: "fr"

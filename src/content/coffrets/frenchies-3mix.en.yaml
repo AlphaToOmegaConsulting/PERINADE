@@ -1,0 +1,14 @@
+nom: "Les Frenchies Cuvees — Mix Box of 3"
+meta: "No vintage · 3 × 75 cl"
+description: "Discovery bundle with one red, one rose and one white."
+prixLabel: "€79.00 incl. VAT"
+image: "../../assets/perinade/shop/catalog/frenchies_3mix.webp"
+imageAlt: "Les Frenchies Mix Box of 3 bundle"
+badges:
+  - "Bundle"
+  - "Les Frenchies"
+tone: "Bundle"
+ctaLabel: "Add to cart"
+ctaHref: "/en/shop#coffrets"
+ordre: 1
+locale: "en"

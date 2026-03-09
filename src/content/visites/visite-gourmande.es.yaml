@@ -1,0 +1,24 @@
+titre: "Visita Gourmet"
+sousTitre: "Visita + maridaje"
+prix: 25
+perLabel: "/ persona"
+dureeMinutes: 90
+capaciteMin: 1
+capaciteMax: 12
+langues:
+  - "Francés"
+  - "Inglés"
+inclus:
+  - "Todo lo incluido en Estándar"
+  - "Tabla de quesos y embutidos"
+  - "Selección artesanal local"
+  - "Tiempo de degustación ampliado"
+  - "Perfecto para parejas y grupos"
+  - "Disponible todos los días"
+horaires: "11:00 – 16:00"
+joursOuverts: "Todos los días"
+politiqueAnnulation: "Cancelación gratuita hasta 48h antes de la visita."
+highlighted: true
+badge: "Popular"
+ordre: 2
+locale: "es"

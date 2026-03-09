@@ -1,0 +1,16 @@
+nom: "Rosé Les Frenchies — Foulard Rouge"
+couleur: "Rosé"
+couleurTone: "Rosé"
+appellation: "IGP Pays d'Oc"
+volume: 75
+prix: 24
+stock: "En stock"
+description: "Rosé délicat et lumineux, au style frais et gourmand."
+badges:
+  - "Les Frenchies"
+  - "Rosé"
+image: "../../assets/perinade/shop/catalog/rose_frenchies.webp"
+imageAlt: "Bouteille Rosé Les Frenchies Foulard Rouge"
+featured: false
+ordre: 10
+locale: "fr"

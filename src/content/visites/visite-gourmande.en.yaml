@@ -1,0 +1,24 @@
+titre: "Gourmet Visit"
+sousTitre: "Visit + food pairing"
+prix: 25
+perLabel: "/ person"
+dureeMinutes: 90
+capaciteMin: 1
+capaciteMax: 12
+langues:
+  - "French"
+  - "English"
+inclus:
+  - "Everything in Standard"
+  - "Cheese & charcuterie board"
+  - "Local artisan selection"
+  - "Extended tasting time"
+  - "Perfect for couples & groups"
+  - "Available daily"
+horaires: "11:00 – 16:00"
+joursOuverts: "Daily"
+politiqueAnnulation: "Free cancellation up to 48h before the visit."
+highlighted: true
+badge: "Popular"
+ordre: 2
+locale: "en"

@@ -1,0 +1,16 @@
+nom: "Cuvée Renaissance Rosé"
+couleur: "Rosé"
+couleurTone: "Rosé"
+appellation: "IGP Pays d'Oc"
+millesime: 2022
+volume: 75
+prix: 14.4
+stock: "En stock"
+description: "Pêche blanche et agrumes, avec une finale fraîche et délicate."
+badges:
+  - "Rosé"
+image: "../../assets/perinade/shop/catalog/renaissance_75.webp"
+imageAlt: "Bouteille Cuvée Renaissance Rosé 2022"
+featured: true
+ordre: 2
+locale: "fr"

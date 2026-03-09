@@ -1,0 +1,16 @@
+nom: "CRAZY HORSE PARIS"
+couleur: "Rosé"
+couleurTone: "Rosé"
+appellation: "IGP Pays d'Oc"
+volume: 75
+prix: 25
+stock: "Stock limité"
+description: "Edición especial con notas de melocotón blanco y cítricos."
+badges:
+  - "Edición limitada"
+  - "Rosado"
+image: "../../assets/perinade/shop/catalog/crazy_horse.webp"
+imageAlt: "Botella edición limitada Crazy Horse Paris"
+featured: true
+ordre: 7
+locale: "es"

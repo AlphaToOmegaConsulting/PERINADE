@@ -1,0 +1,16 @@
+nom: "Les Arènes, Rouge"
+couleur: "Rouge"
+couleurTone: "Rouge"
+appellation: "AOP Minervois"
+millesime: 2023
+volume: 75
+prix: 15
+stock: "En stock"
+description: "Fruits rouges et réglisse, avec une bouche souple et persistante."
+badges:
+  - "Rouge"
+image: "../../assets/perinade/shop/catalog/arenes.webp"
+imageAlt: "Bouteille Les Arènes rouge"
+featured: false
+ordre: 1
+locale: "fr"

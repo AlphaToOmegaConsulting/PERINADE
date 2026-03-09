@@ -1,0 +1,14 @@
+nom: "Cuvées Les Frenchies — Mix Box of 3"
+meta: "Sans millésime · 3 × 75 cl"
+description: "Coffret découverte avec un rouge, un rosé et un blanc."
+prixLabel: "79,00 € TTC"
+image: "../../assets/perinade/shop/catalog/frenchies_3mix.webp"
+imageAlt: "Coffret Les Frenchies Mix Box of 3"
+badges:
+  - "Coffret"
+  - "Les Frenchies"
+tone: "Coffret"
+ctaLabel: "Ajouter au panier"
+ctaHref: "/boutique#coffrets"
+ordre: 1
+locale: "fr"

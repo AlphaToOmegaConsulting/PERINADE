@@ -1,0 +1,23 @@
+titre: "Standard Visit"
+sousTitre: "The essential experience"
+prix: 15
+perLabel: "/ person"
+dureeMinutes: 90
+capaciteMin: 1
+capaciteMax: 12
+langues:
+  - "French"
+  - "English"
+inclus:
+  - "1h30 guided visit"
+  - "Walk through the vines"
+  - "Cellar tour & winery"
+  - "Tasting of 5 estate wines"
+  - "Commentary by the winemaker"
+  - "French & English available"
+horaires: "11:00 – 16:00"
+joursOuverts: "Daily"
+politiqueAnnulation: "Free cancellation up to 48h before the visit."
+highlighted: false
+ordre: 1
+locale: "en"

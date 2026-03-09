@@ -1,0 +1,16 @@
+nom: "Viognier"
+couleur: "Blanc"
+couleurTone: "Blanc"
+appellation: "IGP Pays d'Oc"
+millesime: 2024
+volume: 75
+prix: 14
+stock: "En stock"
+description: "Agrumes et abricot, avec un équilibre entre rondeur et fraîcheur."
+badges:
+  - "Blanc"
+image: "../../assets/perinade/shop/catalog/viognier.webp"
+imageAlt: "Bouteille Viognier 2024"
+featured: false
+ordre: 6
+locale: "fr"

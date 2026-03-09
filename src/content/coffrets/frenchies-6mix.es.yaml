@@ -1,0 +1,14 @@
+nom: "Cuvées Les Frenchies — Mix Box of 6"
+meta: "Sin añada · 6 × 75 cl"
+description: "Lote completo de seis botellas para explorar la gama."
+prixLabel: "158,00 € IVA incl."
+image: "../../assets/perinade/shop/catalog/frenchies_6mix.webp"
+imageAlt: "Lote Les Frenchies Mix Box of 6"
+badges:
+  - "Lote"
+  - "Les Frenchies"
+tone: "Lote"
+ctaLabel: "Añadir al carrito"
+ctaHref: "/es/tienda#coffrets"
+ordre: 2
+locale: "es"

@@ -1,0 +1,16 @@
+nom: "Les Frenchies Rose — Red Scarf"
+couleur: "Rosé"
+couleurTone: "Rosé"
+appellation: "IGP Pays d'Oc"
+volume: 75
+prix: 24
+stock: "En stock"
+description: "Delicate rose style with a bright and lively profile."
+badges:
+  - "Les Frenchies"
+  - "Rose"
+image: "../../assets/perinade/shop/catalog/rose_frenchies.webp"
+imageAlt: "Les Frenchies Rose Red Scarf bottle"
+featured: false
+ordre: 10
+locale: "en"

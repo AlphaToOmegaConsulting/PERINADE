@@ -1,0 +1,14 @@
+nom: "Les Frenchies Cuvees — Mix Box of 6"
+meta: "No vintage · 6 × 75 cl"
+description: "Full bundle with six bottles to explore the range."
+prixLabel: "€158.00 incl. VAT"
+image: "../../assets/perinade/shop/catalog/frenchies_6mix.webp"
+imageAlt: "Les Frenchies Mix Box of 6 bundle"
+badges:
+  - "Bundle"
+  - "Les Frenchies"
+tone: "Bundle"
+ctaLabel: "Add to cart"
+ctaHref: "/en/shop#coffrets"
+ordre: 2
+locale: "en"

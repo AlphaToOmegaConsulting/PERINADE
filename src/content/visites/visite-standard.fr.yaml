@@ -1,0 +1,23 @@
+titre: "Visite standard"
+sousTitre: "L'expérience essentielle"
+prix: 15
+perLabel: "/ personne"
+dureeMinutes: 90
+capaciteMin: 1
+capaciteMax: 12
+langues:
+  - "Français"
+  - "Anglais"
+inclus:
+  - "Visite guidée de 1h30"
+  - "Promenade dans les vignes"
+  - "Visite du chai et de la cave"
+  - "Dégustation de 5 cuvées du domaine"
+  - "Commentaires par le vigneron"
+  - "Français et anglais disponibles"
+horaires: "11:00 – 16:00"
+joursOuverts: "Tous les jours"
+politiqueAnnulation: "Annulation gratuite jusqu'à 48h avant la visite."
+highlighted: false
+ordre: 1
+locale: "fr"

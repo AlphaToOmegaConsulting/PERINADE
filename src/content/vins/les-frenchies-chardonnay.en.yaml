@@ -1,0 +1,16 @@
+nom: "Les Frenchies Chardonnay"
+couleur: "Blanc"
+couleurTone: "Blanc"
+appellation: "IGP Pays d'Oc"
+volume: 75
+prix: 26
+stock: "En stock"
+description: "Full Chardonnay with a light oak touch and fine structure."
+badges:
+  - "Les Frenchies"
+  - "White"
+image: "../../assets/perinade/shop/catalog/chardo_frenchies.webp"
+imageAlt: "Les Frenchies Chardonnay bottle"
+featured: false
+ordre: 8
+locale: "en"

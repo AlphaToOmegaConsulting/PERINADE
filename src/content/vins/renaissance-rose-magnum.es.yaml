@@ -1,0 +1,17 @@
+nom: "Cuvée Renaissance Rosé Magnum"
+couleur: "Rosé"
+couleurTone: "Rosé"
+appellation: "IGP Pays d'Oc"
+millesime: 2024
+volume: 150
+prix: 33
+stock: "En stock"
+description: "Rosado afrutado y redondo con entrada fresca y elegante."
+badges:
+  - "Rosado"
+  - "Magnum"
+image: "../../assets/perinade/shop/catalog/renaissance_magnum.webp"
+imageAlt: "Magnum Cuvée Renaissance Rosé 2024"
+featured: false
+ordre: 3
+locale: "es"

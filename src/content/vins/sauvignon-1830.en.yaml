@@ -1,0 +1,16 @@
+nom: "Sauvignon Blanc Cuvee 1830"
+couleur: "Blanc"
+couleurTone: "Blanc"
+appellation: "IGP Pays d'Oc"
+volume: 75
+prix: 15
+stock: "En stock"
+description: "Cassis and grapefruit notes with a bright, expressive profile."
+badges:
+  - "White"
+  - "Cuvee 1830"
+image: "../../assets/perinade/shop/catalog/sauvignon.webp"
+imageAlt: "Sauvignon Blanc Cuvee 1830 bottle"
+featured: false
+ordre: 5
+locale: "en"

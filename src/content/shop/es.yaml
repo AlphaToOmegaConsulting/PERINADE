@@ -1,0 +1,139 @@
+seo:
+  title: "Comprar Vino Online | Tienda Domaine de la Périnade"
+  description: "Pida nuestros vinos de la finca online: tintos, blancos, rosados y ediciones limitadas. Entrega en 48-72 h en Francia."
+
+hero:
+  image: "../../assets/perinade/shop/img-1.png"
+  imageAlt: "Bodega con estanterías de botellas del dominio Minervois"
+  eyebrow: "Tienda en línea"
+  titleHtml: "Nuestros vinos,<br /><span>en su casa</span>"
+  body: "Descubra nuestras cuvées de la finca y colaboraciones de edición limitada. Envío gratuito a partir de 80 €."
+  primaryCta:
+    label: "Ver vinos"
+    href: "/es/tienda#produits"
+  secondaryCta:
+    label: "Ver lotes"
+    href: "/es/tienda#coffrets"
+  metaAriaLabel: "Información de entrega de la tienda"
+  metaItems:
+    - "Entrega en 48-72 h"
+    - "Pago seguro"
+    - "Devoluciones 14 días"
+
+compliance:
+  marketingBannerAriaLabel: "Información legal sobre alcohol"
+  marketingBannerTitle: "Información legal"
+  ageNotice: "Se prohíbe la venta de alcohol a menores de 18 años."
+  healthNotice: "El abuso de alcohol es peligroso para la salud. Consuma con moderación."
+  checkoutTitle: "Conformidad alcohol"
+  checkoutAdultOnlyNote: "Pedido reservado únicamente a personas adultas."
+  checkoutAcknowledgements:
+    age: "Certifico que tengo 18 años o más."
+    information: "Confirmo que he leído la información del pedido mostrada."
+  payOrderLabel: "Validar pedido (obligación de pago)"
+  payOrderHelp: "Esta acción implica un pedido con obligación de pago."
+  payOrderPendingLabel: "La finalización del pago está en preparación técnica."
+
+productGrid:
+  eyebrow: "Catálogo completo"
+  title: "Nuestras 12 cuvées disponibles"
+  previousLabel: "Productos anteriores"
+  nextLabel: "Productos siguientes"
+
+domainSelection:
+  eyebrow: "Colecciones"
+  title: "Selecciones de la finca"
+  items:
+    - icon: "shipping"
+      title: "Envío cuidado"
+      body: "48-72 h en Francia, embalaje isotérmico incluido"
+    - icon: "map"
+      title: "Zonas de entrega"
+      body: "Francia metropolitana, Europa bajo solicitud"
+    - icon: "return"
+      title: "Devoluciones"
+      body: "14 días tras recepción, reembolso completo"
+    - icon: "lock"
+      title: "Pago seguro"
+      body: "CB, Visa, Mastercard, conexión SSL"
+    - icon: "support"
+      title: "Soporte directo"
+      body: "Respuesta en 24 h al +33 4 68 XX XX XX"
+
+caseComposer:
+  backdropImage: "../../assets/perinade/shop/catalog/frenchies_6mix.webp"
+  crateImage: "../../assets/perinade/shop/catalog/frenchies_3mix.webp"
+  crateImageAlt: "Lote Les Frenchies"
+  eyebrow: "Cajas y lotes"
+  title: "Lotes Les Frenchies"
+  intro: "Encuentre nuestros lotes mix en una sección dedicada, ideales para regalar o descubrir toda la gama Les Frenchies."
+  offers:
+    - title: "Mix Box of 3"
+      lines:
+        - "1 tinto"
+        - "1 rosado"
+        - "1 blanco"
+      price: "79,00 € IVA incl."
+      details: "3 botellas"
+      ctaLabel: "Añadir al carrito"
+      ctaHref: "/es/tienda#coffrets"
+    - title: "Mix Box of 6"
+      lines:
+        - "2 tintos"
+        - "2 rosados"
+        - "2 blancos"
+      price: "158,00 € IVA incl."
+      details: "6 botellas"
+      ctaLabel: "Añadir al carrito"
+      ctaHref: "/es/tienda#coffrets"
+
+finalCta:
+  sectionAriaLabel: "Llamada a la acción de la tienda"
+  title: "Descubra nuestras cuvées"
+  body: "Añada sus vinos favoritos al carrito y complete su pedido en línea."
+  ctaLabel: "Ver vinos"
+  ctaHref: "/es/tienda#produits"
+
+faq:
+  eyebrow: "Preguntas frecuentes"
+  title: "Todo lo que debe saber antes de comprar"
+  items:
+    - question: "¿Cuáles son los plazos de entrega?"
+      answer: "Los pedidos se envían en 24h y se entregan en 48-72 h en Francia metropolitana. Embalaje isotérmico incluido en períodos de calor."
+    - question: "¿La entrega es gratuita?"
+      answer: "La entrega es gratuita a partir de 80 €. En caso contrario, los gastos dependen de su zona de entrega."
+    - question: "¿Puedo devolver mi pedido?"
+      answer: "Sí, dispone de 14 días tras la recepción. Las botellas deben permanecer intactas y sin abrir."
+    - question: "¿Cómo conservar los vinos tras la entrega?"
+      answer: "Conserve las botellas tumbadas en un lugar fresco, seco y protegido de la luz directa."
+    - question: "¿Entregan en el extranjero?"
+      answer: "Sí, bajo solicitud para algunos destinos europeos. Contáctenos antes de validar el pedido."
+    - question: "¿Cómo contactar con la finca?"
+      answer: "Por teléfono al +33 4 68 XX XX XX o por correo electrónico mediante el formulario de contacto del sitio."
+
+confirmationPage:
+  seo:
+    title: "Confirmación de pedido | Domaine de la Périnade"
+    description: "Su pago ha sido confirmado. Consulte el resumen y los próximos pasos de su pedido."
+  hero:
+    title: "Pago confirmado"
+    body: "Gracias por su pedido. Su pago se validó correctamente y nuestro equipo prepara ahora el envío."
+  status:
+    labelPaid: "Estado: pagado"
+    labelRefPrefix: "Referencia de pago"
+  nextSteps:
+    title: "Próximos pasos"
+    items:
+      - "Recibirá un correo de confirmación con el detalle del pedido."
+      - "El pedido se prepara en un plazo de 24 horas laborables."
+      - "Después, el envío se realiza en 48 a 72 horas en Francia metropolitana."
+  support:
+    title: "¿Necesita ayuda?"
+    body: "Nuestro equipo está disponible para cualquier duda sobre su pedido."
+    emailLabel: "contact@perinade.fr"
+    phoneLabel: "+33 4 68 XX XX XX"
+  actions:
+    backShopLabel: "Volver a la tienda"
+    backHomeLabel: "Volver al inicio"
+  legal:
+    moderationNotice: "El abuso de alcohol es peligroso para la salud. Consuma con moderación."

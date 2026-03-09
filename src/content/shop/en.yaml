@@ -1,0 +1,139 @@
+seo:
+  title: "Buy Wine Online | Domaine de la Périnade Shop"
+  description: "Order our estate wines online: reds, whites, rosés and limited editions. 48-72 h delivery in France."
+
+hero:
+  image: "../../assets/perinade/shop/img-1.png"
+  imageAlt: "Wine cellar with bottle shelves — Minervois estate"
+  eyebrow: "Online shop"
+  titleHtml: "Our wines,<br /><span>to your door</span>"
+  body: "Discover our estate wines and limited-edition collaborations. Free delivery from €80."
+  primaryCta:
+    label: "Browse wines"
+    href: "/en/shop#produits"
+  secondaryCta:
+    label: "View bundles"
+    href: "/en/shop#coffrets"
+  metaAriaLabel: "Shop delivery information"
+  metaItems:
+    - "48-72 h delivery"
+    - "Secure payment"
+    - "14-day returns"
+
+compliance:
+  marketingBannerAriaLabel: "Alcohol legal information"
+  marketingBannerTitle: "Legal information"
+  ageNotice: "The sale of alcohol to persons under 18 is prohibited."
+  healthNotice: "Alcohol abuse is dangerous for your health. Drink responsibly."
+  checkoutTitle: "Alcohol compliance"
+  checkoutAdultOnlyNote: "Orders are reserved for adults only."
+  checkoutAcknowledgements:
+    age: "I certify that I am 18 years old or over."
+    information: "I confirm that I have read the displayed order information."
+  payOrderLabel: "Place order (payment obligation)"
+  payOrderHelp: "This action places a payable order."
+  payOrderPendingLabel: "Payment finalization is currently being prepared."
+
+productGrid:
+  eyebrow: "Full catalogue"
+  title: "Our 12 available cuvees"
+  previousLabel: "Previous products"
+  nextLabel: "Next products"
+
+domainSelection:
+  eyebrow: "Collections"
+  title: "Estate selections"
+  items:
+    - icon: "shipping"
+      title: "Careful shipping"
+      body: "48-72 h in France, insulated packaging included"
+    - icon: "map"
+      title: "Delivery zones"
+      body: "Metropolitan France, Europe on request"
+    - icon: "return"
+      title: "Returns"
+      body: "14 days after delivery, full refund"
+    - icon: "lock"
+      title: "Secure payment"
+      body: "CB, Visa, Mastercard, SSL connection"
+    - icon: "support"
+      title: "Direct support"
+      body: "Reply within 24 h at +33 4 68 XX XX XX"
+
+caseComposer:
+  backdropImage: "../../assets/perinade/shop/catalog/frenchies_6mix.webp"
+  crateImage: "../../assets/perinade/shop/catalog/frenchies_3mix.webp"
+  crateImageAlt: "Les Frenchies bundle"
+  eyebrow: "Cases & bundles"
+  title: "Les Frenchies Bundles"
+  intro: "Find our mix boxes in a dedicated section, ideal for gifting or discovering the full Les Frenchies range."
+  offers:
+    - title: "Mix Box of 3"
+      lines:
+        - "1 red"
+        - "1 rose"
+        - "1 white"
+      price: "€79.00 incl. VAT"
+      details: "3 bottles"
+      ctaLabel: "Add to cart"
+      ctaHref: "/en/shop#coffrets"
+    - title: "Mix Box of 6"
+      lines:
+        - "2 reds"
+        - "2 roses"
+        - "2 whites"
+      price: "€158.00 incl. VAT"
+      details: "6 bottles"
+      ctaLabel: "Add to cart"
+      ctaHref: "/en/shop#coffrets"
+
+finalCta:
+  sectionAriaLabel: "Shop call to action"
+  title: "Discover our cuvees"
+  body: "Add your favorite wines to your cart and complete your order online."
+  ctaLabel: "Browse wines"
+  ctaHref: "/en/shop#produits"
+
+faq:
+  eyebrow: "Frequently asked questions"
+  title: "Everything before you buy"
+  items:
+    - question: "What are the delivery times?"
+      answer: "Orders are shipped within 24h and delivered within 48-72 h in metropolitan France. Insulated packaging included in hot weather."
+    - question: "Is delivery free?"
+      answer: "Delivery is free from €80. Below that, fees depend on your delivery area."
+    - question: "Can I return my order?"
+      answer: "Yes, you have 14 days after delivery. Bottles must be intact and unopened."
+    - question: "How should I store wines after delivery?"
+      answer: "Store bottles horizontally in a cool, dry place away from direct light."
+    - question: "Do you deliver abroad?"
+      answer: "Yes, on request for selected European destinations. Contact us before placing your order."
+    - question: "How can I contact the estate?"
+      answer: "By phone at +33 4 68 XX XX XX or by email via the website contact form."
+
+confirmationPage:
+  seo:
+    title: "Order Confirmation | Domaine de la Périnade"
+    description: "Your payment has been confirmed. Find your order recap and next steps."
+  hero:
+    title: "Payment confirmed"
+    body: "Thank you for your order. Your payment was successful and our team is now preparing shipment."
+  status:
+    labelPaid: "Status: paid"
+    labelRefPrefix: "Payment reference"
+  nextSteps:
+    title: "What happens next"
+    items:
+      - "You will receive a confirmation email with your order details."
+      - "Your order is prepared within 24 business hours."
+      - "Shipping is then completed within 48 to 72 hours in mainland France."
+  support:
+    title: "Need help?"
+    body: "Our team remains available if you have any question about your order."
+    emailLabel: "contact@perinade.fr"
+    phoneLabel: "+33 4 68 XX XX XX"
+  actions:
+    backShopLabel: "Back to shop"
+    backHomeLabel: "Back to home"
+  legal:
+    moderationNotice: "Alcohol abuse is dangerous for your health. Drink responsibly."

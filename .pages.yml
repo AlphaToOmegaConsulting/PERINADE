@@ -1,0 +1,275 @@
+media:
+  input: public/uploads
+  output: /uploads
+
+content:
+  - name: contact
+    label: Contact global
+    type: file
+    path: src/content/contact/contact.yaml
+    fields:
+      - name: phone
+        label: Téléphone affiché
+        type: string
+      - name: phoneTel
+        label: Lien téléphone
+        type: string
+      - name: email
+        label: E-mail
+        type: string
+      - name: website
+        label: Site web
+        type: string
+      - name: address
+        label: Adresse
+        type: string
+      - name: region
+        label: Région
+        type: string
+      - name: city
+        label: Ville
+        type: string
+      - name: mapUrl
+        label: URL carte
+        type: string
+      - name: instagram
+        label: Instagram
+        type: string
+      - name: facebook
+        label: Facebook
+        type: string
+
+  - name: ui
+    label: UI globale
+    type: collection
+    path: src/content/ui
+    filename: "{primary}.yaml"
+    view:
+      fields: [skipToContent, addToCartLabel]
+    fields:
+      - name: skipToContent
+        label: Aller au contenu
+        type: string
+      - name: navLabel
+        label: Navigation principale
+        type: string
+      - name: mobileNavLabel
+        label: Navigation mobile
+        type: string
+      - name: menuOpen
+        label: Ouvrir menu
+        type: string
+      - name: menuClose
+        label: Fermer menu
+        type: string
+      - name: homeLabel
+        label: Accueil
+        type: string
+      - name: languageLabel
+        label: Langue
+        type: string
+      - name: bookCta
+        label: Réserver
+        type: string
+      - name: callCta
+        label: Appeler
+        type: string
+      - name: shopCta
+        label: Boutique
+        type: string
+      - name: backToTop
+        label: Retour en haut
+        type: string
+      - name: formSubmitting
+        label: Envoi en cours
+        type: string
+      - name: formSuccess
+        label: Succès formulaire
+        type: string
+      - name: formError
+        label: Erreur formulaire
+        type: string
+      - name: required
+        label: Champ requis
+        type: string
+      - name: invalidEmail
+        label: E-mail invalide
+        type: string
+      - name: legalLine
+        label: Mention légale
+        type: string
+      - name: copyright
+        label: Copyright
+        type: string
+      - name: addToCartLabel
+        label: Ajouter au panier
+        type: string
+
+  - name: visites
+    label: Offres de visites
+    type: collection
+    path: src/content/visites
+    filename: "{primary}.yaml"
+    view:
+      fields: [titre, prix, locale]
+    fields:
+      - name: titre
+        label: Titre
+        type: string
+        required: true
+      - name: sousTitre
+        label: Sous-titre
+        type: string
+      - name: prix
+        label: Prix
+        type: number
+        required: true
+      - name: perLabel
+        label: Suffixe prix
+        type: string
+      - name: dureeMinutes
+        label: Durée en minutes
+        type: number
+      - name: capaciteMin
+        label: Capacité min
+        type: number
+      - name: capaciteMax
+        label: Capacité max
+        type: number
+      - name: langues
+        label: Langues
+        type: string
+        list: true
+      - name: inclus
+        label: Inclus
+        type: string
+        list: true
+      - name: horaires
+        label: Horaires
+        type: string
+      - name: joursOuverts
+        label: Jours ouverts
+        type: string
+      - name: politiqueAnnulation
+        label: Politique d'annulation
+        type: text
+      - name: highlighted
+        label: Mise en avant
+        type: boolean
+      - name: badge
+        label: Badge
+        type: string
+      - name: ordre
+        label: Ordre
+        type: number
+      - name: locale
+        label: Locale
+        type: string
+        required: true
+
+  - name: vins
+    label: Vins
+    type: collection
+    path: src/content/vins
+    filename: "{primary}.yaml"
+    view:
+      fields: [nom, appellation, prix, locale]
+    fields:
+      - name: nom
+        label: Nom
+        type: string
+        required: true
+      - name: couleur
+        label: Couleur
+        type: string
+        required: true
+      - name: couleurTone
+        label: Ton de couleur
+        type: string
+        required: true
+      - name: appellation
+        label: Appellation
+        type: string
+        required: true
+      - name: millesime
+        label: Millésime
+        type: number
+      - name: volume
+        label: Volume
+        type: number
+      - name: prix
+        label: Prix
+        type: number
+        required: true
+      - name: stock
+        label: Stock
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: badges
+        label: Badges
+        type: string
+        list: true
+      - name: imageAlt
+        label: Texte alternatif image
+        type: string
+      - name: featured
+        label: Mis en avant
+        type: boolean
+      - name: ordre
+        label: Ordre
+        type: number
+      - name: locale
+        label: Locale
+        type: string
+        required: true
+
+  - name: coffrets
+    label: Coffrets
+    type: collection
+    path: src/content/coffrets
+    filename: "{primary}.yaml"
+    view:
+      fields: [nom, prixLabel, locale]
+    fields:
+      - name: nom
+        label: Nom
+        type: string
+        required: true
+      - name: meta
+        label: Meta
+        type: string
+      - name: description
+        label: Description
+        type: text
+      - name: prixLabel
+        label: Prix
+        type: string
+      - name: imageAlt
+        label: Texte alternatif image
+        type: string
+      - name: badges
+        label: Badges
+        type: string
+        list: true
+      - name: tone
+        label: Tonalité
+        type: string
+      - name: ctaLabel
+        label: CTA label
+        type: string
+      - name: ctaHref
+        label: CTA lien
+        type: string
+      - name: ordre
+        label: Ordre
+        type: number
+      - name: locale
+        label: Locale
+        type: string
+        required: true
+
+settings:
+  content:
+    merge: true

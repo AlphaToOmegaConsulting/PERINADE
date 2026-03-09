@@ -1,0 +1,24 @@
+titre: "Visite gourmande"
+sousTitre: "Visite + accord gourmand"
+prix: 25
+perLabel: "/ personne"
+dureeMinutes: 90
+capaciteMin: 1
+capaciteMax: 12
+langues:
+  - "Français"
+  - "Anglais"
+inclus:
+  - "Tout inclus de la formule standard"
+  - "Planche fromages et charcuterie"
+  - "Sélection artisanale locale"
+  - "Temps de dégustation prolongé"
+  - "Idéal pour couples et groupes"
+  - "Disponible tous les jours"
+horaires: "11:00 – 16:00"
+joursOuverts: "Tous les jours"
+politiqueAnnulation: "Annulation gratuite jusqu'à 48h avant la visite."
+highlighted: true
+badge: "Populaire"
+ordre: 2
+locale: "fr"

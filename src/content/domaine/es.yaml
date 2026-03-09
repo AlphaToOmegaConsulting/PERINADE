@@ -1,0 +1,152 @@
+theme:
+  sectionDesktop: "6.2rem"
+  sectionTablet: "5rem"
+  sectionMobile: "3.8rem"
+
+seo:
+  title: "La Finca | Domaine de la Périnade"
+  description: "Descubra la historia del Domaine de la Périnade, su terroir, sus vinos y las posibilidades de visita en el corazón del Minervois."
+
+hero:
+  eyebrow: "La Finca"
+  titleLines:
+    - "Desde 1830,"
+    - "el cuidado del terroir"
+  body: "Entre el Canal du Midi y el río Fresquel, el Domaine de la Périnade perpetúa seis generaciones de viticultura en 100 ha, de las cuales 40 ha son de viñedo. Una historia familiar arraigada en el Minervois, relanzada en 2019 con la máxima exigencia."
+  primaryCta:
+    label: "Reservar una visita a la finca"
+    href: "/es/visitas#booking"
+  secondaryCta:
+    label: "Descubrir nuestros vinos"
+    href: "/es/tienda"
+  badges:
+    - "Viticultura"
+    - "Terroir"
+    - "Transmisión"
+  highlights:
+    - "100 ha de finca"
+    - "40 ha de viñedo"
+    - "6 generaciones"
+    - "Minervois · Languedoc"
+  image: "../../assets/perinade/domaine/hero.jpg"
+  imageAlt: "Persona consultando su teléfono al atardecer en la finca"
+
+terroir:
+  eyebrow: "Terroir y saber hacer"
+  title: "Una ubicación excepcional"
+  body: "La finca se extiende entre el Canal du Midi y el río Fresquel, dentro del perímetro de la AOP Minervois. Esta situación geográfica singular — entre agua y garriga — moldea la mineralidad y la frescura de nuestros vinos."
+  grapesTitle: "Variedades de uva"
+  commitmentsTitle: "Compromisos medioambientales"
+  grapes:
+    - "Grenache Noir"
+    - "Cabernet Franc"
+    - "Cabernet Sauvignon"
+    - "Merlot"
+  commitments:
+    - title: "Enfoque HVE"
+      body: "Alto Valor Medioambiental — certificación en curso."
+    - title: "Cero glifosato"
+      body: "Eliminación total de herbicidas; deshierbe mecánico entre las hileras."
+    - title: "Cubierta vegetal controlada"
+      body: "Gestión de la cubierta vegetal para preservar la vida del suelo."
+  image: "../../assets/perinade/domaine/terroir.jpg"
+  imageAlt: "Paisaje de montañas al amanecer"
+
+family:
+  eyebrow: "La familia"
+  title: "La familia Arnal hoy"
+  body:
+    - "En 2019, la 6.ª y 7.ª generación de la familia Arnal retomaron la finca con la voluntad de devolver todo su esplendor a este terroir histórico."
+    - "La construcción de la bodega en 2020, la restauración de las cavas y la selección parcelaria marcaron un nuevo comienzo. El objetivo sigue siendo el mismo: producir vinos auténticos, elegantes y fieles a su origen."
+    - "En la finca, la herencia se vive a diario: precisión en el viñedo, escucha de cada añada y hospitalidad en cada visita."
+  milestones:
+    - year: "1830"
+      label: "Fundación"
+    - year: "2019"
+      label: "Relanzamiento"
+    - year: "2020"
+      label: "1.ª bodega"
+  image: "../../assets/perinade/domaine/family.jpg"
+  imageAlt: "Inscripción Dream Big sobre fondo oscuro"
+
+statsBar:
+  - value: "100 ha"
+    label: "Finca total"
+  - value: "~40 ha"
+    label: "De viñedo"
+  - value: "6.ª y 7.ª"
+    label: "Generaciones"
+  - value: "HVE"
+    label: "En curso"
+  - value: "AOP"
+    label: "Minervois"
+  - value: "365 d"
+    label: "Acogida de visitantes"
+
+visitCta:
+  eyebrow: "Visitas a la finca"
+  title: "Venga a conocer"
+  titleHighlight: "la finca"
+  body: "Reserve una cita para recorrer los viñedos, descubrir la bodega y degustar nuestros vinos en un entorno auténtico."
+  details:
+    - "Duración: 1h30"
+    - "Con reserva previa"
+    - "Acogida en FR / EN"
+    - "Grupos privados bajo petición"
+  primaryCta:
+    label: "Reservar una visita a la finca"
+    href: "/es/visitas#booking"
+  secondaryCta:
+    label: "Contactarnos"
+    href: "#domaine-contact"
+  image: "../../assets/perinade/domaine/visit-cta.jpg"
+  imageAlt: "Botellas alineadas en la cava"
+
+wines:
+  eyebrow: "Nuestros vinos"
+  title: "Los vinos de la finca"
+  allLabel: "Ver toda la tienda"
+  allHref: "/es/tienda"
+  items:
+    - image: "../../assets/perinade/domaine/wine-1.jpg"
+      alt: "Cuvée du Domaine"
+      meta: "AOP Minervois · 2022 · 75 cl"
+      title: "Cuvée du Domaine"
+      body: "Frutos negros, garriga y especias dulces. Boca sedosa y final elegante."
+      price: "12,50 € IVA incl."
+      ctaLabel: "Ver"
+      ctaHref: "/es/tienda"
+    - image: "../../assets/perinade/domaine/wine-2.jpg"
+      alt: "Blanc de Périnade"
+      meta: "IGP Pays d'Oc · 2023 · 75 cl"
+      title: "Blanc de Périnade"
+      body: "Cítricos y flores blancas. Un vino fresco, preciso y mineral."
+      price: "10,00 € IVA incl."
+      ctaLabel: "Ver"
+      ctaHref: "/es/tienda"
+    - image: "../../assets/perinade/domaine/wine-3.jpg"
+      alt: "Grande Réserve"
+      meta: "AOP Minervois · 2020 · 75 cl"
+      title: "Grande Réserve"
+      body: "Criado en barrica, potente y complejo, con taninos fundidos."
+      price: "22,00 € IVA incl."
+      ctaLabel: "Ver"
+      ctaHref: "/es/tienda"
+
+contact:
+  eyebrow: "Contacto"
+  title: "¿Tiene alguna pregunta sobre la finca?"
+  body: "Nuestro equipo responde en menos de 24 horas. También puede llamarnos directamente en horario de apertura de la finca."
+  cards:
+    - label: "Teléfono"
+      value: "+33 4 68 XX XX XX"
+      href: "tel:+33468000000"
+    - label: "Dirección"
+      value: "Domaine de la Périnade · Minervois, Languedoc"
+      href: "https://maps.google.com/?q=Domaine+de+la+P%C3%A9rinade+Minervois+Languedoc"
+    - label: "Formulario"
+      value: "A través de nuestra página de contacto"
+      href: "#domaine-contact"
+  cta:
+    label: "Contactarnos"
+    href: "#domaine-contact"

@@ -1,0 +1,14 @@
+nom: "Cuvées Les Frenchies — Mix Box of 6"
+meta: "Sans millésime · 6 × 75 cl"
+description: "Coffret complet avec six bouteilles pour découvrir la gamme."
+prixLabel: "158,00 € TTC"
+image: "../../assets/perinade/shop/catalog/frenchies_6mix.webp"
+imageAlt: "Coffret Les Frenchies Mix Box of 6"
+badges:
+  - "Coffret"
+  - "Les Frenchies"
+tone: "Coffret"
+ctaLabel: "Ajouter au panier"
+ctaHref: "/boutique#coffrets"
+ordre: 2
+locale: "fr"

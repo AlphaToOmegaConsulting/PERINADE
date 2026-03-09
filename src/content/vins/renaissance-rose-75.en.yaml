@@ -1,0 +1,16 @@
+nom: "Renaissance Rose Cuvee"
+couleur: "Rosé"
+couleurTone: "Rosé"
+appellation: "IGP Pays d'Oc"
+millesime: 2022
+volume: 75
+prix: 14.4
+stock: "En stock"
+description: "White peach and citrus aromas with a fresh, delicate finish."
+badges:
+  - "Rose"
+image: "../../assets/perinade/shop/catalog/renaissance_75.webp"
+imageAlt: "Renaissance Rose Cuvee 2022 bottle"
+featured: true
+ordre: 2
+locale: "en"

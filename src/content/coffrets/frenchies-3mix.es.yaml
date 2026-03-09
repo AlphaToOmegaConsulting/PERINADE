@@ -1,0 +1,14 @@
+nom: "Cuvées Les Frenchies — Mix Box of 3"
+meta: "Sin añada · 3 × 75 cl"
+description: "Lote descubrimiento con un tinto, un rosado y un blanco."
+prixLabel: "79,00 € IVA incl."
+image: "../../assets/perinade/shop/catalog/frenchies_3mix.webp"
+imageAlt: "Lote Les Frenchies Mix Box of 3"
+badges:
+  - "Lote"
+  - "Les Frenchies"
+tone: "Lote"
+ctaLabel: "Añadir al carrito"
+ctaHref: "/es/tienda#coffrets"
+ordre: 1
+locale: "es"
