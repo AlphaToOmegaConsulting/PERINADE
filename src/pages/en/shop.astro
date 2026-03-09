@@ -9,11 +9,44 @@ import ShopDomainSelection from "../../components/shop/ShopDomainSelection.astro
 import ShopCaseComposer from "../../components/shop/ShopCaseComposer.astro";
 import ShopFinalCtaBand from "../../components/shop/ShopFinalCtaBand.astro";
 import ShopFaq from "../../components/shop/ShopFaq.astro";
-import { getShopData, getSiteData } from "../../data/index";
+import { getShopData, getSiteData, getVins, getCoffrets } from "../../data/index";
+import { getUiStrings } from "../../i18n/ui";
 
 const locale = "en";
-const site = await getSiteData(locale);
-const shopPage = await getShopData(locale);
+const [site, shopPage, vins, coffretsCollection, ui] = await Promise.all([
+  getSiteData(locale),
+  getShopData(locale),
+  getVins(locale),
+  getCoffrets(locale),
+  getUiStrings(locale),
+]);
+const vinProducts = vins.map((vin) => ({
+  name: vin.data.nom,
+  meta: vin.data.millesime
+    ? `${vin.data.millesime} · ${vin.data.volume} cl`
+    : `No vintage · ${vin.data.volume} cl`,
+  description: vin.data.description,
+  price: `${vin.data.prix.toFixed(2)} incl. VAT`,
+  image: vin.data.image,
+  imageAlt: vin.data.imageAlt,
+  badges: vin.data.badges,
+  tone: vin.data.couleurTone,
+  ctaLabel: ui.addToCartLabel,
+  ctaHref: "/en/shop#products",
+}));
+const coffretProducts = coffretsCollection.map((c) => ({
+  name: c.data.nom,
+  meta: c.data.meta,
+  description: c.data.description,
+  price: c.data.prixLabel,
+  image: c.data.image,
+  imageAlt: c.data.imageAlt,
+  badges: c.data.badges,
+  tone: c.data.tone,
+  ctaLabel: c.data.ctaLabel,
+  ctaHref: c.data.ctaHref,
+}));
+const productGrid = { ...shopPage.productGrid, products: [...vinProducts, ...coffretProducts] };
 
 const alternates = [
   { locale: "fr", href: "/boutique" },
@@ -22,11 +55,11 @@ const alternates = [
 ];
 ---
 
-<BaseLayout title="Shop | Domaine de la Périnade" description="Order wines from Domaine de la Périnade online." locale={locale} canonicalPath="/en/shop" alternates={alternates}>
+<BaseLayout title={shopPage.seo.title} description={shopPage.seo.description} locale={locale} canonicalPath="/en/shop" alternates={alternates}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/boutique", en: "/en/shop", es: "/es/tienda" }} />
   <main id="main-content" class="shop-page">
     <ShopHero hero={shopPage.hero} />
-    <ShopProductGrid productGrid={shopPage.productGrid} />
+    <ShopProductGrid productGrid={productGrid} />
     <ShopDomainSelection domainSelection={shopPage.domainSelection} />
     <ShopCaseComposer caseComposer={shopPage.caseComposer} />
     <ShopFinalCtaBand finalCta={shopPage.finalCta} />

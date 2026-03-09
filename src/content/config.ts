@@ -698,6 +698,7 @@ const ui = defineCollection({
     invalidEmail: z.string(),
     legalLine: z.string(),
     copyright: z.string(),
+    addToCartLabel: z.string(),
   }),
 });
 

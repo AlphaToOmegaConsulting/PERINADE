@@ -10,11 +10,45 @@ import ShopCaseComposer from "../components/shop/ShopCaseComposer.astro";
 import ShopFinalCtaBand from "../components/shop/ShopFinalCtaBand.astro";
 import ShopFaq from "../components/shop/ShopFaq.astro";
 import CartPopup from "../components/shop/CartPopup.astro";
-import { getShopData, getSiteData } from "../data/index";
+import { getShopData, getSiteData, getVins, getCoffrets } from "../data/index";
+import { getUiStrings } from "../i18n/ui";
 
 const locale = "fr";
-const site = await getSiteData(locale);
-const shopPage = await getShopData(locale);
+const [site, shopPage, vins, coffretsCollection, ui] = await Promise.all([
+  getSiteData(locale),
+  getShopData(locale),
+  getVins(locale),
+  getCoffrets(locale),
+  getUiStrings(locale),
+]);
+const vinProducts = vins.map((vin) => ({
+  name: vin.data.nom,
+  meta: vin.data.millesime
+    ? `${vin.data.millesime} · ${vin.data.volume} cl`
+    : `Sans millésime · ${vin.data.volume} cl`,
+  description: vin.data.description,
+  price: `${vin.data.prix.toFixed(2).replace(".", ",")} € TTC`,
+  image: vin.data.image,
+  imageAlt: vin.data.imageAlt,
+  badges: vin.data.badges,
+  tone: vin.data.couleurTone,
+  ctaLabel: ui.addToCartLabel,
+  ctaHref: "/boutique#produits",
+}));
+const coffretProducts = coffretsCollection.map((c) => ({
+  name: c.data.nom,
+  meta: c.data.meta,
+  description: c.data.description,
+  price: c.data.prixLabel,
+  image: c.data.image,
+  imageAlt: c.data.imageAlt,
+  badges: c.data.badges,
+  tone: c.data.tone,
+  ctaLabel: c.data.ctaLabel,
+  ctaHref: c.data.ctaHref,
+}));
+const allProducts = [...vinProducts, ...coffretProducts];
+const productGrid = { ...shopPage.productGrid, products: allProducts };
 
 const alternates = [
   { locale: "fr", href: "/boutique" },
@@ -35,8 +69,8 @@ const jsonLd = JSON.stringify([
     "name": "Catalogue vins et coffrets — Domaine de la Périnade",
     "description": "Achetez nos cuvées et coffrets en ligne, directement depuis le domaine.",
     "url": "https://www.perinade.fr/boutique",
-    "numberOfItems": shopPage.productGrid.products.length,
-    "itemListElement": shopPage.productGrid.products.map((product, index) => ({
+    "numberOfItems": allProducts.length,
+    "itemListElement": allProducts.map((product, index) => ({
       "@type": "ListItem",
       "position": index + 1,
       "item": {
@@ -82,7 +116,7 @@ const jsonLd = JSON.stringify([
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/boutique", en: "/en/shop", es: "/es/tienda" }} />
   <main id="main-content" class="shop-page">
     <ShopHero hero={shopPage.hero} />
-    <ShopProductGrid productGrid={shopPage.productGrid} />
+    <ShopProductGrid productGrid={productGrid} />
     <ShopDomainSelection domainSelection={shopPage.domainSelection} />
     <ShopCaseComposer caseComposer={shopPage.caseComposer} />
     <ShopFinalCtaBand finalCta={shopPage.finalCta} />
