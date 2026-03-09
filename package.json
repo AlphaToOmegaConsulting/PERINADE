@@ -16,7 +16,9 @@
     "i18n:verify": "npm run check && npm run build && npm run i18n:audit",
     "lint": "eslint src --ext .ts,.astro",
     "format": "prettier --write src",
-    "format:check": "prettier --check src"
+    "format:check": "prettier --check src",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
