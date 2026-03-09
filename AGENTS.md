@@ -8,7 +8,8 @@
 - Public locales: `fr`, `en`, `es`
 - Default locale: `fr`
 - Routing rule: default locale is not prefixed; English uses `/en/*`; Spanish uses `/es/*`
-- **Source de vérité éditoriale** : `content/{section}/{locale}.yaml` (Astro Content Collections + Zod)
+- **Source de vérité éditoriale** : `src/content/{section}/{locale}.yaml` (Astro Content Layer API + Zod)
+- Collections définies dans `src/content.config.ts` via `loader: glob()` (Content Layer API, Astro 5)
 - Loaders centralisés dans `src/data/index.ts` (utilisent `getEntry()` / `getCollection()`)
 - CMS : **Pages CMS** (Git-based) — édition YAML via interface web sans toucher au code
 
@@ -40,12 +41,15 @@
 
 - Never add business or page-copy text directly to shared components under `src/components/sections`, `src/components/shop`, `src/components/domaine`, or `src/components/visits`.
 - Put visible content in the YAML files under `content/`. Source of truth per section:
-  - Home : `content/site/{fr/en/es}.yaml`
-  - Domaine : `content/domaine/{fr/en/es}.yaml`
-  - Visites : `content/visits/{fr/en/es}.yaml`
-  - Actualités : `content/news/{fr/en/es}.yaml`
-  - UI strings (nav, boutons, labels) : `content/ui/{fr/en/es}.yaml`
-  - Boutique : `src/data/shop-{fr/en/es}.ts` — **reste dans le code** (couplé Stripe, migration future Cloudflare D1/KV)
+  - Home : `src/content/site/{fr/en/es}.yaml`
+  - Domaine : `src/content/domaine/{fr/en/es}.yaml`
+  - Visites : `src/content/visits/{fr/en/es}.yaml`
+  - Actualités : `src/content/news/{fr/en/es}.yaml`
+  - UI strings (nav, boutons, labels) : `src/content/ui/{fr/en/es}.yaml`
+  - Boutique : `src/content/shop/{fr/en/es}.yaml`
+  - Vins (fiches produit) : `src/content/vins/{slug}.{fr/en/es}.yaml`
+  - Coffrets (fiches produit) : `src/content/coffrets/{slug}.{fr/en/es}.yaml`
+  - Contact : `src/content/contact/contact.yaml`
 - Images éditoriales : URL strings pointant vers `public/assets/perinade/{section}/`. Ne jamais utiliser `import img from '...'` dans les fichiers de contenu.
 - Si un nouveau champ visible est nécessaire :
   1. mettre à jour le type dans `src/types/`
@@ -62,8 +66,8 @@
 
 - For any content change that affects a public page, run `npm run i18n:verify` before considering the work complete.
 - Read the generated reports:
-  - [output/i18n/audit.md](/Users/codex/Desktop/WEBDEV/PERINADE/output/i18n/audit.md)
-  - [output/i18n/audit.json](/Users/codex/Desktop/WEBDEV/PERINADE/output/i18n/audit.json)
+  - [output/i18n/audit.md](output/i18n/audit.md)
+  - [output/i18n/audit.json](output/i18n/audit.json)
 - If only translation catalog generation is needed, run `npm run i18n:extract`.
 - When reviewing content changes, explicitly check:
   - all affected locales were updated
@@ -77,4 +81,4 @@
 - If a user asks for "modify content" and the request is ambiguous, default to updating all relevant locale YAML files for the same content block.
 - Do not remove or overwrite existing locale content without checking whether parallel locale equivalents must be updated too.
 - If unexpected unrelated changes appear in the worktree, stop and ask the user how to proceed before touching those files.
-- Prefer the repository guide [docs/i18n-maintenance.md](/Users/codex/Desktop/WEBDEV/PERINADE/docs/i18n-maintenance.md) when deciding where content belongs and how to validate it.
+- Prefer the repository guide [docs/i18n-maintenance.md](docs/i18n-maintenance.md) when deciding where content belongs and how to validate it.

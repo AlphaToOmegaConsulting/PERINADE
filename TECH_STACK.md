@@ -74,14 +74,17 @@ Vanilla TypeScript modules, no UI framework (no React/Vue/Svelte):
 ## Architecture
 
 ```
-content/                  # Source de vérité éditoriale — YAML par section et locale
-├── domaine/{fr,en,es}.yaml
-├── news/{fr,en,es}.yaml
-├── site/{fr,en,es}.yaml
-├── ui/{fr,en,es}.yaml
-└── visits/{fr,en,es}.yaml
-
 src/
+├── content/                  # Source de vérité éditoriale — YAML par section et locale
+│   ├── domaine/{fr,en,es}.yaml
+│   ├── news/{fr,en,es}.yaml
+│   ├── site/{fr,en,es}.yaml
+│   ├── ui/{fr,en,es}.yaml
+│   ├── visits/{fr,en,es}.yaml
+│   ├── shop/{fr,en,es}.yaml
+│   ├── contact/contact.yaml
+│   ├── coffrets/{slug}.{fr,en,es}.yaml   # Coffrets cadeaux (par produit)
+│   └── vins/{slug}.{fr,en,es}.yaml       # Vins individuels (par produit)
 ├── components/
 │   ├── sections/   # Page sections (Header, Hero, Gallery, Contact…)
 │   ├── domaine/    # Wine domain components
@@ -89,14 +92,14 @@ src/
 │   ├── shop/       # Shop/e-commerce components
 │   ├── visits/     # Visit booking components
 │   └── ui/         # Reusable UI primitives
-├── config/         # Design tokens non-éditoriaux (visits-theme-config.ts)
 ├── content.config.ts  # Astro Content Collections — Zod schemas
-├── data/           # Loaders centralisés (getEntry / getCollection) + shop-*.ts
+├── data/           # Loaders centralisés (getEntry / getCollection)
 ├── i18n/           # Routing helpers, locale types, UI strings loader
 ├── lib/cart/       # Panier logic (Stripe)
 ├── types/          # TypeScript type definitions
 ├── scripts/        # Client-side TS modules (vanilla TS)
-├── styles/         # Global CSS
+├── styles/         # Global CSS + visits-theme-config.ts
+├── utils/          # Helpers partagés (json-ld, link, price, analytics…)
 └── pages/          # File-based routing, 3 locales
     ├── *.astro           # FR (sans préfixe)
     ├── en/*.astro        # EN (/en/*)
@@ -146,9 +149,9 @@ npm run verify   # check + build (pre-deploy validation)
 ## CMS
 
 - **Pages CMS** (Git-based) — interface d'édition YAML pour le propriétaire non-dev
-- Contenu éditorial : `content/{section}/{fr/en/es}.yaml` — Astro Content Collections + Zod
-- Boutique/Stripe : `src/data/shop-*.ts` — reste dans le code, migration future vers **Cloudflare D1 + KV**
-- Config design visits : `src/config/visits-theme-config.ts` — hors CMS (tokens de design)
+- Contenu éditorial : `src/content/{section}/{fr/en/es}.yaml` — Astro Content Layer API (`loader: glob`) + Zod
+- Boutique/Stripe : `src/content/shop/{fr/en/es}.yaml` — migré en YAML, intégration Stripe via Cloudflare Functions
+- Config design visits : `src/styles/visits-theme-config.ts` — hors CMS (tokens de design)
 
 ---
 
