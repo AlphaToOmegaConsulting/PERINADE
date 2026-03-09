@@ -17,6 +17,7 @@ docs/design/
 docs/*.docx
 
 # Local tooling & caches
+.mcp.json
 .playwright-mcp/
 .tmp_img/
 tmp/

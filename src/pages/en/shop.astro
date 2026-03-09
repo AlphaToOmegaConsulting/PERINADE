@@ -9,6 +9,7 @@ import ShopDomainSelection from "../../components/shop/ShopDomainSelection.astro
 import ShopCaseComposer from "../../components/shop/ShopCaseComposer.astro";
 import ShopFinalCtaBand from "../../components/shop/ShopFinalCtaBand.astro";
 import ShopFaq from "../../components/shop/ShopFaq.astro";
+import CartPopup from "../../components/shop/CartPopup.astro";
 import { getShopData, getSiteData, getVins, getCoffrets } from "../../data/index";
 import { getUiStrings } from "../../i18n/ui";
 
@@ -26,7 +27,7 @@ const vinProducts = vins.map((vin) => ({
     ? `${vin.data.millesime} · ${vin.data.volume} cl`
     : `No vintage · ${vin.data.volume} cl`,
   description: vin.data.description,
-  price: `${vin.data.prix.toFixed(2)} incl. VAT`,
+  price: `€${vin.data.prix.toFixed(2)} incl. VAT`,
   image: vin.data.image,
   imageAlt: vin.data.imageAlt,
   badges: vin.data.badges,
@@ -66,6 +67,12 @@ const alternates = [
     <ShopFaq faq={shopPage.faq} />
     <ShopComplianceBand compliance={shopPage.compliance} />
   </main>
+  <CartPopup
+    cartLabel="Cart"
+    cartHref="/en/cart"
+    closeAriaLabel="Close mini-cart"
+    countTemplate="Cart: {count} item(s)"
+  />
   <Footer footer={site.footer} />
 </BaseLayout>
 

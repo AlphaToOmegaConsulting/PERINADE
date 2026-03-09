@@ -12,7 +12,7 @@ const normalizePath = (value: string): string => {
 };
 
 const isPathActive = (currentPath: string, href: string): boolean => {
-  if (!href || href.startsWith("tel:")) return false;
+  if (!href || href.startsWith("tel:") || href.includes("#")) return false;
 
   const targetPath = normalizePath(href.split("#")[0] || href);
   const activePath = normalizePath(currentPath);

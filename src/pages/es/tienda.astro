@@ -9,6 +9,7 @@ import ShopDomainSelection from "../../components/shop/ShopDomainSelection.astro
 import ShopCaseComposer from "../../components/shop/ShopCaseComposer.astro";
 import ShopFinalCtaBand from "../../components/shop/ShopFinalCtaBand.astro";
 import ShopFaq from "../../components/shop/ShopFaq.astro";
+import CartPopup from "../../components/shop/CartPopup.astro";
 import { getShopData, getSiteData, getVins, getCoffrets } from "../../data/index";
 import { getUiStrings } from "../../i18n/ui";
 
@@ -66,6 +67,12 @@ const alternates = [
     <ShopFaq faq={shopPage.faq} />
     <ShopComplianceBand compliance={shopPage.compliance} />
   </main>
+  <CartPopup
+    cartLabel="Carrito"
+    cartHref="/es/carrito"
+    closeAriaLabel="Cerrar mini-carrito"
+    countTemplate="Carrito: {count} artículo(s)"
+  />
   <Footer footer={site.footer} />
 </BaseLayout>
 

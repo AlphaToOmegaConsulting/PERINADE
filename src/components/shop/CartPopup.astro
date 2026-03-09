@@ -1,9 +1,25 @@
-<div class="cart-popup" data-cart-popup hidden>
-  <button class="cart-popup__close" type="button" data-cart-popup-close aria-label="Fermer le mini-panier">×</button>
+---
+interface Props {
+  cartLabel?: string;
+  cartHref?: string;
+  closeAriaLabel?: string;
+  countTemplate?: string;
+}
+
+const {
+  cartLabel = "Panier",
+  cartHref = "/panier",
+  closeAriaLabel = "Fermer le mini-panier",
+  countTemplate = "Panier : {count} article(s)",
+} = Astro.props;
+---
+
+<div class="cart-popup" data-cart-popup hidden data-cart-count-template={countTemplate}>
+  <button class="cart-popup__close" type="button" data-cart-popup-close aria-label={closeAriaLabel}>×</button>
   <div class="cart-popup__content">
     <span class="cart-popup__icon" aria-hidden="true">🛒</span>
-    <p class="cart-popup__label" data-cart-popup-label>Panier : 0 article(s)</p>
-    <a class="cart-popup__cta" href="/panier">Panier</a>
+    <p class="cart-popup__label" data-cart-popup-label>{countTemplate.replace("{count}", "0")}</p>
+    <a class="cart-popup__cta" href={cartHref}>{cartLabel}</a>
   </div>
 </div>
 
@@ -19,7 +35,8 @@
     if (!popup || !label) return;
 
     const count = cartCount();
-    label.textContent = `Panier : ${count} article(s)`;
+    const template = popup.dataset.cartCountTemplate ?? "Cart: {count} item(s)";
+    label.textContent = template.replace("{count}", String(count));
 
     if (count <= 0) {
       popup.hidden = true;
