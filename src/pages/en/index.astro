@@ -11,18 +11,17 @@ import Testimonials from "../../components/sections/Testimonials.astro";
 import Wines from "../../components/sections/Wines.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getSiteData } from "../../data/index";
+import { getAlternates, getAlternateUrls, getPagePath } from "../../i18n/routes";
 
 const locale = "en";
+const pageId = "home";
 const site = await getSiteData(locale);
-const alternates = [
-  { locale: "fr", href: "/" },
-  { locale: "en", href: "/en" },
-  { locale: "es", href: "/es" }
-];
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
 ---
 
-<BaseLayout locale={locale} canonicalPath="/en" alternates={alternates}>
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/", en: "/en", es: "/es" }} />
+<BaseLayout locale={locale} canonicalPath={getPagePath(pageId, locale)} alternates={alternates}>
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={alternateUrls} />
   <main id="main-content">
     <Hero hero={site.hero} />
     <Reasons reasons={site.reasons} />

@@ -3,23 +3,22 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/sections/Header.astro";
 import Footer from "../../components/sections/Footer.astro";
 import { getShopData, getSiteData } from "../../data/index";
+import { getAlternates, getAlternateUrls, getPagePath } from "../../i18n/routes";
 
 const locale = "es";
+const pageId = "panier";
 const site = await getSiteData(locale);
 const shopPage = await getShopData(locale);
 
-const alternates = [
-  { locale: "fr", href: "/panier" },
-  { locale: "en", href: "/en/cart" },
-  { locale: "es", href: "/es/carrito" }
-];
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
 ---
 
 <BaseLayout
   title="Carrito | Domaine de la Périnade"
   description="Revise y ajuste los artículos de su carrito."
   locale={locale}
-  canonicalPath="/es/carrito"
+  canonicalPath={getPagePath(pageId, locale)}
   alternates={alternates}
 >
   <Header
@@ -28,7 +27,7 @@ const alternates = [
     ctaLabel={site.experience.ctaLabel}
     ctaHref={site.experience.ctaHref}
     locale={locale}
-    alternateUrls={{ fr: "/panier", en: "/en/cart", es: "/es/carrito" }}
+    alternateUrls={alternateUrls}
   />
 
   <main id="main-content" class="cart-page">

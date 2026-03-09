@@ -4,8 +4,10 @@ import Header from "../../components/sections/Header.astro";
 import Footer from "../../components/sections/Footer.astro";
 import { getShopData, getSiteData } from "../../data/index";
 import { getContactInfo } from "../../i18n/contact";
+import { getAlternates, getAlternateUrls, getPagePath } from "../../i18n/routes";
 
 const locale = "en";
+const pageId = "confirmation";
 const [site, shopPage, contact] = await Promise.all([
   getSiteData(locale),
   getShopData(locale),
@@ -14,18 +16,15 @@ const [site, shopPage, contact] = await Promise.all([
 const confirmation = shopPage.confirmationPage;
 const sessionId = Astro.url.searchParams.get("session_id") ?? "";
 
-const alternates = [
-  { locale: "fr", href: "/confirmation" },
-  { locale: "en", href: "/en/confirmation" },
-  { locale: "es", href: "/es/confirmacion" }
-];
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
 ---
 
 <BaseLayout
   title={confirmation.seo.title}
   description={confirmation.seo.description}
   locale={locale}
-  canonicalPath="/en/confirmation"
+  canonicalPath={getPagePath(pageId, locale)}
   alternates={alternates}
   noindex={true}
 >
@@ -35,7 +34,7 @@ const alternates = [
     ctaLabel={site.experience.ctaLabel}
     ctaHref={site.experience.ctaHref}
     locale={locale}
-    alternateUrls={{ fr: "/confirmation", en: "/en/confirmation", es: "/es/confirmacion" }}
+    alternateUrls={alternateUrls}
   />
 
   <main id="main-content" class="confirmation-page">

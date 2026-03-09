@@ -10,8 +10,10 @@ import VisitDomainCta from "../../components/domaine/VisitDomainCta.astro";
 import DomainWinesShowcase from "../../components/domaine/DomainWinesShowcase.astro";
 import DomainContactSection from "../../components/domaine/DomainContactSection.astro";
 import { getSiteData, getDomaineData } from "../../data/index";
+import { getAlternates, getAlternateUrls, getPagePath } from "../../i18n/routes";
 
 const locale = "en";
+const pageId = "domaine";
 const site = await getSiteData(locale);
 const domainePage = await getDomaineData(locale);
 
@@ -21,15 +23,12 @@ const themeVars = [
   `--domaine-section-space-mobile:${domainePage.theme.sectionMobile}`
 ].join(";");
 
-const alternates = [
-  { locale: "fr", href: "/domaine" },
-  { locale: "en", href: "/en/domaine" },
-  { locale: "es", href: "/es/domaine" }
-];
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
 ---
 
-<BaseLayout title={domainePage.seo.title} description={domainePage.seo.description} locale={locale} canonicalPath="/en/domaine" alternates={alternates}>
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/domaine", en: "/en/domaine", es: "/es/domaine" }} />
+<BaseLayout title={domainePage.seo.title} description={domainePage.seo.description} locale={locale} canonicalPath={getPagePath(pageId, locale)} alternates={alternates}>
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={alternateUrls} />
   <main id="main-content" class="domaine-page" style={themeVars}>
     <DomaineHero hero={domainePage.hero} />
     <TerroirSection terroir={domainePage.terroir} />

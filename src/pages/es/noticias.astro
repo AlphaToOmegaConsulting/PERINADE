@@ -5,16 +5,15 @@ import Footer from "../../components/sections/Footer.astro";
 import NewsHero from "../../components/news/NewsHero.astro";
 import NewsArticles from "../../components/news/NewsArticles.astro";
 import { getNewsData, getSiteData } from "../../data/index";
+import { getAlternates, getAlternateUrls, getPagePath } from "../../i18n/routes";
 
 const locale = "es";
+const pageId = "actualites";
 const site = await getSiteData(locale);
 const news = await getNewsData(locale);
 
-const alternates = [
-  { locale: "fr", href: "/actualites" },
-  { locale: "en", href: "/en/news" },
-  { locale: "es", href: "/es/noticias" }
-];
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
 
 const jsonLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -51,7 +50,7 @@ const jsonLd = JSON.stringify({
   title={news.seo.title}
   description={news.seo.description}
   locale={locale}
-  canonicalPath="/es/noticias"
+  canonicalPath={getPagePath(pageId, locale)}
   alternates={alternates}
   jsonLd={jsonLd}
 >
@@ -61,7 +60,7 @@ const jsonLd = JSON.stringify({
     ctaLabel={site.experience.ctaLabel}
     ctaHref={site.experience.ctaHref}
     locale={locale}
-    alternateUrls={{ fr: "/actualites", en: "/en/news", es: "/es/noticias" }}
+    alternateUrls={alternateUrls}
   />
 
   <main id="main-content" class="news-page" style={`--news-section-desktop:${news.theme.sectionDesktop};--news-section-tablet:${news.theme.sectionTablet};--news-section-mobile:${news.theme.sectionMobile};`}>

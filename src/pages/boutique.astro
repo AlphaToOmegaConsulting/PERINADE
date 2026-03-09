@@ -11,10 +11,12 @@ import ShopFinalCtaBand from "../components/shop/ShopFinalCtaBand.astro";
 import ShopFaq from "../components/shop/ShopFaq.astro";
 import CartPopup from "../components/shop/CartPopup.astro";
 import { getShopData, getSiteData, getVins, getCoffrets } from "../data/index";
+import { getAlternates, getAlternateUrls, getPagePath } from "../i18n/routes";
 import { getUiStrings } from "../i18n/ui";
 import { parsePriceToDecimal } from "../utils/price";
 
 const locale = "fr";
+const pageId = "boutique";
 const [site, shopPage, vins, coffretsCollection, ui] = await Promise.all([
   getSiteData(locale),
   getShopData(locale),
@@ -51,11 +53,8 @@ const coffretProducts = coffretsCollection.map((c) => ({
 const allProducts = [...vinProducts, ...coffretProducts];
 const productGrid = { ...shopPage.productGrid, products: allProducts };
 
-const alternates = [
-  { locale: "fr", href: "/boutique" },
-  { locale: "en", href: "/en/shop" },
-  { locale: "es", href: "/es/tienda" }
-];
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
 
 const jsonLd = JSON.stringify([
   {
@@ -104,11 +103,11 @@ const jsonLd = JSON.stringify([
   title={shopPage.seo.title}
   description={shopPage.seo.description}
   locale={locale}
-  canonicalPath="/boutique"
+  canonicalPath={getPagePath(pageId, locale)}
   alternates={alternates}
   jsonLd={jsonLd}
 >
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/boutique", en: "/en/shop", es: "/es/tienda" }} />
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={alternateUrls} />
   <main id="main-content" class="shop-page">
     <ShopHero hero={shopPage.hero} />
     <ShopProductGrid productGrid={productGrid} />

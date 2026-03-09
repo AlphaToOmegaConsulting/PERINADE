@@ -4,13 +4,15 @@ import { getSiteData } from "../data/index";
 import Header from "../components/sections/Header.astro";
 import Footer from "../components/sections/Footer.astro";
 import ActionLink from "../components/ui/actions/ActionLink.astro";
+import { getAlternateUrls } from "../i18n/routes";
 
 const locale = "fr";
 const site = await getSiteData(locale);
+const alternateUrls = getAlternateUrls("home");
 ---
 
 <BaseLayout title="Page introuvable | Domaine de la Périnade" description="Cette page n'existe pas ou a été déplacée." locale={locale} noindex={true}>
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/", en: "/en", es: "/es" }} />
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={alternateUrls} />
   <main id="main-content" class="not-found">
     <div class="shell not-found__shell">
       <p class="not-found__code" aria-hidden="true">404</p>

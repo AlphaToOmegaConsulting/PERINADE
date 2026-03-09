@@ -16,8 +16,10 @@ import { buildVisitsThemeStyle } from "../../utils/visits-theme";
 import { visitsTheme } from "../../styles/visits-theme-config";
 import { buildVisitsJsonLd } from "../../utils/json-ld";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getAlternates, getAlternateUrls, getPagePath } from "../../i18n/routes";
 
 const locale = "es";
+const pageId = "visites";
 const [site, visitsPage, visites] = await Promise.all([
   getSiteData(locale),
   getVisitsData(locale),
@@ -37,18 +39,15 @@ const mappedPlans = visites.map((visite) => ({
 }));
 const pricing = { ...visitsPage.pricing, plans: mappedPlans };
 
-const alternates = [
-  { locale: "fr", href: "/visites" },
-  { locale: "en", href: "/en/visits" },
-  { locale: "es", href: "/es/visitas" }
-];
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
 
 const siteUrl = import.meta.env.SITE?.replace(/\/$/, "") ?? "https://www.perinade.fr";
 const jsonLd = buildVisitsJsonLd(siteUrl, "/es/visitas", visites);
 ---
 
-<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description} locale={locale} canonicalPath="/es/visitas" alternates={alternates} disableCursorOrb jsonLd={jsonLd}>
-  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/visites", en: "/en/visits", es: "/es/visitas" }} />
+<BaseLayout title={visitsPage.seo.title} description={visitsPage.seo.description} locale={locale} canonicalPath={getPagePath(pageId, locale)} alternates={alternates} disableCursorOrb jsonLd={jsonLd}>
+  <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={alternateUrls} />
   <main id="main-content" class="visits-page" style={visitsThemeStyle}>
     <VisitHero hero={visitsPage.hero} />
     <TrustBar items={visitsPage.trustBar} />
