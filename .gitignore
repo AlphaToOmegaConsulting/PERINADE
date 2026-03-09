@@ -11,17 +11,9 @@ PERINADE_Make.zip
 output/
 
 # Local design/source artifacts (keep local, do not push)
-*.fig
 /Pictures-to-add/
-/FINAL_VISIT.png
-/NEWS.png
-/PERINADE SHOP INTERMEDIAIRE.png
-/PERINADE_Make APP.png
-/SHOP.png
-/VISIT.png
-/VISIT_2_DEV.png
-/history.png
-/home.png
+docs/design/
+docs/*.docx
 
 # Local tooling & caches
 .playwright-mcp/
