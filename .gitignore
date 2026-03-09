@@ -18,6 +18,8 @@ docs/*.docx
 
 # Local tooling & caches
 .mcp.json
+.claude/
+.playwright-cli/
 .playwright-mcp/
 .tmp_img/
 tmp/
