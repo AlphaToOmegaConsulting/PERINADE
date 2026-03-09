@@ -133,7 +133,7 @@ export interface DomainePageData {
   terroir: DomaineTerroirData;
   family: DomaineFamilyData;
   statsBar: DomaineStatItem[];
-  timeline: DomaineTimelineData;
+  timeline?: DomaineTimelineData;
   visitCta: DomaineVisitCtaData;
   wines: DomaineWinesData;
   contact: DomaineContactData;
