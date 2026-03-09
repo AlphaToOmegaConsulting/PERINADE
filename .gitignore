@@ -4,6 +4,7 @@ node_modules/
 .worktrees/
 npm-debug.log*
 .DS_Store
+**/.DS_Store
 .codex-*.png
 .post-fix-*.png
 PERINADE_Make.png
