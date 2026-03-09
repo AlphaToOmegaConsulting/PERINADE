@@ -12,8 +12,8 @@ import type { NewsPageData } from "../types/news";
 /* ── Page data loaders ───────────────────────────────────── */
 
 export async function getSiteData(locale: Locale): Promise<SiteData> {
-  const entry = await getEntry("site", locale);
-  if (!entry) throw new Error(`site entry not found for locale: ${locale}`);
+  const entry = await getEntry("accueil", locale);
+  if (!entry) throw new Error(`accueil entry not found for locale: ${locale}`);
   return entry.data;
 }
 
@@ -24,20 +24,20 @@ export async function getDomaineData(locale: Locale): Promise<DomainePageData> {
 }
 
 export async function getVisitsData(locale: Locale): Promise<VisitPageData> {
-  const entry = await getEntry("visits", locale);
-  if (!entry) throw new Error(`visits entry not found for locale: ${locale}`);
+  const entry = await getEntry("visites", locale);
+  if (!entry) throw new Error(`visites entry not found for locale: ${locale}`);
   return entry.data;
 }
 
 export async function getShopData(locale: Locale): Promise<ShopPageData> {
-  const entry = await getEntry("shop", locale);
-  if (!entry) throw new Error(`shop entry not found for locale: ${locale}`);
+  const entry = await getEntry("boutique", locale);
+  if (!entry) throw new Error(`boutique entry not found for locale: ${locale}`);
   return entry.data;
 }
 
 export async function getNewsData(locale: Locale): Promise<NewsPageData> {
-  const entry = await getEntry("news", locale);
-  if (!entry) throw new Error(`news entry not found for locale: ${locale}`);
+  const entry = await getEntry("actualites", locale);
+  if (!entry) throw new Error(`actualites entry not found for locale: ${locale}`);
   return entry.data;
 }
 
@@ -61,7 +61,7 @@ export async function getVins(locale: Locale) {
 
 /** Retourne les visites triées par ordre pour la locale donnée. */
 export async function getVisites(locale: Locale) {
-  const entries = await getCollection("visites", (e) =>
+  const entries = await getCollection("formulesVisite", (e) =>
     e.id.endsWith(`.${locale}`)
   );
   return entries.sort((a, b) => a.data.ordre - b.data.ordre);

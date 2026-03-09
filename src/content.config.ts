@@ -25,8 +25,8 @@ const vins = defineCollection({
     }),
 });
 
-const visites = defineCollection({
-  loader: glob({ pattern: "**/*.yaml", base: "./src/content/visites" }),
+const formulesVisite = defineCollection({
+  loader: glob({ pattern: "**/*.yaml", base: "./src/content/formules-visite" }),
   schema: z.object({
     titre: z.string(),
     sousTitre: z.string(),
@@ -151,8 +151,8 @@ const domaine = defineCollection({
     }),
 });
 
-const news = defineCollection({
-  loader: glob({ pattern: "*.yaml", base: "./src/content/news" }),
+const actualites = defineCollection({
+  loader: glob({ pattern: "*.yaml", base: "./src/content/actualites" }),
   schema: ({ image }) =>
     z.object({
       seo: z.object({ title: z.string(), description: z.string() }),
@@ -245,8 +245,8 @@ const news = defineCollection({
     }),
 });
 
-const shop = defineCollection({
-  loader: glob({ pattern: "*.yaml", base: "./src/content/shop" }),
+const boutique = defineCollection({
+  loader: glob({ pattern: "*.yaml", base: "./src/content/boutique" }),
   schema: ({ image }) =>
     z.object({
       seo: z.object({ title: z.string(), description: z.string() }),
@@ -345,8 +345,8 @@ const shop = defineCollection({
     }),
 });
 
-const visits = defineCollection({
-  loader: glob({ pattern: "*.yaml", base: "./src/content/visits" }),
+const visites = defineCollection({
+  loader: glob({ pattern: "*.yaml", base: "./src/content/visites" }),
   schema: ({ image }) =>
     z.object({
       seo: z.object({ title: z.string(), description: z.string() }),
@@ -519,8 +519,8 @@ const visits = defineCollection({
     }),
 });
 
-const site = defineCollection({
-  loader: glob({ pattern: "*.yaml", base: "./src/content/site" }),
+const accueil = defineCollection({
+  loader: glob({ pattern: "*.yaml", base: "./src/content/accueil" }),
   schema: ({ image }) =>
     z.object({
       nav: z.array(z.object({
@@ -719,4 +719,4 @@ const contact = defineCollection({
   }),
 });
 
-export const collections = { vins, visites, coffrets, domaine, news, shop, visits, site, ui, contact };
+export const collections = { vins, formulesVisite, coffrets, domaine, actualites, boutique, visites, accueil, ui, contact };

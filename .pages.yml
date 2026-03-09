@@ -3,6 +3,7 @@ media:
   output: /uploads
 
 content:
+  # ── Global ──────────────────────────────────────────────────────
   - name: contact
     label: Contact global
     type: file
@@ -105,10 +106,327 @@ content:
         label: Ajouter au panier
         type: string
 
-  - name: visites
-    label: Offres de visites
+  # ── Pages ────────────────────────────────────────────────────────
+  - name: accueil
+    label: Accueil
+    type: collection
+    path: src/content/accueil
+    filename: "{primary}.yaml"
+    view:
+      fields: [hero.eyebrow, hero.body]
+    fields:
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: title
+            label: Titre SEO
+            type: string
+          - name: description
+            label: Description SEO
+            type: text
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre (liste de lignes)
+            type: string
+            list: true
+          - name: body
+            label: Corps
+            type: text
+          - name: ctaLabel
+            label: CTA label
+            type: string
+          - name: ctaHref
+            label: CTA lien
+            type: string
+          - name: meta
+            label: Méta items
+            type: string
+            list: true
+
+  - name: domaine
+    label: Domaine
+    type: collection
+    path: src/content/domaine
+    filename: "{primary}.yaml"
+    view:
+      fields: [hero.eyebrow, seo.title]
+    fields:
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: title
+            label: Titre SEO
+            type: string
+          - name: description
+            label: Description SEO
+            type: text
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: primaryCta
+            label: CTA principal
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: secondaryCta
+            label: CTA secondaire
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+      - name: terroir
+        label: Terroir
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+      - name: family
+        label: Histoire famille
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps (liste de paragraphes)
+            type: text
+            list: true
+
+  - name: visites-page
+    label: Visites (page)
     type: collection
     path: src/content/visites
+    filename: "{primary}.yaml"
+    view:
+      fields: [hero.eyebrow, seo.title]
+    fields:
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: title
+            label: Titre SEO
+            type: string
+          - name: description
+            label: Description SEO
+            type: text
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: primaryCta
+            label: CTA principal
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: secondaryCta
+            label: CTA secondaire
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: helper
+            label: Texte d'aide
+            type: string
+      - name: trustBar
+        label: Trust bar (liste)
+        type: string
+        list: true
+
+  - name: boutique-page
+    label: Boutique (page)
+    type: collection
+    path: src/content/boutique
+    filename: "{primary}.yaml"
+    view:
+      fields: [hero.eyebrow, seo.title]
+    fields:
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: title
+            label: Titre SEO
+            type: string
+          - name: description
+            label: Description SEO
+            type: text
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: titleHtml
+            label: Titre (HTML autorisé)
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: primaryCta
+            label: CTA principal
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: secondaryCta
+            label: CTA secondaire
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+      - name: faq
+        label: FAQ
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: items
+            label: Questions / Réponses
+            type: object
+            list: true
+            fields:
+              - name: question
+                label: Question
+                type: string
+              - name: answer
+                label: Réponse
+                type: text
+
+  - name: actualites-page
+    label: Actualités (page)
+    type: collection
+    path: src/content/actualites
+    filename: "{primary}.yaml"
+    view:
+      fields: [hero.eyebrow, seo.title]
+    fields:
+      - name: seo
+        label: SEO
+        type: object
+        fields:
+          - name: title
+            label: Titre SEO
+            type: string
+          - name: description
+            label: Description SEO
+            type: text
+      - name: hero
+        label: Hero
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: lead
+            label: Chapeau
+            type: text
+          - name: primaryCta
+            label: CTA principal
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+      - name: featured
+        label: Article vedette
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: category
+            label: Catégorie
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: excerpt
+            label: Extrait
+            type: text
+          - name: date
+            label: Date
+            type: string
+          - name: readTime
+            label: Temps de lecture
+            type: string
+          - name: ctaLabel
+            label: CTA label
+            type: string
+          - name: ctaHref
+            label: CTA lien
+            type: string
+
+  # ── Produits ─────────────────────────────────────────────────────
+  - name: formules-visite
+    label: Formules de visite
+    type: collection
+    path: src/content/formules-visite
     filename: "{primary}.yaml"
     view:
       fields: [titre, prix, locale]
