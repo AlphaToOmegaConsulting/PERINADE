@@ -24,7 +24,7 @@ export interface NewsEventItem {
 export interface NewsBlogPost {
   headline: string;
   description: string;
-  datePublished: string;
+  datePublished: Date;
   url: string;
   category: string;
 }
