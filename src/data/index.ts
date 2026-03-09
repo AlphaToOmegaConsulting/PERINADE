@@ -46,7 +46,7 @@ export async function getNewsData(locale: Locale): Promise<NewsPageData> {
 /** Retourne les coffrets triés par ordre pour la locale donnée. */
 export async function getCoffrets(locale: Locale) {
   const entries = await getCollection("coffrets", (e) =>
-    e.id.endsWith(`.${locale}.yaml`)
+    e.id.endsWith(`.${locale}`)
   );
   return entries.sort((a, b) => a.data.ordre - b.data.ordre);
 }
@@ -54,7 +54,7 @@ export async function getCoffrets(locale: Locale) {
 /** Retourne les vins triés par ordre pour la locale donnée. */
 export async function getVins(locale: Locale) {
   const entries = await getCollection("vins", (e) =>
-    e.id.endsWith(`.${locale}.yaml`)
+    e.id.endsWith(`.${locale}`)
   );
   return entries.sort((a, b) => a.data.ordre - b.data.ordre);
 }
@@ -62,7 +62,7 @@ export async function getVins(locale: Locale) {
 /** Retourne les visites triées par ordre pour la locale donnée. */
 export async function getVisites(locale: Locale) {
   const entries = await getCollection("visites", (e) =>
-    e.id.endsWith(`.${locale}.yaml`)
+    e.id.endsWith(`.${locale}`)
   );
   return entries.sort((a, b) => a.data.ordre - b.data.ordre);
 }

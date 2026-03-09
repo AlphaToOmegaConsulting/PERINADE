@@ -9,7 +9,7 @@ const locale = "fr";
 const site = await getSiteData(locale);
 ---
 
-<BaseLayout title="Page introuvable | Domaine de la Périnade" description="Cette page n'existe pas ou a été déplacée." locale={locale}>
+<BaseLayout title="Page introuvable | Domaine de la Périnade" description="Cette page n'existe pas ou a été déplacée." locale={locale} noindex={true}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={{ fr: "/", en: "/en", es: "/es" }} />
   <main id="main-content" class="not-found">
     <div class="shell not-found__shell">
@@ -27,56 +27,3 @@ const site = await getSiteData(locale);
   </main>
   <Footer footer={site.footer} />
 </BaseLayout>
-
-<style>
-  .not-found {
-    align-items: center;
-    display: flex;
-    min-height: calc(100svh - var(--header-height) * 2);
-    padding-block: clamp(4rem, 10vw, 8rem);
-  }
-
-  .not-found__shell {
-    text-align: center;
-  }
-
-  .not-found__code {
-    color: var(--color-accent);
-    font-family: var(--font-display);
-    font-size: clamp(5rem, 18vw, 10rem);
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1;
-    margin: 0 0 0.25em;
-    opacity: 0.35;
-  }
-
-  .not-found__title {
-    font-size: clamp(1.75rem, 4vw, 2.75rem);
-    margin: 0 0 1rem;
-  }
-
-  .not-found__body {
-    color: var(--color-muted);
-    font-size: clamp(1rem, 2vw, 1.125rem);
-    line-height: 1.65;
-    margin: 0 auto 2.5rem;
-    max-width: 36rem;
-  }
-
-  .not-found__body p {
-    margin: 0.4rem 0;
-  }
-
-  .not-found__actions {
-    display: inline-flex;
-    gap: 0.65rem;
-  }
-
-  .not-found__actions :global(.not-found__cta) {
-    border-radius: 0.5rem;
-    font-size: 0.9375rem;
-    min-width: 5rem;
-    padding: 0.85rem 1.4rem;
-  }
-</style>

@@ -25,16 +25,30 @@ const initFormGuards = () => {
 };
 
 export const initUi = (): void => {
+  /* Critique — initialiser immédiatement pour l'interactivité visible */
   initFormGuards();
   initHeaderMenus();
   initAccordions();
   initTabsWidgets();
-  initBookingCalendars();
   initCounters();
   initContactForms();
-  initCursorOrb();
-  initScrollReveals();
+
+  /* Non-critique — différer au premier moment d'inactivité du navigateur */
+  const deferred = () => {
+    initBookingCalendars();
+    initCursorOrb();
+    initScrollReveals();
+  };
+
+  if (typeof requestIdleCallback !== "undefined") {
+    requestIdleCallback(deferred, { timeout: 2000 });
+  } else {
+    setTimeout(deferred, 200);
+  }
 };
+
+/* Initialisation au chargement de la page (compatible ViewTransitions) */
+document.addEventListener("astro:page-load", () => initUi());
 
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => initUi(), { once: true });

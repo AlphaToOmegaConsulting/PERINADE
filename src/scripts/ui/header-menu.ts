@@ -6,6 +6,50 @@ const FOCUSABLE_SELECTOR =
 
 let quickActionsReady = false;
 
+const normalizePath = (value: string): string => {
+  if (!value || value === "/") return "/";
+  return value.replace(/\/+$/, "");
+};
+
+const isPathActive = (currentPath: string, href: string): boolean => {
+  if (!href || href.startsWith("tel:")) return false;
+
+  const targetPath = normalizePath(href.split("#")[0] || href);
+  const activePath = normalizePath(currentPath);
+
+  if (targetPath === "/") {
+    return activePath === "/";
+  }
+
+  return activePath === targetPath || activePath.startsWith(`${targetPath}/`);
+};
+
+const syncHeaderNavState = (): void => {
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll<HTMLElement>("[data-header] .ui-nav-link").forEach((link) => {
+    if (!(link instanceof HTMLAnchorElement)) return;
+
+    const active = isPathActive(currentPath, link.getAttribute("href") ?? "");
+    link.classList.toggle("is-active", active);
+
+    if (active) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+};
+
+const syncQuickActionState = (): void => {
+  const currentPath = window.location.pathname;
+
+  document.querySelectorAll<HTMLAnchorElement>("[data-mobile-quick-actions] a").forEach((link) => {
+    const active = isPathActive(currentPath, link.getAttribute("href") ?? "");
+    link.classList.toggle("is-active", active);
+  });
+};
+
 const initHeaderMenu = (header: HTMLElement): void => {
   if (header.dataset.uiReady === "true") return;
 
@@ -125,6 +169,8 @@ const initHeaderMenu = (header: HTMLElement): void => {
 
 export const initHeaderMenus = (): void => {
   document.querySelectorAll<HTMLElement>("[data-header]").forEach(initHeaderMenu);
+  syncHeaderNavState();
+  syncQuickActionState();
 
   if (quickActionsReady) return;
 
@@ -137,15 +183,6 @@ export const initHeaderMenus = (): void => {
         href: link.getAttribute("href") ?? ""
       });
     });
-  });
-
-  const currentPath = window.location.pathname;
-  document.querySelectorAll<HTMLAnchorElement>("[data-mobile-quick-actions] a").forEach((link) => {
-    const href = link.getAttribute("href") ?? "";
-    if (href.startsWith("tel:")) return;
-    if (href.startsWith(currentPath) || currentPath.startsWith(href.split("#")[0] ?? "")) {
-      link.classList.add("is-active");
-    }
   });
 
   quickActionsReady = true;

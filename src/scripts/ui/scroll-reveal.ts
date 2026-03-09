@@ -1,4 +1,11 @@
 let revealInitialized = false;
+let activeObserver: IntersectionObserver | null = null;
+
+document.addEventListener("astro:before-swap", () => {
+  revealInitialized = false;
+  activeObserver?.disconnect();
+  activeObserver = null;
+});
 
 const registerDeclarativeRevealGroups = (): void => {
   document.querySelectorAll<HTMLElement>("[data-reveal-group]").forEach((group) => {
@@ -42,13 +49,13 @@ export const initScrollReveals = (): void => {
     return;
   }
 
-  const observer = new IntersectionObserver(
-    (entries, currentObserver) => {
+  activeObserver = new IntersectionObserver(
+    (entries, obs) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         const target = entry.target as HTMLElement;
         target.classList.add("is-visible");
-        currentObserver.unobserve(target);
+        obs.unobserve(target);
       });
     },
     {
@@ -59,7 +66,7 @@ export const initScrollReveals = (): void => {
   );
 
   document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((node) => {
-    observer.observe(node);
+    activeObserver!.observe(node);
   });
 
   revealInitialized = true;

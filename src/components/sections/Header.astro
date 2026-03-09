@@ -16,7 +16,7 @@ interface Props {
 }
 
 const { nav, quickActions = [], ctaLabel, ctaHref, locale = defaultLocale, alternateUrls } = Astro.props;
-const ui = getUiStrings(locale);
+const ui = await getUiStrings(locale);
 
 const leftNav = nav.filter((item) => item.desktopSlot === "left");
 const rightNav = nav.filter((item) => item.desktopSlot === "right");
@@ -41,7 +41,7 @@ const langLinks = alternateUrls
   : [];
 ---
 
-<header class="site-header" data-header>
+<header class="site-header" data-header transition:persist>
   <div class="site-header__fade" aria-hidden="true"></div>
   <nav class="shell site-header__nav" aria-label={ui.navLabel}>
     <div class="site-header__group site-header__group--left">
@@ -276,12 +276,29 @@ const langLinks = alternateUrls
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.06em;
-    padding: 0.2rem 0.35rem;
+    padding: 0.2rem 0.35rem 0.3rem;
+  }
+
+  .site-header__lang-item:global(.ui-nav-link)::after {
+    background: var(--color-accent);
+    height: 0.1rem;
+    inset-inline: 0.35rem;
+    top: calc(100% + 0.12rem);
+    transform-origin: center;
+  }
+
+  .site-header__lang-item:global(.ui-nav-link:hover),
+  .site-header__lang-item:global(.ui-nav-link:focus-visible) {
+    color: var(--color-white);
   }
 
   .site-header__lang-item:global(.is-active) {
     color: var(--color-white);
-    border-bottom: 1.5px solid var(--color-accent);
+  }
+
+  .site-header__lang-item:global(.ui-nav-link.is-active)::after {
+    opacity: 1;
+    transform: scaleX(1);
   }
 
   .site-header__lang--mobile {
