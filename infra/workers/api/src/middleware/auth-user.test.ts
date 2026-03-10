@@ -18,9 +18,11 @@ function encodeJson(obj: unknown): string {
 
 async function makeToken(
   privateKey: CryptoKey,
-  payload: Record<string, unknown>
+  payload: Record<string, unknown>,
+  // Fix 3: optional header overrides (e.g. to set a kid)
+  headerOverrides?: Record<string, unknown>
 ): Promise<string> {
-  const header = encodeJson({ alg: "ES256", typ: "JWT" });
+  const header = encodeJson({ alg: "ES256", typ: "JWT", ...headerOverrides });
   const body = encodeJson(payload);
   const data = new TextEncoder().encode(`${header}.${body}`);
   const sigBytes = await crypto.subtle.sign(
@@ -49,6 +51,11 @@ beforeAll(async () => {
 afterEach(() => {
   resetJwksCache();
 });
+
+// Helper: wrap a CryptoKey into the cache entry format required by setJwksCache
+function cacheEntry(key: CryptoKey, kid = "test-key-id") {
+  return { kid, key };
+}
 
 // Minimal Hono app for testing
 function makeApp() {
@@ -96,7 +103,7 @@ describe("supabaseUserAuth middleware", () => {
   });
 
   it("returns 401 when token is expired", async () => {
-    setJwksCache([publicKey]);
+    setJwksCache([cacheEntry(publicKey)]);
     const app = makeApp();
 
     const expiredPayload = {
@@ -111,7 +118,7 @@ describe("supabaseUserAuth middleware", () => {
   });
 
   it("returns 401 when signature is invalid (tampered payload)", async () => {
-    setJwksCache([publicKey]);
+    setJwksCache([cacheEntry(publicKey)]);
     const app = makeApp();
 
     const validPayload = {
@@ -160,7 +167,7 @@ describe("supabaseUserAuth middleware", () => {
   });
 
   it("passes with a valid token and sets userId + userEmail on context", async () => {
-    setJwksCache([publicKey]);
+    setJwksCache([cacheEntry(publicKey)]);
     const app = makeApp();
 
     const validPayload = {
@@ -177,5 +184,21 @@ describe("supabaseUserAuth middleware", () => {
       userId: "user-uuid-456",
       userEmail: "customer@perinade.fr",
     });
+  });
+
+  // Fix 3: token signed with valid key, future exp, but no sub → 401
+  it("returns 401 when token is missing the sub claim", async () => {
+    setJwksCache([cacheEntry(publicKey)]);
+    const app = makeApp();
+
+    const noSubPayload = {
+      email: "user@example.com",
+      exp: Math.floor(Date.now() / 1000) + 3600,
+      // intentionally no sub field
+    };
+    const token = await makeToken(privateKey, noSubPayload);
+
+    const res = await request(app, `Bearer ${token}`);
+    expect(res.status).toBe(401);
   });
 });

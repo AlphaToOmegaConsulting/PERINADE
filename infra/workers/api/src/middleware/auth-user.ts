@@ -11,7 +11,8 @@ const SUPABASE_JWKS_URL =
   "https://ieuaozyzffcmmrgigivc.supabase.co/auth/v1/.well-known/jwks.json";
 
 // Module-level cache: a single Promise so concurrent requests share the same fetch
-let jwksCache: Promise<CryptoKey[]> | null = null;
+// Fix 1: cache now preserves the kid ↔ CryptoKey association
+let jwksCache: Promise<{ kid: string; key: CryptoKey }[]> | null = null;
 
 function base64urlToUint8Array(b64url: string): Uint8Array {
   const b64 = b64url.replace(/-/g, "+").replace(/_/g, "/");
@@ -33,27 +34,32 @@ interface EcJwk {
   use: string;
 }
 
-async function fetchJwks(): Promise<CryptoKey[]> {
+// Fix 1: fetchJwks returns { kid, key }[] instead of CryptoKey[]
+async function fetchJwks(): Promise<{ kid: string; key: CryptoKey }[]> {
   const res = await fetch(SUPABASE_JWKS_URL);
   if (!res.ok) throw new Error(`JWKS fetch failed: ${res.status}`);
   const data: { keys: EcJwk[] } = await res.json();
 
+  const filtered = data.keys.filter(
+    (k) => k.kty === "EC" && k.crv === "P-256"
+  );
+
   return Promise.all(
-    data.keys
-      .filter((k) => k.kty === "EC" && k.crv === "P-256")
-      .map((jwk) =>
-        crypto.subtle.importKey(
-          "jwk",
-          jwk,
-          { name: "ECDSA", namedCurve: "P-256" },
-          false,
-          ["verify"]
-        )
-      )
+    filtered.map(async (jwk) => {
+      const key = await crypto.subtle.importKey(
+        "jwk",
+        jwk,
+        { name: "ECDSA", namedCurve: "P-256" },
+        false,
+        ["verify"]
+      );
+      return { kid: jwk.kid, key };
+    })
   );
 }
 
-function getJwks(): Promise<CryptoKey[]> {
+// Fix 1: getJwks returns { kid, key }[]
+function getJwks(): Promise<{ kid: string; key: CryptoKey }[]> {
   if (!jwksCache) {
     jwksCache = fetchJwks().catch((err) => {
       // Clear cache on failure so next request retries
@@ -70,8 +76,9 @@ export function resetJwksCache(): void {
 }
 
 // Exported for testing — injects a pre-resolved cache
-export function setJwksCache(keys: CryptoKey[]): void {
-  jwksCache = Promise.resolve(keys);
+// Fix 1: updated signature to accept { kid, key }[]
+export function setJwksCache(entries: { kid: string; key: CryptoKey }[]): void {
+  jwksCache = Promise.resolve(entries);
 }
 
 export const supabaseUserAuth: MiddlewareHandler<{
@@ -91,6 +98,7 @@ export const supabaseUserAuth: MiddlewareHandler<{
 
   const [headerB64, payloadB64, sigB64] = parts;
 
+  // Fix 2: decode header + payload first, then verify signature, then validate claims
   let header: { kid?: string; alg?: string };
   let payload: { sub?: string; email?: string; exp?: number };
   try {
@@ -102,30 +110,30 @@ export const supabaseUserAuth: MiddlewareHandler<{
     return c.json({ error: "Unauthorized" }, 401);
   }
 
-  // Validate expiry
-  if (!payload.exp || payload.exp < Date.now() / 1000) {
-    return c.json({ error: "Unauthorized" }, 401);
-  }
-
-  // Require sub claim
-  if (!payload.sub) {
-    return c.json({ error: "Unauthorized" }, 401);
-  }
-
-  let keys: CryptoKey[];
+  let entries: { kid: string; key: CryptoKey }[];
   try {
-    keys = await getJwks();
+    entries = await getJwks();
   } catch {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
-  // Try each key — we don't have kid-per-key mapping from the cache, so we
-  // try all and accept if any verifies. If header.kid is present, prefer matching.
+  // Fix 1: prefer the key whose kid matches the token header's kid,
+  // then fall back to trying all keys if no match found.
   const signatureBytes = base64urlToUint8Array(sigB64);
   const dataBytes = new TextEncoder().encode(`${headerB64}.${payloadB64}`);
 
+  // Build the ordered list of keys to try: matching kid first, then the rest
+  const tokenKid = header.kid;
+  const ordered =
+    tokenKid !== undefined
+      ? [
+          ...entries.filter((e) => e.kid === tokenKid),
+          ...entries.filter((e) => e.kid !== tokenKid),
+        ]
+      : entries;
+
   let verified = false;
-  for (const key of keys) {
+  for (const { key } of ordered) {
     try {
       const ok = await crypto.subtle.verify(
         { name: "ECDSA", hash: "SHA-256" },
@@ -143,6 +151,16 @@ export const supabaseUserAuth: MiddlewareHandler<{
   }
 
   if (!verified) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+
+  // Fix 2: validate claims AFTER signature verification
+  if (!payload.exp || payload.exp < Date.now() / 1000) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+
+  // Require sub claim
+  if (!payload.sub) {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
