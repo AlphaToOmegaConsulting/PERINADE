@@ -12,11 +12,11 @@ export async function getSession() {
   return session;
 }
 
-export async function sendMagicLink(email: string): Promise<{ error: string | null }> {
+export async function sendMagicLink(email: string, callbackUrl: string): Promise<{ error: string | null }> {
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${window.location.origin}/compte/callback`,
+      emailRedirectTo: callbackUrl,
     },
   });
   return { error: error?.message ?? null };
@@ -27,7 +27,7 @@ export async function signOut(): Promise<void> {
 }
 
 export async function fetchUserProfile(accessToken: string) {
-  const res = await fetch("https://perinade.alpha2omegaconsulting.com/api/user/me", {
+  const res = await fetch("/api/user/me", {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   if (!res.ok) return null;
@@ -40,7 +40,7 @@ export async function fetchUserProfile(accessToken: string) {
 }
 
 export async function fetchOrders(accessToken: string) {
-  const res = await fetch("https://perinade.alpha2omegaconsulting.com/api/user/orders", {
+  const res = await fetch("/api/user/orders", {
     headers: { Authorization: `Bearer ${accessToken}` },
   });
   if (!res.ok) return [];

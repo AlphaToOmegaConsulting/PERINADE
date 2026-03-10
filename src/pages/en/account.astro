@@ -116,7 +116,8 @@ const alternateUrls = getAlternateUrls(pageId);
       const email = (document.getElementById("login-email") as HTMLInputElement).value;
       submit.disabled = true;
       submit.textContent = "Sending…";
-      const { error } = await sendMagicLink(email);
+      const callbackUrl = window.location.origin + "/en/account/callback";
+      const { error } = await sendMagicLink(email, callbackUrl);
       msg.hidden = false;
       if (error) {
         msg.textContent = "Error: " + error;
