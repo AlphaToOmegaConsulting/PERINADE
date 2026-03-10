@@ -6,10 +6,14 @@ import type { Env } from "../types.js";
 export const productRoutes = new Hono<{ Bindings: Env }>();
 
 productRoutes.get("/", async (c) => {
-  const rows = await c.env.DB.prepare(
-    "SELECT * FROM products ORDER BY id ASC"
-  ).all();
-  return c.json(rows.results);
+  try {
+    const rows = await c.env.DB.prepare(
+      "SELECT * FROM products ORDER BY id ASC"
+    ).all();
+    return c.json(rows.results);
+  } catch {
+    return c.json({ error: "Database error" }, 500);
+  }
 });
 
 const patchSchema = z.object({
@@ -27,27 +31,32 @@ productRoutes.patch("/:id", zValidator("json", patchSchema), async (c) => {
   const now = new Date().toISOString();
   const db = c.env.DB;
 
-  const product = await db.prepare("SELECT * FROM products WHERE id = ?").bind(id).first();
-  if (!product) return c.json({ error: "Product not found" }, 404);
+  try {
+    const product = await db.prepare("SELECT * FROM products WHERE id = ?").bind(id).first();
+    if (!product) return c.json({ error: "Product not found" }, 404);
 
-  if (data.stock_qty !== undefined) {
-    const delta = data.stock_qty - (product.stock_qty as number);
-    await db.prepare(
-      "UPDATE products SET stock_qty = ?, updated_at = ? WHERE id = ?"
-    ).bind(data.stock_qty, now, id).run();
+    if (data.stock_qty !== undefined) {
+      const delta = data.stock_qty - (product.stock_qty as number);
+      await db.batch([
+        db.prepare(
+          "UPDATE products SET stock_qty = ?, updated_at = ? WHERE id = ?"
+        ).bind(data.stock_qty, now, id),
+        db.prepare(
+          `INSERT INTO stock_movements (id, product_id, type, qty_delta, reference_id, note, created_at)
+           VALUES (?, ?, 'manual', ?, 'manual', ?, ?)`
+        ).bind(crypto.randomUUID(), id, delta, data.note ?? null, now),
+      ]);
+    }
 
-    await db.prepare(
-      `INSERT INTO stock_movements (id, product_id, type, qty_delta, reference_id, note, created_at)
-       VALUES (?, ?, 'manual', ?, 'manual', ?, ?)`
-    ).bind(crypto.randomUUID(), id, delta, data.note ?? null, now).run();
+    if (data.prix_cents !== undefined) {
+      await db.prepare(
+        "UPDATE products SET prix_cents = ?, updated_at = ? WHERE id = ?"
+      ).bind(data.prix_cents, now, id).run();
+    }
+
+    const updated = await db.prepare("SELECT * FROM products WHERE id = ?").bind(id).first();
+    return c.json(updated);
+  } catch {
+    return c.json({ error: "Database error" }, 500);
   }
-
-  if (data.prix_cents !== undefined) {
-    await db.prepare(
-      "UPDATE products SET prix_cents = ?, updated_at = ? WHERE id = ?"
-    ).bind(data.prix_cents, now, id).run();
-  }
-
-  const updated = await db.prepare("SELECT * FROM products WHERE id = ?").bind(id).first();
-  return c.json(updated);
 });

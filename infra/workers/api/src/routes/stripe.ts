@@ -22,11 +22,19 @@ stripeRoutes.get("/events", async (c) => {
 stripeRoutes.get("/reconcile", async (c) => {
   // Fetch D1 paid orders (last 30 days)
   const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
-  const d1Orders = await c.env.DB.prepare(
-    "SELECT stripe_session_id, status, amount_total FROM orders WHERE created_at >= ?"
-  ).bind(since).all<{ stripe_session_id: string; status: string; amount_total: number }>();
+  type D1Order = { stripe_session_id: string; status: string; amount_total: number };
+  let d1Orders: { results: D1Order[] };
+  try {
+    d1Orders = await c.env.DB.prepare(
+      "SELECT stripe_session_id, status, amount_total FROM orders WHERE created_at >= ?"
+    ).bind(since).all<D1Order>();
+  } catch {
+    return c.json({ error: "Database error" }, 500);
+  }
 
-  // Fetch Stripe Checkout Sessions (keyed by id = cs_xxx, matches stripe_session_id in D1)
+  // NOTE: Stripe API caps a single page at 100 results.
+  // Reconciliation covers at most 100 Stripe sessions; pagination not implemented.
+  // For high-volume periods, divergences beyond the first 100 sessions may be missed.
   const sinceSec = Math.floor(Date.now() / 1000 - 30 * 24 * 3600);
   const stripeRes = await fetch(
     `https://api.stripe.com/v1/checkout/sessions?limit=100&created[gte]=${sinceSec}`,
@@ -45,7 +53,7 @@ stripeRoutes.get("/reconcile", async (c) => {
   const items = Array.from(allKeys).map((key) => {
     const d1 = d1Map.get(key) ?? null;
     const stripe = stripeMap.get(key) ?? null;
-    const amountMatch = d1 && stripe ? d1.amount_total === stripe.amount_total : d1 === stripe;
+    const amountMatch = d1 !== null && stripe !== null && d1.amount_total === stripe.amount_total;
     const statusMatch = !d1 || !stripe ? false :
       (d1.status === "paid" && stripe.payment_status === "paid") ||
       (d1.status === "failed" && stripe.payment_status === "unpaid");
@@ -73,9 +81,14 @@ stripeRoutes.get("/reconcile", async (c) => {
 
 stripeRoutes.post("/sync/:orderId", async (c) => {
   const orderId = c.req.param("orderId");
-  const order = await c.env.DB.prepare(
-    "SELECT * FROM orders WHERE id = ? OR stripe_session_id = ?"
-  ).bind(orderId, orderId).first<{ stripe_session_id: string }>();
+  let order: { stripe_session_id: string } | null;
+  try {
+    order = await c.env.DB.prepare(
+      "SELECT * FROM orders WHERE id = ? OR stripe_session_id = ?"
+    ).bind(orderId, orderId).first<{ stripe_session_id: string }>();
+  } catch {
+    return c.json({ error: "Database error" }, 500);
+  }
   if (!order) return c.json({ error: "Order not found" }, 404);
 
   const res = await fetch(
@@ -85,10 +98,17 @@ stripeRoutes.post("/sync/:orderId", async (c) => {
   if (!res.ok) return c.json({ error: "Stripe API error" }, 502);
   const session: { payment_status: string; amount_total: number } = await res.json();
 
-  const newStatus = session.payment_status === "paid" ? "paid" : "pending";
-  await c.env.DB.prepare(
-    "UPDATE orders SET status = ?, amount_total = ? WHERE stripe_session_id = ?"
-  ).bind(newStatus, session.amount_total, order.stripe_session_id).run();
+  const newStatus =
+    session.payment_status === "paid" ? "paid" :
+    session.payment_status === "unpaid" ? "failed" :
+    "pending"; // no_payment_required or unknown
+  try {
+    await c.env.DB.prepare(
+      "UPDATE orders SET status = ?, amount_total = ? WHERE stripe_session_id = ?"
+    ).bind(newStatus, session.amount_total, order.stripe_session_id).run();
+  } catch {
+    return c.json({ error: "Database error" }, 500);
+  }
 
   return c.json({ synced: true, new_status: newStatus });
 });

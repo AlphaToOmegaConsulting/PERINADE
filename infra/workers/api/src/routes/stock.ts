@@ -9,6 +9,10 @@ stockRoutes.get("/movements", async (c) => {
   const params: string[] = [];
   if (productId) { sql += " WHERE product_id = ?"; params.push(productId); }
   sql += " ORDER BY created_at DESC LIMIT 200";
-  const rows = await c.env.DB.prepare(sql).bind(...params).all();
-  return c.json(rows.results);
+  try {
+    const rows = await c.env.DB.prepare(sql).bind(...params).all();
+    return c.json(rows.results);
+  } catch {
+    return c.json({ error: "Database error" }, 500);
+  }
 });
