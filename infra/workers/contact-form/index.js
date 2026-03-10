@@ -38,7 +38,7 @@ export default {
       .map((o) => o.trim())
       .filter(Boolean);
 
-    const originAllowed = allowedOrigins.length === 0 || allowedOrigins.includes(origin);
+    const originAllowed = allowedOrigins.length > 0 && allowedOrigins.includes(origin);
 
     const corsHeaders = {
       "Access-Control-Allow-Origin": originAllowed ? origin : "null",

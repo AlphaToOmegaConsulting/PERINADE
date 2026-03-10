@@ -63,7 +63,7 @@ const jsonLd = JSON.stringify([
     "@type": "ItemList",
     "name": "Catalogue vins et coffrets — Domaine de la Périnade",
     "description": "Achetez nos cuvées et coffrets en ligne, directement depuis le domaine.",
-    "url": "https://www.perinade.fr/boutique",
+    "url": Astro.url.href,
     "numberOfItems": allProducts.length,
     "itemListElement": allProducts.map((product, index) => ({
       "@type": "ListItem",
@@ -118,7 +118,12 @@ const jsonLd = JSON.stringify([
     <ShopFaq faq={shopPage.faq} />
     <ShopComplianceBand compliance={shopPage.compliance} />
   </main>
-  <CartPopup />
+  <CartPopup
+    cartLabel="Panier"
+    cartHref="/panier"
+    closeAriaLabel="Fermer le mini-panier"
+    countTemplate="Panier : {count} article(s)"
+  />
   <Footer footer={site.footer} />
 </BaseLayout>
 

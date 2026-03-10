@@ -97,7 +97,7 @@ const { booking } = Astro.props;
           <input type="hidden" name="totalPerPerson" data-booking-field-total />
 
           <SubmitButton class="booking__cta" label={booking.config.ctaLabel} variant="primary" size="lg" fullWidth />
-          <a class="booking__call" href="tel:+33468000000">{booking.config.callLabel}</a>
+          <a class="booking__call" href={booking.config.callHref}>{booking.config.callLabel}</a>
           <p class="booking__status" data-booking-status aria-live="polite"></p>
         </form>
       </div>

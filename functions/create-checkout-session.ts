@@ -100,25 +100,37 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     httpClient: Stripe.createFetchHttpClient(),
   });
 
-  // Stock check — optimistic strategy (see spec for race condition handling)
-  // DB binding is available via context.env.DB (Cloudflare Pages Functions)
+  // Optimistic stock decrement — atomic UPDATE avoids TOCTOU race condition.
+  // Each UPDATE only succeeds if stock_qty >= qty; changes === 0 means insufficient stock.
+  // On Stripe failure the decrements are rolled back.
+  const decremented: Array<{ id: string; qty: number }> = [];
   if (context.env.DB) {
     try {
       for (const item of items) {
-        const row = await context.env.DB.prepare(
-          "SELECT stock_qty FROM products WHERE id = ?"
-        ).bind(item.id).first<{ stock_qty: number }>();
+        const result = await context.env.DB.prepare(
+          "UPDATE products SET stock_qty = stock_qty - ? WHERE id = ? AND stock_qty >= ?"
+        ).bind(item.qty, item.id, item.qty).run();
 
-        if (!row || row.stock_qty < item.qty) {
+        if (result.meta.changes === 0) {
+          // Roll back already-decremented items
+          if (decremented.length > 0) {
+            const rollbacks = decremented.map(({ id, qty }) =>
+              context.env.DB!.prepare(
+                "UPDATE products SET stock_qty = stock_qty + ? WHERE id = ?"
+              ).bind(qty, id)
+            );
+            await context.env.DB.batch(rollbacks);
+          }
           return json({ error: `Stock insuffisant pour ${item.name}` }, 409);
         }
+        decremented.push({ id: item.id, qty: item.qty });
       }
     } catch {
       // D1 unavailable — fail open to avoid blocking checkout
       console.error("Stock check failed, proceeding without check");
     }
   }
-  // If DB is not bound (dev without D1), skip check
+  // If DB is not bound (dev without D1), skip stock check
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -138,10 +150,34 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
       })),
     });
 
-    if (!session.url) return json({ error: "Missing session URL" }, 500);
+    if (!session.url) {
+      // Stripe session created but no URL — roll back decrements
+      if (context.env.DB && decremented.length > 0) {
+        const rollbacks = decremented.map(({ id, qty }) =>
+          context.env.DB!.prepare(
+            "UPDATE products SET stock_qty = stock_qty + ? WHERE id = ?"
+          ).bind(qty, id)
+        );
+        await context.env.DB.batch(rollbacks);
+      }
+      return json({ error: "Missing session URL" }, 500);
+    }
 
     return json({ url: session.url });
   } catch {
+    // Stripe failed — roll back stock decrements
+    if (context.env.DB && decremented.length > 0) {
+      try {
+        const rollbacks = decremented.map(({ id, qty }) =>
+          context.env.DB!.prepare(
+            "UPDATE products SET stock_qty = stock_qty + ? WHERE id = ?"
+          ).bind(qty, id)
+        );
+        await context.env.DB.batch(rollbacks);
+      } catch {
+        console.error("Stock rollback failed after Stripe error");
+      }
+    }
     return json({ error: "Failed to create checkout session" }, 500);
   }
 };

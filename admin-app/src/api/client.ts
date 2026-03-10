@@ -4,9 +4,14 @@ const API_BASE = import.meta.env.VITE_API_BASE ?? "https://perinade.alpha2omegac
 // when the user is authenticated via the Access login page.
 // The browser passes it as a cookie; we read it for API calls.
 function getCfJwt(): string {
-  // CF Access JWTs are base64url-encoded (no ';'), so this simple regex is reliable
-  const match = document.cookie.match(/CF_Authorization=([^;]+)/);
-  return match?.[1] ?? "";
+  // CF_Authorization is the cookie name injected by Cloudflare Access
+  // Using split-based lookup to handle any edge cases with = in JWT (base64 padding)
+  const entry = document.cookie.split("; ").find((row) => row.startsWith("CF_Authorization="));
+  return entry ? entry.slice("CF_Authorization=".length) : "";
+}
+
+export function isCfAuthenticated(): boolean {
+  return getCfJwt().length > 0;
 }
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {

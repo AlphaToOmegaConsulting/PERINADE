@@ -6,7 +6,8 @@ hero:
   image: "../../assets/perinade/shop/img-1.png"
   imageAlt: "Cave avec étagères de bouteilles du domaine viticole Minervois"
   eyebrow: "Boutique en ligne"
-  titleHtml: "Nos vins,<br /><span>chez vous</span>"
+  titleLine1: "Nos vins,"
+  titleLine2: "chez vous"
   body: "Découvrez nos cuvées du domaine et nos collaborations en édition limitée. Livraison gratuite dès 80 €."
   primaryCta:
     label: "Découvrir"

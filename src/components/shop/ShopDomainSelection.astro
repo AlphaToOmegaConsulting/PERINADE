@@ -7,20 +7,17 @@ interface Props {
 
 const { domainSelection } = Astro.props;
 
-function iconSvg(icon: string) {
-  if (icon === "shipping") {
-    return `<svg viewBox="0 0 24 24" fill="none"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 18.5a1.5 1.5 0 1 0 0 .01M17 18.5a1.5 1.5 0 1 0 0 .01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  }
-  if (icon === "map") {
-    return `<svg viewBox="0 0 24 24" fill="none"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  }
-  if (icon === "return") {
-    return `<svg viewBox="0 0 24 24" fill="none"><path d="M9 8H5V4M5 8l4-4M20 11a7 7 0 1 1-2.05-4.95" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-  }
-  if (icon === "lock") {
-    return `<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`;
-  }
-  return `<svg viewBox="0 0 24 24" fill="none"><path d="M21 11.5a8.5 8.5 0 0 1-17 0 8.5 8.5 0 0 1 17 0ZM8.5 10a3.5 3.5 0 0 1 7 0v2" stroke="currentColor" stroke-width="1.6"/><path d="M12 18v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
+type DomainIcon = "shipping" | "map" | "return" | "lock";
+
+const ICON_SVG: Record<DomainIcon, string> = {
+  shipping: `<svg viewBox="0 0 24 24" fill="none"><path d="M3 7h11v10H3zM14 10h4l3 3v4h-7zM7 18.5a1.5 1.5 0 1 0 0 .01M17 18.5a1.5 1.5 0 1 0 0 .01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  map: `<svg viewBox="0 0 24 24" fill="none"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  return: `<svg viewBox="0 0 24 24" fill="none"><path d="M9 8H5V4M5 8l4-4M20 11a7 7 0 1 1-2.05-4.95" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  lock: `<svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 11V8a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
+};
+
+function iconSvg(icon: string): string {
+  return ICON_SVG[icon as DomainIcon] ?? "";
 }
 ---
 

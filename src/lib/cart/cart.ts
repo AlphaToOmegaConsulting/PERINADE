@@ -46,7 +46,7 @@ const normalizeState = (value: unknown): CartState => {
     const unitAmount = Number(candidate.unitAmount);
     const qty = normalizeQty(candidate.qty);
 
-    if (!id || !name || !description || !Number.isFinite(unitAmount) || qty <= 0) continue;
+    if (!id || !name || !description || !Number.isFinite(unitAmount) || unitAmount <= 0 || qty <= 0) continue;
 
     const existing = mergedById.get(id);
     const nextQty = (existing?.qty ?? 0) + qty;

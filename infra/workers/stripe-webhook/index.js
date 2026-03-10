@@ -31,19 +31,18 @@ export default {
       return new Response("Unauthorized", { status: 401 });
     }
 
-    // 2. Log event (idempotence: INSERT OR IGNORE on stripe_event_id)
+    // 2. Log event with atomic idempotence check
+    // INSERT OR IGNORE returns changes=1 if this instance won the race, changes=0 if duplicate.
+    // This avoids the TOCTOU race between INSERT and a separate SELECT.
     const logId = crypto.randomUUID();
-    await env.DB.prepare(
+    const insertResult = await env.DB.prepare(
       `INSERT OR IGNORE INTO webhook_logs (id, event_type, stripe_event_id, payload, status, created_at)
        VALUES (?, ?, ?, ?, 'received', ?)`
     ).bind(logId, event.type, event.id, payload, new Date().toISOString()).run();
 
-    // Check if already processed (INSERT OR IGNORE silently fails on duplicate)
-    const existing = await env.DB.prepare(
-      "SELECT status FROM webhook_logs WHERE stripe_event_id = ? AND status = 'processed'"
-    ).bind(event.id).first();
-    if (existing) {
-      console.log(`Event ${event.id} already processed, skipping.`);
+    if (insertResult.meta.changes === 0) {
+      // Row already existed — either duplicate delivery or already processed
+      console.log(`Event ${event.id} already logged (duplicate delivery), skipping.`);
       return new Response("OK (duplicate)", { status: 200 });
     }
 

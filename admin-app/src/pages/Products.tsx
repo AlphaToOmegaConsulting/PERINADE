@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { api, type Product } from "../api/client";
 
 export function Products() {
@@ -11,7 +12,13 @@ export function Products() {
   const updateMutation = useMutation({
     mutationFn: ({ id, stock_qty }: { id: string; stock_qty: number }) =>
       api.products.update(id, { stock_qty }),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ["products"] }),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["products"] });
+      toast.success("Stock mis à jour");
+    },
+    onError: (err) => {
+      toast.error(`Erreur : ${err instanceof Error ? err.message : "inconnue"}`);
+    },
   });
 
   if (isLoading) return <p>Chargement…</p>;
@@ -39,6 +46,12 @@ export function Products() {
     </div>
   );
 }
+
+const STATUS_LABELS: Record<string, string> = {
+  en_stock: "En stock",
+  limite: "Stock limité",
+  rupture: "Rupture",
+};
 
 function ProductRow({ product: p, index, onUpdate }: { product: Product; index: number; onUpdate: (id: string, qty: number) => void }) {
   const [editing, setEditing] = useState(false);
@@ -75,8 +88,8 @@ function ProductRow({ product: p, index, onUpdate }: { product: Product; index: 
         ) : (
           <span
             className="cursor-pointer hover:underline"
-            onClick={() => setEditing(true)}
-            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setEditing(true); }}
+            onClick={() => { setVal(String(p.stock_qty)); setEditing(true); }}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { setVal(String(p.stock_qty)); setEditing(true); } }}
             role="button"
             tabIndex={0}
             title="Cliquer pour modifier"
@@ -89,7 +102,7 @@ function ProductRow({ product: p, index, onUpdate }: { product: Product; index: 
           p.stock_status === "en_stock" ? "bg-green-100 text-green-700" :
           p.stock_status === "limite" ? "bg-yellow-100 text-yellow-700" :
           "bg-red-100 text-red-700"
-        }`}>{p.stock_status}</span>
+        }`}>{STATUS_LABELS[p.stock_status] ?? p.stock_status}</span>
       </td>
       <td className="px-4 py-2 text-gray-400">{new Date(p.updated_at).toLocaleDateString("fr-FR")}</td>
     </tr>

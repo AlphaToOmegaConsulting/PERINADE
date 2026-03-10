@@ -9,7 +9,8 @@ export interface ShopHeroData {
   image: ImageMetadata;
   imageAlt: string;
   eyebrow: string;
-  titleHtml: string;
+  titleLine1: string;
+  titleLine2: string;
   body: string;
   primaryCta: ShopHeroCta;
   secondaryCta: ShopHeroCta;

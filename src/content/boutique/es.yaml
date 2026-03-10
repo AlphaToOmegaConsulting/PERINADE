@@ -6,7 +6,8 @@ hero:
   image: "../../assets/perinade/shop/img-1.png"
   imageAlt: "Bodega con estanterías de botellas del dominio Minervois"
   eyebrow: "Tienda en línea"
-  titleHtml: "Nuestros vinos,<br /><span>en su casa</span>"
+  titleLine1: "Nuestros vinos,"
+  titleLine2: "en su casa"
   body: "Descubra nuestras cuvées de la finca y colaboraciones de edición limitada. Envío gratuito a partir de 80 €."
   primaryCta:
     label: "Ver vinos"

@@ -13,6 +13,7 @@ import CartPopup from "../../components/shop/CartPopup.astro";
 import { getShopData, getSiteData, getVins, getCoffrets } from "../../data/index";
 import { getAlternates, getAlternateUrls, getPagePath } from "../../i18n/routes";
 import { getUiStrings } from "../../i18n/ui";
+import { parsePriceToDecimal } from "../../utils/price";
 
 const locale = "es";
 const pageId = "boutique";
@@ -54,9 +55,40 @@ const productGrid = { ...shopPage.productGrid, products: [...vinProducts, ...cof
 
 const alternates = getAlternates(pageId);
 const alternateUrls = getAlternateUrls(pageId);
+const allProducts = [...vinProducts, ...coffretProducts];
+
+const jsonLd = JSON.stringify([
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Catálogo de vinos y cofres regalo — Domaine de la Périnade",
+    "description": "Compre nuestras cuvées y cofres de regalo en línea, directamente desde la bodega.",
+    "url": Astro.url.href,
+    "numberOfItems": allProducts.length,
+    "itemListElement": allProducts.map((product, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@type": "Product",
+        "name": product.name,
+        "description": product.description,
+        "brand": { "@type": "Brand", "name": "Domaine de la Périnade" },
+        "category": product.meta,
+        "offers": {
+          "@type": "Offer",
+          "price": parsePriceToDecimal(product.price),
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "priceValidUntil": "2026-12-31",
+          "url": `${Astro.site?.toString().replace(/\/$/, "") ?? "https://www.perinade.fr"}${product.ctaHref || "/es/tienda"}`
+        }
+      }
+    }))
+  }
+]);
 ---
 
-<BaseLayout title={shopPage.seo.title} description={shopPage.seo.description} locale={locale} canonicalPath={getPagePath(pageId, locale)} alternates={alternates}>
+<BaseLayout title={shopPage.seo.title} description={shopPage.seo.description} locale={locale} canonicalPath={getPagePath(pageId, locale)} alternates={alternates} jsonLd={jsonLd}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={alternateUrls} />
   <main id="main-content" class="shop-page">
     <ShopHero hero={shopPage.hero} />

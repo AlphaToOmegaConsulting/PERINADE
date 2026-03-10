@@ -9,6 +9,16 @@ export async function cfAccessAuth(
   c: Context<{ Bindings: Env; Variables: AuthVariables }>,
   next: Next
 ) {
+  // Guard: placeholder AUD tag must never reach a live request
+  if (c.env.CF_ACCESS_AUD === "your-aud-tag" || c.env.CF_ACCESS_AUD === "your-team-name") {
+    throw new Error("CF_ACCESS_AUD is still set to the placeholder value. Set the real Audience tag via `wrangler secret put CF_ACCESS_AUD`.");
+  }
+
+  // Guard: DEV_BYPASS_AUTH must never coexist with a real AUD tag (= production)
+  if (c.env.DEV_BYPASS_AUTH === "true" && c.env.CF_ACCESS_AUD) {
+    throw new Error("DEV_BYPASS_AUTH must not be set when CF_ACCESS_AUD is configured. Remove DEV_BYPASS_AUTH from your environment.");
+  }
+
   // DEV ONLY — bypass via .dev.vars (gitignored, never in wrangler.toml)
   if (c.env.DEV_BYPASS_AUTH === "true") {
     c.set("user", { email: "dev@local.test" });

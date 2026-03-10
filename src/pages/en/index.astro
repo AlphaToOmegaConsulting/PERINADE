@@ -18,9 +18,11 @@ const pageId = "home";
 const site = await getSiteData(locale);
 const alternates = getAlternates(pageId);
 const alternateUrls = getAlternateUrls(pageId);
+const seoTitle = "Domaine de la Périnade | AOP Minervois Wine near Carcassonne";
+const seoDescription = "Family-run wine estate in Languedoc since 1830. AOP Minervois and IGP Pays d'Oc wines. Wine tasting, cellar tours and online shop. Near Carcassonne, Aude.";
 ---
 
-<BaseLayout locale={locale} canonicalPath={getPagePath(pageId, locale)} alternates={alternates}>
+<BaseLayout title={seoTitle} description={seoDescription} locale={locale} canonicalPath={getPagePath(pageId, locale)} alternates={alternates}>
   <Header nav={site.nav} quickActions={site.mobileQuickActions} ctaLabel={site.experience.ctaLabel} ctaHref={site.experience.ctaHref} locale={locale} alternateUrls={alternateUrls} />
   <main id="main-content">
     <Hero hero={site.hero} />

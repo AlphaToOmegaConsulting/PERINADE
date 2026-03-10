@@ -1,4 +1,5 @@
 ---
+import Stripe from "stripe";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/sections/Header.astro";
 import Footer from "../components/sections/Footer.astro";
@@ -8,13 +9,32 @@ import { getAlternates, getAlternateUrls, getPagePath } from "../i18n/routes";
 
 const locale = "fr";
 const pageId = "confirmation";
+
+// Verify payment before rendering — redirect if session_id absent or unpaid
+const sessionId = Astro.url.searchParams.get("session_id") ?? "";
+if (!sessionId) {
+  return Astro.redirect("/panier");
+}
+try {
+  const stripeKey = (Astro.locals as { runtime?: { env?: { STRIPE_SECRET_KEY?: string } } })
+    .runtime?.env?.STRIPE_SECRET_KEY ?? import.meta.env.STRIPE_SECRET_KEY ?? "";
+  if (stripeKey) {
+    const stripe = new Stripe(stripeKey, { httpClient: Stripe.createFetchHttpClient() });
+    const session = await stripe.checkout.sessions.retrieve(sessionId, { expand: [] });
+    if (session.payment_status !== "paid") {
+      return Astro.redirect("/panier");
+    }
+  }
+} catch {
+  return Astro.redirect("/panier");
+}
+
 const [site, shopPage, contact] = await Promise.all([
   getSiteData(locale),
   getShopData(locale),
   getContactInfo(),
 ]);
 const confirmation = shopPage.confirmationPage;
-const sessionId = Astro.url.searchParams.get("session_id") ?? "";
 
 const alternates = getAlternates(pageId);
 const alternateUrls = getAlternateUrls(pageId);

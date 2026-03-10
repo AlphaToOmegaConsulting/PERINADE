@@ -3,6 +3,10 @@ main = "index.js"
 compatibility_date = "2024-01-01"
 account_id = "aea813e220eb8b709d70698a80ded18e"
 
+[vars]
+# Admin API domain for CSP connect-src — update to https://api.perinade.fr when DNS migrated
+SITE_API_DOMAIN = "https://perinade.alpha2omegaconsulting.com"
+
 # TODO: Décommenter les routes quand le domaine est sur Cloudflare et que le token
 # API a la permission "Zone → Workers Routes: Edit".
 # [[routes]]

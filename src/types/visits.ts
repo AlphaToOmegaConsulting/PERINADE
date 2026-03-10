@@ -80,6 +80,7 @@ export interface BookingConfig {
   ctaLabel: string;
   ctaHref: string;
   callLabel: string;
+  callHref: string;
   submitEndpoint?: string;
   successMessage?: string;
   errorMessage?: string;

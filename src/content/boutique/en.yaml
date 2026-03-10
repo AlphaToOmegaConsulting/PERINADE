@@ -6,7 +6,8 @@ hero:
   image: "../../assets/perinade/shop/img-1.png"
   imageAlt: "Wine cellar with bottle shelves — Minervois estate"
   eyebrow: "Online shop"
-  titleHtml: "Our wines,<br /><span>to your door</span>"
+  titleLine1: "Our wines,"
+  titleLine2: "to your door"
   body: "Discover our estate wines and limited-edition collaborations. Free delivery from €80."
   primaryCta:
     label: "Browse wines"

@@ -24,7 +24,7 @@ export default {
           "style-src 'self' 'unsafe-inline'",
           "font-src 'self'",
           "img-src 'self' data: https:",
-          "connect-src 'self' https://api.stripe.com https://perinade.alpha2omegaconsulting.com",
+          `connect-src 'self' https://api.stripe.com${env.SITE_API_DOMAIN ? ` ${env.SITE_API_DOMAIN}` : ""}`,
           "frame-ancestors 'none'",
           "form-action 'self'",
           "object-src 'none'",

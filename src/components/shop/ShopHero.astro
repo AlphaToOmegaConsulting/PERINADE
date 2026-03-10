@@ -18,7 +18,7 @@ const { hero } = Astro.props;
 
     <div class="shop-hero__content" data-reveal-group data-reveal-stagger="80">
       <p class="shop-hero__eyebrow" data-reveal="up">{hero.eyebrow}</p>
-      <h1 id="shop-hero-title" set:html={hero.titleHtml} data-reveal="up"></h1>
+      <h1 id="shop-hero-title" data-reveal="up">{hero.titleLine1} <span>{hero.titleLine2}</span></h1>
       <p class="shop-hero__body" data-reveal="up">{hero.body}</p>
 
       <div class="shop-hero__actions" data-reveal="up">
