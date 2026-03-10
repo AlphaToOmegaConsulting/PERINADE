@@ -85,19 +85,19 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
   // Stock check — optimistic strategy (see spec for race condition handling)
   // DB binding is available via context.env.DB (Cloudflare Pages Functions)
   if (context.env.DB) {
-    for (const item of items) {
-      const row = await context.env.DB.prepare(
-        "SELECT stock_qty FROM products WHERE id = ?"
-      )
-        .bind(item.id)
-        .first<{ stock_qty: number }>();
+    try {
+      for (const item of items) {
+        const row = await context.env.DB.prepare(
+          "SELECT stock_qty FROM products WHERE id = ?"
+        ).bind(item.id).first<{ stock_qty: number }>();
 
-      if (!row || row.stock_qty < item.qty) {
-        return new Response(
-          JSON.stringify({ error: `Stock insuffisant pour ${item.name}` }),
-          { status: 409, headers: { "Content-Type": "application/json" } }
-        );
+        if (!row || row.stock_qty < item.qty) {
+          return json({ error: `Stock insuffisant pour ${item.name}` }, 409);
+        }
       }
+    } catch {
+      // D1 unavailable — fail open to avoid blocking checkout
+      console.error("Stock check failed, proceeding without check");
     }
   }
   // If DB is not bound (dev without D1), skip check
