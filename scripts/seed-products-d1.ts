@@ -20,7 +20,11 @@ import { tmpdir } from "node:os";
 const isLocal = process.argv.includes("--local");
 const DB_NAME = "perinade-dev-db";
 const VINS_DIR = join(process.cwd(), "src/content/vins");
-const baseArgs = isLocal ? ["--local"] : [];
+const WRANGLER_CONFIG = join(process.cwd(), "infra/workers/api/wrangler.toml");
+const baseArgs = [
+  "--config", WRANGLER_CONFIG,
+  ...(isLocal ? ["--local"] : []),
+];
 
 interface VinYaml {
   nom?: string;
