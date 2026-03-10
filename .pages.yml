@@ -5,67 +5,64 @@ media:
 content:
   # ── Global ──────────────────────────────────────────────────────
   - name: contact
-    label: Contact global
+    label: Contact & Business Info
     type: file
     path: src/content/contact/contact.yaml
     fields:
       - name: phone
-        label: Téléphone affiché
+        label: Phone number
         type: string
       - name: email
-        label: E-mail
+        label: Email address
         type: string
       - name: website
-        label: Site web
+        label: Website URL
         type: string
       - name: address
-        label: Adresse
+        label: Street address
         type: string
       - name: region
-        label: Région
+        label: Region
         type: string
       - name: city
-        label: Ville
+        label: City
         type: string
       - name: instagram
-        label: Instagram
+        label: Instagram handle
         type: string
       - name: facebook
-        label: Facebook
+        label: Facebook handle
         type: string
 
-  # ── Pages ────────────────────────────────────────────────────────
-  - name: accueil
-    label: Accueil
-    type: collection
-    path: src/content/accueil
-    filename: "{primary}.yaml"
-    view:
-      fields: [hero.eyebrow, hero.body]
+  # ── Homepage ─────────────────────────────────────────────────────
+  - name: accueil-fr
+    label: Homepage — French
+    type: file
+    path: src/content/accueil/fr.yaml
     fields:
       - name: hero
-        label: Hero
+        label: Hero section
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre (liste de lignes)
+            label: Title (list of lines)
             type: string
             list: true
           - name: body
-            label: Corps
+            label: Body text
             type: text
           - name: meta
-            label: Méta items
+            label: Meta items
             type: string
             list: true
           - name: backgroundImage
-            label: Image de fond
+            label: Background image
             type: string
           - name: featuredCards
-            label: Cartes mises en avant
+            label: Featured cards
             type: object
             list: true
             fields:
@@ -73,23 +70,23 @@ content:
                 label: Kicker
                 type: string
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: image
                 label: Image
                 type: string
               - name: alt
-                label: Texte alternatif
+                label: Image alt text
                 type: string
       - name: reasons
-        label: Raisons de visiter
+        label: Why visit us
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: items
             label: Items
@@ -97,26 +94,26 @@ content:
             list: true
             fields:
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: body
-                label: Corps
+                label: Body text
                 type: text
       - name: experience
-        label: Expérience
+        label: Experience section
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: body
-            label: Corps
+            label: Body text
             type: text
           - name: details
-            label: Détails
+            label: Details
             type: object
             list: true
             fields:
@@ -124,23 +121,23 @@ content:
                 label: Label
                 type: string
               - name: value
-                label: Valeur
+                label: Value
                 type: string
           - name: infoLine
-            label: Ligne d'info
+            label: Info line
             type: string
           - name: backgroundImage
-            label: Image de fond
+            label: Background image
             type: string
       - name: gallery
-        label: Galerie
+        label: Photo gallery
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: items
             label: Photos
@@ -151,71 +148,71 @@ content:
                 label: Image
                 type: string
               - name: alt
-                label: Texte alternatif
+                label: Image alt text
                 type: string
       - name: testimonials
-        label: Témoignages
+        label: Testimonials
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: pressLogos
-            label: Logos presse
+            label: Press logos
             type: string
             list: true
           - name: items
-            label: Témoignages
+            label: Testimonials
             type: object
             list: true
             fields:
               - name: quote
-                label: Citation
+                label: Quote
                 type: text
               - name: author
-                label: Auteur
+                label: Author
                 type: string
               - name: meta
-                label: Méta (ville…)
+                label: Location / info
                 type: string
               - name: rating
-                label: Note /5
+                label: Rating (out of 5)
                 type: number
       - name: history
-        label: Histoire
+        label: History section
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: titleHighlight
-            label: Mot mis en avant
+            label: Highlighted word
             type: string
           - name: body
-            label: Corps (liste de paragraphes)
+            label: Body text (paragraphs list)
             type: text
             list: true
           - name: imagePrimary
-            label: Image principale
+            label: Main image
             type: string
       - name: wines
-        label: Vins sélectionnés (section accueil)
+        label: Featured wines (homepage section)
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: items
-            label: Vins
+            label: Wines
             type: object
             list: true
             fields:
@@ -223,29 +220,29 @@ content:
                 label: Image
                 type: string
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: subtitle
-                label: Sous-titre
+                label: Subtitle
                 type: string
               - name: description
                 label: Description
                 type: text
       - name: contact
-        label: Section contact (accueil)
+        label: Contact section (homepage)
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: titleHtml
-            label: Titre (HTML autorisé)
+            label: Title (HTML allowed)
             type: string
           - name: body
-            label: Corps
+            label: Body text
             type: text
           - name: info
-            label: Informations de contact
+            label: Contact info
             type: object
             list: true
             fields:
@@ -253,29 +250,29 @@ content:
                 label: Label
                 type: string
               - name: value
-                label: Valeur
+                label: Value
                 type: string
       - name: footer
-        label: Pied de page
+        label: Footer
         type: object
         fields:
           - name: brandTitle
-            label: Nom de la marque
+            label: Brand name
             type: string
           - name: about
             label: Description
             type: text
           - name: newsletterTitle
-            label: Titre newsletter
+            label: Newsletter title
             type: string
           - name: newsletterBody
-            label: Corps newsletter
+            label: Newsletter body
             type: string
           - name: newsletterAdultNotice
-            label: Mention majeurs newsletter
+            label: Adult notice (newsletter)
             type: string
           - name: social
-            label: Réseaux sociaux
+            label: Social networks
             type: object
             list: true
             fields:
@@ -283,550 +280,67 @@ content:
                 label: Label
                 type: string
               - name: href
-                label: Lien
+                label: Link
                 type: string
           - name: copyright
             label: Copyright
             type: string
           - name: legalLine
-            label: Mention légale
+            label: Legal notice
             type: string
 
-  - name: domaine
-    label: Domaine
-    type: collection
-    path: src/content/domaine
-    filename: "{primary}.yaml"
-    view:
-      fields: [hero.eyebrow, hero.body]
+  - name: accueil-en
+    label: Homepage — English
+    type: file
+    path: src/content/accueil/en.yaml
     fields:
       - name: hero
-        label: Hero
+        label: Hero section
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: titleLines
-            label: Lignes du titre
-            type: string
-            list: true
-          - name: body
-            label: Corps
-            type: text
-          - name: badges
-            label: Badges
-            type: string
-            list: true
-          - name: highlights
-            label: Chiffres clés
-            type: string
-            list: true
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-      - name: terroir
-        label: Terroir
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: grapes
-            label: Cépages
+            label: Title (list of lines)
             type: string
             list: true
-          - name: commitments
-            label: Engagements environnementaux
+          - name: body
+            label: Body text
+            type: text
+          - name: meta
+            label: Meta items
+            type: string
+            list: true
+          - name: backgroundImage
+            label: Background image
+            type: string
+          - name: featuredCards
+            label: Featured cards
             type: object
             list: true
             fields:
+              - name: kicker
+                label: Kicker
+                type: string
               - name: title
-                label: Titre
+                label: Title
                 type: string
-              - name: body
-                label: Corps
-                type: text
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-      - name: family
-        label: Histoire famille
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps (liste de paragraphes)
-            type: text
-            list: true
-          - name: milestones
-            label: Jalons historiques
-            type: object
-            list: true
-            fields:
-              - name: year
-                label: Année
-                type: string
-              - name: label
-                label: Label
-                type: string
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-      - name: statsBar
-        label: Barre de statistiques
-        type: object
-        list: true
-        fields:
-          - name: value
-            label: Valeur
-            type: string
-          - name: label
-            label: Label
-            type: string
-      - name: visitCta
-        label: CTA visite
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: titleHighlight
-            label: Mot mis en avant
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: details
-            label: Détails pratiques
-            type: string
-            list: true
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-      - name: wines
-        label: Vins (section domaine)
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: items
-            label: Vins
-            type: object
-            list: true
-            fields:
               - name: image
                 label: Image
                 type: string
               - name: alt
-                label: Texte alternatif
+                label: Image alt text
                 type: string
-              - name: meta
-                label: Méta (appellation, millésime…)
-                type: string
-              - name: title
-                label: Titre
-                type: string
-              - name: body
-                label: Corps
-                type: text
-              - name: price
-                label: Prix affiché
-                type: string
-      - name: contact
-        label: Section contact (domaine)
+      - name: reasons
+        label: Why visit us
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: cards
-            label: Cartes de contact
-            type: object
-            list: true
-            fields:
-              - name: label
-                label: Label
-                type: string
-              - name: value
-                label: Valeur
-                type: string
-
-  - name: visites-page
-    label: Visites (page)
-    type: collection
-    path: src/content/visites
-    filename: "{primary}.yaml"
-    view:
-      fields: [hero.eyebrow, hero.body]
-    fields:
-      - name: hero
-        label: Hero
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: titleLines
-            label: Lignes du titre
-            type: string
-            list: true
-          - name: body
-            label: Corps
-            type: text
-          - name: badges
-            label: Badges
-            type: object
-            list: true
-            fields:
-              - name: label
-                label: Label
-                type: string
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-      - name: trustBar
-        label: Trust bar (liste)
-        type: string
-        list: true
-      - name: timeline
-        label: Parcours de visite (timeline)
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: steps
-            label: Étapes
-            type: object
-            list: true
-            fields:
-              - name: number
-                label: Numéro
-                type: string
-              - name: title
-                label: Titre
-                type: string
-              - name: body
-                label: Corps
-                type: text
-              - name: image
-                label: Image
-                type: string
-              - name: imageAlt
-                label: Texte alternatif image
-                type: string
-      - name: wines
-        label: Vins de la dégustation
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: cards
-            label: Cartes de vins
-            type: object
-            list: true
-            fields:
-              - name: tag
-                label: Tag
-                type: string
-              - name: title
-                label: Titre
-                type: string
-              - name: notes
-                label: Notes de dégustation
-                type: string
-                list: true
-              - name: image
-                label: Image
-                type: string
-              - name: imageAlt
-                label: Texte alternatif image
-                type: string
-      - name: pairing
-        label: Option planche
-        type: object
-        fields:
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre (liste de lignes)
-            type: string
-            list: true
-          - name: body
-            label: Corps
-            type: text
-          - name: bullets
-            label: Points clés
-            type: string
-            list: true
-          - name: note
-            label: Note
-            type: string
-      - name: pricing
-        label: Formules (texte)
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: meta
-            label: Méta infos
-            type: string
-            list: true
-      - name: access
-        label: Accès / Comment venir
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: leftCard
-            label: Carte adresse
-            type: object
-            fields:
-              - name: tag
-                label: Tag
-                type: string
-              - name: title
-                label: Titre
-                type: string
-              - name: subtitle
-                label: Sous-titre
-                type: string
-              - name: content
-                label: Contenu (liste)
-                type: string
-                list: true
-          - name: rightCards
-            label: Cartes transport
-            type: object
-            list: true
-            fields:
-              - name: tag
-                label: Tag
-                type: string
-              - name: title
-                label: Titre
-                type: string
-              - name: subtitle
-                label: Sous-titre
-                type: string
-              - name: content
-                label: Contenu (liste)
-                type: string
-                list: true
-      - name: escape
-        label: Expérience étendue
-        type: object
-        fields:
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre (liste de lignes)
-            type: string
-            list: true
-          - name: body
-            label: Corps
-            type: text
-          - name: features
-            label: Caractéristiques
-            type: object
-            list: true
-            fields:
-              - name: label
-                label: Label
-                type: string
-      - name: booking
-        label: Réservation (textes)
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-      - name: finalCta
-        label: CTA final
-        type: object
-        fields:
-          - name: image
-            label: Image de fond
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-          - name: body
-            label: Corps
-            type: text
-
-  - name: boutique-page
-    label: Boutique (page)
-    type: collection
-    path: src/content/boutique
-    filename: "{primary}.yaml"
-    view:
-      fields: [hero.eyebrow, hero.body]
-    fields:
-      - name: hero
-        label: Hero
-        type: object
-        fields:
-          - name: image
-            label: Image
-            type: string
-          - name: imageAlt
-            label: Texte alternatif image
-            type: string
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: titleHtml
-            label: Titre (HTML autorisé)
-            type: string
-          - name: body
-            label: Corps
-            type: text
-          - name: metaItems
-            label: Méta items
-            type: string
-            list: true
-      - name: compliance
-        label: Conformité alcool
-        type: object
-        fields:
-          - name: marketingBannerTitle
-            label: Titre bannière légale
-            type: string
-          - name: ageNotice
-            label: Mention âge légal
-            type: string
-          - name: healthNotice
-            label: Mention santé
-            type: string
-          - name: checkoutTitle
-            label: Titre checkout conformité
-            type: string
-          - name: checkoutAdultOnlyNote
-            label: Note majeurs checkout
-            type: string
-          - name: checkoutAcknowledgements
-            label: Cases à cocher
-            type: object
-            fields:
-              - name: age
-                label: Confirmation âge
-                type: string
-              - name: information
-                label: Confirmation informations
-                type: string
-      - name: productGrid
-        label: Grille produits
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
-            type: string
-      - name: domainSelection
-        label: Sélections du domaine
-        type: object
-        fields:
-          - name: eyebrow
-            label: Eyebrow
-            type: string
-          - name: title
-            label: Titre
+            label: Title
             type: string
           - name: items
             label: Items
@@ -834,73 +348,1958 @@ content:
             list: true
             fields:
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: body
-                label: Corps
+                label: Body text
+                type: text
+      - name: experience
+        label: Experience section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: details
+            label: Details
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Value
+                type: string
+          - name: infoLine
+            label: Info line
+            type: string
+          - name: backgroundImage
+            label: Background image
+            type: string
+      - name: gallery
+        label: Photo gallery
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Photos
+            type: object
+            list: true
+            fields:
+              - name: src
+                label: Image
+                type: string
+              - name: alt
+                label: Image alt text
+                type: string
+      - name: testimonials
+        label: Testimonials
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: pressLogos
+            label: Press logos
+            type: string
+            list: true
+          - name: items
+            label: Testimonials
+            type: object
+            list: true
+            fields:
+              - name: quote
+                label: Quote
+                type: text
+              - name: author
+                label: Author
+                type: string
+              - name: meta
+                label: Location / info
+                type: string
+              - name: rating
+                label: Rating (out of 5)
+                type: number
+      - name: history
+        label: History section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: titleHighlight
+            label: Highlighted word
+            type: string
+          - name: body
+            label: Body text (paragraphs list)
+            type: text
+            list: true
+          - name: imagePrimary
+            label: Main image
+            type: string
+      - name: wines
+        label: Featured wines (homepage section)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Wines
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: description
+                label: Description
+                type: text
+      - name: contact
+        label: Contact section (homepage)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleHtml
+            label: Title (HTML allowed)
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: info
+            label: Contact info
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Value
+                type: string
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: brandTitle
+            label: Brand name
+            type: string
+          - name: about
+            label: Description
+            type: text
+          - name: newsletterTitle
+            label: Newsletter title
+            type: string
+          - name: newsletterBody
+            label: Newsletter body
+            type: string
+          - name: newsletterAdultNotice
+            label: Adult notice (newsletter)
+            type: string
+          - name: social
+            label: Social networks
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Link
+                type: string
+          - name: copyright
+            label: Copyright
+            type: string
+          - name: legalLine
+            label: Legal notice
+            type: string
+
+  - name: accueil-es
+    label: Homepage — Spanish
+    type: file
+    path: src/content/accueil/es.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title (list of lines)
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: meta
+            label: Meta items
+            type: string
+            list: true
+          - name: backgroundImage
+            label: Background image
+            type: string
+          - name: featuredCards
+            label: Featured cards
+            type: object
+            list: true
+            fields:
+              - name: kicker
+                label: Kicker
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: image
+                label: Image
+                type: string
+              - name: alt
+                label: Image alt text
+                type: string
+      - name: reasons
+        label: Why visit us
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Items
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+      - name: experience
+        label: Experience section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: details
+            label: Details
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Value
+                type: string
+          - name: infoLine
+            label: Info line
+            type: string
+          - name: backgroundImage
+            label: Background image
+            type: string
+      - name: gallery
+        label: Photo gallery
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Photos
+            type: object
+            list: true
+            fields:
+              - name: src
+                label: Image
+                type: string
+              - name: alt
+                label: Image alt text
+                type: string
+      - name: testimonials
+        label: Testimonials
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: pressLogos
+            label: Press logos
+            type: string
+            list: true
+          - name: items
+            label: Testimonials
+            type: object
+            list: true
+            fields:
+              - name: quote
+                label: Quote
+                type: text
+              - name: author
+                label: Author
+                type: string
+              - name: meta
+                label: Location / info
+                type: string
+              - name: rating
+                label: Rating (out of 5)
+                type: number
+      - name: history
+        label: History section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: titleHighlight
+            label: Highlighted word
+            type: string
+          - name: body
+            label: Body text (paragraphs list)
+            type: text
+            list: true
+          - name: imagePrimary
+            label: Main image
+            type: string
+      - name: wines
+        label: Featured wines (homepage section)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Wines
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: description
+                label: Description
+                type: text
+      - name: contact
+        label: Contact section (homepage)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleHtml
+            label: Title (HTML allowed)
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: info
+            label: Contact info
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Value
+                type: string
+      - name: footer
+        label: Footer
+        type: object
+        fields:
+          - name: brandTitle
+            label: Brand name
+            type: string
+          - name: about
+            label: Description
+            type: text
+          - name: newsletterTitle
+            label: Newsletter title
+            type: string
+          - name: newsletterBody
+            label: Newsletter body
+            type: string
+          - name: newsletterAdultNotice
+            label: Adult notice (newsletter)
+            type: string
+          - name: social
+            label: Social networks
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Link
+                type: string
+          - name: copyright
+            label: Copyright
+            type: string
+          - name: legalLine
+            label: Legal notice
+            type: string
+
+  # ── The Estate ───────────────────────────────────────────────────
+  - name: domaine-fr
+    label: The Estate — French
+    type: file
+    path: src/content/domaine/fr.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: badges
+            label: Badges
+            type: string
+            list: true
+          - name: highlights
+            label: Key figures
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: terroir
+        label: Terroir & Land
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: grapes
+            label: Grape varieties
+            type: string
+            list: true
+          - name: commitments
+            label: Environmental commitments
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: family
+        label: Family history
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text (paragraphs list)
+            type: text
+            list: true
+          - name: milestones
+            label: Key milestones
+            type: object
+            list: true
+            fields:
+              - name: year
+                label: Year
+                type: string
+              - name: label
+                label: Label
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: statsBar
+        label: Stats bar
+        type: object
+        list: true
+        fields:
+          - name: value
+            label: Value
+            type: string
+          - name: label
+            label: Label
+            type: string
+      - name: visitCta
+        label: Visit CTA section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: titleHighlight
+            label: Highlighted word
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: details
+            label: Practical details
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: wines
+        label: Featured wines (estate section)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Wines
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: string
+              - name: alt
+                label: Image alt text
+                type: string
+              - name: meta
+                label: Meta (appellation, vintage…)
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+              - name: price
+                label: Displayed price
+                type: string
+      - name: contact
+        label: Contact section (estate)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: cards
+            label: Contact cards
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Value
+                type: string
+
+  - name: domaine-en
+    label: The Estate — English
+    type: file
+    path: src/content/domaine/en.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: badges
+            label: Badges
+            type: string
+            list: true
+          - name: highlights
+            label: Key figures
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: terroir
+        label: Terroir & Land
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: grapes
+            label: Grape varieties
+            type: string
+            list: true
+          - name: commitments
+            label: Environmental commitments
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: family
+        label: Family history
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text (paragraphs list)
+            type: text
+            list: true
+          - name: milestones
+            label: Key milestones
+            type: object
+            list: true
+            fields:
+              - name: year
+                label: Year
+                type: string
+              - name: label
+                label: Label
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: statsBar
+        label: Stats bar
+        type: object
+        list: true
+        fields:
+          - name: value
+            label: Value
+            type: string
+          - name: label
+            label: Label
+            type: string
+      - name: visitCta
+        label: Visit CTA section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: titleHighlight
+            label: Highlighted word
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: details
+            label: Practical details
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: wines
+        label: Featured wines (estate section)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Wines
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: string
+              - name: alt
+                label: Image alt text
+                type: string
+              - name: meta
+                label: Meta (appellation, vintage…)
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+              - name: price
+                label: Displayed price
+                type: string
+      - name: contact
+        label: Contact section (estate)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: cards
+            label: Contact cards
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Value
+                type: string
+
+  - name: domaine-es
+    label: The Estate — Spanish
+    type: file
+    path: src/content/domaine/es.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: badges
+            label: Badges
+            type: string
+            list: true
+          - name: highlights
+            label: Key figures
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: terroir
+        label: Terroir & Land
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: grapes
+            label: Grape varieties
+            type: string
+            list: true
+          - name: commitments
+            label: Environmental commitments
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: family
+        label: Family history
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text (paragraphs list)
+            type: text
+            list: true
+          - name: milestones
+            label: Key milestones
+            type: object
+            list: true
+            fields:
+              - name: year
+                label: Year
+                type: string
+              - name: label
+                label: Label
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: statsBar
+        label: Stats bar
+        type: object
+        list: true
+        fields:
+          - name: value
+            label: Value
+            type: string
+          - name: label
+            label: Label
+            type: string
+      - name: visitCta
+        label: Visit CTA section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: titleHighlight
+            label: Highlighted word
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: details
+            label: Practical details
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: wines
+        label: Featured wines (estate section)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Wines
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: string
+              - name: alt
+                label: Image alt text
+                type: string
+              - name: meta
+                label: Meta (appellation, vintage…)
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+              - name: price
+                label: Displayed price
+                type: string
+      - name: contact
+        label: Contact section (estate)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: cards
+            label: Contact cards
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Value
+                type: string
+
+  # ── Visits & Tastings ────────────────────────────────────────────
+  - name: visites-fr
+    label: Visits & Tastings — French
+    type: file
+    path: src/content/visites/fr.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: badges
+            label: Badges
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: trustBar
+        label: Trust bar (list)
+        type: string
+        list: true
+      - name: timeline
+        label: Visit journey (timeline)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: steps
+            label: Steps
+            type: object
+            list: true
+            fields:
+              - name: number
+                label: Number
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: wines
+        label: Tasting wines
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: cards
+            label: Wine cards
+            type: object
+            list: true
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: notes
+                label: Tasting notes
+                type: string
+                list: true
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: pairing
+        label: Cheese board option
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title (list of lines)
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: bullets
+            label: Key points
+            type: string
+            list: true
+          - name: note
+            label: Note
+            type: string
+      - name: pricing
+        label: Packages (text)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: meta
+            label: Meta info
+            type: string
+            list: true
+      - name: access
+        label: How to get here
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: leftCard
+            label: Address card
+            type: object
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: content
+                label: Content (list)
+                type: string
+                list: true
+          - name: rightCards
+            label: Transport cards
+            type: object
+            list: true
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: content
+                label: Content (list)
+                type: string
+                list: true
+      - name: escape
+        label: Extended experience
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title (list of lines)
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: features
+            label: Features
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+      - name: booking
+        label: Booking (texts)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+      - name: finalCta
+        label: Final CTA section
+        type: object
+        fields:
+          - name: image
+            label: Background image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+
+  - name: visites-en
+    label: Visits & Tastings — English
+    type: file
+    path: src/content/visites/en.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: badges
+            label: Badges
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: trustBar
+        label: Trust bar (list)
+        type: string
+        list: true
+      - name: timeline
+        label: Visit journey (timeline)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: steps
+            label: Steps
+            type: object
+            list: true
+            fields:
+              - name: number
+                label: Number
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: wines
+        label: Tasting wines
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: cards
+            label: Wine cards
+            type: object
+            list: true
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: notes
+                label: Tasting notes
+                type: string
+                list: true
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: pairing
+        label: Cheese board option
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title (list of lines)
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: bullets
+            label: Key points
+            type: string
+            list: true
+          - name: note
+            label: Note
+            type: string
+      - name: pricing
+        label: Packages (text)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: meta
+            label: Meta info
+            type: string
+            list: true
+      - name: access
+        label: How to get here
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: leftCard
+            label: Address card
+            type: object
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: content
+                label: Content (list)
+                type: string
+                list: true
+          - name: rightCards
+            label: Transport cards
+            type: object
+            list: true
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: content
+                label: Content (list)
+                type: string
+                list: true
+      - name: escape
+        label: Extended experience
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title (list of lines)
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: features
+            label: Features
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+      - name: booking
+        label: Booking (texts)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+      - name: finalCta
+        label: Final CTA section
+        type: object
+        fields:
+          - name: image
+            label: Background image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+
+  - name: visites-es
+    label: Visits & Tastings — Spanish
+    type: file
+    path: src/content/visites/es.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: badges
+            label: Badges
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: trustBar
+        label: Trust bar (list)
+        type: string
+        list: true
+      - name: timeline
+        label: Visit journey (timeline)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: steps
+            label: Steps
+            type: object
+            list: true
+            fields:
+              - name: number
+                label: Number
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: wines
+        label: Tasting wines
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: cards
+            label: Wine cards
+            type: object
+            list: true
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: notes
+                label: Tasting notes
+                type: string
+                list: true
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: pairing
+        label: Cheese board option
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title (list of lines)
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: bullets
+            label: Key points
+            type: string
+            list: true
+          - name: note
+            label: Note
+            type: string
+      - name: pricing
+        label: Packages (text)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: meta
+            label: Meta info
+            type: string
+            list: true
+      - name: access
+        label: How to get here
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: leftCard
+            label: Address card
+            type: object
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: content
+                label: Content (list)
+                type: string
+                list: true
+          - name: rightCards
+            label: Transport cards
+            type: object
+            list: true
+            fields:
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: subtitle
+                label: Subtitle
+                type: string
+              - name: content
+                label: Content (list)
+                type: string
+                list: true
+      - name: escape
+        label: Extended experience
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title (list of lines)
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: features
+            label: Features
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+      - name: booking
+        label: Booking (texts)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+      - name: finalCta
+        label: Final CTA section
+        type: object
+        fields:
+          - name: image
+            label: Background image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+
+  # ── Shop ─────────────────────────────────────────────────────────
+  - name: boutique-fr
+    label: Shop — French
+    type: file
+    path: src/content/boutique/fr.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleHtml
+            label: Title (HTML allowed)
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: metaItems
+            label: Meta items
+            type: string
+            list: true
+      - name: compliance
+        label: Alcohol compliance
+        type: object
+        fields:
+          - name: marketingBannerTitle
+            label: Legal banner title
+            type: string
+          - name: ageNotice
+            label: Legal age notice
+            type: string
+          - name: healthNotice
+            label: Health notice
+            type: string
+          - name: checkoutTitle
+            label: Compliance checkout title
+            type: string
+          - name: checkoutAdultOnlyNote
+            label: Adult-only checkout note
+            type: string
+          - name: checkoutAcknowledgements
+            label: Checkboxes
+            type: object
+            fields:
+              - name: age
+                label: Age confirmation
+                type: string
+              - name: information
+                label: Information confirmation
+                type: string
+      - name: productGrid
+        label: Product grid
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+      - name: domainSelection
+        label: Estate selections
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Items
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
                 type: text
       - name: caseComposer
-        label: Coffrets Les Frenchies
+        label: Les Frenchies gift boxes
         type: object
         fields:
           - name: backdropImage
-            label: Image de fond
+            label: Background image
             type: string
           - name: crateImage
-            label: Image coffret
+            label: Gift box image
             type: string
           - name: crateImageAlt
-            label: Texte alternatif image coffret
+            label: Gift box image alt text
             type: string
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: intro
             label: Introduction
             type: text
           - name: offers
-            label: Offres
+            label: Offers
             type: object
             list: true
             fields:
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: lines
-                label: Lignes de description
+                label: Description lines
                 type: string
                 list: true
               - name: price
-                label: Prix affiché
+                label: Displayed price
                 type: string
               - name: details
-                label: Détails
+                label: Details
                 type: string
       - name: finalCta
-        label: CTA final
+        label: Final CTA section
         type: object
         fields:
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: body
-            label: Corps
+            label: Body text
             type: text
       - name: faq
         label: FAQ
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: items
-            label: Questions / Réponses
+            label: Questions & Answers
             type: object
             list: true
             fields:
@@ -908,322 +2307,839 @@ content:
                 label: Question
                 type: string
               - name: answer
-                label: Réponse
+                label: Answer
                 type: text
 
-  - name: actualites-page
-    label: Actualités (page)
-    type: collection
-    path: src/content/actualites
-    filename: "{primary}.yaml"
-    view:
-      fields: [hero.eyebrow, featured.title]
+  - name: boutique-en
+    label: Shop — English
+    type: file
+    path: src/content/boutique/en.yaml
     fields:
       - name: hero
-        label: Hero
+        label: Hero section
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleHtml
+            label: Title (HTML allowed)
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: metaItems
+            label: Meta items
+            type: string
+            list: true
+      - name: compliance
+        label: Alcohol compliance
+        type: object
+        fields:
+          - name: marketingBannerTitle
+            label: Legal banner title
+            type: string
+          - name: ageNotice
+            label: Legal age notice
+            type: string
+          - name: healthNotice
+            label: Health notice
+            type: string
+          - name: checkoutTitle
+            label: Compliance checkout title
+            type: string
+          - name: checkoutAdultOnlyNote
+            label: Adult-only checkout note
+            type: string
+          - name: checkoutAcknowledgements
+            label: Checkboxes
+            type: object
+            fields:
+              - name: age
+                label: Age confirmation
+                type: string
+              - name: information
+                label: Information confirmation
+                type: string
+      - name: productGrid
+        label: Product grid
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+      - name: domainSelection
+        label: Estate selections
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Items
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+      - name: caseComposer
+        label: Les Frenchies gift boxes
+        type: object
+        fields:
+          - name: backdropImage
+            label: Background image
+            type: string
+          - name: crateImage
+            label: Gift box image
+            type: string
+          - name: crateImageAlt
+            label: Gift box image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: offers
+            label: Offers
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: lines
+                label: Description lines
+                type: string
+                list: true
+              - name: price
+                label: Displayed price
+                type: string
+              - name: details
+                label: Details
+                type: string
+      - name: finalCta
+        label: Final CTA section
+        type: object
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+      - name: faq
+        label: FAQ
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Questions & Answers
+            type: object
+            list: true
+            fields:
+              - name: question
+                label: Question
+                type: string
+              - name: answer
+                label: Answer
+                type: text
+
+  - name: boutique-es
+    label: Shop — Spanish
+    type: file
+    path: src/content/boutique/es.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleHtml
+            label: Title (HTML allowed)
+            type: string
+          - name: body
+            label: Body text
+            type: text
+          - name: metaItems
+            label: Meta items
+            type: string
+            list: true
+      - name: compliance
+        label: Alcohol compliance
+        type: object
+        fields:
+          - name: marketingBannerTitle
+            label: Legal banner title
+            type: string
+          - name: ageNotice
+            label: Legal age notice
+            type: string
+          - name: healthNotice
+            label: Health notice
+            type: string
+          - name: checkoutTitle
+            label: Compliance checkout title
+            type: string
+          - name: checkoutAdultOnlyNote
+            label: Adult-only checkout note
+            type: string
+          - name: checkoutAcknowledgements
+            label: Checkboxes
+            type: object
+            fields:
+              - name: age
+                label: Age confirmation
+                type: string
+              - name: information
+                label: Information confirmation
+                type: string
+      - name: productGrid
+        label: Product grid
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+      - name: domainSelection
+        label: Estate selections
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Items
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: body
+                label: Body text
+                type: text
+      - name: caseComposer
+        label: Les Frenchies gift boxes
+        type: object
+        fields:
+          - name: backdropImage
+            label: Background image
+            type: string
+          - name: crateImage
+            label: Gift box image
+            type: string
+          - name: crateImageAlt
+            label: Gift box image alt text
+            type: string
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: offers
+            label: Offers
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Title
+                type: string
+              - name: lines
+                label: Description lines
+                type: string
+                list: true
+              - name: price
+                label: Displayed price
+                type: string
+              - name: details
+                label: Details
+                type: string
+      - name: finalCta
+        label: Final CTA section
+        type: object
+        fields:
+          - name: title
+            label: Title
+            type: string
+          - name: body
+            label: Body text
+            type: text
+      - name: faq
+        label: FAQ
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: items
+            label: Questions & Answers
+            type: object
+            list: true
+            fields:
+              - name: question
+                label: Question
+                type: string
+              - name: answer
+                label: Answer
+                type: text
+
+  # ── News & Events ────────────────────────────────────────────────
+  - name: actualites-fr
+    label: News & Events — French
+    type: file
+    path: src/content/actualites/fr.yaml
+    fields:
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
             type: string
           - name: titleLines
-            label: Lignes du titre
+            label: Title lines
             type: string
             list: true
           - name: lead
-            label: Chapeau
+            label: Lead text
             type: text
           - name: metaItems
-            label: Méta items
+            label: Meta items
             type: string
             list: true
           - name: image
             label: Image
             type: string
           - name: imageAlt
-            label: Texte alternatif image
+            label: Image alt text
             type: string
       - name: featured
-        label: Article vedette
+        label: Featured article
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: category
-            label: Catégorie
+            label: Category
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: excerpt
-            label: Extrait
+            label: Excerpt
             type: text
           - name: date
             label: Date
             type: string
           - name: readTime
-            label: Temps de lecture
+            label: Reading time
             type: string
           - name: image
             label: Image
             type: string
           - name: imageAlt
-            label: Texte alternatif image
+            label: Image alt text
             type: string
       - name: articles
         label: Articles
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: chips
-            label: Filtres
+            label: Filter tags
             type: string
             list: true
           - name: leadCard
-            label: Carte mise en avant
+            label: Featured card
             type: object
             fields:
               - name: category
-                label: Catégorie
+                label: Category
                 type: string
               - name: date
                 label: Date
                 type: string
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: excerpt
-                label: Extrait
+                label: Excerpt
                 type: text
               - name: image
                 label: Image
                 type: string
               - name: imageAlt
-                label: Texte alternatif image
+                label: Image alt text
                 type: string
           - name: cards
-            label: Autres articles
+            label: Other articles
             type: object
             list: true
             fields:
               - name: category
-                label: Catégorie
+                label: Category
                 type: string
               - name: date
                 label: Date
                 type: string
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: excerpt
-                label: Extrait
+                label: Excerpt
                 type: text
               - name: image
                 label: Image
                 type: string
               - name: imageAlt
-                label: Texte alternatif image
+                label: Image alt text
                 type: string
       - name: agenda
         label: Agenda
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: title
-            label: Titre
+            label: Title
             type: string
           - name: events
-            label: Événements
+            label: Events
             type: object
             list: true
             fields:
               - name: day
-                label: Jour
+                label: Day
                 type: string
               - name: month
-                label: Mois
+                label: Month
                 type: string
               - name: type
                 label: Type
                 type: string
               - name: title
-                label: Titre
+                label: Title
                 type: string
               - name: time
-                label: Horaire
+                label: Time
                 type: string
               - name: location
-                label: Lieu
+                label: Location
                 type: string
       - name: visitCta
-        label: CTA visite (actualités)
+        label: Visit CTA (news section)
         type: object
         fields:
           - name: eyebrow
-            label: Eyebrow
+            label: Eyebrow text
             type: string
           - name: titleLines
-            label: Lignes du titre
+            label: Title lines
             type: string
             list: true
           - name: body
-            label: Corps
+            label: Body text
             type: text
           - name: backgroundImage
-            label: Image de fond
+            label: Background image
             type: string
           - name: backgroundAlt
-            label: Texte alternatif image de fond
+            label: Background image alt text
             type: string
 
-  # ── Produits ─────────────────────────────────────────────────────
-  - name: formules-visite
-    label: Formules de visite
-    type: collection
-    path: src/content/formules-visite
-    filename: "{primary}.yaml"
-    view:
-      fields: [titre, prix]
+  - name: actualites-en
+    label: News & Events — English
+    type: file
+    path: src/content/actualites/en.yaml
     fields:
-      - name: titre
-        label: Titre
-        type: string
-        required: true
-      - name: sousTitre
-        label: Sous-titre
-        type: string
-      - name: prix
-        label: Prix
-        type: number
-        required: true
-      - name: dureeMinutes
-        label: Durée en minutes
-        type: number
-      - name: capaciteMin
-        label: Capacité min
-        type: number
-      - name: capaciteMax
-        label: Capacité max
-        type: number
-      - name: langues
-        label: Langues
-        type: string
-        list: true
-      - name: inclus
-        label: Inclus
-        type: string
-        list: true
-      - name: horaires
-        label: Horaires
-        type: string
-      - name: joursOuverts
-        label: Jours ouverts
-        type: string
-      - name: politiqueAnnulation
-        label: Politique d'annulation
-        type: text
-      - name: highlighted
-        label: Mise en avant
-        type: boolean
-      - name: badge
-        label: Badge
-        type: string
-      - name: ordre
-        label: Ordre
-        type: number
-
-  - name: vins
-    label: Vins
-    type: collection
-    path: src/content/vins
-    filename: "{primary}.yaml"
-    view:
-      fields: [nom, appellation, prix]
-    fields:
-      - name: nom
-        label: Nom
-        type: string
-        required: true
-      - name: couleur
-        label: Couleur
-        type: string
-        required: true
-      - name: appellation
-        label: Appellation
-        type: string
-        required: true
-      - name: millesime
-        label: Millésime
-        type: number
-      - name: volume
-        label: Volume
-        type: number
-      - name: prix
-        label: Prix
-        type: number
-        required: true
-      - name: stock
-        label: Stock
-        type: string
-      - name: description
-        label: Description
-        type: text
-      - name: badges
-        label: Badges
-        type: string
-        list: true
-      - name: image
-        label: Image
-        type: string
-      - name: imageAlt
-        label: Texte alternatif image
-        type: string
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: lead
+            label: Lead text
+            type: text
+          - name: metaItems
+            label: Meta items
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
       - name: featured
-        label: Mis en avant
-        type: boolean
-      - name: ordre
-        label: Ordre
-        type: number
+        label: Featured article
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: category
+            label: Category
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: excerpt
+            label: Excerpt
+            type: text
+          - name: date
+            label: Date
+            type: string
+          - name: readTime
+            label: Reading time
+            type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: articles
+        label: Articles
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: chips
+            label: Filter tags
+            type: string
+            list: true
+          - name: leadCard
+            label: Featured card
+            type: object
+            fields:
+              - name: category
+                label: Category
+                type: string
+              - name: date
+                label: Date
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: excerpt
+                label: Excerpt
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+          - name: cards
+            label: Other articles
+            type: object
+            list: true
+            fields:
+              - name: category
+                label: Category
+                type: string
+              - name: date
+                label: Date
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: excerpt
+                label: Excerpt
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: agenda
+        label: Agenda
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: events
+            label: Events
+            type: object
+            list: true
+            fields:
+              - name: day
+                label: Day
+                type: string
+              - name: month
+                label: Month
+                type: string
+              - name: type
+                label: Type
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: time
+                label: Time
+                type: string
+              - name: location
+                label: Location
+                type: string
+      - name: visitCta
+        label: Visit CTA (news section)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: backgroundImage
+            label: Background image
+            type: string
+          - name: backgroundAlt
+            label: Background image alt text
+            type: string
 
-  - name: coffrets
-    label: Coffrets
-    type: collection
-    path: src/content/coffrets
-    filename: "{primary}.yaml"
-    view:
-      fields: [nom, prixLabel]
+  - name: actualites-es
+    label: News & Events — Spanish
+    type: file
+    path: src/content/actualites/es.yaml
     fields:
-      - name: nom
-        label: Nom
-        type: string
-        required: true
-      - name: meta
-        label: Meta
-        type: string
-      - name: description
-        label: Description
-        type: text
-      - name: prixLabel
-        label: Prix
-        type: string
-      - name: imageAlt
-        label: Texte alternatif image
-        type: string
-      - name: badges
-        label: Badges
-        type: string
-        list: true
-      - name: ordre
-        label: Ordre
-        type: number
+      - name: hero
+        label: Hero section
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: lead
+            label: Lead text
+            type: text
+          - name: metaItems
+            label: Meta items
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: featured
+        label: Featured article
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: category
+            label: Category
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: excerpt
+            label: Excerpt
+            type: text
+          - name: date
+            label: Date
+            type: string
+          - name: readTime
+            label: Reading time
+            type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Image alt text
+            type: string
+      - name: articles
+        label: Articles
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: chips
+            label: Filter tags
+            type: string
+            list: true
+          - name: leadCard
+            label: Featured card
+            type: object
+            fields:
+              - name: category
+                label: Category
+                type: string
+              - name: date
+                label: Date
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: excerpt
+                label: Excerpt
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+          - name: cards
+            label: Other articles
+            type: object
+            list: true
+            fields:
+              - name: category
+                label: Category
+                type: string
+              - name: date
+                label: Date
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: excerpt
+                label: Excerpt
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Image alt text
+                type: string
+      - name: agenda
+        label: Agenda
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: title
+            label: Title
+            type: string
+          - name: events
+            label: Events
+            type: object
+            list: true
+            fields:
+              - name: day
+                label: Day
+                type: string
+              - name: month
+                label: Month
+                type: string
+              - name: type
+                label: Type
+                type: string
+              - name: title
+                label: Title
+                type: string
+              - name: time
+                label: Time
+                type: string
+              - name: location
+                label: Location
+                type: string
+      - name: visitCta
+        label: Visit CTA (news section)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow text
+            type: string
+          - name: titleLines
+            label: Title lines
+            type: string
+            list: true
+          - name: body
+            label: Body text
+            type: text
+          - name: backgroundImage
+            label: Background image
+            type: string
+          - name: backgroundAlt
+            label: Background image alt text
+            type: string
 
 settings:
   content:
