@@ -18,13 +18,17 @@ export default {
       "Content-Security-Policy",
       [
         "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' https://js.stripe.com",
+        "script-src 'self' 'unsafe-inline' https://js.stripe.com https://static.cloudflareinsights.com",
         "style-src 'self'",
         "style-src-attr 'unsafe-inline'",
         "img-src 'self' data: https:",
-        "connect-src 'self' https://api.stripe.com",
+        "connect-src 'self' https://api.stripe.com https://cloudflareinsights.com",
         "frame-src https://js.stripe.com https://hooks.stripe.com",
         "font-src 'self'",
+        "object-src 'none'",
+        "frame-ancestors 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
       ].join("; ")
     );
     newHeaders.set("X-Frame-Options", "DENY");

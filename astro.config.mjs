@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 export default defineConfig({
   site: process.env.SITE_URL || "https://www.perinade.fr",
   server: {
-    host: import.meta.env.DEV
+    host: process.env.ASTRO_HOST === "true"
   },
   i18n: {
     defaultLocale: "fr",

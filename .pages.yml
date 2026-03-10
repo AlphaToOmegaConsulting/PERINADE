@@ -125,6 +125,46 @@ content:
           - name: description
             label: Description SEO
             type: text
+      - name: nav
+        label: Navigation
+        type: object
+        list: true
+        fields:
+          - name: label
+            label: Label
+            type: string
+          - name: href
+            label: Lien
+            type: string
+          - name: mobile
+            label: Visible en mobile
+            type: boolean
+          - name: desktopSlot
+            label: Slot desktop (left/right)
+            type: string
+          - name: desktopLabel
+            label: Label desktop
+            type: string
+      - name: mobileQuickActions
+        label: Actions rapides mobile
+        type: object
+        list: true
+        fields:
+          - name: id
+            label: ID
+            type: string
+          - name: label
+            label: Label
+            type: string
+          - name: href
+            label: Lien
+            type: string
+          - name: icon
+            label: Icône
+            type: string
+          - name: priority
+            label: Priorité
+            type: string
       - name: hero
         label: Hero
         type: object
@@ -149,6 +189,344 @@ content:
             label: Méta items
             type: string
             list: true
+          - name: backgroundImage
+            label: Image de fond
+            type: string
+          - name: featuredCards
+            label: Cartes mises en avant
+            type: object
+            list: true
+            fields:
+              - name: kicker
+                label: Kicker
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: image
+                label: Image
+                type: string
+              - name: alt
+                label: Texte alternatif
+                type: string
+              - name: href
+                label: Lien
+                type: string
+      - name: reasons
+        label: Raisons de visiter
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: items
+            label: Items
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Titre
+                type: string
+              - name: body
+                label: Corps
+                type: text
+              - name: icon
+                label: Icône
+                type: string
+      - name: experience
+        label: Expérience
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: details
+            label: Détails
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Valeur
+                type: string
+              - name: icon
+                label: Icône
+                type: string
+          - name: infoLine
+            label: Ligne d'info
+            type: string
+          - name: ctaLabel
+            label: CTA label
+            type: string
+          - name: ctaHref
+            label: CTA lien
+            type: string
+          - name: backgroundImage
+            label: Image de fond
+            type: string
+      - name: gallery
+        label: Galerie
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: items
+            label: Photos
+            type: object
+            list: true
+            fields:
+              - name: src
+                label: Image
+                type: string
+              - name: alt
+                label: Texte alternatif
+                type: string
+      - name: testimonials
+        label: Témoignages
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: pressLabel
+            label: Label presse
+            type: string
+          - name: pressLogos
+            label: Logos presse
+            type: string
+            list: true
+          - name: items
+            label: Témoignages
+            type: object
+            list: true
+            fields:
+              - name: quote
+                label: Citation
+                type: text
+              - name: author
+                label: Auteur
+                type: string
+              - name: meta
+                label: Méta (ville…)
+                type: string
+              - name: rating
+                label: Note /5
+                type: number
+      - name: history
+        label: Histoire
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: titleHighlight
+            label: Mot mis en avant
+            type: string
+          - name: body
+            label: Corps (liste de paragraphes)
+            type: text
+            list: true
+          - name: imagePrimary
+            label: Image principale
+            type: string
+          - name: ctaLabel
+            label: CTA label
+            type: string
+          - name: ctaHref
+            label: CTA lien
+            type: string
+      - name: wines
+        label: Vins sélectionnés (section accueil)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: allWinesLabel
+            label: Label "tous les vins"
+            type: string
+          - name: allWinesHref
+            label: Lien "tous les vins"
+            type: string
+          - name: items
+            label: Vins
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: subtitle
+                label: Sous-titre
+                type: string
+              - name: description
+                label: Description
+                type: text
+              - name: ctaLabel
+                label: CTA label
+                type: string
+              - name: ctaHref
+                label: CTA lien
+                type: string
+      - name: contact
+        label: Section contact (accueil)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: titleHtml
+            label: Titre (HTML autorisé)
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: info
+            label: Informations de contact
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Valeur
+                type: string
+              - name: icon
+                label: Icône
+                type: string
+          - name: labels
+            label: Labels du formulaire
+            type: object
+            fields:
+              - name: firstName
+                label: Prénom
+                type: string
+              - name: lastName
+                label: Nom
+                type: string
+              - name: email
+                label: E-mail
+                type: string
+              - name: phone
+                label: Téléphone
+                type: string
+              - name: subject
+                label: Sujet
+                type: string
+              - name: message
+                label: Message
+                type: string
+              - name: submit
+                label: Bouton envoyer
+                type: string
+          - name: validation
+            label: Messages de validation
+            type: object
+            fields:
+              - name: required
+                label: Champ requis
+                type: string
+              - name: invalidEmail
+                label: E-mail invalide
+                type: string
+              - name: fixErrors
+                label: Corriger les erreurs
+                type: string
+          - name: formSuccessMessage
+            label: Message succès
+            type: string
+          - name: formErrorMessage
+            label: Message erreur
+            type: string
+      - name: footer
+        label: Pied de page
+        type: object
+        fields:
+          - name: brandTitle
+            label: Nom de la marque
+            type: string
+          - name: about
+            label: Description
+            type: text
+          - name: groups
+            label: Groupes de liens
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Titre du groupe
+                type: string
+              - name: links
+                label: Liens
+                type: object
+                list: true
+                fields:
+                  - name: label
+                    label: Label
+                    type: string
+                  - name: href
+                    label: Lien
+                    type: string
+          - name: newsletterTitle
+            label: Titre newsletter
+            type: string
+          - name: newsletterBody
+            label: Corps newsletter
+            type: string
+          - name: newsletterAdultNotice
+            label: Mention majeurs newsletter
+            type: string
+          - name: newsletterPlaceholder
+            label: Placeholder e-mail
+            type: string
+          - name: newsletterAction
+            label: Action formulaire newsletter
+            type: string
+          - name: social
+            label: Réseaux sociaux
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: copyright
+            label: Copyright
+            type: string
+          - name: legalLine
+            label: Mention légale
+            type: string
 
   - name: domaine
     label: Domaine
@@ -175,6 +553,10 @@ content:
           - name: eyebrow
             label: Eyebrow
             type: string
+          - name: titleLines
+            label: Lignes du titre
+            type: string
+            list: true
           - name: body
             label: Corps
             type: text
@@ -198,6 +580,20 @@ content:
               - name: href
                 label: Lien
                 type: string
+          - name: badges
+            label: Badges
+            type: string
+            list: true
+          - name: highlights
+            label: Chiffres clés
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
       - name: terroir
         label: Terroir
         type: object
@@ -211,6 +607,33 @@ content:
           - name: body
             label: Corps
             type: text
+          - name: grapesTitle
+            label: Titre cépages
+            type: string
+          - name: commitmentsTitle
+            label: Titre engagements
+            type: string
+          - name: grapes
+            label: Cépages
+            type: string
+            list: true
+          - name: commitments
+            label: Engagements environnementaux
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Titre
+                type: string
+              - name: body
+                label: Corps
+                type: text
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
       - name: family
         label: Histoire famille
         type: object
@@ -225,6 +648,162 @@ content:
             label: Corps (liste de paragraphes)
             type: text
             list: true
+          - name: milestones
+            label: Jalons historiques
+            type: object
+            list: true
+            fields:
+              - name: year
+                label: Année
+                type: string
+              - name: label
+                label: Label
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
+      - name: statsBar
+        label: Barre de statistiques
+        type: object
+        list: true
+        fields:
+          - name: value
+            label: Valeur
+            type: string
+          - name: label
+            label: Label
+            type: string
+      - name: visitCta
+        label: CTA visite
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: titleHighlight
+            label: Mot mis en avant
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: details
+            label: Détails pratiques
+            type: string
+            list: true
+          - name: primaryCta
+            label: CTA principal
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: secondaryCta
+            label: CTA secondaire
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
+      - name: wines
+        label: Vins (section domaine)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: allLabel
+            label: Label "tous les vins"
+            type: string
+          - name: allHref
+            label: Lien "tous les vins"
+            type: string
+          - name: items
+            label: Vins
+            type: object
+            list: true
+            fields:
+              - name: image
+                label: Image
+                type: string
+              - name: alt
+                label: Texte alternatif
+                type: string
+              - name: meta
+                label: Méta (appellation, millésime…)
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: body
+                label: Corps
+                type: text
+              - name: price
+                label: Prix affiché
+                type: string
+              - name: ctaLabel
+                label: CTA label
+                type: string
+              - name: ctaHref
+                label: CTA lien
+                type: string
+      - name: contact
+        label: Section contact (domaine)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: cards
+            label: Cartes de contact
+            type: object
+            list: true
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: value
+                label: Valeur
+                type: string
+              - name: href
+                label: Lien
+                type: string
+          - name: cta
+            label: CTA
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
 
   - name: visites-page
     label: Visites (page)
@@ -251,9 +830,24 @@ content:
           - name: eyebrow
             label: Eyebrow
             type: string
+          - name: titleLines
+            label: Lignes du titre
+            type: string
+            list: true
           - name: body
             label: Corps
             type: text
+          - name: badges
+            label: Badges
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: Icône
+                type: string
+              - name: label
+                label: Label
+                type: string
           - name: primaryCta
             label: CTA principal
             type: object
@@ -277,10 +871,303 @@ content:
           - name: helper
             label: Texte d'aide
             type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
       - name: trustBar
         label: Trust bar (liste)
         type: string
         list: true
+      - name: timeline
+        label: Parcours de visite (timeline)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: steps
+            label: Étapes
+            type: object
+            list: true
+            fields:
+              - name: id
+                label: ID
+                type: string
+              - name: number
+                label: Numéro
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: body
+                label: Corps
+                type: text
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Texte alternatif image
+                type: string
+      - name: wines
+        label: Vins de la dégustation
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: cards
+            label: Cartes de vins
+            type: object
+            list: true
+            fields:
+              - name: id
+                label: ID
+                type: string
+              - name: tag
+                label: Tag
+                type: string
+              - name: tagTone
+                label: Tonalité du tag
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: notes
+                label: Notes de dégustation
+                type: string
+                list: true
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Texte alternatif image
+                type: string
+      - name: pairing
+        label: Option planche
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre (liste de lignes)
+            type: string
+            list: true
+          - name: body
+            label: Corps
+            type: text
+          - name: bullets
+            label: Points clés
+            type: string
+            list: true
+          - name: note
+            label: Note
+            type: string
+      - name: pricing
+        label: Formules (texte)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: meta
+            label: Méta infos
+            type: string
+            list: true
+      - name: access
+        label: Accès / Comment venir
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: leftCard
+            label: Carte adresse
+            type: object
+            fields:
+              - name: icon
+                label: Icône
+                type: string
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: subtitle
+                label: Sous-titre
+                type: string
+              - name: content
+                label: Contenu (liste)
+                type: string
+                list: true
+              - name: ctaLabel
+                label: CTA label
+                type: string
+              - name: ctaHref
+                label: CTA lien
+                type: string
+          - name: rightCards
+            label: Cartes transport
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: Icône
+                type: string
+              - name: tag
+                label: Tag
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: subtitle
+                label: Sous-titre
+                type: string
+              - name: content
+                label: Contenu (liste)
+                type: string
+                list: true
+      - name: escape
+        label: Expérience étendue
+        type: object
+        fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre (liste de lignes)
+            type: string
+            list: true
+          - name: body
+            label: Corps
+            type: text
+          - name: features
+            label: Caractéristiques
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: Icône
+                type: string
+              - name: label
+                label: Label
+                type: string
+          - name: cta
+            label: CTA
+            type: object
+            fields:
+              - name: label
+                label: Label
+                type: string
+              - name: href
+                label: Lien
+                type: string
+      - name: booking
+        label: Réservation (textes)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: ui
+            label: Labels interface
+            type: object
+            fields:
+              - name: prevMonthAriaLabel
+                label: Mois précédent (aria)
+                type: string
+              - name: nextMonthAriaLabel
+                label: Mois suivant (aria)
+                type: string
+              - name: slotHeading
+                label: Titre créneaux
+                type: string
+              - name: participantsHeading
+                label: Titre participants
+                type: string
+              - name: priceFromLabel
+                label: Label "à partir de"
+                type: string
+              - name: pricePerPersonLabel
+                label: Label "/ personne"
+                type: string
+              - name: missingDateMessage
+                label: Message date manquante
+                type: string
+              - name: defaultSuccessMessage
+                label: Message succès
+                type: string
+              - name: defaultErrorMessage
+                label: Message erreur
+                type: string
+              - name: mailSubjectFallback
+                label: Sujet e-mail par défaut
+                type: string
+      - name: finalCta
+        label: CTA final
+        type: object
+        fields:
+          - name: image
+            label: Image de fond
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
 
   - name: boutique-page
     label: Boutique (page)
@@ -304,6 +1191,12 @@ content:
         label: Hero
         type: object
         fields:
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
           - name: eyebrow
             label: Eyebrow
             type: string
@@ -333,6 +1226,159 @@ content:
               - name: href
                 label: Lien
                 type: string
+          - name: metaAriaLabel
+            label: Aria label méta
+            type: string
+          - name: metaItems
+            label: Méta items
+            type: string
+            list: true
+      - name: compliance
+        label: Conformité alcool
+        type: object
+        fields:
+          - name: marketingBannerAriaLabel
+            label: Aria label bannière légale
+            type: string
+          - name: marketingBannerTitle
+            label: Titre bannière légale
+            type: string
+          - name: ageNotice
+            label: Mention âge légal
+            type: string
+          - name: healthNotice
+            label: Mention santé
+            type: string
+          - name: checkoutTitle
+            label: Titre checkout conformité
+            type: string
+          - name: checkoutAdultOnlyNote
+            label: Note majeurs checkout
+            type: string
+          - name: checkoutAcknowledgements
+            label: Cases à cocher
+            type: object
+            fields:
+              - name: age
+                label: Confirmation âge
+                type: string
+              - name: information
+                label: Confirmation informations
+                type: string
+          - name: payOrderLabel
+            label: Label bouton payer
+            type: string
+          - name: payOrderHelp
+            label: Aide bouton payer
+            type: string
+          - name: payOrderPendingLabel
+            label: Label paiement en attente
+            type: string
+      - name: productGrid
+        label: Grille produits
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: previousLabel
+            label: Label "précédent"
+            type: string
+          - name: nextLabel
+            label: Label "suivant"
+            type: string
+      - name: domainSelection
+        label: Sélections du domaine
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: items
+            label: Items
+            type: object
+            list: true
+            fields:
+              - name: icon
+                label: Icône
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: body
+                label: Corps
+                type: text
+      - name: caseComposer
+        label: Coffrets Les Frenchies
+        type: object
+        fields:
+          - name: backdropImage
+            label: Image de fond
+            type: string
+          - name: crateImage
+            label: Image coffret
+            type: string
+          - name: crateImageAlt
+            label: Texte alternatif image coffret
+            type: string
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: intro
+            label: Introduction
+            type: text
+          - name: offers
+            label: Offres
+            type: object
+            list: true
+            fields:
+              - name: title
+                label: Titre
+                type: string
+              - name: lines
+                label: Lignes de description
+                type: string
+                list: true
+              - name: price
+                label: Prix affiché
+                type: string
+              - name: details
+                label: Détails
+                type: string
+              - name: ctaLabel
+                label: CTA label
+                type: string
+              - name: ctaHref
+                label: CTA lien
+                type: string
+      - name: finalCta
+        label: CTA final
+        type: object
+        fields:
+          - name: sectionAriaLabel
+            label: Aria label section
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: body
+            label: Corps
+            type: text
+          - name: ctaLabel
+            label: CTA label
+            type: string
+          - name: ctaHref
+            label: CTA lien
+            type: string
       - name: faq
         label: FAQ
         type: object
@@ -354,6 +1400,84 @@ content:
               - name: answer
                 label: Réponse
                 type: text
+      - name: confirmationPage
+        label: Page de confirmation commande
+        type: object
+        fields:
+          - name: seo
+            label: SEO
+            type: object
+            fields:
+              - name: title
+                label: Titre SEO
+                type: string
+              - name: description
+                label: Description SEO
+                type: text
+          - name: hero
+            label: Hero
+            type: object
+            fields:
+              - name: title
+                label: Titre
+                type: string
+              - name: body
+                label: Corps
+                type: text
+          - name: status
+            label: Statuts
+            type: object
+            fields:
+              - name: labelPaid
+                label: Label "payé"
+                type: string
+              - name: labelRefPrefix
+                label: Préfixe référence
+                type: string
+          - name: nextSteps
+            label: Prochaines étapes
+            type: object
+            fields:
+              - name: title
+                label: Titre
+                type: string
+              - name: items
+                label: Étapes
+                type: string
+                list: true
+          - name: support
+            label: Support
+            type: object
+            fields:
+              - name: title
+                label: Titre
+                type: string
+              - name: body
+                label: Corps
+                type: text
+              - name: emailLabel
+                label: Label e-mail
+                type: string
+              - name: phoneLabel
+                label: Label téléphone
+                type: string
+          - name: actions
+            label: Actions
+            type: object
+            fields:
+              - name: backShopLabel
+                label: Retour boutique
+                type: string
+              - name: backHomeLabel
+                label: Retour accueil
+                type: string
+          - name: legal
+            label: Mentions légales
+            type: object
+            fields:
+              - name: moderationNotice
+                label: Mention modération
+                type: string
 
   - name: actualites-page
     label: Actualités (page)
@@ -380,6 +1504,10 @@ content:
           - name: eyebrow
             label: Eyebrow
             type: string
+          - name: titleLines
+            label: Lignes du titre
+            type: string
+            list: true
           - name: lead
             label: Chapeau
             type: text
@@ -393,6 +1521,16 @@ content:
               - name: href
                 label: Lien
                 type: string
+          - name: metaItems
+            label: Méta items
+            type: string
+            list: true
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
       - name: featured
         label: Article vedette
         type: object
@@ -420,6 +1558,183 @@ content:
             type: string
           - name: ctaHref
             label: CTA lien
+            type: string
+          - name: image
+            label: Image
+            type: string
+          - name: imageAlt
+            label: Texte alternatif image
+            type: string
+      - name: articles
+        label: Articles
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: chips
+            label: Filtres
+            type: string
+            list: true
+          - name: activeChip
+            label: Filtre actif par défaut
+            type: string
+          - name: leadCtaLabel
+            label: Label CTA article vedette
+            type: string
+          - name: leadCard
+            label: Carte mise en avant
+            type: object
+            fields:
+              - name: category
+                label: Catégorie
+                type: string
+              - name: date
+                label: Date
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: excerpt
+                label: Extrait
+                type: text
+              - name: readLabel
+                label: Temps de lecture
+                type: string
+              - name: href
+                label: Lien
+                type: string
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Texte alternatif image
+                type: string
+          - name: cards
+            label: Autres articles
+            type: object
+            list: true
+            fields:
+              - name: category
+                label: Catégorie
+                type: string
+              - name: date
+                label: Date
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: excerpt
+                label: Extrait
+                type: text
+              - name: readLabel
+                label: Label "lire la suite"
+                type: string
+              - name: href
+                label: Lien
+                type: string
+              - name: image
+                label: Image
+                type: string
+              - name: imageAlt
+                label: Texte alternatif image
+                type: string
+          - name: viewMoreLabel
+            label: Label "voir plus"
+            type: string
+          - name: viewMoreHref
+            label: Lien "voir plus"
+            type: string
+      - name: agenda
+        label: Agenda
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: title
+            label: Titre
+            type: string
+          - name: viewAllLabel
+            label: Label "voir tout"
+            type: string
+          - name: viewAllHref
+            label: Lien "voir tout"
+            type: string
+          - name: events
+            label: Événements
+            type: object
+            list: true
+            fields:
+              - name: day
+                label: Jour
+                type: string
+              - name: month
+                label: Mois
+                type: string
+              - name: type
+                label: Type
+                type: string
+              - name: title
+                label: Titre
+                type: string
+              - name: time
+                label: Horaire
+                type: string
+              - name: location
+                label: Lieu
+                type: string
+              - name: href
+                label: Lien
+                type: string
+      - name: visitCta
+        label: CTA visite (actualités)
+        type: object
+        fields:
+          - name: eyebrow
+            label: Eyebrow
+            type: string
+          - name: titleLines
+            label: Lignes du titre
+            type: string
+            list: true
+          - name: body
+            label: Corps
+            type: text
+          - name: ctaLabel
+            label: CTA label
+            type: string
+          - name: ctaHref
+            label: CTA lien
+            type: string
+          - name: backgroundImage
+            label: Image de fond
+            type: string
+          - name: backgroundAlt
+            label: Texte alternatif image de fond
+            type: string
+      - name: blogPosts
+        label: Articles (données SEO/JSON-LD)
+        type: object
+        list: true
+        fields:
+          - name: headline
+            label: Titre
+            type: string
+          - name: description
+            label: Description
+            type: text
+          - name: datePublished
+            label: Date de publication
+            type: string
+          - name: url
+            label: URL
+            type: string
+          - name: category
+            label: Catégorie
             type: string
 
   # ── Produits ─────────────────────────────────────────────────────
@@ -529,6 +1844,9 @@ content:
         label: Badges
         type: string
         list: true
+      - name: image
+        label: Image
+        type: string
       - name: imageAlt
         label: Texte alternatif image
         type: string
