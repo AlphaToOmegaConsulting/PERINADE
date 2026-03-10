@@ -9,6 +9,7 @@
     "functions",
     "scripts",
     "dist",
-    "node_modules"
+    "node_modules",
+    "src/pages/_design-system.astro"
   ]
 }

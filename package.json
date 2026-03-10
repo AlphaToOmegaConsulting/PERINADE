@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@astrojs/react": "^5.0.0",
     "@types/node": "^24.3.1",
     "astro": "^5.18.0",
     "astro-eslint-parser": "^1.0.0",
@@ -35,6 +36,7 @@
     "yaml": "^2.8.2"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^12.6.13",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/playfair-display": "^5.2.8",
     "@keystatic/astro": "^5.0.6",

@@ -1,0 +1,1144 @@
+---
+// Design System — dev-only page, not linked from nav
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>Design System — Périnade</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg: #ffffff;
+  --color-white: #ffffff;
+  --color-text: #2c2c2c;
+  --color-text-strong: #1a1a1a;
+  --color-muted: #595959;
+  --color-muted-light: #6b6b6b;
+  --color-soft: #faf7f2;
+  --color-soft-strong: #f0ebe3;
+  --color-deep-green: #192b17;
+  --color-accent: #c49c6e;
+  --color-cta: #a85900;
+  --color-cta-strong: #8f4b00;
+  --color-ink-soft: rgba(18,18,18,0.72);
+  --color-card-border-soft: rgba(44,44,44,0.1);
+  --radius-card: 1rem;
+  --radius-panel: 1.4rem;
+  --shadow-soft: 0 0.625rem 1.5rem rgba(24,20,14,0.08);
+  --shadow-card: 0 1.125rem 2.375rem rgba(28,22,17,0.08);
+  --motion-shadow-hover: 0 1.3rem 2.2rem rgba(20,14,9,0.14);
+  --motion-border-hover: rgba(196,156,110,0.48);
+  --motion-duration-xs: 140ms;
+  --motion-duration-sm: 180ms;
+  --motion-duration-md: 240ms;
+  --motion-duration-lg: 620ms;
+  --motion-ease-standard: cubic-bezier(0.2,0,0,1);
+  --motion-ease-emphasized: cubic-bezier(0.21,1,0.31,1);
+  --motion-distance-sm: -0.125rem;
+  --motion-distance-md: -0.2rem;
+  --motion-scale-media: 1.045;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', sans-serif;
+  --control-accent: var(--color-accent);
+}
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: #f2ede6; color: var(--color-text); display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; font-size: 14px; line-height: 1.5; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--color-deep-green);
+  color: rgba(255,255,255,0.85);
+  display: flex; flex-direction: column;
+  height: 100vh; position: sticky; top: 0;
+  overflow-y: auto; padding: 1.5rem 0;
+}
+.sidebar-brand { padding: 0 1.25rem 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.sidebar-brand h1 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 500; color: #fff; line-height: 1.2; }
+.sidebar-brand span { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; }
+nav { padding: 1rem 0; flex: 1; }
+nav a { display: flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.25rem; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.6); transition: color 150ms ease, background 150ms ease; }
+nav a:hover, nav a.active { color: #fff; background: rgba(255,255,255,0.07); }
+nav a .nav-num { font-size: 0.6rem; opacity: 0.4; width: 1rem; }
+.sidebar-footer { padding: 1rem 1.25rem 0; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.65rem; opacity: 0.35; }
+
+/* ── MAIN ── */
+main { padding: 3rem 3rem 6rem; max-width: 1100px; }
+
+/* ── SECTION HEADERS ── */
+.ds-section { margin-bottom: 5rem; }
+.ds-section-header { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid rgba(44,44,44,0.12); }
+.ds-section-header h2 { font-family: var(--font-display); font-size: 1.8rem; font-weight: 500; color: var(--color-text-strong); }
+.ds-section-header p { font-size: 0.82rem; color: var(--color-muted); margin-top: 0.3rem; }
+.ds-subsection { margin-bottom: 2rem; }
+.ds-subsection h3 { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 1rem; }
+.ds-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: flex-start; }
+.ds-label { font-size: 0.65rem; color: var(--color-muted); letter-spacing: 0.08em; margin-top: 0.4rem; text-align: center; }
+
+/* ── 1. DESIGN TOKENS ── */
+.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.75rem; }
+.color-swatch { border-radius: 0.6rem; overflow: hidden; box-shadow: var(--shadow-soft); }
+.color-swatch__block { height: 3.5rem; }
+.color-swatch__info { background: #fff; padding: 0.45rem 0.6rem; }
+.color-swatch__name { font-size: 0.62rem; font-weight: 600; color: var(--color-text); }
+.color-swatch__val { font-size: 0.58rem; color: var(--color-muted); font-family: monospace; }
+.type-scale-row { display: flex; align-items: baseline; gap: 1.5rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(44,44,44,0.06); }
+.type-scale-row:last-child { border: none; }
+.type-meta { min-width: 120px; font-size: 0.65rem; color: var(--color-muted); font-family: monospace; }
+.space-bar { display: flex; align-items: center; gap: 1rem; padding: 0.4rem 0; }
+.space-bar__swatch { background: var(--color-accent); border-radius: 2px; height: 1rem; opacity: 0.8; }
+.space-bar__label { font-size: 0.65rem; font-family: monospace; color: var(--color-muted); min-width: 90px; }
+.token-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
+.token-table th { text-align: left; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); padding: 0.5rem 0.75rem; border-bottom: 2px solid rgba(44,44,44,0.1); }
+.token-table td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(44,44,44,0.05); vertical-align: middle; }
+.token-table tr:last-child td { border: none; }
+.token-table code { background: rgba(44,44,44,0.06); padding: 0.1rem 0.35rem; border-radius: 0.25rem; font-size: 0.72rem; }
+.ease-bar { height: 4px; border-radius: 2px; background: var(--color-accent); width: 100%; margin-top: 0.25rem; opacity: 0.6; }
+.shadow-demo { background: #fff; border-radius: var(--radius-card); padding: 1.5rem 2rem; text-align: center; font-size: 0.8rem; color: var(--color-muted); min-width: 160px; }
+
+/* ── 2. BUTTONS ── */
+.ui-action {
+  align-items: center; appearance: none;
+  border: 1px solid transparent; border-radius: 999px;
+  color: #fff; cursor: pointer;
+  display: inline-flex; font-family: var(--font-body);
+  font-size: 0.75rem; font-weight: 600; gap: 0.45rem;
+  justify-content: center; letter-spacing: 0.14em;
+  line-height: 1; padding-inline: 1.25rem;
+  position: relative; text-align: center;
+  text-decoration: none; text-transform: uppercase;
+  transition: background-color var(--motion-duration-sm) var(--motion-ease-standard),
+    border-color var(--motion-duration-sm) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-md) var(--motion-ease-standard),
+    transform var(--motion-duration-md) var(--motion-ease-standard);
+}
+.ui-action:hover { box-shadow: var(--motion-shadow-hover); transform: translateY(var(--motion-distance-sm)); }
+.ui-action:active { transform: translateY(0); }
+.ui-action--sm { min-height: 2.6rem; font-size: 0.7rem; padding-inline: 1rem; }
+.ui-action--md { min-height: 3.1rem; }
+.ui-action--lg { min-height: 3.8rem; padding-inline: 1.75rem; font-size: 0.8rem; }
+.ui-action--primary { background: var(--color-cta); border-color: var(--color-cta); box-shadow: var(--shadow-soft); }
+.ui-action--primary:hover { background: var(--color-cta-strong); border-color: var(--color-cta-strong); }
+.ui-action--secondary { background: #fff; border-color: var(--color-cta); color: var(--color-cta); }
+.ui-action--secondary:hover { background: #f9f5f0; }
+.ui-action--ghost { background: transparent; border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.9); }
+.ui-action--ghost:hover { background: rgba(255,255,255,0.09); border-color: rgba(255,255,255,0.6); }
+.ui-action--text {
+  background: transparent; border: none; border-bottom: 1px solid rgba(196,156,110,0.35);
+  border-radius: 0; color: var(--color-cta-strong); font-size: 0.8rem;
+  min-height: auto; padding: 0 0 0.25rem; letter-spacing: 0.04em; text-transform: none;
+  box-shadow: none;
+}
+.ui-action--text::after { content: " →"; display: inline; }
+.ui-action--text:hover { color: var(--color-cta); box-shadow: none; transform: none; }
+.ui-action--interaction-emphasis:hover { box-shadow: 0 1.5rem 2.5rem rgba(196,106,0,0.22); transform: translateY(var(--motion-distance-md)); }
+.ui-action--tone-inverse.ui-action--secondary { background: transparent; border-color: rgba(255,255,255,0.28); color: #fff; }
+.ui-action:disabled, .ui-action--disabled { opacity: 0.45; pointer-events: none; cursor: not-allowed; }
+.ui-action--loading { opacity: 0.75; pointer-events: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { display: inline-block; width: 0.85rem; height: 0.85rem; border: 2px solid currentColor; border-right-color: transparent; border-radius: 999px; animation: spin 900ms linear infinite; }
+.dark-bg { background: var(--color-deep-green); border-radius: var(--radius-card); padding: 1.25rem 1.5rem; }
+
+/* ── 3. CARDS ── */
+.ui-card { background: var(--color-white); border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); overflow: clip; }
+.ui-card--soft { background: var(--color-soft); }
+.ui-card--inverse { background: #1a1a1a; border-color: rgba(255,255,255,0.1); color: #fff; }
+.ui-card--elevation-soft { box-shadow: var(--shadow-soft); }
+.ui-card--elevation-raised { box-shadow: var(--shadow-card); }
+.ui-card__content { padding: 1.1rem 1.15rem; display: grid; gap: 0.5rem; }
+.ui-card__eyebrow { font-size: 0.65rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--color-muted); }
+.ui-card__title { font-size: 0.95rem; font-weight: 600; }
+.ui-card__body { font-size: 0.8rem; color: var(--color-muted); line-height: 1.55; }
+.ui-card--interactive {
+  transition: transform var(--motion-duration-md) var(--motion-ease-standard),
+    box-shadow var(--motion-duration-md) var(--motion-ease-standard),
+    border-color var(--motion-duration-sm) var(--motion-ease-standard);
+  cursor: pointer;
+}
+.ui-card--interactive:hover { border-color: var(--motion-border-hover); box-shadow: var(--motion-shadow-hover); transform: translateY(var(--motion-distance-md)); }
+
+/* card grid */
+.card-grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.card-grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.card-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+
+/* MediaCard */
+.media-card { background: var(--color-white); border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); overflow: hidden; cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--motion-duration-md) var(--motion-ease-standard), box-shadow var(--motion-duration-md) var(--motion-ease-standard), border-color 200ms ease;
+}
+.media-card:hover { transform: translateY(-0.3125rem); box-shadow: 0 1.5rem 3rem rgba(20,14,9,0.13); border-color: var(--motion-border-hover); }
+.media-card__img { height: 140px; overflow: hidden; background: var(--color-soft-strong); }
+.media-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 500ms var(--motion-ease-emphasized); }
+.media-card:hover .media-card__img img { transform: scale(1.05); }
+.media-card__body { padding: 1rem 1.1rem; display: grid; gap: 0.35rem; }
+.media-card__eye { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-muted); }
+.media-card__title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; line-height: 1.25; }
+
+/* ProductCard */
+.shop-card { background: #fff; border: 1px solid rgba(44,44,44,0.1); border-radius: 1.25rem; overflow: hidden; }
+.shop-card__image { aspect-ratio: 1.2; background: var(--color-soft-strong); overflow: hidden; }
+.shop-card__image img { width: 100%; height: 100%; object-fit: cover; }
+.shop-card__body { padding: 0.85rem; display: grid; gap: 0.3rem; }
+.shop-card__meta { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: #6b6b6b; }
+.shop-card__title { font-size: 0.95rem; font-weight: 600; color: #2c2c2c; }
+.shop-card__price { font-size: 1.2rem; font-weight: 600; color: #2c2c2c; margin-top: 0.2rem; }
+.shop-card--after {
+  box-shadow: var(--shadow-soft);
+  transition: transform 300ms var(--motion-ease-emphasized), box-shadow 300ms var(--motion-ease-emphasized), border-color 200ms ease;
+  cursor: pointer;
+}
+.shop-card--after:hover { transform: translateY(-0.3125rem); box-shadow: 0 1.5rem 3rem rgba(20,14,9,0.13); border-color: var(--motion-border-hover); }
+.shop-card--after .shop-card__image img { transition: transform 500ms var(--motion-ease-emphasized); }
+.shop-card--after:hover .shop-card__image img { transform: scale(1.05); }
+
+/* InfoCard */
+.info-card { background: var(--color-soft); border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); padding: 1.25rem; display: grid; gap: 0.6rem; }
+.info-card__tag { display: inline-block; background: rgba(196,156,110,0.15); color: var(--color-cta); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 0.3rem; }
+.info-card__icon { width: 2.6rem; height: 2.6rem; background: rgba(25,43,23,0.08); border-radius: 999px; display: flex; align-items: center; justify-content: center; color: var(--color-deep-green); }
+.info-card__title { font-size: 1rem; font-weight: 600; }
+.info-card__list { display: grid; gap: 0.3rem; }
+.info-card__list li { font-size: 0.78rem; color: var(--color-muted); list-style: none; display: flex; gap: 0.4rem; }
+.info-card__list li::before { content: "·"; color: var(--color-accent); }
+.info-card__cta { font-size: 0.78rem; color: var(--color-cta); font-weight: 600; }
+.info-card__cta::after { content: " →"; }
+
+/* PricingCard */
+.plan { background: var(--color-white); border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); padding: 1.5rem; display: grid; gap: 0.7rem; box-shadow: var(--shadow-soft); position: relative; }
+.plan--highlighted { background: var(--color-deep-green); color: #fff; border-color: transparent; }
+.plan--highlighted .plan__subtitle, .plan--highlighted .plan__feature { color: rgba(255,255,255,0.7); }
+.plan__badge { position: absolute; top: -0.6rem; right: 1rem; background: var(--color-accent); color: #fff; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 999px; }
+.plan__name { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.6; }
+.plan__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 500; }
+.plan__price { font-size: 2rem; font-weight: 700; line-height: 1; }
+.plan__price span { font-size: 0.8rem; font-weight: 400; opacity: 0.7; }
+.plan__subtitle { font-size: 0.78rem; color: var(--color-muted); }
+.plan__features { display: grid; gap: 0.4rem; }
+.plan__feature { font-size: 0.78rem; color: var(--color-muted); display: flex; gap: 0.45rem; }
+.plan__feature::before { content: "✓"; color: var(--color-accent); font-weight: 700; flex-shrink: 0; }
+.plan__cta { margin-top: 0.5rem; }
+
+/* CtaPanel */
+.cta-panel { border-radius: var(--radius-panel); padding: 2rem 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center; }
+.cta-panel--default { background: var(--color-soft); border: 1px solid var(--color-card-border-soft); }
+.cta-panel--inverse { background: var(--color-deep-green); color: #fff; }
+.cta-panel__eye { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.5rem; }
+.cta-panel__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; margin-bottom: 0.5rem; }
+.cta-panel--inverse .cta-panel__title { color: #fff; }
+.cta-panel__body { font-size: 0.82rem; color: var(--color-muted); }
+.cta-panel--inverse .cta-panel__body { color: rgba(255,255,255,0.7); }
+.cta-panel__actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+/* ── 4. CONTROLS ── */
+/* Accordion */
+.ui-accordion { border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); overflow: hidden; background: #fff; }
+.ui-accordion__item + .ui-accordion__item { border-top: 1px solid rgba(44,44,44,0.07); }
+.ui-accordion__trigger {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.25rem; font-family: var(--font-body); font-size: 0.88rem; font-weight: 600;
+  color: var(--color-text); text-align: left;
+  transition: color 180ms ease, background 180ms ease;
+}
+.ui-accordion__trigger:hover { color: var(--color-accent); background: rgba(196,156,110,0.04); }
+.ui-accordion__trigger[aria-expanded="true"] { color: var(--color-accent); background: color-mix(in srgb, var(--color-accent) 5%, white); }
+.ui-accordion__chevron { font-size: 0.75rem; transition: transform 180ms ease; display: inline-block; opacity: 0.6; }
+.ui-accordion__trigger[aria-expanded="true"] .ui-accordion__chevron { transform: rotate(180deg); }
+.ui-accordion__panel { padding: 0 1.25rem 1rem; font-size: 0.82rem; color: var(--color-muted); line-height: 1.65; }
+.ui-accordion__panel[hidden] { display: none; }
+
+/* Tabs */
+.ui-tabs { background: #fff; border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); overflow: hidden; }
+.ui-tabs__list { display: flex; border-bottom: 1px solid rgba(44,44,44,0.08); padding: 0 0.5rem; }
+.ui-tabs__trigger {
+  background: none; border: none; border-bottom: 2px solid transparent;
+  cursor: pointer; font-family: var(--font-body); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.08em; padding: 0.85rem 1rem; color: var(--color-muted);
+  transition: color 180ms ease, border-color 180ms ease;
+}
+.ui-tabs__trigger:hover { color: var(--color-text); }
+.ui-tabs__trigger[aria-selected="true"] { color: var(--color-accent); border-bottom-color: var(--color-accent); }
+.ui-tabs__panel { padding: 1.25rem; font-size: 0.82rem; color: var(--color-muted); line-height: 1.65; }
+.ui-tabs__panel[hidden] { display: none; }
+
+/* ChoiceChipGroup */
+.chip-group { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.ui-choice-chip {
+  background: #fff; border: 1px solid rgba(44,44,44,0.15); border-radius: 999px;
+  cursor: pointer; font-family: var(--font-body); font-size: 0.75rem; font-weight: 500;
+  padding: 0.45rem 1rem; color: var(--color-text);
+  transition: border-color 180ms ease, color 180ms ease, background 180ms ease;
+}
+.ui-choice-chip:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.ui-choice-chip[aria-pressed="true"] { background: color-mix(in srgb, var(--color-accent) 8%, white); border-color: var(--color-accent); color: var(--color-cta); }
+
+/* CounterField */
+.ui-counter { display: inline-flex; align-items: center; gap: 0; border: 1px solid rgba(44,44,44,0.15); border-radius: 999px; overflow: hidden; background: #fff; }
+.ui-counter__button { background: none; border: none; cursor: pointer; font-size: 1.1rem; width: 2.4rem; height: 2.4rem; display: flex; align-items: center; justify-content: center; color: var(--color-muted); transition: color 150ms ease, background 150ms ease; }
+.ui-counter__button:hover { color: var(--color-cta); background: rgba(196,156,110,0.07); }
+.ui-counter__value { font-size: 0.88rem; font-weight: 600; min-width: 2rem; text-align: center; }
+
+/* ToggleField */
+.ui-toggle { display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-size: 0.82rem; }
+.ui-toggle input { accent-color: var(--color-accent); width: 1rem; height: 1rem; cursor: pointer; }
+
+/* ── 5. NAVIGATION ── */
+.ui-nav-link { display: inline-flex; letter-spacing: 0.01em; position: relative; text-decoration: none; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 180ms ease; }
+.ui-nav-link::after { background: currentColor; border-radius: 999px; content: ""; height: 0.125rem; inset-inline: 0; opacity: 0; position: absolute; top: calc(100% + 0.35rem); transform: scaleX(0.7); transform-origin: center; transition: opacity 180ms ease, transform 180ms ease; }
+.ui-nav-link:hover::after, .ui-nav-link.is-active::after { opacity: 1; transform: scaleX(1); }
+.ui-nav-link--default { color: rgba(255,255,255,0.8); }
+.ui-nav-link--default:hover, .ui-nav-link--default.is-active { color: #fff; }
+.ui-nav-link--quiet { color: rgba(44,44,44,0.7); }
+.ui-nav-link--quiet:hover, .ui-nav-link--quiet.is-active { color: var(--color-text-strong); }
+.ui-nav-link--footer { color: rgba(255,255,255,0.62); font-size: 0.82rem; letter-spacing: 0.04em; text-transform: none; }
+.ui-nav-link--footer:hover { color: rgba(255,255,255,0.9); }
+.ui-nav-link--language { font-size: 0.65rem; letter-spacing: 0.2em; }
+
+/* ── 7. ICONS ── */
+.icons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 0.75rem; }
+.icon-item { background: #fff; border: 1px solid var(--color-card-border-soft); border-radius: 0.75rem; padding: 1rem 0.75rem; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; box-shadow: var(--shadow-soft); transition: border-color 180ms ease; }
+.icon-item:hover { border-color: var(--motion-border-hover); }
+.icon-item svg { width: 1.5rem; height: 1.5rem; }
+.icon-item span { font-size: 0.58rem; letter-spacing: 0.06em; color: var(--color-muted); }
+
+/* ── 8. MOTION ── */
+.motion-demo { background: #fff; border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); padding: 1.5rem; }
+.lift-demo { border-radius: var(--radius-card); background: var(--color-soft); border: 1px solid var(--color-card-border-soft); padding: 1rem 1.25rem; display: inline-block; cursor: pointer; box-shadow: var(--shadow-soft); will-change: transform; transition: transform var(--motion-duration-md) var(--motion-ease-standard), box-shadow var(--motion-duration-md) var(--motion-ease-standard), border-color var(--motion-duration-sm) var(--motion-ease-standard); }
+.lift-demo:hover { transform: translateY(var(--motion-distance-md)); box-shadow: var(--motion-shadow-hover); border-color: var(--motion-border-hover); }
+.lift-demo--spring { transition: transform 300ms var(--motion-ease-emphasized), box-shadow 300ms var(--motion-ease-emphasized), border-color 200ms ease; }
+.lift-demo--spring:hover { transform: translateY(-0.3125rem); }
+.media-demo { border-radius: var(--radius-card); overflow: hidden; cursor: pointer; display: inline-block; width: 200px; }
+.media-demo img { width: 100%; height: 130px; object-fit: cover; display: block; transition: transform var(--motion-duration-lg) var(--motion-ease-emphasized); }
+.media-demo:hover img { transform: scale(var(--motion-scale-media)); }
+.underline-demo { display: inline-flex; font-size: 0.9rem; font-weight: 500; color: var(--color-cta-strong); position: relative; cursor: pointer; }
+.underline-demo::after { background: currentColor; border-radius: 999px; content: ""; height: 0.08rem; inset-inline: 0; opacity: 0.8; position: absolute; bottom: -0.2rem; transform: scaleX(0.74); transform-origin: left; transition: transform 180ms var(--motion-ease-standard); }
+.underline-demo:hover::after { transform: scaleX(1); }
+.arrow-demo { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; font-weight: 600; color: var(--color-cta); cursor: pointer; }
+.arrow-demo .arr { display: inline-block; transform: translateX(0); transition: transform 180ms var(--motion-ease-standard); }
+.arrow-demo:hover .arr { transform: translateX(0.2rem); }
+
+/* ── 9. SECTION PATTERNS ── */
+.section-pattern { background: #e8e3db; border-radius: var(--radius-panel); overflow: hidden; }
+.section-pattern__label { font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-muted); padding: 0.75rem 1rem 0; }
+.pattern-wrap { padding: 1.25rem; transform-origin: top left; }
+
+/* Hero mini */
+.hero-mini { background: linear-gradient(135deg, #192b17 0%, #1a2a18 60%, #2a1a0a 100%); border-radius: 0.75rem; padding: 2rem; color: #fff; position: relative; overflow: hidden; }
+.hero-mini::before { content: ''; position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?w=600&q=50') center/cover; opacity: 0.25; }
+.hero-mini__content { position: relative; }
+.hero-mini__eye { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 0.6rem; }
+.hero-mini__title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 500; line-height: 1.15; margin-bottom: 0.75rem; }
+.hero-mini__body { font-size: 0.78rem; color: rgba(255,255,255,0.75); margin-bottom: 1.25rem; max-width: 340px; }
+.hero-mini__actions { display: flex; gap: 0.6rem; }
+
+/* reasons mini */
+.reasons-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+.reason-card { text-align: center; padding: 1.25rem 1rem; background: #fff; border: 1px solid var(--color-card-border-soft); border-radius: var(--radius-card); box-shadow: var(--shadow-soft); }
+.reason-icon { width: 3rem; height: 3rem; background: rgba(25,43,23,0.09); border-radius: 999px; display: flex; align-items: center; justify-content: center; color: var(--color-deep-green); margin: 0 auto 0.75rem; }
+.reason-card h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.35rem; }
+.reason-card p { font-size: 0.75rem; color: var(--color-muted); line-height: 1.55; }
+
+/* Testimonials card */
+.test-card { border-radius: var(--radius-card); max-width: 260px; position: relative; }
+.test-card__stars { color: var(--color-accent); font-size: 0.9rem; margin-bottom: 0.75rem; }
+.test-card__quote { font-style: italic; color: rgba(44,44,44,0.82); font-size: 0.82rem; line-height: 1.65; margin-bottom: 0.75rem; }
+.test-card__author { font-size: 0.78rem; color: var(--color-muted); }
+.test-card__author strong { color: var(--color-text); }
+.test-card::after { content: '"'; color: rgba(196,156,110,0.18); font-family: var(--font-display); font-size: 4rem; position: absolute; right: 0.8rem; top: 0.3rem; line-height: 1; }
+.test-card--after { background: var(--color-white); border: 1px solid var(--color-card-border-soft); box-shadow: var(--shadow-soft); padding: 1.25rem;
+  transition: transform 300ms var(--motion-ease-emphasized), box-shadow 300ms var(--motion-ease-emphasized), border-color 200ms ease; }
+.test-card--after:hover { transform: translateY(-0.3125rem); box-shadow: 0 1.5rem 3rem rgba(20,14,9,0.13); border-color: var(--motion-border-hover); }
+
+/* Misc */
+.tag { display: inline-block; background: rgba(196,156,110,0.15); color: var(--color-cta); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.45rem; border-radius: 0.25rem; font-weight: 600; }
+.badge-group { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <h1>Périnade</h1>
+    <span>Design System</span>
+  </div>
+  <nav>
+    <a href="#tokens"><span class="nav-num">01</span> Tokens</a>
+    <a href="#buttons"><span class="nav-num">02</span> Boutons</a>
+    <a href="#cards"><span class="nav-num">03</span> Cartes</a>
+    <a href="#controls"><span class="nav-num">04</span> Contrôles</a>
+    <a href="#navigation"><span class="nav-num">05</span> Navigation</a>
+    <a href="#typography"><span class="nav-num">06</span> Typographie</a>
+    <a href="#icons"><span class="nav-num">07</span> Icônes</a>
+    <a href="#motion"><span class="nav-num">08</span> Motion</a>
+    <a href="#patterns"><span class="nav-num">09</span> Patterns</a>
+  </nav>
+  <div class="sidebar-footer">3 locales · Astro 5 · Cloudflare Pages</div>
+</aside>
+
+<!-- ── MAIN ── -->
+<main>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 01. TOKENS -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="tokens">
+  <div class="ds-section-header">
+    <h2>01 — Design Tokens</h2>
+    <p>Variables CSS globales définies dans <code>src/styles/global.css</code></p>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Palette couleurs</h3>
+    <div class="color-grid">
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#ffffff;border:1px solid #eee"></div><div class="color-swatch__info"><div class="color-swatch__name">white / bg</div><div class="color-swatch__val">#ffffff</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#faf7f2"></div><div class="color-swatch__info"><div class="color-swatch__name">soft</div><div class="color-swatch__val">#faf7f2</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#f0ebe3"></div><div class="color-swatch__info"><div class="color-swatch__name">soft-strong</div><div class="color-swatch__val">#f0ebe3</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#2c2c2c"></div><div class="color-swatch__info"><div class="color-swatch__name">text</div><div class="color-swatch__val">#2c2c2c</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#1a1a1a"></div><div class="color-swatch__info"><div class="color-swatch__name">text-strong</div><div class="color-swatch__val">#1a1a1a</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#595959"></div><div class="color-swatch__info"><div class="color-swatch__name">muted</div><div class="color-swatch__val">#595959</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#6b6b6b"></div><div class="color-swatch__info"><div class="color-swatch__name">muted-light</div><div class="color-swatch__val">#6b6b6b</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#c49c6e"></div><div class="color-swatch__info"><div class="color-swatch__name">accent</div><div class="color-swatch__val">#c49c6e</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#a85900"></div><div class="color-swatch__info"><div class="color-swatch__name">cta</div><div class="color-swatch__val">#a85900</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#8f4b00"></div><div class="color-swatch__info"><div class="color-swatch__name">cta-strong</div><div class="color-swatch__val">#8f4b00</div></div></div>
+      <div class="color-swatch"><div class="color-swatch__block" style="background:#192b17"></div><div class="color-swatch__info"><div class="color-swatch__name">deep-green</div><div class="color-swatch__val">#192b17</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Ombres</h3>
+    <div class="ds-row">
+      <div>
+        <div class="shadow-demo" style="box-shadow:none;border:1px solid rgba(44,44,44,0.1)">flat<br><small>aucune ombre</small></div>
+        <div class="ds-label">flat</div>
+      </div>
+      <div>
+        <div class="shadow-demo" style="box-shadow:0 0.625rem 1.5rem rgba(24,20,14,0.08)">shadow-soft<br><small>0 0.625rem 1.5rem</small></div>
+        <div class="ds-label">shadow-soft</div>
+      </div>
+      <div>
+        <div class="shadow-demo" style="box-shadow:0 1.125rem 2.375rem rgba(28,22,17,0.08)">shadow-card<br><small>0 1.125rem 2.375rem</small></div>
+        <div class="ds-label">shadow-card</div>
+      </div>
+      <div>
+        <div class="shadow-demo" style="box-shadow:0 1.3rem 2.2rem rgba(20,14,9,0.14)">shadow-hover<br><small>0 1.3rem 2.2rem</small></div>
+        <div class="ds-label">motion-shadow-hover</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Motion — Durées &amp; Easings</h3>
+    <table class="token-table">
+      <thead><tr><th>Token</th><th>Valeur</th><th>Usage</th></tr></thead>
+      <tbody>
+        <tr><td><code>--motion-duration-xs</code></td><td>140ms</td><td>Micro-interactions (state change)</td></tr>
+        <tr><td><code>--motion-duration-sm</code></td><td>180ms</td><td>Hover couleurs, underlines</td></tr>
+        <tr><td><code>--motion-duration-md</code></td><td>240ms</td><td>Hover cartes, boutons</td></tr>
+        <tr><td><code>--motion-duration-lg</code></td><td>620ms</td><td>Reveal scroll, zoom image</td></tr>
+        <tr><td><code>--motion-ease-standard</code></td><td>cubic-bezier(0.2,0,0,1)</td><td>Transitions UI classiques</td></tr>
+        <tr><td><code>--motion-ease-emphasized</code></td><td>cubic-bezier(0.21,1,0.31,1)</td><td>Reveal, zoom, spring</td></tr>
+        <tr><td><code>--motion-distance-sm</code></td><td>−0.125rem (~2px)</td><td>Hover boutons</td></tr>
+        <tr><td><code>--motion-distance-md</code></td><td>−0.2rem (~3px)</td><td>Hover cartes</td></tr>
+        <tr><td><code>--motion-scale-media</code></td><td>1.045</td><td>Zoom image</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 02. BOUTONS -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="buttons">
+  <div class="ds-section-header">
+    <h2>02 — Boutons &amp; Actions</h2>
+    <p>4 variants · 3 tailles · 4 tones · états disabled / loading. Survolez pour voir les animations.</p>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Variant primary — sm / md / lg</h3>
+    <div class="ds-row" style="align-items:center">
+      <button class="ui-action ui-action--primary ui-action--sm">Réserver sm</button>
+      <button class="ui-action ui-action--primary ui-action--md">Réserver md</button>
+      <button class="ui-action ui-action--primary ui-action--lg">Réserver lg</button>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Variant secondary — sm / md / lg</h3>
+    <div class="ds-row" style="align-items:center">
+      <button class="ui-action ui-action--secondary ui-action--sm">Découvrir sm</button>
+      <button class="ui-action ui-action--secondary ui-action--md">Découvrir md</button>
+      <button class="ui-action ui-action--secondary ui-action--lg">Découvrir lg</button>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Variant ghost — sur fond sombre</h3>
+    <div class="dark-bg">
+      <div class="ds-row" style="align-items:center">
+        <button class="ui-action ui-action--ghost ui-action--sm">Ghost sm</button>
+        <button class="ui-action ui-action--ghost ui-action--md">Ghost md</button>
+        <button class="ui-action ui-action--ghost ui-action--lg">Ghost lg</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Variant text</h3>
+    <div class="ds-row">
+      <span class="ui-action ui-action--text">Voir tous nos vins</span>
+      <span class="ui-action ui-action--text">En savoir plus</span>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Interaction emphasis (hover plus prononcé)</h3>
+    <div class="ds-row">
+      <button class="ui-action ui-action--primary ui-action--lg ui-action--interaction-emphasis">Réserver ma visite</button>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>États</h3>
+    <div class="ds-row" style="align-items:center">
+      <button class="ui-action ui-action--primary ui-action--md" disabled>Désactivé</button>
+      <button class="ui-action ui-action--primary ui-action--md ui-action--loading"><span class="spinner"></span> Chargement…</button>
+      <button class="ui-action ui-action--secondary ui-action--md" disabled>Secondary désactivé</button>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>IconButton (ghost sm)</h3>
+    <div class="ds-row">
+      <button class="ui-action ui-action--ghost ui-action--sm" style="padding:0;width:2.6rem;height:2.6rem;border-color:rgba(44,44,44,0.2);color:var(--color-text)">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="currentColor" stroke-width="1.7"><path d="M6.5 8.5h11l-1 10h-9l-1-10Z" stroke-linejoin="round"/><path d="M9 9V7.8A3 3 0 0 1 12 5a3 3 0 0 1 3 2.8V9" stroke-linecap="round"/></svg>
+      </button>
+      <button class="ui-action ui-action--ghost ui-action--sm" style="padding:0;width:2.6rem;height:2.6rem;border-color:rgba(44,44,44,0.2);color:var(--color-text)">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5h16v9H4v-9Z" stroke-linejoin="round"/><path d="m5 8.5 7 5 7-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="ui-action ui-action--ghost ui-action--sm" style="padding:0;width:2.6rem;height:2.6rem;border-color:rgba(44,44,44,0.2);color:var(--color-text)">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 7.5v5l3 1.8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 03. CARTES -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="cards">
+  <div class="ds-section-header">
+    <h2>03 — Cartes</h2>
+    <p>6 types · tones, elevations, états interactifs. Survolez les cartes avec <em>interactive</em>.</p>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>Card — Tones × Elevations</h3>
+    <div class="card-grid-3">
+      <div class="ui-card"><div class="ui-card__content"><div class="ui-card__eyebrow">Default · Flat</div><div class="ui-card__title">Fond blanc, sans ombre</div><div class="ui-card__body">Variante de base, élévation plate.</div></div></div>
+      <div class="ui-card ui-card--elevation-soft"><div class="ui-card__content"><div class="ui-card__eyebrow">Default · Soft</div><div class="ui-card__title">Fond blanc, ombre légère</div><div class="ui-card__body">Shadow-soft pour distinguer du fond.</div></div></div>
+      <div class="ui-card ui-card--elevation-raised"><div class="ui-card__content"><div class="ui-card__eyebrow">Default · Raised</div><div class="ui-card__title">Fond blanc, ombre marquée</div><div class="ui-card__body">Shadow-card pour premier plan.</div></div></div>
+      <div class="ui-card ui-card--soft"><div class="ui-card__content"><div class="ui-card__eyebrow">Soft · Flat</div><div class="ui-card__title">Fond crème, sans ombre</div><div class="ui-card__body">Arrière-plan doux sans élévation.</div></div></div>
+      <div class="ui-card ui-card--soft ui-card--elevation-soft"><div class="ui-card__content"><div class="ui-card__eyebrow">Soft · Soft</div><div class="ui-card__title">Fond crème, ombre légère</div><div class="ui-card__body">Combinaison douce et chaleureuse.</div></div></div>
+      <div class="ui-card ui-card--soft ui-card--elevation-raised"><div class="ui-card__content"><div class="ui-card__eyebrow">Soft · Raised</div><div class="ui-card__title">Fond crème, ombre marquée</div><div class="ui-card__body">Mise en avant sur fond clair.</div></div></div>
+      <div class="ui-card ui-card--inverse"><div class="ui-card__content"><div class="ui-card__eyebrow" style="color:rgba(255,255,255,0.5)">Inverse · Flat</div><div class="ui-card__title">Fond sombre, sans ombre</div><div class="ui-card__body" style="color:rgba(255,255,255,0.6)">Pour sections sombres.</div></div></div>
+      <div class="ui-card ui-card--interactive ui-card--elevation-soft"><div class="ui-card__content"><div class="ui-card__eyebrow">Interactive · Soft</div><div class="ui-card__title">Survol → lift + bordure dorée</div><div class="ui-card__body">Passez votre souris ici.</div></div></div>
+      <div class="ui-card ui-card--interactive ui-card--elevation-raised"><div class="ui-card__content"><div class="ui-card__eyebrow">Interactive · Raised</div><div class="ui-card__title">Hover marqué</div><div class="ui-card__body">Shadow-card au repos, hover plus profond.</div></div></div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>MediaCard — avec image + hover zoom</h3>
+    <div class="card-grid-4">
+      <div class="media-card">
+        <div class="media-card__img"><img src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?w=400&q=70" alt="vin"></div>
+        <div class="media-card__body"><div class="media-card__eye">Actualité</div><div class="media-card__title">La vendange 2024 en images</div></div>
+      </div>
+      <div class="media-card">
+        <div class="media-card__img"><img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?w=400&q=70" alt="domaine"></div>
+        <div class="media-card__body"><div class="media-card__eye">Événement</div><div class="media-card__title">Portes ouvertes du domaine</div></div>
+      </div>
+      <div class="media-card">
+        <div class="media-card__img"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=70" alt="cave"></div>
+        <div class="media-card__body"><div class="media-card__eye">Visite</div><div class="media-card__title">Découvrez notre cave historique</div></div>
+      </div>
+      <div class="media-card">
+        <div class="media-card__img"><img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=400&q=70" alt="bouteille"></div>
+        <div class="media-card__body"><div class="media-card__eye">Dégustation</div><div class="media-card__title">Cuvée Tradition millésime 2022</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>ProductCard — AVANT vs APRÈS (survolez)</h3>
+    <div class="card-grid-2" style="max-width:520px">
+      <div>
+        <div style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:#b84040;font-weight:700;margin-bottom:0.5rem">AVANT — pas de hover</div>
+        <div class="shop-card" style="max-width:220px">
+          <div class="shop-card__image"><img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&q=70" alt="vin"></div>
+          <div class="shop-card__body"><div class="shop-card__meta">Vin rouge · 75cl</div><div class="shop-card__title">Cuvée Tradition</div><div class="shop-card__price">18,00 €</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:#3a7d50;font-weight:700;margin-bottom:0.5rem">APRÈS — shadow + lift + zoom</div>
+        <div class="shop-card shop-card--after" style="max-width:220px">
+          <div class="shop-card__image"><img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&q=70" alt="vin"></div>
+          <div class="shop-card__body"><div class="shop-card__meta">Vin rouge · 75cl</div><div class="shop-card__title">Cuvée Tradition</div><div class="shop-card__price">18,00 €</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>InfoCard</h3>
+    <div class="card-grid-3">
+      <div class="info-card">
+        <div class="info-card__tag">Accès</div>
+        <div class="info-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.7"><path d="M12 20s5-4.8 5-9a5 5 0 1 0-10 0c0 4.2 5 9 5 9Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11" r="1.8" fill="currentColor"/></svg>
+        </div>
+        <div class="info-card__title">Comment nous trouver</div>
+        <ul class="info-card__list"><li>À 45 min de Bordeaux</li><li>Route des Vins de Bordeaux</li><li>GPS : Lat. 44.8378, Lon. −0.5792</li></ul>
+        <div class="info-card__cta">Voir l'itinéraire</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__tag">Horaires</div>
+        <div class="info-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 7.5v5l3 1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="info-card__title">Ouverture du domaine</div>
+        <ul class="info-card__list"><li>Lun–Ven : 9h–18h</li><li>Sam : 10h–16h</li><li>Fermé le dimanche</li></ul>
+        <div class="info-card__cta">Réserver une visite</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__tag">Contact</div>
+        <div class="info-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.7"><path d="M4 7.5h16v9H4v-9Z" stroke-linejoin="round"/><path d="m5 8.5 7 5 7-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="info-card__title">Nous écrire</div>
+        <ul class="info-card__list"><li>contact@perinade.fr</li><li>+33 5 57 00 00 00</li></ul>
+        <div class="info-card__cta">Envoyer un message</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>PricingCard</h3>
+    <div class="card-grid-3">
+      <div class="plan">
+        <div class="plan__name">Essentiel</div>
+        <div class="plan__title">Visite Découverte</div>
+        <div class="plan__price">28 €<span> / pers.</span></div>
+        <div class="plan__subtitle">Idéal pour une première visite</div>
+        <div class="plan__features">
+          <div class="plan__feature">Visite guidée 1h30</div>
+          <div class="plan__feature">Dégustation 3 vins</div>
+          <div class="plan__feature">Fiche de dégustation</div>
+        </div>
+        <div class="plan__cta"><button class="ui-action ui-action--secondary ui-action--sm" style="width:100%;justify-content:center">Réserver</button></div>
+      </div>
+      <div class="plan plan--highlighted">
+        <div class="plan__badge">Populaire</div>
+        <div class="plan__name">Signature</div>
+        <div class="plan__title">Visite Prestige</div>
+        <div class="plan__price" style="color:#fff">68 €<span> / pers.</span></div>
+        <div class="plan__subtitle">L'expérience complète</div>
+        <div class="plan__features">
+          <div class="plan__feature">Visite guidée 3h</div>
+          <div class="plan__feature">Dégustation 6 vins</div>
+          <div class="plan__feature">Plateau de fromages</div>
+          <div class="plan__feature">Bouteille offerte</div>
+        </div>
+        <div class="plan__cta"><button class="ui-action ui-action--primary ui-action--sm" style="width:100%;justify-content:center">Réserver</button></div>
+      </div>
+      <div class="plan">
+        <div class="plan__name">Privatisé</div>
+        <div class="plan__title">Groupe &amp; Événements</div>
+        <div class="plan__price">Sur devis</div>
+        <div class="plan__subtitle">À partir de 10 personnes</div>
+        <div class="plan__features">
+          <div class="plan__feature">Programme personnalisé</div>
+          <div class="plan__feature">Accueil privatif</div>
+          <div class="plan__feature">Chef cuisinier</div>
+        </div>
+        <div class="plan__cta"><button class="ui-action ui-action--secondary ui-action--sm" style="width:100%;justify-content:center">Nous contacter</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>CtaPanel — tone default &amp; inverse</h3>
+    <div style="display:grid;gap:1rem">
+      <div class="cta-panel cta-panel--default">
+        <div>
+          <div class="cta-panel__eye">Bon cadeau</div>
+          <div class="cta-panel__title">Offrez une expérience unique</div>
+          <div class="cta-panel__body">Nos coffrets cadeau combinent visite guidée et dégustation des meilleurs millésimes du domaine.</div>
+        </div>
+        <div class="cta-panel__actions">
+          <button class="ui-action ui-action--primary ui-action--md">Voir les coffrets</button>
+          <button class="ui-action ui-action--secondary ui-action--md">En savoir plus</button>
+        </div>
+      </div>
+      <div class="cta-panel cta-panel--inverse">
+        <div>
+          <div class="cta-panel__eye">Visite privée</div>
+          <div class="cta-panel__title">Réservez votre expérience</div>
+          <div class="cta-panel__body" style="color:rgba(255,255,255,0.7)">Immersion totale dans l'univers du Domaine de la Périnade.</div>
+        </div>
+        <div class="cta-panel__actions">
+          <button class="ui-action ui-action--primary ui-action--md">Réserver maintenant</button>
+          <button class="ui-action ui-action--ghost ui-action--md">Téléphoner</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 04. CONTRÔLES -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="controls">
+  <div class="ds-section-header">
+    <h2>04 — Contrôles</h2>
+    <p>Accordion, Tabs, ChoiceChipGroup, CounterField, ToggleField — tous interactifs.</p>
+  </div>
+
+  <div class="card-grid-2">
+    <div>
+      <div class="ds-subsection">
+        <h3>Accordion</h3>
+        <div class="ui-accordion">
+          <div class="ui-accordion__item">
+            <button class="ui-accordion__trigger" aria-expanded="true" onclick="toggleAccordion(this)">
+              Quels vins propose le domaine ?
+              <span class="ui-accordion__chevron">▾</span>
+            </button>
+            <div class="ui-accordion__panel">Le domaine produit des rouges, blancs et rosés issus des parcelles de Merlot, Cabernet Sauvignon et Sauvignon Blanc.</div>
+          </div>
+          <div class="ui-accordion__item">
+            <button class="ui-accordion__trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+              Comment réserver une visite ?
+              <span class="ui-accordion__chevron">▾</span>
+            </button>
+            <div class="ui-accordion__panel" hidden>Réservez en ligne via notre formulaire ou appelez-nous directement au +33 5 57 00 00 00.</div>
+          </div>
+          <div class="ui-accordion__item">
+            <button class="ui-accordion__trigger" aria-expanded="false" onclick="toggleAccordion(this)">
+              Livraison à domicile disponible ?
+              <span class="ui-accordion__chevron">▾</span>
+            </button>
+            <div class="ui-accordion__panel" hidden>Oui, livraison en France métropolitaine sous 3–5 jours ouvrés. Offerte à partir de 6 bouteilles.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>ChoiceChipGroup</h3>
+        <div class="chip-group">
+          <button class="ui-choice-chip" aria-pressed="true" onclick="toggleChip(this)">Tous</button>
+          <button class="ui-choice-chip" aria-pressed="false" onclick="toggleChip(this)">Rouges</button>
+          <button class="ui-choice-chip" aria-pressed="false" onclick="toggleChip(this)">Blancs</button>
+          <button class="ui-choice-chip" aria-pressed="false" onclick="toggleChip(this)">Rosés</button>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>CounterField</h3>
+        <div class="ui-counter">
+          <button class="ui-counter__button" onclick="adjustCounter(this,-1)">−</button>
+          <span class="ui-counter__value">2</span>
+          <button class="ui-counter__button" onclick="adjustCounter(this,1)">+</button>
+        </div>
+      </div>
+
+      <div class="ds-subsection">
+        <h3>ToggleField</h3>
+        <label class="ui-toggle"><input type="checkbox"> Ajouter le plateau dégustation (+12 €)</label>
+        <br>
+        <label class="ui-toggle" style="margin-top:0.5rem"><input type="checkbox" checked> J'accepte les conditions générales</label>
+      </div>
+    </div>
+
+    <div>
+      <div class="ds-subsection">
+        <h3>Tabs</h3>
+        <div class="ui-tabs">
+          <div class="ui-tabs__list" role="tablist">
+            <button class="ui-tabs__trigger" role="tab" aria-selected="true" onclick="switchTab(this, 'tab1')">Vins</button>
+            <button class="ui-tabs__trigger" role="tab" aria-selected="false" onclick="switchTab(this, 'tab2')">Visites</button>
+            <button class="ui-tabs__trigger" role="tab" aria-selected="false" onclick="switchTab(this, 'tab3')">Boutique</button>
+          </div>
+          <div id="tab1" class="ui-tabs__panel">
+            <strong>Notre gamme</strong><br>Du Bordeaux Supérieur classique aux cuvées Prestige, le domaine propose 8 vins reflétant chaque terroir de nos 45 hectares.
+          </div>
+          <div id="tab2" class="ui-tabs__panel" hidden>
+            <strong>Expériences disponibles</strong><br>Visite Découverte, Visite Prestige, et formules privatisées pour groupes et événements d'entreprise.
+          </div>
+          <div id="tab3" class="ui-tabs__panel" hidden>
+            <strong>Commande en ligne</strong><br>Vins, coffrets cadeaux et abonnements disponibles avec livraison offerte dès 6 bouteilles.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 05. NAVIGATION -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="navigation">
+  <div class="ds-section-header">
+    <h2>05 — Navigation</h2>
+    <p>NavLink — 4 kinds × 3 tones, états actif / hover.</p>
+  </div>
+
+  <div class="dark-bg" style="margin-bottom:1rem">
+    <div class="ds-subsection">
+      <h3 style="color:rgba(255,255,255,0.5)">Tone default / inverse (fond sombre)</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center">
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--default" href="#">Accueil</a>
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--default" href="#">Domaine</a>
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--default is-active" href="#">Visites</a>
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--default" href="#">Boutique</a>
+        <a class="ui-nav-link ui-nav-link--language ui-nav-link--default" href="#">FR</a>
+        <a class="ui-nav-link ui-nav-link--language ui-nav-link--default" href="#">EN</a>
+        <a class="ui-nav-link ui-nav-link--language ui-nav-link--default" href="#">ES</a>
+      </div>
+    </div>
+    <div class="ds-subsection" style="margin-bottom:0">
+      <h3 style="color:rgba(255,255,255,0.5)">Kind footer</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center">
+        <a class="ui-nav-link ui-nav-link--footer" href="#">Mentions légales</a>
+        <a class="ui-nav-link ui-nav-link--footer" href="#">CGV</a>
+        <a class="ui-nav-link ui-nav-link--footer is-active" href="#">Contact</a>
+        <a class="ui-nav-link ui-nav-link--footer" href="#">Plan du site</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--color-card-border-soft);border-radius:var(--radius-card);padding:1.25rem 1.5rem">
+    <div class="ds-subsection" style="margin-bottom:0">
+      <h3>Tone quiet (fond clair)</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:2rem;align-items:center">
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--quiet" href="#">Accueil</a>
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--quiet" href="#">Domaine</a>
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--quiet is-active" href="#">Boutique</a>
+        <a class="ui-nav-link ui-nav-link--primary ui-nav-link--quiet" href="#">Actualités</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 06. TYPOGRAPHIE -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="typography">
+  <div class="ds-section-header">
+    <h2>06 — Typographie</h2>
+    <p>Playfair Display (titres) + Inter (corps). Échelle fluide via clamp().</p>
+  </div>
+
+  <div style="background:#fff;border:1px solid var(--color-card-border-soft);border-radius:var(--radius-card);padding:1.5rem 2rem">
+    <div class="type-scale-row">
+      <div class="type-meta">display-hero<br>3–6.25rem</div>
+      <div style="font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);font-weight:500;line-height:1.1;color:var(--color-text-strong)">Domaine de la Périnade</div>
+    </div>
+    <div class="type-scale-row">
+      <div class="type-meta">section-xl<br>2.3–3.55rem</div>
+      <div style="font-family:var(--font-display);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:500;color:var(--color-text-strong)">Nos cuvées d'exception</div>
+    </div>
+    <div class="type-scale-row">
+      <div class="type-meta">section-lg<br>2.05–2.95rem</div>
+      <div style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:500;color:var(--color-text-strong)">Réservez votre visite</div>
+    </div>
+    <div class="type-scale-row">
+      <div class="type-meta">h3 display<br>1.4rem · 600</div>
+      <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:600;color:var(--color-text-strong)">Cuvée Tradition 2022</div>
+    </div>
+    <div class="type-scale-row">
+      <div class="type-meta">eyebrow<br>0.72rem · 700</div>
+      <div style="font-family:var(--font-body);font-size:0.72rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent)">Bordeaux Supérieur · AOC</div>
+    </div>
+    <div class="type-scale-row">
+      <div class="type-meta">body<br>1rem · 400</div>
+      <div style="font-family:var(--font-body);font-size:1rem;color:var(--color-text);line-height:1.65">Le Domaine de la Périnade est un vignoble familial de 45 hectares en appellation Bordeaux Supérieur, transmis de génération en génération depuis 1887.</div>
+    </div>
+    <div class="type-scale-row">
+      <div class="type-meta">body muted<br>0.9rem · 400</div>
+      <div style="font-family:var(--font-body);font-size:0.9rem;color:var(--color-muted);line-height:1.65">Notes de fruits noirs, tanins soyeux, belle longueur en bouche. À déguster avec des viandes grillées ou un plateau de fromages.</div>
+    </div>
+    <div class="type-scale-row">
+      <div class="type-meta">italic citation<br>1rem · 400</div>
+      <div style="font-family:var(--font-display);font-size:1rem;font-style:italic;color:rgba(44,44,44,0.82);line-height:1.68">« Un domaine d'exception, des vins qui racontent le terroir bordelais avec une élégance remarquable. »</div>
+    </div>
+    <div class="type-scale-row" style="border:none">
+      <div class="type-meta">caption small<br>0.65rem · 400</div>
+      <div style="font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-muted)">Mis en bouteille au Domaine · 12,5% vol. · Contient des sulfites</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 07. ICÔNES -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="icons">
+  <div class="ds-section-header">
+    <h2>07 — Icônes</h2>
+    <p>19 icônes SVG inline, stroke="currentColor", viewBox 0 0 24 24.</p>
+  </div>
+  <div class="icons-grid">
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M18 3c-6 1-10 4.5-11.4 10.3-.2.8-.4 1.7-.6 2.7 1.1-.7 2.2-1.1 3.2-1.4C15 13 18.5 9.1 20 4.5c.1-.5.2-1 .3-1.5H18Zm-6 10.5c-2.5 0-4.6.9-6.5 3.1" stroke-linecap="round" stroke-linejoin="round"/></svg><span>leaf</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 16c1.8-2.3 3.6-3.4 5.4-3.4S12 13.7 13.7 16c1.8-2 3.5-3 5.3-3 1 0 2 .4 3 1.1M3 20h18" stroke-linecap="round" stroke-linejoin="round"/></svg><span>terrain</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 4h8l-1.2 7.2A4 4 0 0 1 11 14.5V20m0 0h2m-2 0H9" stroke-linecap="round" stroke-linejoin="round"/></svg><span>glass</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 7.5v5l3 1.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>clock</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8.5 12.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM4.5 18c.7-2 2.2-3 4-3h.5c1.8 0 3.3 1 4 3M14 18c.5-1.4 1.6-2.2 3.2-2.2h.3c1.1 0 2.1.4 3 1.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>users</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M4.5 9.5h15M4.5 14.5h15M12 4c2 2.2 3 5 3 8s-1 5.8-3 8c-2-2.2-3-5-3-8s1-5.8 3-8Z" stroke-linecap="round" stroke-linejoin="round"/></svg><span>globe</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s5-4.8 5-9a5 5 0 1 0-10 0c0 4.2 5 9 5 9Z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11" r="1.8" fill="currentColor"/></svg><span>pin</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 8.5A2.5 2.5 0 0 0 6.5 6H18v12H6.5A2.5 2.5 0 0 0 4 15.5v-7Z" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 9.5h3M11 14.5h2" stroke-linecap="round"/></svg><span>ticket</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6.5 8.5h11l-1 10h-9l-1-10Z" stroke-linejoin="round"/><path d="M9 9V7.8A3 3 0 0 1 12 5a3 3 0 0 1 3 2.8V9" stroke-linecap="round"/></svg><span>bag</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7.5 5.5c.4-.4 1-.5 1.5-.2l2 1c.6.3.8 1 .5 1.6l-.7 1.4c1 1.9 2.5 3.4 4.4 4.4l1.4-.7c.6-.3 1.3-.1 1.6.5l1 2c.3.5.2 1.1-.2 1.5l-1.2 1.2c-.7.7-1.7.9-2.6.6A17.6 17.6 0 0 1 4.4 8.1c-.3-.9-.1-1.9.6-2.6l1.2-1.2Z" stroke-linecap="round" stroke-linejoin="round"/></svg><span>phone</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7.5h16v9H4v-9Z" stroke-linejoin="round"/><path d="m5 8.5 7 5 7-5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>mail</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="5.5" width="16" height="14" rx="2"/><path d="M8 3.5v4M16 3.5v4M4 9h16" stroke-linecap="round"/></svg><span>calendar</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6.5 14.5h11l-1.2-3.3a2 2 0 0 0-1.9-1.3H9.6a2 2 0 0 0-1.9 1.3L6.5 14.5Zm0 0-1.5 1.2v2.3h1.7v-1.3h10.6V18H19v-2.3l-1.5-1.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.2" cy="14.5" r=".9" fill="currentColor"/><circle cx="15.8" cy="14.5" r=".9" fill="currentColor"/></svg><span>car</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 13.5 21 9l-9 9-1.6-3.9L6.5 12 3 13.5Z" stroke-linejoin="round"/></svg><span>plane</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="4.5" width="12" height="13" rx="2.5"/><path d="M9 8h6M9 11h6M8.5 18.5l-2 2M15.5 18.5l2 2" stroke-linecap="round"/></svg><span>train</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3 7 10h3l-2 3h3l-2.2 3.5h6.4L13 13h3l-2-3h3L12 3Z" stroke-linejoin="round"/><path d="M12 17v4" stroke-linecap="round"/></svg><span>tree</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 15c1.3 1.4 2.7 2 4 2s2.7-.6 4-2c1.3 1.4 2.7 2 4 2s2.7-.6 4-2" stroke-linecap="round"/><path d="M6 13V8.5A2.5 2.5 0 0 1 8.5 6h3A2.5 2.5 0 0 1 14 8.5V13" stroke-linecap="round"/></svg><span>pool</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m4 18 5.8-8.7 3.5 3 2.3-3.7L20 12" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="6" r="1" fill="currentColor"/><circle cx="12" cy="5" r="1" fill="currentColor"/><circle cx="17.5" cy="5.5" r="1" fill="currentColor"/></svg><span>event</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4.5" y="4.5" width="15" height="15" rx="4"/><circle cx="12" cy="12" r="3.2"/><circle cx="17" cy="7.3" r="1" fill="currentColor"/></svg><span>instagram</span></div>
+    <div class="icon-item"><svg viewBox="0 0 24 24" fill="none"><path d="M14.3 8H16V5.2c-.3 0-.9-.2-2-.2-2.1 0-3.5 1.3-3.5 3.8V11H8v3h2.5v5H14v-5h2.6l.4-3H14V9.2c0-.9.2-1.2 1.3-1.2Z" fill="currentColor"/></svg><span>facebook</span></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 08. MOTION -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="motion">
+  <div class="ds-section-header">
+    <h2>08 — Motion &amp; Animations</h2>
+    <p>Classes utilitaires hover + système de reveal au scroll. Survolez les démos.</p>
+  </div>
+
+  <div class="card-grid-2" style="margin-bottom:1.5rem">
+    <div class="motion-demo">
+      <div class="ds-subsection"><h3>.ui-hover-lift (actuel)</h3></div>
+      <div class="lift-demo">
+        <strong style="font-size:0.85rem">Survol moi</strong><br>
+        <span style="font-size:0.72rem;color:var(--color-muted)">translateY(-0.2rem) · 240ms standard</span>
+      </div>
+    </div>
+    <div class="motion-demo">
+      <div class="ds-subsection"><h3>.ui-hover-lift (version B proposée)</h3></div>
+      <div class="lift-demo lift-demo--spring">
+        <strong style="font-size:0.85rem">Survol moi</strong><br>
+        <span style="font-size:0.72rem;color:var(--color-muted)">translateY(-0.3125rem) · 300ms spring</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid-2" style="margin-bottom:1.5rem">
+    <div class="motion-demo">
+      <div class="ds-subsection"><h3>.ui-hover-media (image zoom)</h3></div>
+      <div class="media-demo">
+        <img src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?w=300&q=70" alt="vin">
+      </div>
+      <div style="font-size:0.72rem;color:var(--color-muted);margin-top:0.5rem">scale(1.045) · 620ms emphasized</div>
+    </div>
+    <div class="motion-demo">
+      <div class="ds-subsection"><h3>.ui-hover-underline &amp; .ui-hover-arrow</h3></div>
+      <div style="display:grid;gap:1.25rem;padding-top:0.5rem">
+        <div class="underline-demo">Voir tous nos vins</div>
+        <div class="underline-demo">Découvrir le domaine</div>
+        <div class="arrow-demo">En savoir plus <span class="arr">→</span></div>
+        <div class="arrow-demo">Réserver maintenant <span class="arr">→</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-subsection">
+    <h3>[data-reveal] — Animation au scroll</h3>
+    <div style="background:#fff;border:1px solid var(--color-card-border-soft);border-radius:var(--radius-card);padding:1.25rem">
+      <p style="font-size:0.82rem;color:var(--color-muted);margin-bottom:1rem">Les éléments avec <code>data-reveal</code> commencent invisibles et glissent vers leur position finale quand ils entrent dans le viewport. Durée : 620ms, easing emphasized. Stagger via <code>data-reveal-stagger</code>.</p>
+      <table class="token-table">
+        <thead><tr><th>Attribut</th><th>Effet de départ</th></tr></thead>
+        <tbody>
+          <tr><td><code>data-reveal</code> / <code>data-reveal="up"</code></td><td>opacity 0 + translateY(1.15rem)</td></tr>
+          <tr><td><code>data-reveal="left"</code></td><td>opacity 0 + translateX(-1.15rem)</td></tr>
+          <tr><td><code>data-reveal="right"</code></td><td>opacity 0 + translateX(1.15rem)</td></tr>
+          <tr><td><code>data-reveal="zoom"</code></td><td>opacity 0 + scale(0.975)</td></tr>
+          <tr><td><code>.is-visible</code> (ajouté par JS)</td><td>opacity 1 + translate(0) scale(1)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ -->
+<!-- 09. SECTION PATTERNS -->
+<!-- ══════════════════════════════════════ -->
+<section class="ds-section" id="patterns">
+  <div class="ds-section-header">
+    <h2>09 — Patterns de sections</h2>
+    <p>Miniatures des sections majeures du site — représentation simplifiée.</p>
+  </div>
+
+  <div style="display:grid;gap:1.5rem">
+
+    <!-- Hero -->
+    <div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-muted);margin-bottom:0.5rem">Hero (Accueil)</div>
+      <div class="hero-mini">
+        <div class="hero-mini__content">
+          <div class="hero-mini__eye">Bordeaux Supérieur · Depuis 1887</div>
+          <h2 class="hero-mini__title">L'âme d'un terroir,<br>le soin d'une famille</h2>
+          <p class="hero-mini__body">Vignoble familial de 45 hectares en appellation Bordeaux Supérieur. Bienvenue au Domaine de la Périnade.</p>
+          <div class="hero-mini__actions">
+            <button class="ui-action ui-action--primary ui-action--md">Réserver une visite</button>
+            <button class="ui-action ui-action--ghost ui-action--md">Découvrir les vins</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reasons -->
+    <div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-muted);margin-bottom:0.5rem">Reasons (Accueil)</div>
+      <div style="background:var(--color-soft);border-radius:var(--radius-panel);padding:2rem">
+        <div style="text-align:center;margin-bottom:1.5rem">
+          <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-accent);margin-bottom:0.4rem">Pourquoi nous choisir</div>
+          <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:500">3 bonnes raisons</div>
+        </div>
+        <div class="reasons-grid">
+          <div class="reason-card">
+            <div class="reason-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.7"><path d="M18 3c-6 1-10 4.5-11.4 10.3-.2.8-.4 1.7-.6 2.7 1.1-.7 2.2-1.1 3.2-1.4C15 13 18.5 9.1 20 4.5c.1-.5.2-1 .3-1.5H18Zm-6 10.5c-2.5 0-4.6.9-6.5 3.1" stroke-linecap="round"/></svg></div>
+            <h4>Vins d'Exception</h4>
+            <p>Sélections rigoureuses issues des meilleures parcelles du domaine.</p>
+          </div>
+          <div class="reason-card">
+            <div class="reason-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.7"><path d="M8.5 12.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm7 0a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5ZM4.5 18c.7-2 2.2-3 4-3h.5c1.8 0 3.3 1 4 3M14 18c.5-1.4 1.6-2.2 3.2-2.2h.3c1.1 0 2.1.4 3 1.2" stroke-linecap="round"/></svg></div>
+            <h4>Accueil Personnalisé</h4>
+            <p>Chaque visite est adaptée à votre groupe et vos préférences.</p>
+          </div>
+          <div class="reason-card">
+            <div class="reason-icon"><svg viewBox="0 0 24 24" fill="none" width="20" height="20" stroke="currentColor" stroke-width="1.7"><path d="M12 20s5-4.8 5-9a5 5 0 1 0-10 0c0 4.2 5 9 5 9Z" stroke-linecap="round"/><circle cx="12" cy="11" r="1.8" fill="currentColor"/></svg></div>
+            <h4>Lieu Unique</h4>
+            <p>Un cadre exceptionnel au cœur de l'appellation Bordeaux Supérieur.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wines -->
+    <div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-muted);margin-bottom:0.5rem">Wines (Accueil)</div>
+      <div style="background:#fff;border:1px solid var(--color-card-border-soft);border-radius:var(--radius-panel);padding:2rem">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:1.5rem">
+          <div>
+            <div style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-cta-strong);margin-bottom:0.4rem">Notre gamme</div>
+            <div style="font-family:var(--font-display);font-size:1.5rem;font-weight:500">Nos vins</div>
+          </div>
+          <span class="ui-action ui-action--text" style="font-size:0.75rem">Voir tous</span>
+        </div>
+        <div class="card-grid-4">
+          <div class="media-card">
+            <div class="media-card__img" style="height:110px"><img src="https://images.unsplash.com/photo-1584916201218-f4242ceb4809?w=300&q=60" alt="vin"></div>
+            <div class="media-card__body"><div class="media-card__eye">Bordeaux Supérieur</div><div class="media-card__title" style="font-size:0.9rem">Cuvée Tradition</div></div>
+          </div>
+          <div class="media-card">
+            <div class="media-card__img" style="height:110px"><img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?w=300&q=60" alt="vin"></div>
+            <div class="media-card__body"><div class="media-card__eye">Grand Vin</div><div class="media-card__title" style="font-size:0.9rem">Cuvée Prestige</div></div>
+          </div>
+          <div class="media-card">
+            <div class="media-card__img" style="height:110px"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=300&q=60" alt="vin"></div>
+            <div class="media-card__body"><div class="media-card__eye">Blanc Sec</div><div class="media-card__title" style="font-size:0.9rem">Les Pierres Blanches</div></div>
+          </div>
+          <div class="media-card">
+            <div class="media-card__img" style="height:110px"><img src="https://images.unsplash.com/photo-1516594915697-87eb3b1c14ea?w=300&q=60" alt="vin"></div>
+            <div class="media-card__body"><div class="media-card__eye">Rosé</div><div class="media-card__title" style="font-size:0.9rem">Clos de la Vigne</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div>
+      <div style="font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-muted);margin-bottom:0.5rem">Testimonials (Accueil)</div>
+      <div style="background:var(--color-soft);border-radius:var(--radius-panel);padding:2rem">
+        <div style="text-align:center;margin-bottom:1.5rem"><div style="font-family:var(--font-display);font-size:1.5rem;font-weight:500">Ce que disent nos visiteurs</div></div>
+        <div class="card-grid-3">
+          <article class="test-card test-card--after" style="max-width:none">
+            <div class="test-card__stars">★★★★★</div>
+            <p class="test-card__quote">« Un domaine d'exception, des vins qui racontent le terroir avec élégance. »</p>
+            <p class="test-card__author"><strong>Marie L.</strong> · <span>Cliente fidèle</span></p>
+          </article>
+          <article class="test-card test-card--after" style="max-width:none">
+            <div class="test-card__stars">★★★★★</div>
+            <p class="test-card__quote">« La visite guidée était captivante. On repart avec une bouteille et des souvenirs. »</p>
+            <p class="test-card__author"><strong>Pierre B.</strong> · <span>Guide touristique</span></p>
+          </article>
+          <article class="test-card test-card--after" style="max-width:none">
+            <div class="test-card__stars">★★★★★</div>
+            <p class="test-card__quote">« Accueil chaleureux, dégustation généreuse. Un must lors d'un séjour bordelais. »</p>
+            <p class="test-card__author"><strong>Sophie R.</strong> · <span>Œnologue amateur</span></p>
+          </article>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<script>
+// Scroll spy
+const sections = document.querySelectorAll('.ds-section');
+const navLinks = document.querySelectorAll('nav a');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => l.classList.remove('active'));
+      const target = document.querySelector('nav a[href="#' + e.target.id + '"]');
+      if (target) target.classList.add('active');
+    }
+  });
+}, { threshold: 0.2 });
+sections.forEach(s => obs.observe(s));
+
+function toggleAccordion(btn) {
+  const expanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', !expanded);
+  const panel = btn.nextElementSibling;
+  if (!expanded) panel.removeAttribute('hidden');
+  else panel.setAttribute('hidden', '');
+}
+
+function toggleChip(btn) {
+  const group = btn.closest('.chip-group');
+  group.querySelectorAll('.ui-choice-chip').forEach(c => c.setAttribute('aria-pressed', 'false'));
+  btn.setAttribute('aria-pressed', 'true');
+}
+
+function adjustCounter(btn, delta) {
+  const val = btn.parentElement.querySelector('.ui-counter__value');
+  val.textContent = Math.max(1, Math.min(10, parseInt(val.textContent) + delta));
+}
+
+function switchTab(btn, id) {
+  const tabs = btn.closest('.ui-tabs');
+  tabs.querySelectorAll('.ui-tabs__trigger').forEach(t => t.setAttribute('aria-selected', 'false'));
+  tabs.querySelectorAll('.ui-tabs__panel').forEach(p => p.setAttribute('hidden', ''));
+  btn.setAttribute('aria-selected', 'true');
+  document.getElementById(id).removeAttribute('hidden');
+}
+</script>
+</body>
+</html>
