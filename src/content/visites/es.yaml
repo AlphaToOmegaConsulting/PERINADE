@@ -221,6 +221,8 @@ booking:
   ui:
     prevMonthAriaLabel: "Mes anterior"
     nextMonthAriaLabel: "Mes siguiente"
+    decrementLabel: "Disminuir"
+    incrementLabel: "Aumentar"
     slotHeading: "Horario"
     participantsHeading: "Participantes"
     priceFromLabel: "Desde"

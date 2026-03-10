@@ -15,6 +15,7 @@ interface CartItem {
 
 interface RequestBody {
   items?: unknown;
+  successUrl?: unknown;
 }
 
 const json = (data: unknown, status = 200): Response =>
@@ -24,6 +25,14 @@ const json = (data: unknown, status = 200): Response =>
       "content-type": "application/json; charset=utf-8",
     },
   });
+
+const ALLOWED_SUCCESS_PATHS = {
+  fr: "/confirmation",
+  en: "/en/confirmation",
+  es: "/es/confirmacion",
+} as const;
+
+const ALLOWED_SUCCESS_PATH_VALUES: string[] = Object.values(ALLOWED_SUCCESS_PATHS);
 
 const normalizeBaseUrl = (value: string | undefined): string | null => {
   if (!value) return null;
@@ -76,6 +85,17 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     return json({ error: "Invalid payload" }, 400);
   }
 
+  // Resolve locale-specific success URL sent by the cart page.
+  // Allowed values keep Stripe redirecting to pages we control.
+  const rawSuccessUrl = body.successUrl;
+  let successPath: string = ALLOWED_SUCCESS_PATHS.fr;
+  if (typeof rawSuccessUrl === "string" && rawSuccessUrl.startsWith(siteBaseUrl)) {
+    const pathname = new URL(rawSuccessUrl).pathname;
+    if (ALLOWED_SUCCESS_PATH_VALUES.includes(pathname)) {
+      successPath = pathname;
+    }
+  }
+
   const stripe = new Stripe(secretKey, {
     httpClient: Stripe.createFetchHttpClient(),
   });
@@ -83,7 +103,7 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${siteBaseUrl}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${siteBaseUrl}${successPath}?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteBaseUrl}/panier`,
       line_items: items.map((item) => ({
         price_data: {

@@ -21,6 +21,7 @@ export type UiStrings = {
   legalLine: string;
   copyright: string;
   addToCartLabel: string;
+  cartLabel: string;
 };
 
 export async function getUiStrings(locale: Locale): Promise<UiStrings> {

@@ -12,6 +12,8 @@ const shopPage = await getShopData(locale);
 
 const alternates = getAlternates(pageId);
 const alternateUrls = getAlternateUrls(pageId);
+
+const cartStrings = shopPage.cart;
 ---
 
 <BaseLayout
@@ -37,7 +39,10 @@ const alternateUrls = getAlternateUrls(pageId);
           <h1>Panier</h1>
         </header>
 
-        <p class="cart-empty" data-cart-empty>Votre panier est vide.</p>
+        <div class="cart-empty" data-cart-empty>
+          <p>{cartStrings.emptyMessage}</p>
+          <a href={cartStrings.browseShopHref} class="btn btn--secondary cart-empty__cta">{cartStrings.browseShopLabel}</a>
+        </div>
 
         <div class="cart-table-wrap" data-cart-table-wrap hidden>
           <table class="cart-table" aria-live="polite">
@@ -99,9 +104,30 @@ const alternateUrls = getAlternateUrls(pageId);
   <Footer footer={site.footer} />
 </BaseLayout>
 
+<script type="application/json" id="cart-i18n" is:inline set:html={JSON.stringify(cartStrings)}></script>
+
 <script>
   import { cartTotalCents, getCart, removeFromCart, setQty } from "../lib/cart/cart";
   import type { CartItem } from "../lib/cart/cart";
+
+  interface CartI18n {
+    emptyMessage: string;
+    browseShopLabel: string;
+    browseShopHref: string;
+    colProduct: string;
+    colQty: string;
+    colTotalHt: string;
+    colTotalTtc: string;
+    removeLabel: string;
+    ariaDecreaseQty: string;
+    ariaIncreaseQty: string;
+    ariaRemoveItem: string;
+    statusRedirecting: string;
+    errorNoSession: string;
+    errorGeneric: string;
+  }
+
+  const i18n = JSON.parse(document.getElementById("cart-i18n")!.textContent!) as CartI18n;
 
   const formatEuroFromCents = (cents: number): string =>
     `${(Math.max(0, Number(cents) || 0) / 100).toFixed(2).replace(".", ",")} €`;
@@ -144,7 +170,7 @@ const alternateUrls = getAlternateUrls(pageId);
 
     const labelEl = document.createElement("span");
     labelEl.className = "cart-item__label";
-    labelEl.textContent = "Quantité";
+    labelEl.textContent = i18n.colQty;
 
     const controls = document.createElement("div");
     controls.className = "cart-item__qty-controls";
@@ -155,7 +181,7 @@ const alternateUrls = getAlternateUrls(pageId);
     dec.dataset.action = "dec";
     dec.dataset.id = item.id;
     dec.dataset.qty = String(item.qty);
-    dec.setAttribute("aria-label", `Diminuer la quantité de ${item.name}`);
+    dec.setAttribute("aria-label", i18n.ariaDecreaseQty.replace("{name}", item.name));
     dec.textContent = "-";
 
     const qty = document.createElement("span");
@@ -168,7 +194,7 @@ const alternateUrls = getAlternateUrls(pageId);
     inc.dataset.action = "inc";
     inc.dataset.id = item.id;
     inc.dataset.qty = String(item.qty);
-    inc.setAttribute("aria-label", `Augmenter la quantité de ${item.name}`);
+    inc.setAttribute("aria-label", i18n.ariaIncreaseQty.replace("{name}", item.name));
     inc.textContent = "+";
 
     controls.append(dec, qty, inc);
@@ -185,8 +211,8 @@ const alternateUrls = getAlternateUrls(pageId);
     button.className = "cart-item__remove";
     button.dataset.action = "remove";
     button.dataset.id = item.id;
-    button.setAttribute("aria-label", `Supprimer ${item.name} du panier`);
-    button.textContent = "Supprimer";
+    button.setAttribute("aria-label", i18n.ariaRemoveItem.replace("{name}", item.name));
+    button.textContent = i18n.removeLabel;
 
     cell.append(button);
     return cell;
@@ -223,14 +249,14 @@ const alternateUrls = getAlternateUrls(pageId);
     }));
 
     if (!cartItems.length) {
-      statusEl.textContent = "Votre panier est vide.";
+      statusEl.textContent = i18n.emptyMessage;
       updateCheckoutState(false);
       return;
     }
 
     submit.dataset.busy = "true";
     updateCheckoutState(true);
-    statusEl.textContent = "Redirection vers le paiement...";
+    statusEl.textContent = i18n.statusRedirecting;
 
     try {
       const response = await fetch("/create-checkout-session", {
@@ -238,17 +264,17 @@ const alternateUrls = getAlternateUrls(pageId);
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ items: cartItems }),
+        body: JSON.stringify({ items: cartItems, successUrl: new URL("/confirmation", window.location.origin).href }),
       });
 
       const payload = (await response.json().catch(() => ({}))) as { url?: string; error?: string };
       if (!response.ok || !payload.url) {
-        throw new Error(payload.error || "Impossible de créer la session de paiement.");
+        throw new Error(payload.error || i18n.errorNoSession);
       }
 
       window.location.assign(payload.url);
     } catch (error) {
-      statusEl.textContent = error instanceof Error ? error.message : "Erreur de paiement. Merci de réessayer.";
+      statusEl.textContent = error instanceof Error ? error.message : i18n.errorGeneric;
       submit.dataset.busy = "false";
       updateCheckoutState(true);
     }
@@ -291,9 +317,9 @@ const alternateUrls = getAlternateUrls(pageId);
       const lineTtcCents = item.unitAmount * item.qty;
       const lineHtCents = Math.round(lineTtcCents / (1 + VAT_RATE));
 
-      const name = createCell("Produit", item.name, "cart-item__name");
-      const lineHt = createCell("Total HT", formatEuroFromCents(lineHtCents), "cart-item__line-ht");
-      const lineTtc = createCell("Total TTC", formatEuroFromCents(lineTtcCents), "cart-item__line-ttc");
+      const name = createCell(i18n.colProduct, item.name, "cart-item__name");
+      const lineHt = createCell(i18n.colTotalHt, formatEuroFromCents(lineHtCents), "cart-item__line-ht");
+      const lineTtc = createCell(i18n.colTotalTtc, formatEuroFromCents(lineTtcCents), "cart-item__line-ttc");
       const qty = createQtyControls(item);
       const remove = createRemoveButton(item);
 
@@ -387,6 +413,9 @@ const alternateUrls = getAlternateUrls(pageId);
   }
 
   window.addEventListener("cart:changed", render);
+  document.addEventListener("astro:before-swap", () => {
+    window.removeEventListener("cart:changed", render);
+  }, { once: true });
   document.addEventListener("astro:after-swap", initCartPage);
 </script>
 
@@ -411,13 +440,25 @@ const alternateUrls = getAlternateUrls(pageId);
   }
 
   .cart-empty {
+    align-items: flex-start;
     background: #fff;
     border: 1px solid rgba(44, 44, 44, 0.1);
     border-radius: 0.9rem;
     color: #4f5257;
+    display: flex;
+    flex-direction: column;
     font-size: 1.03rem;
+    gap: 0.9rem;
     margin: 0;
     padding: 1.1rem 1.2rem;
+  }
+
+  .cart-empty p {
+    margin: 0;
+  }
+
+  .cart-empty__cta {
+    align-self: flex-start;
   }
 
   .cart-table-wrap {

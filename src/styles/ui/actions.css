@@ -166,8 +166,8 @@
 
 .ui-action--tone-accent {
   --action-secondary-border: var(--color-accent);
-  --action-secondary-color: var(--color-accent);
-  --action-text-color: var(--color-accent);
+  --action-secondary-color: var(--color-accent-text);
+  --action-text-color: var(--color-accent-text);
   --action-text-color-hover: var(--color-cta);
 }
 

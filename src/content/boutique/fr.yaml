@@ -111,6 +111,22 @@ faq:
     - question: "Comment contacter le domaine ?"
       answer: "Par téléphone au +33 4 68 XX XX XX ou par e-mail via le formulaire de contact du site."
 
+cart:
+  emptyMessage: "Votre panier est vide."
+  browseShopLabel: "Voir la boutique"
+  browseShopHref: "/boutique"
+  colProduct: "Produit"
+  colQty: "Quantité"
+  colTotalHt: "Total HT"
+  colTotalTtc: "Total TTC"
+  removeLabel: "Supprimer"
+  ariaDecreaseQty: "Diminuer la quantité de {name}"
+  ariaIncreaseQty: "Augmenter la quantité de {name}"
+  ariaRemoveItem: "Supprimer {name} du panier"
+  statusRedirecting: "Redirection vers le paiement..."
+  errorNoSession: "Impossible de créer la session de paiement."
+  errorGeneric: "Erreur de paiement. Merci de réessayer."
+
 confirmationPage:
   seo:
     title: "Confirmation de commande | Domaine de la Périnade"

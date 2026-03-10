@@ -111,6 +111,22 @@ faq:
     - question: "¿Cómo contactar con la finca?"
       answer: "Por teléfono al +33 4 68 XX XX XX o por correo electrónico mediante el formulario de contacto del sitio."
 
+cart:
+  emptyMessage: "Su carrito está vacío."
+  browseShopLabel: "Ver la tienda"
+  browseShopHref: "/es/tienda"
+  colProduct: "Producto"
+  colQty: "Cantidad"
+  colTotalHt: "Total HT"
+  colTotalTtc: "Total con IVA"
+  removeLabel: "Eliminar"
+  ariaDecreaseQty: "Disminuir cantidad de {name}"
+  ariaIncreaseQty: "Aumentar cantidad de {name}"
+  ariaRemoveItem: "Eliminar {name} del carrito"
+  statusRedirecting: "Redirigiendo al pago..."
+  errorNoSession: "No se pudo crear la sesión de pago."
+  errorGeneric: "Error de pago. Inténtelo de nuevo."
+
 confirmationPage:
   seo:
     title: "Confirmación de pedido | Domaine de la Périnade"

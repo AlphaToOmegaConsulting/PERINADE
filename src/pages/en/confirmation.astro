@@ -64,6 +64,10 @@ const alternateUrls = getAlternateUrls(pageId);
         <section class="confirmation-card" aria-labelledby="confirmation-support">
           <h2 id="confirmation-support">{confirmation.support.title}</h2>
           <p>{confirmation.support.body}</p>
+          {/* TODO (Fix 5): Move "Email:" and "Phone:" prefix labels to YAML.
+              Add emailHeaderLabel / phoneHeaderLabel keys under confirmationPage.support
+              in src/content/boutique/{fr,en,es}.yaml, update the Zod schema in
+              src/content.config.ts, then replace the hardcoded strings below. */}
           <p>
             <strong>Email:</strong>{" "}
             <a href={`mailto:${confirmation.support.emailLabel}`}>{confirmation.support.emailLabel}</a>

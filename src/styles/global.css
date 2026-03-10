@@ -46,6 +46,7 @@
   --color-soft-strong: #f0ebe3;
   --color-deep-green: #192b17;
   --color-accent: #c49c6e;
+  --color-accent-text: #7a5330; /* darkened for WCAG AA contrast on white */
   --color-cta: #a85900;
   --color-cta-strong: #8f4b00;
   --color-ink-soft: rgba(18, 18, 18, 0.72);
