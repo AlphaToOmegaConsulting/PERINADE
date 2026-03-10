@@ -9,6 +9,8 @@ import { orderRoutes } from "./routes/orders.js";
 import { stockRoutes } from "./routes/stock.js";
 import { stripeRoutes } from "./routes/stripe.js";
 import { webhookRoutes } from "./routes/webhooks.js";
+import { userRoutes } from "./routes/user.js";
+import { authRoutes } from "./routes/auth.js";
 
 const app = new Hono<{ Bindings: Env }>();
 
@@ -30,6 +32,22 @@ app.route("/api/admin/orders", orderRoutes);
 app.route("/api/admin/stock", stockRoutes);
 app.route("/api/admin/stripe", stripeRoutes);
 app.route("/api/admin/webhooks", webhookRoutes);
+
+// CORS: allow main site origins for user/auth routes
+app.use("/api/user/*", cors({
+  origin: ["https://perinade.alpha2omegaconsulting.com", "http://localhost:4321"],
+  allowMethods: ["GET", "POST"],
+  allowHeaders: ["Content-Type", "Authorization"],
+}));
+app.use("/api/auth/*", cors({
+  origin: ["https://perinade.alpha2omegaconsulting.com", "http://localhost:4321"],
+  allowMethods: ["GET", "POST"],
+  allowHeaders: ["Content-Type", "Authorization"],
+}));
+
+// Mount user/auth routes
+app.route("/api/user", userRoutes);
+app.route("/api/auth", authRoutes);
 
 // Health check (no auth)
 app.get("/api/health", (c) => c.json({ ok: true }));
