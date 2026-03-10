@@ -22,14 +22,14 @@ export async function cfAccessAuth(
     return c.json({ error: "Auth service unavailable" }, 503);
   }
 
-  let user = await verifyJwt(token, keys);
+  let user = await verifyJwt(token, keys, c.env.CF_ACCESS_AUD);
 
   // If validation failed with cached keys, try fresh keys (key rotation)
   if (!user) {
     await c.env.CACHE.delete("cf_access_jwks");
     try {
       const freshKeys = await getJwks(c.env.CF_ACCESS_TEAM, c.env.CACHE);
-      user = await verifyJwt(token, freshKeys);
+      user = await verifyJwt(token, freshKeys, c.env.CF_ACCESS_AUD);
       if (!user) return c.json({ error: "Forbidden" }, 403);
     } catch {
       return c.json({ error: "Auth service unavailable" }, 503);

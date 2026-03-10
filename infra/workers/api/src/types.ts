@@ -5,4 +5,5 @@ export interface Env {
   CACHE: KVNamespace;
   STRIPE_SECRET_KEY: string;
   CF_ACCESS_TEAM: string;
+  CF_ACCESS_AUD: string;  // Application Audience tag from CF Access dashboard
 }

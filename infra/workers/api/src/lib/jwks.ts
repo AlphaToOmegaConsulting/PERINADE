@@ -41,7 +41,8 @@ export async function getJwks(teamName: string, kv: KVNamespace): Promise<JwkKey
 
 export async function verifyJwt(
   token: string,
-  keys: JwkKey[]
+  keys: JwkKey[],
+  expectedAud: string
 ): Promise<{ email: string } | null> {
   const parts = token.split(".");
   if (parts.length !== 3) return null;
@@ -49,7 +50,7 @@ export async function verifyJwt(
   const [headerB64, payloadB64, sigB64] = parts;
 
   let header: { kid: string; alg: string };
-  let payload: { exp: number; email?: string };
+  let payload: { exp: number; email?: string; aud?: string | string[] };
   try {
     header = JSON.parse(atob(headerB64.replace(/-/g, "+").replace(/_/g, "/")));
     payload = JSON.parse(atob(payloadB64.replace(/-/g, "+").replace(/_/g, "/")));
@@ -58,6 +59,11 @@ export async function verifyJwt(
   }
 
   if (payload.exp < Date.now() / 1000) return null;
+
+  // Validate audience claim
+  const aud = payload.aud;
+  const audValid = Array.isArray(aud) ? aud.includes(expectedAud) : aud === expectedAud;
+  if (!audValid) return null;
 
   const key = keys.find((k) => k.kid === header.kid);
   if (!key) return null;
