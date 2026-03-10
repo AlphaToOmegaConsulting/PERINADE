@@ -3,7 +3,8 @@ import { pageRoutes, type PageId } from "../i18n/routes";
 
 const siteUrl = "https://www.perinade.fr";
 
-const sitemapMeta: Record<PageId, { changefreq: string; priority: Record<"fr" | "en" | "es", string> }> = {
+// Account pages are private (noindex) and excluded from the sitemap
+const sitemapMeta: Partial<Record<PageId, { changefreq: string; priority: Record<"fr" | "en" | "es", string> }>> = {
   home: { changefreq: "weekly", priority: { fr: "1.0", en: "0.9", es: "0.9" } },
   visites: { changefreq: "weekly", priority: { fr: "0.9", en: "0.8", es: "0.8" } },
   boutique: { changefreq: "weekly", priority: { fr: "0.8", en: "0.7", es: "0.7" } },
@@ -21,6 +22,7 @@ export async function GET() {
   for (const pageId of Object.keys(pageRoutes) as PageId[]) {
     const group = pageRoutes[pageId];
     const meta = sitemapMeta[pageId];
+    if (!meta) continue; // skip private/noindex pages (e.g. account pages)
 
     for (const locale of locales) {
       const path = group[locale];

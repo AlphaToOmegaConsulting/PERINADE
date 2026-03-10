@@ -12,7 +12,11 @@ export const pageRoutes = {
   boutique: { fr: "/boutique", en: "/en/shop", es: "/es/tienda" },
   actualites: { fr: "/actualites", en: "/en/news", es: "/es/noticias" },
   panier: { fr: "/panier", en: "/en/cart", es: "/es/carrito" },
-  confirmation: { fr: "/confirmation", en: "/en/confirmation", es: "/es/confirmacion" }
+  confirmation: { fr: "/confirmation", en: "/en/confirmation", es: "/es/confirmacion" },
+  compte: { fr: "/compte", en: "/en/account", es: "/es/cuenta" },
+  compteCommandes: { fr: "/compte/commandes", en: "/en/account/orders", es: "/es/cuenta/pedidos" },
+  compteFidelite: { fr: "/compte/fidelite", en: "/en/account/loyalty", es: "/es/cuenta/fidelidad" },
+  compteCallback: { fr: "/compte/callback", en: "/en/account/callback", es: "/es/cuenta/callback" }
 } satisfies Record<string, Record<Locale, string>>;
 
 export type PageId = keyof typeof pageRoutes;

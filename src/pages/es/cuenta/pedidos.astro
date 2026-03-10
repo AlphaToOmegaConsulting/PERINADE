@@ -1,0 +1,227 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/sections/Header.astro";
+import Footer from "../../../components/sections/Footer.astro";
+import { getSiteData } from "../../../data/index";
+import { getAlternates, getAlternateUrls, getPagePath } from "../../../i18n/routes";
+
+const locale = "es";
+const pageId = "compteCommandes";
+const site = await getSiteData(locale);
+const alternates = getAlternates(pageId);
+const alternateUrls = getAlternateUrls(pageId);
+---
+
+<BaseLayout
+  title="Mis pedidos | Domaine de la Périnade"
+  description="Consulta el historial de tus pedidos."
+  locale={locale}
+  canonicalPath={getPagePath(pageId, locale)}
+  alternates={alternates}
+  noindex={true}
+>
+  <Header
+    nav={site.nav}
+    quickActions={site.mobileQuickActions}
+    ctaLabel={site.experience.ctaLabel}
+    ctaHref={site.experience.ctaHref}
+    locale={locale}
+    alternateUrls={alternateUrls}
+  />
+
+  <main id="main-content" class="account-page">
+    <section class="section">
+      <div class="shell account-shell">
+        <div id="orders-loading" class="account-loading">
+          <p>Cargando…</p>
+        </div>
+        <div id="orders-content" hidden>
+          <header class="account-hero">
+            <p class="account-hero__badge">Mi cuenta</p>
+            <h1>Mis pedidos</h1>
+          </header>
+          <div id="orders-list"></div>
+          <nav class="account-nav" style="margin-top:1rem">
+            <a href="/es/cuenta" class="account-nav__link">Volver a mi cuenta</a>
+          </nav>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer footer={site.footer} />
+</BaseLayout>
+
+<script>
+  import { getSession, fetchOrders } from "../../../scripts/account";
+
+  const loading = document.getElementById("orders-loading")!;
+  const content = document.getElementById("orders-content")!;
+  const listEl = document.getElementById("orders-list")!;
+
+  async function init() {
+    const session = await getSession();
+    loading.hidden = true;
+    if (!session) {
+      window.location.assign("/es/cuenta");
+      return;
+    }
+    content.hidden = false;
+    const orders = await fetchOrders(session.access_token);
+    if (orders.length === 0) {
+      const p = document.createElement("p");
+      p.className = "account-empty";
+      p.textContent = "Aún no has realizado ningún pedido.";
+      listEl.append(p);
+      return;
+    }
+    for (const order of orders) {
+      const card = document.createElement("div");
+      card.className = "order-card";
+
+      const ref = document.createElement("p");
+      ref.className = "order-card__ref";
+      ref.textContent = `Ref. ${order.stripe_session_id}`;
+
+      const date = document.createElement("p");
+      date.className = "order-card__date";
+      date.textContent = new Date(order.created_at).toLocaleDateString("es-ES", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+
+      const status = document.createElement("p");
+      status.className = "order-card__status";
+      status.textContent = order.status;
+
+      const amount = document.createElement("p");
+      amount.className = "order-card__amount";
+      amount.textContent = `${(order.amount_total / 100).toFixed(2)} ${order.currency.toUpperCase()}`;
+
+      card.append(ref, date, status, amount);
+      listEl.append(card);
+    }
+  }
+
+  init().catch(console.error);
+</script>
+
+<style>
+  .account-page {
+    background: radial-gradient(circle at 10% 5%, rgba(214, 116, 0, 0.08), transparent 28%), #f8f7f5;
+    min-height: calc(100svh - var(--header-height) * 2);
+  }
+
+  .account-shell {
+    margin-inline: auto;
+    max-width: 52rem;
+  }
+
+  .account-hero {
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 10px 26px rgba(16, 24, 40, 0.06);
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .account-hero__badge {
+    background: rgba(200, 109, 0, 0.12);
+    border-radius: 99px;
+    color: #8a4900;
+    display: inline-flex;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.7rem;
+    padding: 0.28rem 0.64rem;
+    text-transform: uppercase;
+  }
+
+  .account-hero h1 {
+    color: #202227;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .account-loading {
+    color: #5b616a;
+    padding: 2rem 0;
+    text-align: center;
+  }
+
+  .account-empty {
+    color: #5b616a;
+    padding: 1rem 0;
+  }
+
+  .order-card {
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 0.9rem;
+    margin-bottom: 0.75rem;
+    padding: 1rem 1.1rem;
+  }
+
+  .order-card__ref {
+    color: #5b616a;
+    font-size: 0.8rem;
+    font-family: ui-monospace, monospace;
+    margin: 0 0 0.25rem;
+    word-break: break-all;
+  }
+
+  .order-card__date {
+    color: #202227;
+    font-weight: 600;
+    margin: 0 0 0.25rem;
+  }
+
+  .order-card__status {
+    color: #5b616a;
+    font-size: 0.85rem;
+    margin: 0 0 0.25rem;
+    text-transform: capitalize;
+  }
+
+  .order-card__amount {
+    color: #c86d00;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  .account-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .account-nav__link {
+    align-items: center;
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.16);
+    border-radius: 0.72rem;
+    color: #2f3338;
+    display: inline-flex;
+    flex: 1;
+    font-size: 0.86rem;
+    font-weight: 700;
+    justify-content: center;
+    letter-spacing: 0.08em;
+    min-height: 2.85rem;
+    min-width: 12rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: filter 120ms ease;
+  }
+
+  .account-nav__link:hover,
+  .account-nav__link:focus-visible {
+    filter: brightness(0.97);
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/sections/Header.astro";
+import Footer from "../../components/sections/Footer.astro";
+import { getSiteData } from "../../data/index";
+
+const locale = "fr";
+const site = await getSiteData(locale);
+---
+
+<BaseLayout title="Connexion | Domaine de la Périnade" locale={locale} noindex={true}>
+  <Header
+    nav={site.nav}
+    quickActions={site.mobileQuickActions}
+    ctaLabel={site.experience.ctaLabel}
+    ctaHref={site.experience.ctaHref}
+    locale={locale}
+    alternateUrls={{ fr: "/compte/callback", en: "/en/account/callback", es: "/es/cuenta/callback" }}
+  />
+
+  <main id="main-content" class="account-page">
+    <section class="section">
+      <div class="shell account-shell">
+        <div class="account-card">
+          <p id="callback-status">Connexion en cours…</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer footer={site.footer} />
+</BaseLayout>
+
+<script>
+  import { supabase } from "../../scripts/account";
+
+  const status = document.getElementById("callback-status")!;
+
+  async function handleCallback() {
+    const { data, error } = await supabase.auth.getSession();
+    if (error || !data.session) {
+      const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(
+        window.location.href,
+      );
+      if (exchangeError) {
+        status.textContent = "Lien invalide ou expiré. Veuillez réessayer.";
+        return;
+      }
+    }
+    status.textContent = "Connexion réussie ! Redirection…";
+    setTimeout(() => window.location.assign("/compte"), 1000);
+  }
+
+  handleCallback().catch(() => {
+    status.textContent = "Erreur de connexion. Veuillez réessayer.";
+  });
+</script>
+
+<style>
+  .account-page {
+    background: radial-gradient(circle at 10% 5%, rgba(214, 116, 0, 0.08), transparent 28%), #f8f7f5;
+    min-height: calc(100svh - var(--header-height) * 2);
+  }
+
+  .account-shell {
+    margin-inline: auto;
+    max-width: 52rem;
+  }
+
+  .account-card {
+    background: #fff;
+    border: 1px solid rgba(44, 44, 44, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 10px 26px rgba(16, 24, 40, 0.06);
+    padding: 1.4rem;
+    color: #4f5257;
+  }
+</style>
