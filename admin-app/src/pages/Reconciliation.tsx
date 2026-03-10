@@ -3,7 +3,7 @@ import { api, type ReconcileItem } from "../api/client";
 
 export function Reconciliation() {
   const qc = useQueryClient();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ["reconcile"], queryFn: api.stripe.reconcile,
   });
   const syncMutation = useMutation({
@@ -12,6 +12,7 @@ export function Reconciliation() {
   });
 
   if (isLoading) return <p>Chargement…</p>;
+  if (isError) return <p className="text-red-600 text-sm">Erreur de chargement. Vérifiez votre connexion.</p>;
   if (!data) return null;
 
   return (
@@ -23,8 +24,8 @@ export function Reconciliation() {
       <table className="w-full text-sm bg-white border rounded-lg overflow-hidden">
         <thead className="bg-gray-50 border-b">
           <tr>
-            {["Session ID", "Statut D1", "Statut Stripe", "Montant D1", "Montant Stripe", ""].map((h) => (
-              <th key={h} className="text-left px-4 py-2 font-medium text-gray-600">{h}</th>
+            {["Session ID", "Statut D1", "Statut Stripe", "Montant D1", "Montant Stripe", "Action"].map((h) => (
+              <th key={h} className="text-left px-4 py-2 font-medium text-gray-600">{h === "Action" ? "" : h}</th>
             ))}
           </tr>
         </thead>
@@ -40,8 +41,9 @@ export function Reconciliation() {
                 {item.divergent && (
                   <button
                     onClick={() => syncMutation.mutate(item.stripe_session_id)}
-                    className="text-xs text-blue-600 hover:underline"
-                  >Resync</button>
+                    disabled={syncMutation.isPending}
+                    className="text-xs text-blue-600 hover:underline disabled:opacity-50 disabled:cursor-not-allowed"
+                  >{syncMutation.isPending ? "…" : "Resync"}</button>
                 )}
               </td>
             </tr>

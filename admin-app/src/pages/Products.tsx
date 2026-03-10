@@ -4,7 +4,7 @@ import { api, type Product } from "../api/client";
 
 export function Products() {
   const qc = useQueryClient();
-  const { data: products = [], isLoading } = useQuery({
+  const { data: products = [], isLoading, isError } = useQuery({
     queryKey: ["products"], queryFn: api.products.list,
   });
 
@@ -15,6 +15,7 @@ export function Products() {
   });
 
   if (isLoading) return <p>Chargement…</p>;
+  if (isError) return <p className="text-red-600 text-sm">Erreur de chargement. Vérifiez votre connexion.</p>;
 
   return (
     <div>
@@ -60,6 +61,10 @@ function ProductRow({ product: p, index, onUpdate }: { product: Product; index: 
             <input
               type="number" min={0} max={9999}
               value={val} onChange={(e) => setVal(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") save();
+                if (e.key === "Escape") { setEditing(false); setVal(String(p.stock_qty)); }
+              }}
               className="border rounded px-2 py-1 w-20 text-sm"
               autoFocus
             />
@@ -71,6 +76,9 @@ function ProductRow({ product: p, index, onUpdate }: { product: Product; index: 
           <span
             className="cursor-pointer hover:underline"
             onClick={() => setEditing(true)}
+            onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") setEditing(true); }}
+            role="button"
+            tabIndex={0}
             title="Cliquer pour modifier"
           >{p.stock_qty}</span>
         )}

@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/client";
 
 export function Webhooks() {
-  const { data = [], isLoading } = useQuery({
+  const { data = [], isLoading, isError } = useQuery({
     queryKey: ["webhooks"], queryFn: api.webhooks,
   });
 
   if (isLoading) return <p>Chargement…</p>;
+  if (isError) return <p className="text-red-600 text-sm">Erreur de chargement. Vérifiez votre connexion.</p>;
 
   return (
     <div>
@@ -24,7 +25,9 @@ export function Webhooks() {
             <tr key={w.id} className={`${w.status === "failed" ? "bg-red-50" : ""} ${i > 0 ? "border-t border-gray-100" : ""}`}>
               <td className="px-4 py-2">{new Date(w.created_at).toLocaleString("fr-FR")}</td>
               <td className="px-4 py-2 font-mono text-xs">{w.event_type}</td>
-              <td className="px-4 py-2 font-mono text-xs">{w.stripe_event_id?.slice(0, 18)}…</td>
+              <td className="px-4 py-2 font-mono text-xs">
+                {w.stripe_event_id ? `${w.stripe_event_id.slice(0, 18)}…` : "—"}
+              </td>
               <td className="px-4 py-2">
                 <span className={`px-2 py-0.5 rounded text-xs ${
                   w.status === "processed" ? "bg-green-100 text-green-700" :

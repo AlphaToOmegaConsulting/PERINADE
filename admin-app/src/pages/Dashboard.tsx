@@ -6,9 +6,10 @@ function euros(cents: number) {
 }
 
 export function Dashboard() {
-  const { data, isLoading } = useQuery({ queryKey: ["dashboard"], queryFn: api.dashboard });
+  const { data, isLoading, isError } = useQuery({ queryKey: ["dashboard"], queryFn: api.dashboard });
 
   if (isLoading) return <p>Chargement…</p>;
+  if (isError) return <p className="text-red-600 text-sm">Erreur de chargement. Vérifiez votre connexion.</p>;
   if (!data) return null;
 
   return (

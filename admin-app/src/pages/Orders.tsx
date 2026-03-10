@@ -2,11 +2,12 @@ import { useQuery } from "@tanstack/react-query";
 import { api } from "../api/client";
 
 export function Orders() {
-  const { data: orders = [], isLoading } = useQuery({
+  const { data: orders = [], isLoading, isError } = useQuery({
     queryKey: ["orders"], queryFn: () => api.orders.list(),
   });
 
   if (isLoading) return <p>Chargement…</p>;
+  if (isError) return <p className="text-red-600 text-sm">Erreur de chargement. Vérifiez votre connexion.</p>;
 
   return (
     <div>
