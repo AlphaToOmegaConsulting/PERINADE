@@ -238,7 +238,7 @@ const alternateUrls = getAlternateUrls(pageId);
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ items: cartItems }),
+        body: JSON.stringify({ locale: document.documentElement.lang || "fr", items: cartItems }),
       });
 
       const payload = (await response.json().catch(() => ({}))) as { url?: string; error?: string };

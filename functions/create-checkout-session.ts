@@ -15,8 +15,23 @@ interface CartItem {
   qty: number;
 }
 
+type Locale = "fr" | "en" | "es";
+
+const CART_ROUTES: Record<Locale, string> = {
+  fr: "/panier",
+  en: "/en/cart",
+  es: "/es/carrito",
+};
+
+const CONFIRMATION_ROUTES: Record<Locale, string> = {
+  fr: "/confirmation",
+  en: "/en/confirmation",
+  es: "/es/confirmacion",
+};
+
 interface RequestBody {
   items?: unknown;
+  locale?: unknown;
 }
 
 const json = (data: unknown, status = 200): Response =>
@@ -78,6 +93,9 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
     return json({ error: "Invalid payload" }, 400);
   }
 
+  const locale: Locale =
+    body.locale === "en" || body.locale === "es" ? body.locale : "fr";
+
   const stripe = new Stripe(secretKey, {
     httpClient: Stripe.createFetchHttpClient(),
   });
@@ -105,8 +123,8 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      success_url: `${siteBaseUrl}/confirmation?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteBaseUrl}/panier`,
+      success_url: `${siteBaseUrl}${CONFIRMATION_ROUTES[locale]}?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${siteBaseUrl}${CART_ROUTES[locale]}`,
       line_items: items.map((item) => ({
         price_data: {
           currency: "eur",
