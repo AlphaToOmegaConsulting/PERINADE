@@ -15,6 +15,8 @@ database_id = "69f84eaf-2291-44c5-bf6f-eaa4b8c1d46f"
 binding = "CACHE"
 id = "eb0dfc6944b74a048e140b36e74b13be"
 
-[[routes]]
-pattern = "perinade.alpha2omegaconsulting.com/api/contact"
-zone_id = "3de818ba26d525ef6b866487c8cf2b21"
+# TODO: Décommenter quand le domaine est sur Cloudflare et que le token
+# API a la permission "Zone → Workers Routes: Edit".
+# [[routes]]
+# pattern = "perinade.alpha2omegaconsulting.com/api/contact"
+# zone_id = "3de818ba26d525ef6b866487c8cf2b21"
