@@ -150,8 +150,8 @@ async function handleCheckoutCompleted(session, env, eventId) {
     "UPDATE orders SET items_processed = 1 WHERE stripe_session_id = ?"
   ).bind(sessionId).run();
 
-  // Update webhook_log status here (after items_processed=1 is confirmed written)
-  // This ensures the audit trail is consistent even if the outer status update fails.
+  // Eagerly mark as processed here to ensure consistency;
+  // the outer dispatch block will also write 'processed' (harmless double-write).
   await env.DB.prepare(
     "UPDATE webhook_logs SET status = 'processed' WHERE stripe_event_id = ?"
   ).bind(eventId).run();
@@ -235,7 +235,7 @@ async function fetchLineItems(sessionId, stripeKey) {
 
 async function sendAlert(env, subject, body) {
   if (!env.RESEND_API_KEY || !env.CONTACT_EMAIL_TO) return;
-  await fetch("https://api.resend.com/emails", {
+  const resp = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${env.RESEND_API_KEY}`,
@@ -248,6 +248,11 @@ async function sendAlert(env, subject, body) {
       text: body,
     }),
   });
+  if (!resp.ok) {
+    const text = await resp.text().catch(() => "(unreadable)");
+    console.error(`sendAlert failed (${resp.status}): ${text}`);
+    // Email is best-effort; do not throw — we don't want to retry webhooks for email failures
+  }
 }
 
 async function verifyStripeSignature(payload, sigHeader, secret) {
@@ -264,8 +269,15 @@ async function verifyStripeSignature(payload, sigHeader, secret) {
     { name: "HMAC", hash: "SHA-256" }, false, ["sign"]
   );
   const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(signed));
-  const computed = Array.from(new Uint8Array(mac)).map((b) => b.toString(16).padStart(2, "0")).join("");
+  const computedBytes = new Uint8Array(mac);
   const expected = parts.v1;
-  if (computed !== expected) throw new Error("Signature mismatch");
+  if (!expected) throw new Error("Missing v1 signature in header");
+  const expectedBytes = new Uint8Array(
+    expected.match(/.{2}/g).map((b) => parseInt(b, 16))
+  );
+  if (computedBytes.length !== expectedBytes.length) throw new Error("Signature mismatch");
+  let diff = 0;
+  for (let i = 0; i < computedBytes.length; i++) diff |= computedBytes[i] ^ expectedBytes[i];
+  if (diff !== 0) throw new Error("Signature mismatch");
   return JSON.parse(payload);
 }
