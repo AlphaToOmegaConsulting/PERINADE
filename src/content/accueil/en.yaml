@@ -1,265 +1,253 @@
 nav:
-  - label: "Home"
-    href: "/en"
+  - label: Home
+    href: /en
     mobile: false
-  - label: "Visits"
-    href: "/en/visits"
-    desktopSlot: "left"
-    desktopLabel: "VISITS"
-  - label: "Shop"
-    href: "/en/shop"
-    desktopSlot: "left"
-    desktopLabel: "SHOP"
-  - label: "The Estate"
-    href: "/en/domaine"
-    desktopSlot: "left"
-    desktopLabel: "ESTATE"
-  - label: "News"
-    href: "/en/news"
-    desktopSlot: "right"
-    desktopLabel: "NEWS"
-  - label: "Contact"
-    href: "/en#contact"
-
+  - label: Visits
+    href: /en/visits
+    desktopSlot: left
+    desktopLabel: VISITS
+  - label: Shop
+    href: /en/shop
+    desktopSlot: left
+    desktopLabel: SHOP
+  - label: The Estate
+    href: /en/domaine
+    desktopSlot: left
+    desktopLabel: ESTATE
+  - label: News
+    href: /en/news
+    desktopSlot: right
+    desktopLabel: NEWS
+  - label: Contact
+    href: /en#contact
 mobileQuickActions:
-  - id: "book"
-    label: "Book"
-    href: "/en/visits#booking"
-    icon: "calendar"
-    priority: "primary"
-  - id: "shop"
-    label: "Shop"
-    href: "/en/shop"
-    icon: "bag"
-    priority: "secondary"
-  - id: "call"
-    label: "Call"
-    href: "tel:+33468000000"
-    icon: "phone"
-    priority: "secondary"
-
+  - id: book
+    label: Book
+    href: /en/visits#booking
+    icon: calendar
+    priority: primary
+  - id: shop
+    label: Shop
+    href: /en/shop
+    icon: bag
+    priority: secondary
+  - id: call
+    label: Call
+    href: tel:+33468000000
+    icon: phone
+    priority: secondary
 hero:
-  eyebrow: "Near Carcassonne"
+  eyebrow: Near Carcassonne
   title:
-    - "Domaine"
-    - "de la"
-    - "Périnade"
-  body: "In the heart of Languedoc, our family estate welcomes you for an authentic experience among vines, cellar and tastings. Discover wines of character, crafted with passion and respect for the terroir."
-  ctaLabel: "Book a visit"
-  ctaHref: "/en/visits#booking"
+    - Domaine
+    - de la
+    - Périnade
+  body: In the heart of Languedoc, our family estate welcomes you for an authentic
+    experience among vines, cellar and tastings. Discover wines of character,
+    crafted with passion and respect for the terroir.
+  ctaLabel: Book a visit
+  ctaHref: /en/visits#booking
   meta:
-    - "By appointment"
-    - "Family estate"
-    - "Since 1830"
-  backgroundImage: "../../assets/perinade/hero-vineyard.png"
+    - By appointment
+    - Family estate
+    - Since 1830
+  backgroundImage: ../../assets/perinade/hero-vineyard.png
   featuredCards:
-    - kicker: "Tasting"
-      title: "Cellar Visit"
-      image: "../../assets/perinade/hero-deck/visite-caveau.png"
-      alt: "Bottles and estate cellar"
-      href: "#experience"
-    - kicker: "Terroir"
-      title: "Vineyard Walk"
-      image: "../../assets/perinade/hero-deck/balade-vignes.png"
-      alt: "View of the estate vineyards"
-      href: "#histoire"
-    - kicker: "Shop"
-      title: "Our Exceptional Wines"
-      image: "../../assets/perinade/hero-deck/cuvees-exception.png"
-      alt: "Selection of estate bottles"
-      href: "/en/shop"
-
+    - kicker: Tasting
+      title: Cellar Visit
+      image: ../../assets/perinade/hero-deck/visite-caveau.png
+      alt: Bottles and estate cellar
+    - kicker: Terroir
+      title: Vineyard Walk
+      image: ../../assets/perinade/hero-deck/balade-vignes.png
+      alt: View of the estate vineyards
+    - kicker: Shop
+      title: Our Exceptional Wines
+      image: ../../assets/perinade/hero-deck/cuvees-exception.png
+      alt: Selection of estate bottles
 reasons:
-  eyebrow: "Why visit us"
-  title: "Three reasons to come"
+  eyebrow: Why visit us
+  title: Three reasons to come
   items:
-    - title: "A family estate"
-      body: "For six generations, our family has passionately cultivated a human-scale vineyard."
-      icon: "leaf"
-    - title: "An exceptional terroir"
-      body: "Nestled between garrigue and hills, our vineyard benefits from a unique microclimate."
-      icon: "terrain"
-    - title: "An intimate tasting"
-      body: "No mass tours here. We welcome you personally in a warm and friendly setting."
-      icon: "glass"
-
+    - title: A family estate
+      body: For six generations, our family has passionately cultivated a human-scale
+        vineyard.
+    - title: An exceptional terroir
+      body: Nestled between garrigue and hills, our vineyard benefits from a unique
+        microclimate.
+    - title: An intimate tasting
+      body: No mass tours here. We welcome you personally in a warm and friendly
+        setting.
 experience:
-  eyebrow: "Visit"
-  title: "Live the Périnade Experience"
-  body: "A guided tour of the estate followed by a commented tasting of our wines, in an authentic and welcoming setting."
+  eyebrow: Visit
+  title: Live the Périnade Experience
+  body: A guided tour of the estate followed by a commented tasting of our wines,
+    in an authentic and welcoming setting.
   details:
-    - label: "Duration"
-      value: "About 1h30"
-      icon: "clock"
-    - label: "Group"
-      value: "2 to 10 people"
-      icon: "users"
-    - label: "Languages"
-      value: "French, English, Spanish"
-      icon: "globe"
-    - label: "Location"
-      value: "Near Carcassonne"
-      icon: "pin"
-    - label: "Price"
-      value: "€15 / person"
-      icon: "ticket"
-  infoLine: "By appointment only · Free parking · Easy access from Carcassonne"
-  ctaLabel: "Book a visit"
-  ctaHref: "/en/visits#booking"
-  backgroundImage: "../../assets/perinade/experience-bg.png"
-
+    - label: Duration
+      value: About 1h30
+    - label: Group
+      value: 2 to 10 people
+    - label: Languages
+      value: French, English, Spanish
+    - label: Location
+      value: Near Carcassonne
+    - label: Price
+      value: €15 / person
+    - label: Test
+      value: Test
+  infoLine: By appointment only · Free parking · Easy access from Carcassonne
+  ctaLabel: Book a visit
+  ctaHref: /en/visits#booking
+  backgroundImage: ../../assets/perinade/experience-bg.png
 gallery:
-  eyebrow: "Our world"
-  title: "Estate Gallery"
+  eyebrow: Our world
+  title: Estate Gallery
   items:
-    - src: "../../assets/perinade/hero-vineyard.png"
-      alt: "Vineyard view at sunset"
-    - src: "../../assets/perinade/gallery-cellar.png"
-      alt: "Cellar and tasting"
-    - src: "../../assets/perinade/gallery-vines-close.png"
-      alt: "Close-up of estate vines"
-
+    - src: ../../assets/perinade/hero-vineyard.png
+      alt: Vineyard view at sunset
+    - src: ../../assets/perinade/gallery-cellar.png
+      alt: Cellar and tasting
+    - src: ../../assets/perinade/gallery-vines-close.png
+      alt: Close-up of estate vines
 testimonials:
-  eyebrow: "Testimonials"
-  title: "What they say"
-  pressLabel: "Featured in"
+  eyebrow: Testimonials
+  title: What they say
+  pressLabel: Featured in
   pressLogos:
-    - "Le Figaro Vin"
-    - "Revue du Vin"
-    - "Decanter"
-    - "Wine Spectator"
+    - Le Figaro Vin
+    - Revue du Vin
+    - Decanter
+    - Wine Spectator
   items:
-    - quote: "An exceptional welcome in a magnificent setting. The tasting was fascinating and the wines delicious. We'll be back!"
-      author: "Marie & Jean-Pierre"
-      meta: "Toulouse"
+    - quote: An exceptional welcome in a magnificent setting. The tasting was
+        fascinating and the wines delicious. We'll be back!
+      author: Marie & Jean-Pierre
+      meta: Toulouse
       rating: 5
-    - quote: "A hidden gem near Carcassonne. The family was incredibly welcoming and the wines were outstanding. A must-visit experience."
-      author: "Sarah T."
-      meta: "London, UK"
+    - quote: A hidden gem near Carcassonne. The family was incredibly welcoming and
+        the wines were outstanding. A must-visit experience.
+      author: Sarah T.
+      meta: London, UK
       rating: 5
-    - quote: "You can immediately feel the passion and family know-how. The wines are sincere and the estate is superb. A true favourite."
-      author: "Philippe D."
-      meta: "Paris"
+    - quote: You can immediately feel the passion and family know-how. The wines are
+        sincere and the estate is superb. A true favourite.
+      author: Philippe D.
+      meta: Paris
       rating: 5
-
 history:
-  eyebrow: "Our story"
-  title: "Six generations of"
-  titleHighlight: "passion"
+  eyebrow: Our story
+  title: Six generations of
+  titleHighlight: passion
   body:
-    - "Founded in 1830, Domaine de la Périnade is a family adventure born from a love of the Languedoc terroir. On these sun-drenched lands between garrigue and hills, we cultivate our vines with respect for tradition and particular attention to the environment."
-    - "Today, the sixth generation carries on this expertise, blending ancestral methods with modern winemaking to produce wines that express the uniqueness of our terroir."
-  imagePrimary: "../../assets/perinade/history-family.png"
-  ctaLabel: "Discover the full story"
-  ctaHref: "/en/domaine"
-
+    - Founded in 1830, Domaine de la Périnade is a family adventure born from a
+      love of the Languedoc terroir. On these sun-drenched lands between
+      garrigue and hills, we cultivate our vines with respect for tradition and
+      particular attention to the environment.
+    - Today, the sixth generation carries on this expertise, blending ancestral
+      methods with modern winemaking to produce wines that express the
+      uniqueness of our terroir.
+  imagePrimary: ../../assets/perinade/history-family.png
+  ctaLabel: Discover the full story
+  ctaHref: /en/domaine
 wines:
-  eyebrow: "Our wines"
-  title: "Selected vintages"
-  allWinesLabel: "View all wines"
-  allWinesHref: "/en/shop"
+  eyebrow: Our wines
+  title: Selected vintages
+  allWinesLabel: View all wines
+  allWinesHref: /en/shop
   items:
-    - image: "../../assets/perinade/wine-cuvee-domaine.png"
-      title: "Cuvée du Domaine"
-      subtitle: "Red · AOP Minervois"
-      description: "A silky red with notes of dark fruit, garrigue and sweet spices, crafted to accompany fine dining."
-      ctaLabel: "View wine"
-      ctaHref: "/en/shop"
-    - image: "../../assets/perinade/wine-blanc.png"
-      title: "Blanc de Périnade"
-      subtitle: "White · IGP Pays d'Oc"
-      description: "A fresh and floral vintage, carried by citrus, mineral tension and a clean finish."
-      ctaLabel: "View wine"
-      ctaHref: "/en/shop"
-    - image: "../../assets/perinade/wine-rose.png"
-      title: "Rosé d'Été"
-      subtitle: "Rosé · IGP Pays d'Oc"
-      description: "A luminous rosé with hints of white peach and strawberry, designed for summer meals and apéritifs."
-      ctaLabel: "View wine"
-      ctaHref: "/en/shop"
-    - image: "../../assets/perinade/wine-grande-reserve.png"
-      title: "Grande Réserve"
-      subtitle: "Red · AOP Minervois"
-      description: "A wine of character aged in oak barrels, full-bodied and persistent, with smooth tannins and deep substance."
-      ctaLabel: "View wine"
-      ctaHref: "/en/shop"
-
+    - image: ../../assets/perinade/wine-cuvee-domaine.png
+      title: Cuvée du Domaine
+      subtitle: Red · AOP Minervois
+      description: A silky red with notes of dark fruit, garrigue and sweet spices,
+        crafted to accompany fine dining.
+    - image: ../../assets/perinade/wine-blanc.png
+      title: Blanc de Périnade
+      subtitle: White · IGP Pays d'Oc
+      description: A fresh and floral vintage, carried by citrus, mineral tension and
+        a clean finish.
+    - image: ../../assets/perinade/wine-rose.png
+      title: Rosé d'Été
+      subtitle: Rosé · IGP Pays d'Oc
+      description: A luminous rosé with hints of white peach and strawberry, designed
+        for summer meals and apéritifs.
+    - image: ../../assets/perinade/wine-grande-reserve.png
+      title: Grande Réserve
+      subtitle: Red · AOP Minervois
+      description: A wine of character aged in oak barrels, full-bodied and
+        persistent, with smooth tannins and deep substance.
 contact:
-  eyebrow: "Contact us"
-  titleHtml: "Let's talk about your next visit"
-  body: "Would you like to book a visit, place an order or simply learn more about our wines? Don't hesitate to get in touch."
+  eyebrow: Contact us
+  titleHtml: Let's talk about your next visit
+  body: Would you like to book a visit, place an order or simply learn more about
+    our wines? Don't hesitate to get in touch.
   info:
-    - label: "Phone"
-      value: "+33 4 68 XX XX XX"
-      icon: "phone"
-    - label: "Email"
-      value: "contact@perinade.fr"
-      icon: "mail"
-    - label: "Website"
-      value: "www.perinade.fr"
-      icon: "globe"
-    - label: "Address"
-      value: "Near Carcassonne, Aude (11)"
-      icon: "pin"
+    - label: Phone
+      value: +33 4 68 XX XX XX
+    - label: Email
+      value: contact@perinade.fr
+    - label: Website
+      value: www.perinade.fr
+    - label: Address
+      value: Near Carcassonne, Aude (11)
   labels:
-    firstName: "First name *"
-    lastName: "Last name *"
-    email: "Email *"
-    phone: "Phone *"
-    subject: "Subject *"
-    message: "Message *"
-    submit: "Send message"
+    firstName: First name *
+    lastName: Last name *
+    email: Email *
+    phone: Phone *
+    subject: Subject *
+    message: Message *
+    submit: Send message
   validation:
-    required: "This field is required."
-    invalidEmail: "Please enter a valid email address."
-    fixErrors: "Please fix the highlighted fields."
+    required: This field is required.
+    invalidEmail: Please enter a valid email address.
+    fixErrors: Please fix the highlighted fields.
   mail:
-    defaultSubject: "Contact request"
-    fieldFirstName: "First name"
-    fieldLastName: "Last name"
-    fieldEmail: "Email"
-    fieldPhone: "Phone"
-    fieldMessage: "Message"
-  formSuccessMessage: "Message ready. Please check your email draft before sending."
-  formErrorMessage: "Unable to prepare message. Please call us at +33 4 68 XX XX XX."
-
+    defaultSubject: Contact request
+    fieldFirstName: First name
+    fieldLastName: Last name
+    fieldEmail: Email
+    fieldPhone: Phone
+    fieldMessage: Message
+  formSuccessMessage: Message ready. Please check your email draft before sending.
+  formErrorMessage: Unable to prepare message. Please call us at +33 4 68 XX XX XX.
 footer:
-  brandTitle: "Périnade"
-  about: "Family estate near Carcassonne. Authentic Languedoc wines since 1830."
+  brandTitle: Périnade
+  about: Family estate near Carcassonne. Authentic Languedoc wines since 1830.
   groups:
-    - title: "Navigation"
+    - title: Navigation
       links:
-        - label: "Home"
-          href: "/en"
-        - label: "Visits"
-          href: "/en/visits"
-        - label: "Shop"
-          href: "/en/shop"
-        - label: "The Estate"
-          href: "/en/domaine"
-        - label: "News"
-          href: "/en#contact"
-        - label: "Contact"
-          href: "/en#contact"
-    - title: "Information"
+        - label: Home
+          href: /en
+        - label: Visits
+          href: /en/visits
+        - label: Shop
+          href: /en/shop
+        - label: The Estate
+          href: /en/domaine
+        - label: News
+          href: /en#contact
+        - label: Contact
+          href: /en#contact
+    - title: Information
       links:
-        - label: "Legal notice"
-          href: "/en#contact"
-        - label: "Privacy policy"
-          href: "/en#contact"
-        - label: "Terms of sale"
-          href: "/en#contact"
-        - label: "Press"
-          href: "/en#contact"
-  newsletterTitle: "Newsletter"
-  newsletterBody: "Receive our latest news and exclusive offers."
-  newsletterAdultNotice: "Content intended for adults only."
-  newsletterPlaceholder: "your@email.com"
-  newsletterAction: "mailto:contact@perinade.fr"
+        - label: Legal notice
+          href: /en#contact
+        - label: Privacy policy
+          href: /en#contact
+        - label: Terms of sale
+          href: /en#contact
+        - label: Press
+          href: /en#contact
+  newsletterTitle: Newsletter
+  newsletterBody: Receive our latest news and exclusive offers.
+  newsletterAdultNotice: Content intended for adults only.
+  newsletterPlaceholder: your@email.com
+  newsletterAction: mailto:contact@perinade.fr
   social:
-    - label: "Instagram"
-      href: "https://www.instagram.com/"
-    - label: "Facebook"
-      href: "https://www.facebook.com/"
-  copyright: "© 2026 Domaine de la Périnade. All rights reserved."
-  legalLine: "Alcohol abuse is dangerous for your health. Drink responsibly."
+    - label: Instagram
+      href: https://www.instagram.com/
+    - label: Facebook
+      href: https://www.facebook.com/
+  copyright: © 2026 Domaine de la Périnade. All rights reserved.
+  legalLine: Alcohol abuse is dangerous for your health. Drink responsibly.
