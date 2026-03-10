@@ -42,3 +42,4 @@ infra/*.tfstate
 infra/*.tfstate.backup
 infra/crash.log
 infra/terraform.tfstate.d/
+.wrangler/
