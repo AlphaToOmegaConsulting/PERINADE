@@ -28,3 +28,12 @@ tmp/
 # Local analysis & generated artifacts
 ownership-map-out/
 products/
+
+# Terraform
+infra/.terraform/
+infra/.terraform.lock.hcl
+infra/*.tfvars
+infra/*.tfstate
+infra/*.tfstate.backup
+infra/crash.log
+infra/terraform.tfstate.d/

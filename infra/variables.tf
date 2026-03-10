@@ -11,13 +11,20 @@ variable "cloudflare_account_id" {
 }
 
 variable "cloudflare_zone_id" {
-  description = "Zone ID Cloudflare pour perinade.fr (visible dans le Dashboard > Présentation du domaine)"
+  description = "Zone ID Cloudflare (alpha2omegaconsulting.com maintenant, perinade.fr après transfert)"
   type        = string
+}
+
+variable "site_domain" {
+  description = "Domaine principal du site. Actuellement: perinade.alpha2omegaconsulting.com. Après transfert: perinade.fr"
+  type        = string
+  default     = "perinade.alpha2omegaconsulting.com"
 }
 
 variable "github_owner" {
   description = "Propriétaire du dépôt GitHub (username ou org)"
   type        = string
+  default     = "francoisfrance"
 }
 
 variable "github_repo" {

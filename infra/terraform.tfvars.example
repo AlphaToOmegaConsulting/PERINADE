@@ -1,0 +1,13 @@
+# Copier ce fichier en dev.tfvars ou prod.tfvars et remplir les valeurs
+# Ne jamais committer *.tfvars — vérifier .gitignore
+
+cloudflare_api_token  = "your-cloudflare-api-token"
+cloudflare_account_id = "aea813e220eb8b709d70698a80ded18e"
+cloudflare_zone_id    = "3de818ba26d525ef6b866487c8cf2b21"
+
+# Domaine actuel — changer en "perinade.fr" après transfert DNS
+site_domain = "perinade.alpha2omegaconsulting.com"
+
+github_owner             = "francoisfrance"
+github_repo              = "PERINADE"
+github_production_branch = "main"

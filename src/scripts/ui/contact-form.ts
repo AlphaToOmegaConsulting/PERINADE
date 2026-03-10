@@ -55,7 +55,7 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
     });
   });
 
-  contactForm.addEventListener("submit", (event) => {
+  contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const valid = fields.every((field) => validateField(field));
     if (!valid) {
@@ -72,17 +72,27 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
     const payload = Object.fromEntries(
       Array.from(formData.entries(), ([key, value]) => [key, typeof value === "string" ? value : value.name])
     ) as Record<string, string>;
-    const action = contactForm.getAttribute("action") || "";
-    const successMessage = contactForm.dataset.successMessage || "Message envoye.";
-    const errorMessage = contactForm.dataset.errorMessage || "Erreur d'envoi.";
+    const successMessage = contactForm.dataset.successMessage || "Message envoyé.";
+    const errorMessage = contactForm.dataset.errorMessage || "Erreur d'envoi. Veuillez réessayer.";
+
+    const submitButton = contactForm.querySelector<HTMLButtonElement>("[type=submit]");
+    if (submitButton) submitButton.disabled = true;
 
     try {
-      if (action.startsWith("mailto:")) {
-        const subject = encodeURIComponent(String(payload.subject || defaultSubject));
-        const body = encodeURIComponent(
-          `${mailFirstName}: ${payload.firstName}\n${mailLastName}: ${payload.lastName}\n${mailEmail}: ${payload.email}\n${mailPhone}: ${payload.phone}\n\n${mailMessage}:\n${payload.message}`
-        );
-        window.location.href = `${action}?subject=${subject}&body=${body}`;
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+          email: payload.email,
+          phone: payload.phone,
+          subject: payload.subject,
+          message: payload.message,
+        }),
+      });
+
+      if (res.ok) {
         if (statusEl instanceof HTMLElement) {
           statusEl.textContent = successMessage;
           statusEl.classList.remove("is-error");
@@ -90,19 +100,9 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
           statusEl.classList.add("is-visible");
         }
         contactForm.reset();
-        trackUiEvent({
-          event: "cta_click",
-          context: "contact_form_submit",
-          meta: payload
-        });
-        return;
-      }
-
-      if (statusEl instanceof HTMLElement) {
-        statusEl.textContent = errorMessage;
-        statusEl.classList.remove("is-success");
-        statusEl.classList.add("is-error");
-        statusEl.classList.add("is-visible");
+        trackUiEvent({ event: "cta_click", context: "contact_form_submit" });
+      } else {
+        throw new Error(`HTTP ${res.status}`);
       }
     } catch {
       if (statusEl instanceof HTMLElement) {
@@ -111,6 +111,8 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
         statusEl.classList.add("is-error");
         statusEl.classList.add("is-visible");
       }
+    } finally {
+      if (submitButton) submitButton.disabled = false;
     }
   });
 

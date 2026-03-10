@@ -1,0 +1,13 @@
+name = "perinade-dev-stripe-webhook"
+main = "index.js"
+compatibility_date = "2024-01-01"
+account_id = "aea813e220eb8b709d70698a80ded18e"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "perinade-dev-db"
+database_id = "69f84eaf-2291-44c5-bf6f-eaa4b8c1d46f"
+
+[[routes]]
+pattern = "perinade.alpha2omegaconsulting.com/api/stripe/webhook"
+zone_id = "3de818ba26d525ef6b866487c8cf2b21"
