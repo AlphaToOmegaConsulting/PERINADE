@@ -9,6 +9,13 @@ export async function cfAccessAuth(
   c: Context<{ Bindings: Env; Variables: AuthVariables }>,
   next: Next
 ) {
+  // DEV ONLY — bypass via .dev.vars (gitignored, never in wrangler.toml)
+  if (c.env.DEV_BYPASS_AUTH === "true") {
+    c.set("user", { email: "dev@local.test" });
+    await next();
+    return;
+  }
+
   const token = c.req.header("CF-Access-Jwt-Assertion");
   if (!token) {
     return c.json({ error: "Unauthorized" }, 401);
