@@ -10,7 +10,6 @@
  *   npx tsx scripts/migrate.ts --local
  */
 import { execFileSync } from "node:child_process";
-import { existsSync } from "node:fs";
 
 const isLocal = process.argv.includes("--local");
 const DB_NAME = "perinade-dev-db";
@@ -32,16 +31,23 @@ wranglerExec("infra/migrations/001_products.sql");
 // Note: wrangler d1 execute --json may emit progress lines before the JSON
 // on remote (non-local) mode. We extract the last line starting with '['.
 console.log("Checking if migration 002 is needed...");
-const rawOutput = execFileSync(
-  "npx",
-  [
-    "wrangler", "d1", "execute", DB_NAME,
-    "--command", "PRAGMA table_info('orders');",
-    "--json",
-    ...baseArgs,
-  ],
-  { encoding: "utf8", stderr: "pipe" }  // capture stderr separately
-);
+let rawOutput: string;
+try {
+  rawOutput = execFileSync(
+    "npx",
+    [
+      "wrangler", "d1", "execute", DB_NAME,
+      "--command", "PRAGMA table_info('orders');",
+      "--json",
+      ...baseArgs,
+    ],
+    { encoding: "utf8", stderr: "pipe" }
+  );
+} catch (err: unknown) {
+  const spawnErr = err as { stderr?: Buffer | string; message?: string };
+  console.error("PRAGMA query failed:", spawnErr.stderr?.toString() ?? spawnErr.message);
+  process.exit(1);
+}
 
 // Find the JSON line in stdout (last line starting with '[')
 const jsonLine = rawOutput
@@ -49,6 +55,10 @@ const jsonLine = rawOutput
   .map((l) => l.trim())
   .filter((l) => l.startsWith("["))
   .at(-1) ?? "[]";
+
+if (jsonLine === "[]") {
+  throw new Error("PRAGMA query returned no JSON output — aborting to avoid unsafe ALTERs");
+}
 
 const rows: Array<{ name: string }> = JSON.parse(jsonLine)?.[0]?.results ?? [];
 
