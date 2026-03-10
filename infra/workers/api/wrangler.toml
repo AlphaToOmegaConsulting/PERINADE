@@ -23,3 +23,7 @@ zone_id = "3de818ba26d525ef6b866487c8cf2b21"
 [vars]
 CF_ACCESS_TEAM = "your-team-name"   # replace with Cloudflare Access team name
 CF_ACCESS_AUD = "your-aud-tag"      # replace with CF Access Application Audience tag
+
+# ⚠️  TODO-BEFORE-DEPLOY — supprimer les deux lignes ci-dessous avant tout déploiement en production
+# ⚠️  Ce flag désactive l'authentification CF Access (test local uniquement)
+DEV_BYPASS_AUTH = "true"
