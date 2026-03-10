@@ -192,13 +192,17 @@ async function handleChargeRefunded(charge, env) {
 
 async function handlePaymentFailed(paymentIntent, env) {
   // payment_intent.payment_failed has no Checkout Session ID.
-  // Use payment_intent_id column for correlation; stripe_session_id stays NULL.
+  // Store the payment_intent ID prefixed with "pi_failed:" as a unique identifier
+  // since stripe_session_id has a NOT NULL UNIQUE constraint on the orders table.
+  const sessionPlaceholder = `pi_failed:${paymentIntent.id}`;
+
   await env.DB.prepare(
     `INSERT OR IGNORE INTO orders
      (id, stripe_session_id, payment_intent_id, status, customer_email, amount_total, currency, items, items_processed, created_at)
-     VALUES (?, NULL, ?, 'failed', ?, ?, ?, '[]', 0, ?)`
+     VALUES (?, ?, ?, 'failed', ?, ?, ?, '[]', 0, ?)`
   ).bind(
     crypto.randomUUID(),
+    sessionPlaceholder,        // NOT NULL satisfied; unique per pi
     paymentIntent.id,
     paymentIntent.receipt_email ?? "",
     paymentIntent.amount ?? 0,
