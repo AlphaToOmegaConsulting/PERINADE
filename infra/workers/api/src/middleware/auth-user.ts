@@ -7,12 +7,14 @@ export type UserVariables = {
   userEmail: string;
 };
 
-const SUPABASE_JWKS_URL =
-  "https://ieuaozyzffcmmrgigivc.supabase.co/auth/v1/.well-known/jwks.json";
+// Module-level cache keyed by SUPABASE_URL.
+// Each entry holds the shared Promise and the time it was fetched (for TTL).
+const jwksCache = new Map<
+  string,
+  { promise: Promise<{ kid: string; key: CryptoKey }[]>; fetchedAt: number }
+>();
 
-// Module-level cache: a single Promise so concurrent requests share the same fetch
-// Fix 1: cache now preserves the kid ↔ CryptoKey association
-let jwksCache: Promise<{ kid: string; key: CryptoKey }[]> | null = null;
+const JWKS_TTL_MS = 3_600_000; // 1 hour
 
 function base64urlToUint8Array(b64url: string): Uint8Array {
   const b64 = b64url.replace(/-/g, "+").replace(/_/g, "/");
@@ -34,9 +36,10 @@ interface EcJwk {
   use: string;
 }
 
-// Fix 1: fetchJwks returns { kid, key }[] instead of CryptoKey[]
-async function fetchJwks(): Promise<{ kid: string; key: CryptoKey }[]> {
-  const res = await fetch(SUPABASE_JWKS_URL);
+async function fetchJwks(
+  jwksUrl: string
+): Promise<{ kid: string; key: CryptoKey }[]> {
+  const res = await fetch(jwksUrl);
   if (!res.ok) throw new Error(`JWKS fetch failed: ${res.status}`);
   const data: { keys: EcJwk[] } = await res.json();
 
@@ -58,27 +61,44 @@ async function fetchJwks(): Promise<{ kid: string; key: CryptoKey }[]> {
   );
 }
 
-// Fix 1: getJwks returns { kid, key }[]
-function getJwks(): Promise<{ kid: string; key: CryptoKey }[]> {
-  if (!jwksCache) {
-    jwksCache = fetchJwks().catch((err) => {
+function getJwks(
+  baseUrl: string
+): Promise<{ kid: string; key: CryptoKey }[]> {
+  const jwksUrl = `${baseUrl}/auth/v1/.well-known/jwks.json`;
+  const cached = jwksCache.get(baseUrl);
+
+  // Evict stale entry (TTL exceeded)
+  if (cached && Date.now() - cached.fetchedAt > JWKS_TTL_MS) {
+    jwksCache.delete(baseUrl);
+  }
+
+  if (!jwksCache.has(baseUrl)) {
+    const fetchedAt = Date.now();
+    const promise = fetchJwks(jwksUrl).catch((err) => {
       // Clear cache on failure so next request retries
-      jwksCache = null;
+      jwksCache.delete(baseUrl);
       throw err;
     });
+    jwksCache.set(baseUrl, { promise, fetchedAt });
   }
-  return jwksCache;
+
+  return jwksCache.get(baseUrl)!.promise;
 }
 
 // Exported for testing — resets the module-level cache
 export function resetJwksCache(): void {
-  jwksCache = null;
+  jwksCache.clear();
 }
 
-// Exported for testing — injects a pre-resolved cache
-// Fix 1: updated signature to accept { kid, key }[]
-export function setJwksCache(entries: { kid: string; key: CryptoKey }[]): void {
-  jwksCache = Promise.resolve(entries);
+// Exported for testing — injects a pre-resolved cache entry for a given URL
+export function setJwksCache(
+  entries: { kid: string; key: CryptoKey }[],
+  baseUrl = "https://test.supabase.co"
+): void {
+  jwksCache.set(baseUrl, {
+    promise: Promise.resolve(entries),
+    fetchedAt: Date.now(),
+  });
 }
 
 export const supabaseUserAuth: MiddlewareHandler<{
@@ -98,9 +118,14 @@ export const supabaseUserAuth: MiddlewareHandler<{
 
   const [headerB64, payloadB64, sigB64] = parts;
 
-  // Fix 2: decode header + payload first, then verify signature, then validate claims
   let header: { kid?: string; alg?: string };
-  let payload: { sub?: string; email?: string; exp?: number };
+  let payload: {
+    sub?: string;
+    email?: string;
+    exp?: number;
+    iss?: string;
+    aud?: string;
+  };
   try {
     header = JSON.parse(atob(headerB64.replace(/-/g, "+").replace(/_/g, "/")));
     payload = JSON.parse(
@@ -110,19 +135,23 @@ export const supabaseUserAuth: MiddlewareHandler<{
     return c.json({ error: "Unauthorized" }, 401);
   }
 
+  // Fix 3: validate alg claim before any key lookup
+  if (header.alg !== "ES256") {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+
   let entries: { kid: string; key: CryptoKey }[];
   try {
-    entries = await getJwks();
+    entries = await getJwks(c.env.SUPABASE_URL);
   } catch {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
-  // Fix 1: prefer the key whose kid matches the token header's kid,
+  // Prefer the key whose kid matches the token header's kid,
   // then fall back to trying all keys if no match found.
   const signatureBytes = base64urlToUint8Array(sigB64);
   const dataBytes = new TextEncoder().encode(`${headerB64}.${payloadB64}`);
 
-  // Build the ordered list of keys to try: matching kid first, then the rest
   const tokenKid = header.kid;
   const ordered =
     tokenKid !== undefined
@@ -154,13 +183,19 @@ export const supabaseUserAuth: MiddlewareHandler<{
     return c.json({ error: "Unauthorized" }, 401);
   }
 
-  // Fix 2: validate claims AFTER signature verification
+  // Validate claims AFTER signature verification
   if (!payload.exp || payload.exp < Date.now() / 1000) {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
   // Require sub claim
   if (!payload.sub) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+
+  // Fix 4: validate iss and aud claims
+  const expectedIss = `${c.env.SUPABASE_URL}/auth/v1`;
+  if (payload.iss !== expectedIss || payload.aud !== "authenticated") {
     return c.json({ error: "Unauthorized" }, 401);
   }
 

@@ -6,6 +6,8 @@ import type { Env } from "../types.js";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
+const TEST_SUPABASE_URL = "https://test.supabase.co";
+
 function base64urlEncode(bytes: Uint8Array): string {
   let binary = "";
   for (const b of bytes) binary += String.fromCharCode(b);
@@ -19,7 +21,7 @@ function encodeJson(obj: unknown): string {
 async function makeToken(
   privateKey: CryptoKey,
   payload: Record<string, unknown>,
-  // Fix 3: optional header overrides (e.g. to set a kid)
+  // optional header overrides (e.g. to set a kid or override alg)
   headerOverrides?: Record<string, unknown>
 ): Promise<string> {
   const header = encodeJson({ alg: "ES256", typ: "JWT", ...headerOverrides });
@@ -57,7 +59,7 @@ function cacheEntry(key: CryptoKey, kid = "test-key-id") {
   return { kid, key };
 }
 
-// Minimal Hono app for testing
+// Minimal Hono app for testing — binds SUPABASE_URL so middleware can use it
 function makeApp() {
   const app = new Hono<{ Bindings: Env; Variables: UserVariables }>();
   app.use("/protected", supabaseUserAuth);
@@ -68,9 +70,28 @@ function makeApp() {
 }
 
 async function request(app: Hono, authHeader?: string) {
-  const headers: Record<string, string> = {};
+  const headers: Record<string, string> = {
+    // Provide the env binding that the middleware reads
+    "x-test-supabase-url": TEST_SUPABASE_URL,
+  };
   if (authHeader !== undefined) headers["Authorization"] = authHeader;
-  return app.request("/protected", { headers });
+  // Inject env via Hono's fetch env parameter
+  return app.fetch(
+    new Request("http://localhost/protected", { headers }),
+    { SUPABASE_URL: TEST_SUPABASE_URL } as unknown as Env
+  );
+}
+
+// Valid payload helper — includes iss and aud so Fix 4 checks pass
+function validPayload(overrides?: Record<string, unknown>) {
+  return {
+    sub: "user-uuid-456",
+    email: "customer@perinade.fr",
+    exp: Math.floor(Date.now() / 1000) + 3600,
+    iss: `${TEST_SUPABASE_URL}/auth/v1`,
+    aud: "authenticated",
+    ...overrides,
+  };
 }
 
 // ── Tests ──────────────────────────────────────────────────────────────────
@@ -102,31 +123,34 @@ describe("supabaseUserAuth middleware", () => {
     expect(res.status).toBe(401);
   });
 
-  it("returns 401 when token is expired", async () => {
-    setJwksCache([cacheEntry(publicKey)]);
+  // Fix 3: token with alg: "none" must be rejected before key lookup
+  it("returns 401 when token header has alg: none", async () => {
+    setJwksCache([cacheEntry(publicKey)], TEST_SUPABASE_URL);
     const app = makeApp();
 
-    const expiredPayload = {
-      sub: "user-uuid-123",
-      email: "user@example.com",
-      exp: Math.floor(Date.now() / 1000) - 3600, // 1 hour ago
-    };
-    const token = await makeToken(privateKey, expiredPayload);
+    const token = await makeToken(privateKey, validPayload(), { alg: "none" });
+    const res = await request(app, `Bearer ${token}`);
+    expect(res.status).toBe(401);
+  });
+
+  it("returns 401 when token is expired", async () => {
+    setJwksCache([cacheEntry(publicKey)], TEST_SUPABASE_URL);
+    const app = makeApp();
+
+    const token = await makeToken(
+      privateKey,
+      validPayload({ exp: Math.floor(Date.now() / 1000) - 3600 })
+    );
 
     const res = await request(app, `Bearer ${token}`);
     expect(res.status).toBe(401);
   });
 
   it("returns 401 when signature is invalid (tampered payload)", async () => {
-    setJwksCache([cacheEntry(publicKey)]);
+    setJwksCache([cacheEntry(publicKey)], TEST_SUPABASE_URL);
     const app = makeApp();
 
-    const validPayload = {
-      sub: "user-uuid-123",
-      email: "user@example.com",
-      exp: Math.floor(Date.now() / 1000) + 3600,
-    };
-    const token = await makeToken(privateKey, validPayload);
+    const token = await makeToken(privateKey, validPayload());
 
     // Tamper with the payload part
     const parts = token.split(".");
@@ -134,6 +158,8 @@ describe("supabaseUserAuth middleware", () => {
       sub: "attacker-uuid",
       email: "attacker@evil.com",
       exp: Math.floor(Date.now() / 1000) + 3600,
+      iss: `${TEST_SUPABASE_URL}/auth/v1`,
+      aud: "authenticated",
     });
     const tamperedToken = `${parts[0]}.${tamperedPayload}.${parts[2]}`;
 
@@ -142,8 +168,6 @@ describe("supabaseUserAuth middleware", () => {
   });
 
   it("returns 401 when JWKS fetch fails", async () => {
-    // Do NOT set cache — but override fetchJwks by keeping cache null
-    // and patching the global fetch to fail
     resetJwksCache();
     const origFetch = globalThis.fetch;
     globalThis.fetch = async () => {
@@ -152,13 +176,7 @@ describe("supabaseUserAuth middleware", () => {
 
     try {
       const app = makeApp();
-      const validPayload = {
-        sub: "user-uuid-123",
-        email: "user@example.com",
-        exp: Math.floor(Date.now() / 1000) + 3600,
-      };
-      // We need a real token but the JWKS will fail anyway
-      const token = await makeToken(privateKey, validPayload);
+      const token = await makeToken(privateKey, validPayload());
       const res = await request(app, `Bearer ${token}`);
       expect(res.status).toBe(401);
     } finally {
@@ -166,16 +184,34 @@ describe("supabaseUserAuth middleware", () => {
     }
   });
 
-  it("passes with a valid token and sets userId + userEmail on context", async () => {
-    setJwksCache([cacheEntry(publicKey)]);
+  // Fix 4: wrong iss must return 401
+  it("returns 401 when token has wrong iss claim", async () => {
+    setJwksCache([cacheEntry(publicKey)], TEST_SUPABASE_URL);
     const app = makeApp();
 
-    const validPayload = {
-      sub: "user-uuid-456",
-      email: "customer@perinade.fr",
-      exp: Math.floor(Date.now() / 1000) + 3600,
-    };
-    const token = await makeToken(privateKey, validPayload);
+    const token = await makeToken(
+      privateKey,
+      validPayload({ iss: "https://evil.supabase.co/auth/v1" })
+    );
+    const res = await request(app, `Bearer ${token}`);
+    expect(res.status).toBe(401);
+  });
+
+  // Fix 4: wrong aud must return 401
+  it("returns 401 when token has wrong aud claim", async () => {
+    setJwksCache([cacheEntry(publicKey)], TEST_SUPABASE_URL);
+    const app = makeApp();
+
+    const token = await makeToken(privateKey, validPayload({ aud: "anon" }));
+    const res = await request(app, `Bearer ${token}`);
+    expect(res.status).toBe(401);
+  });
+
+  it("passes with a valid token and sets userId + userEmail on context", async () => {
+    setJwksCache([cacheEntry(publicKey)], TEST_SUPABASE_URL);
+    const app = makeApp();
+
+    const token = await makeToken(privateKey, validPayload());
 
     const res = await request(app, `Bearer ${token}`);
     expect(res.status).toBe(200);
@@ -188,15 +224,13 @@ describe("supabaseUserAuth middleware", () => {
 
   // Fix 3: token signed with valid key, future exp, but no sub → 401
   it("returns 401 when token is missing the sub claim", async () => {
-    setJwksCache([cacheEntry(publicKey)]);
+    setJwksCache([cacheEntry(publicKey)], TEST_SUPABASE_URL);
     const app = makeApp();
 
-    const noSubPayload = {
-      email: "user@example.com",
-      exp: Math.floor(Date.now() / 1000) + 3600,
-      // intentionally no sub field
-    };
-    const token = await makeToken(privateKey, noSubPayload);
+    const token = await makeToken(
+      privateKey,
+      validPayload({ sub: undefined })
+    );
 
     const res = await request(app, `Bearer ${token}`);
     expect(res.status).toBe(401);
