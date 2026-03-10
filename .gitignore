@@ -16,6 +16,11 @@ output/
 docs/design/
 docs/*.docx
 
+# Env local overrides (never commit)
+*.local
+.env*
+!.env.example
+
 # Local tooling & caches
 .mcp.json
 .claude/
