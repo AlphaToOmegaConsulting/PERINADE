@@ -75,8 +75,8 @@ export async function verifyJwt(
 
   const valid = await crypto.subtle.verify(
     "RSASSA-PKCS1-v1_5", cryptoKey,
-    base64urlDecode(sigB64) as unknown as ArrayBuffer,
-    new TextEncoder().encode(`${headerB64}.${payloadB64}`) as unknown as ArrayBuffer
+    base64urlDecode(sigB64),
+    new TextEncoder().encode(`${headerB64}.${payloadB64}`)
   );
 
   return valid ? { email: payload.email ?? "unknown" } : null;
