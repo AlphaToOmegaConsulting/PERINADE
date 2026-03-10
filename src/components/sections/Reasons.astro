@@ -15,8 +15,9 @@ const { reasons } = Astro.props;
     <SectionHeading eyebrow={reasons.eyebrow} title={reasons.title} centered />
 
     <div class="reasons__grid" data-reveal-group data-reveal-stagger="90">
-      {reasons.items.map((reason) => (
-        <article class="reasons__card ui-hover-lift" data-reveal="up">
+      {reasons.items.map((reason, i) => (
+        <article class="reasons__card" data-reveal="up">
+          <span class="reasons__number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
           <span class="reasons__icon"><Icon name={reason.icon} /></span>
           <h3>{reason.title}</h3>
           <p>{reason.body}</p>
@@ -29,51 +30,75 @@ const { reasons } = Astro.props;
 <style>
   .reasons__grid {
     display: grid;
-    gap: 2.75rem;
+    gap: 1.5rem;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     margin-top: 2.35rem;
   }
 
   .reasons__card {
-    display: grid;
-    justify-items: center;
-    max-width: 17rem;
-    margin-inline: auto;
-    text-align: center;
+    background: white;
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    padding: 1.85rem 1.65rem 1.65rem;
+    position: relative;
+    text-align: left;
+  }
+
+  .reasons__card::before {
+    background: var(--color-accent);
+    border-radius: 999px;
+    content: "";
+    height: 2px;
+    left: 1.65rem;
+    position: absolute;
+    top: 0;
+    width: 2.5rem;
+  }
+
+  .reasons__number {
+    color: rgba(196, 156, 110, 0.18);
+    display: block;
+    font-family: var(--font-display);
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    pointer-events: none;
+    user-select: none;
   }
 
   .reasons__icon {
     align-items: center;
-    background: rgba(25, 43, 23, 0.1);
-    border-radius: 999px;
+    background: var(--color-soft-strong);
+    border-radius: 0.4rem;
     color: var(--color-deep-green);
     display: inline-flex;
-    height: 4.2rem;
+    height: 3rem;
     justify-content: center;
-    margin-bottom: 1.05rem;
-    width: 4.2rem;
+    margin-bottom: 1rem;
+    width: 3rem;
   }
 
   .reasons__icon :global(svg) {
-    height: 1.7rem;
-    width: 1.7rem;
+    height: 1.4rem;
+    width: 1.4rem;
   }
 
   .reasons h3 {
-    font-size: 1.42rem;
-    margin: 0 0 0.85rem;
+    font-size: 1.2rem;
+    margin: 0 0 0.65rem;
   }
 
   .reasons p {
     color: var(--color-muted);
     line-height: 1.7;
     margin: 0;
-    max-width: 18.5rem;
   }
 
   @media (max-width: 1023px) {
     .reasons__grid {
-      gap: 2rem;
+      gap: 1.25rem;
       grid-template-columns: 1fr;
       margin-top: 3rem;
     }

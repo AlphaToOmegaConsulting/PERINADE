@@ -3,8 +3,8 @@ main = "index.js"
 compatibility_date = "2024-01-01"
 account_id = "aea813e220eb8b709d70698a80ded18e"
 
-# Routes : ajouter manuellement dans Dashboard → Workers → Routes
-# ou ajouter "Zone → Workers Routes: Edit" au token API et décommenter :
-[[routes]]
-pattern = "perinade.alpha2omegaconsulting.com/*"
-zone_id = "3de818ba26d525ef6b866487c8cf2b21"
+# TODO: Décommenter les routes quand le domaine est sur Cloudflare et que le token
+# API a la permission "Zone → Workers Routes: Edit".
+# [[routes]]
+# pattern = "perinade.alpha2omegaconsulting.com/*"
+# zone_id = "3de818ba26d525ef6b866487c8cf2b21"

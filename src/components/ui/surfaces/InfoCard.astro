@@ -31,7 +31,7 @@ const {
 } = Astro.props;
 ---
 
-<Card class={className} surfaceTone="soft" radius="md" padding="md">
+<Card class={className} surfaceTone="soft" radius="md" padding="md" interactive={!!ctaHref}>
   {(icon || tag) && (
     <div class="ui-info-card__head">
       {icon && <span class="ui-info-card__icon"><Icon name={icon} /></span>}
