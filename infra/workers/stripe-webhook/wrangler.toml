@@ -8,8 +8,9 @@ binding = "DB"
 database_name = "perinade-dev-db"
 database_id = "69f84eaf-2291-44c5-bf6f-eaa4b8c1d46f"
 
-# TODO: Décommenter quand le domaine est sur Cloudflare et que le token
-# API a la permission "Zone → Workers Routes: Edit".
-# [[routes]]
-# pattern = "perinade.alpha2omegaconsulting.com/api/stripe/webhook"
-# zone_id = "3de818ba26d525ef6b866487c8cf2b21"
+[[routes]]
+pattern = "perinade.alpha2omegaconsulting.com/api/stripe/webhook"
+zone_id = "3de818ba26d525ef6b866487c8cf2b21"
+
+[vars]
+CONTACT_EMAIL_TO = "contact@perinade.fr"

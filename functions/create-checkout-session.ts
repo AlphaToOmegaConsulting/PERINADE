@@ -1,8 +1,10 @@
 import Stripe from "stripe";
+import type { D1Database } from "@cloudflare/workers-types";
 
 interface Env {
   STRIPE_SECRET_KEY?: string;
   SITE_BASE_URL?: string;
+  DB?: D1Database; // D1 binding — optional for backwards compat in local dev
 }
 
 interface CartItem {
@@ -79,6 +81,26 @@ export const onRequestPost = async (context: { request: Request; env: Env }): Pr
   const stripe = new Stripe(secretKey, {
     httpClient: Stripe.createFetchHttpClient(),
   });
+
+  // Stock check — optimistic strategy (see spec for race condition handling)
+  // DB binding is available via context.env.DB (Cloudflare Pages Functions)
+  if (context.env.DB) {
+    try {
+      for (const item of items) {
+        const row = await context.env.DB.prepare(
+          "SELECT stock_qty FROM products WHERE id = ?"
+        ).bind(item.id).first<{ stock_qty: number }>();
+
+        if (!row || row.stock_qty < item.qty) {
+          return json({ error: `Stock insuffisant pour ${item.name}` }, 409);
+        }
+      }
+    } catch {
+      // D1 unavailable — fail open to avoid blocking checkout
+      console.error("Stock check failed, proceeding without check");
+    }
+  }
+  // If DB is not bound (dev without D1), skip check
 
   try {
     const session = await stripe.checkout.sessions.create({

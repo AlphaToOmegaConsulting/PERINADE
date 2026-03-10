@@ -25,6 +25,7 @@ const [site, shopPage, vins, coffretsCollection, ui] = await Promise.all([
   getUiStrings(locale),
 ]);
 const vinProducts = vins.map((vin) => ({
+  id: vin.id.replace(/\.(fr|en|es)$/, ""),
   name: vin.data.nom,
   meta: vin.data.millesime
     ? `${vin.data.millesime} · ${vin.data.volume} cl`

@@ -18,6 +18,7 @@ export interface ShopHeroData {
 }
 
 export interface ShopProduct {
+  id?: string;
   name: string;
   meta: string;
   description: string;

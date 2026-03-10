@@ -2,5 +2,13 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": "."
-  }
+  },
+  "exclude": [
+    "admin-app",
+    "infra",
+    "functions",
+    "scripts",
+    "dist",
+    "node_modules"
+  ]
 }

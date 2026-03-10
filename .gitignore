@@ -16,6 +16,11 @@ output/
 docs/design/
 docs/*.docx
 
+# Env local overrides (never commit)
+*.local
+.env*
+!.env.example
+
 # Local tooling & caches
 .mcp.json
 .claude/
@@ -37,3 +42,4 @@ infra/*.tfstate
 infra/*.tfstate.backup
 infra/crash.log
 infra/terraform.tfstate.d/
+.wrangler/

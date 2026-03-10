@@ -14,23 +14,38 @@ export default {
     const response = await fetch(request);
     const newHeaders = new Headers(response.headers);
 
-    newHeaders.set(
-      "Content-Security-Policy",
-      [
-        "default-src 'self'",
-        "script-src 'self' 'unsafe-inline' https://js.stripe.com https://static.cloudflareinsights.com",
-        "style-src 'self'",
-        "style-src-attr 'unsafe-inline'",
-        "img-src 'self' data: https:",
-        "connect-src 'self' https://api.stripe.com https://cloudflareinsights.com",
-        "frame-src https://js.stripe.com https://hooks.stripe.com",
-        "font-src 'self'",
-        "object-src 'none'",
-        "frame-ancestors 'none'",
-        "base-uri 'self'",
-        "form-action 'self'",
-      ].join("; ")
-    );
+    const host = request.headers.get("Host") ?? "";
+    const isAdmin = host.startsWith("admin.");
+
+    const cspDirectives = isAdmin
+      ? [
+          "default-src 'self'",
+          "script-src 'self'",
+          "style-src 'self' 'unsafe-inline'",
+          "font-src 'self'",
+          "img-src 'self' data: https:",
+          "connect-src 'self' https://api.stripe.com https://perinade.alpha2omegaconsulting.com",
+          "frame-ancestors 'none'",
+          "form-action 'self'",
+          "object-src 'none'",
+          "base-uri 'self'",
+        ]
+      : [
+          "default-src 'self'",
+          "script-src 'self' 'unsafe-inline' https://js.stripe.com https://static.cloudflareinsights.com",
+          "style-src 'self'",
+          "style-src-attr 'unsafe-inline'",
+          "img-src 'self' data: https:",
+          "connect-src 'self' https://api.stripe.com https://cloudflareinsights.com",
+          "frame-src https://js.stripe.com https://hooks.stripe.com",
+          "font-src 'self'",
+          "object-src 'none'",
+          "frame-ancestors 'none'",
+          "base-uri 'self'",
+          "form-action 'self'",
+        ];
+
+    newHeaders.set("Content-Security-Policy", cspDirectives.join("; "));
     newHeaders.set("X-Frame-Options", "DENY");
     newHeaders.set("X-Content-Type-Options", "nosniff");
     newHeaders.set("Referrer-Policy", "strict-origin-when-cross-origin");
