@@ -32,12 +32,12 @@ export const initUi = (): void => {
   initTabsWidgets();
   initCounters();
   initContactForms();
+  initScrollReveals();
 
   /* Non-critique — différer au premier moment d'inactivité du navigateur */
   const deferred = () => {
     initBookingCalendars();
     initCursorOrb();
-    initScrollReveals();
   };
 
   if (typeof requestIdleCallback !== "undefined") {

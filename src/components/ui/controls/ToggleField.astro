@@ -22,5 +22,8 @@ const {
 
 <label class:list={["ui-toggle", className]}>
   <input id={id} name={name} type="checkbox" checked={checked} disabled={disabled} data-addon={dataAddon ? "" : undefined} />
+  <span class="ui-toggle__track">
+    <span class="ui-toggle__thumb"></span>
+  </span>
   <span>{label}</span>
 </label>

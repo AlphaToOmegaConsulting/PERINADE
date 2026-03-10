@@ -13,14 +13,14 @@ const { testimonials } = Astro.props;
   <div class="shell shell--narrow">
     <SectionHeading eyebrow={testimonials.eyebrow} title={testimonials.title} centered />
 
-    <div class="testimonials__grid" data-reveal-group data-reveal-stagger="75">
+    <div class=”testimonials__grid” data-reveal-group data-reveal-stagger=”75”>
       {testimonials.items.map((item) => (
-        <article class="testimonials__card ui-hover-lift" data-reveal="up">
-          <div class="testimonials__stars" aria-hidden="true">
+        <article class=”testimonials__card” data-reveal=”up”>
+          <div class=”testimonials__stars” aria-hidden=”true”>
             {Array.from({ length: item.rating }).map(() => <span>★</span>)}
           </div>
-          <p class="testimonials__quote">“{item.quote}”</p>
-          <p class="testimonials__author">
+          <p class=”testimonials__quote”>”{item.quote}”</p>
+          <p class=”testimonials__author”>
             <strong>{item.author}</strong>
             <span> — {item.meta}</span>
           </p>
@@ -44,8 +44,8 @@ const { testimonials } = Astro.props;
 
   .testimonials__grid {
     display: grid;
-    gap: 1.4rem;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    grid-template-columns: 1fr 1fr;
     margin-top: 2.45rem;
   }
 
@@ -53,36 +53,42 @@ const { testimonials } = Astro.props;
     background: var(--color-white);
     border: 1px solid var(--color-card-border-soft);
     border-radius: var(--radius-card);
-    min-height: 13rem;
-    padding: 1.55rem 1.45rem 1.4rem;
+    padding: 1.25rem;
     position: relative;
   }
 
-  .testimonials__card::after {
-    color: rgba(196, 156, 110, 0.18);
-    content: "99";
+  .testimonials__card:first-child {
+    background: var(--color-soft-strong);
+    border: none;
+    border-left: 3px solid var(--color-accent);
+    grid-row: span 2;
+    padding: 2rem;
+  }
+
+  .testimonials__card:first-child .testimonials__quote {
     font-family: var(--font-display);
-    font-size: 2rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+    font-size: 1.15rem;
+    font-style: italic;
+    line-height: 1.6;
   }
 
   .testimonials__stars {
     color: var(--color-accent);
     display: flex;
-    gap: 0.15rem;
-    margin-bottom: 1rem;
+    font-size: 0.7rem;
+    gap: 0.1rem;
+    margin-bottom: 0.85rem;
   }
 
   .testimonials__quote {
     color: rgba(44, 44, 44, 0.82);
     font-style: italic;
     line-height: 1.68;
-    margin: 0 0 1rem;
+    margin: 0 0 0.85rem;
   }
 
   .testimonials__author {
+    font-size: 0.9rem;
     margin: 0;
   }
 
@@ -120,9 +126,13 @@ const { testimonials } = Astro.props;
     font-size: 1.125rem;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 767px) {
     .testimonials__grid {
       grid-template-columns: 1fr;
+    }
+
+    .testimonials__card:first-child {
+      grid-row: auto;
     }
   }
 </style>
