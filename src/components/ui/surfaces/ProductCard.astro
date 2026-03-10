@@ -29,7 +29,7 @@ const parsePriceToCents = (value: string): number => {
   return Math.round(amount * 100);
 };
 
-const productId = slugify(`${product.name}-${product.meta}-${product.price}`);
+const productId = product.id ?? slugify(`${product.name}-${product.meta}-${product.price}`);
 const unitAmount = parsePriceToCents(product.price);
 const imageSrc = product.image?.src;
 ---
