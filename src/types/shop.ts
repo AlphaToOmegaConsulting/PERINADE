@@ -143,6 +143,23 @@ export interface ShopConfirmationPageData {
   };
 }
 
+export interface CartI18nData {
+  emptyMessage: string;
+  browseShopLabel: string;
+  browseShopHref: string;
+  colProduct: string;
+  colQty: string;
+  colTotalHt: string;
+  colTotalTtc: string;
+  removeLabel: string;
+  ariaDecreaseQty: string;
+  ariaIncreaseQty: string;
+  ariaRemoveItem: string;
+  statusRedirecting: string;
+  errorNoSession: string;
+  errorGeneric: string;
+}
+
 export interface ShopPageData {
   seo: ShopSeoData;
   hero: ShopHeroData;
@@ -152,5 +169,6 @@ export interface ShopPageData {
   caseComposer: ShopCaseComposerData;
   finalCta: ShopFinalCtaData;
   faq: ShopFaqData;
+  cart: CartI18nData;
   confirmationPage: ShopConfirmationPageData;
 }

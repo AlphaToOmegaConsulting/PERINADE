@@ -111,6 +111,22 @@ faq:
     - question: "How can I contact the estate?"
       answer: "By phone at +33 4 68 XX XX XX or by email via the website contact form."
 
+cart:
+  emptyMessage: "Your cart is empty."
+  browseShopLabel: "Browse the shop"
+  browseShopHref: "/en/shop"
+  colProduct: "Product"
+  colQty: "Quantity"
+  colTotalHt: "Total excl. VAT"
+  colTotalTtc: "Total incl. VAT"
+  removeLabel: "Remove"
+  ariaDecreaseQty: "Decrease quantity of {name}"
+  ariaIncreaseQty: "Increase quantity of {name}"
+  ariaRemoveItem: "Remove {name} from cart"
+  statusRedirecting: "Redirecting to payment..."
+  errorNoSession: "Unable to create checkout session."
+  errorGeneric: "Payment error. Please try again."
+
 confirmationPage:
   seo:
     title: "Order Confirmation | Domaine de la Périnade"

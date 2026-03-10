@@ -96,6 +96,8 @@ export interface BookingUiLabels {
   defaultSuccessMessage: string;
   defaultErrorMessage: string;
   mailSubjectFallback: string;
+  decrementLabel: string;
+  incrementLabel: string;
 }
 
 export interface BookingSubmissionPayload {

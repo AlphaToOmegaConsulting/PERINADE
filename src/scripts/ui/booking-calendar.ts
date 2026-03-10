@@ -72,6 +72,11 @@ const payloadToMeta = (payload: BookingSubmissionPayload): Record<string, string
   };
 };
 
+const NAV_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"] as const;
+
+const findEnabled = (candidates: HTMLButtonElement[]): HTMLButtonElement | null =>
+  candidates.find((b) => !b.disabled && b.getAttribute("aria-disabled") !== "true") ?? null;
+
 const initBookingCalendar = (root: HTMLElement): void => {
   if (root.dataset.uiReady === "true") return;
 
@@ -221,6 +226,46 @@ const initBookingCalendar = (root: HTMLElement): void => {
         state.selectedDate = date;
         syncFields();
         renderCalendar();
+      });
+
+      button.addEventListener("keydown", (event: KeyboardEvent) => {
+        if (!(NAV_KEYS as readonly string[]).includes(event.key)) return;
+        event.preventDefault();
+
+        const allButtons = Array.from(daysGrid.querySelectorAll<HTMLButtonElement>("button[data-day]"));
+
+        const currentIndex = allButtons.indexOf(button);
+        if (currentIndex === -1) return;
+
+        let target: HTMLButtonElement | null = null;
+
+        if (event.key === "ArrowLeft") {
+          const slice = allButtons.slice(0, currentIndex).reverse();
+          target = findEnabled(slice);
+        } else if (event.key === "ArrowRight") {
+          const slice = allButtons.slice(currentIndex + 1);
+          target = findEnabled(slice);
+        } else if (event.key === "ArrowUp") {
+          // 7 days back — same weekday, previous week
+          const targetIndex = currentIndex - 7;
+          if (targetIndex >= 0) {
+            const slice = [allButtons[targetIndex]];
+            target = findEnabled(slice) ?? null;
+          }
+        } else if (event.key === "ArrowDown") {
+          // 7 days forward — same weekday, next week
+          const targetIndex = currentIndex + 7;
+          if (targetIndex < allButtons.length) {
+            const slice = [allButtons[targetIndex]];
+            target = findEnabled(slice) ?? null;
+          }
+        } else if (event.key === "Home") {
+          target = findEnabled(allButtons);
+        } else if (event.key === "End") {
+          target = findEnabled([...allButtons].reverse());
+        }
+
+        target?.focus();
       });
 
       daysGrid.append(button);

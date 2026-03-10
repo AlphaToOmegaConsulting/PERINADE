@@ -8,12 +8,12 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
   const requiredMessage = contactForm.dataset.requiredMessage || "Required field.";
   const invalidEmailMessage = contactForm.dataset.invalidEmailMessage || "Please enter a valid email.";
   const fixErrorsMessage = contactForm.dataset.fixErrorsMessage || "Please fix the highlighted fields.";
-  const defaultSubject = contactForm.dataset.defaultSubject || "Contact request";
-  const mailFirstName = contactForm.dataset.mailFirstName || "First name";
-  const mailLastName = contactForm.dataset.mailLastName || "Last name";
-  const mailEmail = contactForm.dataset.mailEmail || "Email";
-  const mailPhone = contactForm.dataset.mailPhone || "Phone";
-  const mailMessage = contactForm.dataset.mailMessage || "Message";
+
+  const setFormStatus = (el: HTMLElement, state: "success" | "error", msg: string) => {
+    el.classList.remove("is-success", "is-error");
+    el.classList.add(state === "success" ? "is-success" : "is-error", "is-visible");
+    el.textContent = msg;
+  };
 
   const setFieldError = (field: HTMLInputElement | HTMLTextAreaElement, message: string) => {
     const errorEl = contactForm.querySelector(`[data-error-for="${field.id}"]`);
@@ -21,6 +21,11 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
     if (!(errorEl instanceof HTMLElement)) return;
     errorEl.textContent = message;
     field.setAttribute("aria-invalid", message ? "true" : "false");
+    if (message) {
+      field.setAttribute("aria-describedby", `${field.id}-error`);
+    } else {
+      field.removeAttribute("aria-describedby");
+    }
     field.dataset.valid = message ? "false" : field.value.trim() ? "true" : "false";
     fieldState?.classList.toggle("is-invalid", Boolean(message));
     fieldState?.classList.toggle("is-valid", !message && Boolean(field.value.trim()));
@@ -59,12 +64,7 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
     event.preventDefault();
     const valid = fields.every((field) => validateField(field));
     if (!valid) {
-      if (statusEl instanceof HTMLElement) {
-        statusEl.textContent = fixErrorsMessage;
-        statusEl.classList.remove("is-success");
-        statusEl.classList.add("is-error");
-        statusEl.classList.add("is-visible");
-      }
+      if (statusEl instanceof HTMLElement) setFormStatus(statusEl, "error", fixErrorsMessage);
       return;
     }
 
@@ -93,24 +93,14 @@ const setupContactForm = (contactForm: HTMLFormElement): void => {
       });
 
       if (res.ok) {
-        if (statusEl instanceof HTMLElement) {
-          statusEl.textContent = successMessage;
-          statusEl.classList.remove("is-error");
-          statusEl.classList.add("is-success");
-          statusEl.classList.add("is-visible");
-        }
+        if (statusEl instanceof HTMLElement) setFormStatus(statusEl, "success", successMessage);
         contactForm.reset();
         trackUiEvent({ event: "cta_click", context: "contact_form_submit" });
       } else {
         throw new Error(`HTTP ${res.status}`);
       }
     } catch {
-      if (statusEl instanceof HTMLElement) {
-        statusEl.textContent = errorMessage;
-        statusEl.classList.remove("is-success");
-        statusEl.classList.add("is-error");
-        statusEl.classList.add("is-visible");
-      }
+      if (statusEl instanceof HTMLElement) setFormStatus(statusEl, "error", errorMessage);
     } finally {
       if (submitButton) submitButton.disabled = false;
     }

@@ -74,9 +74,9 @@ const { booking } = Astro.props;
           <section>
             <h4>{booking.ui.participantsHeading}</h4>
             <div class="booking__counter">
-              <button type="button" data-count-dec aria-label="Diminuer">−</button>
+              <button type="button" data-count-dec aria-label={booking.ui.decrementLabel}>−</button>
               <output data-count-value>{booking.config.defaultParticipants}</output>
-              <button type="button" data-count-inc aria-label="Augmenter">+</button>
+              <button type="button" data-count-inc aria-label={booking.ui.incrementLabel}>+</button>
             </div>
           </section>
 

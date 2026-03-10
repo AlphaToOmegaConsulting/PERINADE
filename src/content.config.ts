@@ -322,6 +322,22 @@ const boutique = defineCollection({
           answer: z.string(),
         })),
       }),
+      cart: z.object({
+        emptyMessage: z.string(),
+        browseShopLabel: z.string(),
+        browseShopHref: z.string(),
+        colProduct: z.string(),
+        colQty: z.string(),
+        colTotalHt: z.string(),
+        colTotalTtc: z.string(),
+        removeLabel: z.string(),
+        ariaDecreaseQty: z.string(),
+        ariaIncreaseQty: z.string(),
+        ariaRemoveItem: z.string(),
+        statusRedirecting: z.string(),
+        errorNoSession: z.string(),
+        errorGeneric: z.string(),
+      }),
       confirmationPage: z.object({
         seo: z.object({ title: z.string(), description: z.string() }),
         hero: z.object({ title: z.string(), body: z.string() }),
@@ -466,6 +482,8 @@ const visites = defineCollection({
         ui: z.object({
           prevMonthAriaLabel: z.string(),
           nextMonthAriaLabel: z.string(),
+          decrementLabel: z.string(),
+          incrementLabel: z.string(),
           slotHeading: z.string(),
           participantsHeading: z.string(),
           priceFromLabel: z.string(),
@@ -700,6 +718,7 @@ const ui = defineCollection({
     legalLine: z.string(),
     copyright: z.string(),
     addToCartLabel: z.string(),
+    cartLabel: z.string(),
   }),
 });
 

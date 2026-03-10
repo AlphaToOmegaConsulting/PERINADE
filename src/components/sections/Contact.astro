@@ -53,38 +53,38 @@ const { contact } = Astro.props;
         <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-first-name">{contact.labels.firstName}</label>
           <input id="contact-first-name" type="text" name="firstName" autocomplete="given-name" required />
-          <small class="contact__error" data-error-for="contact-first-name"></small>
+          <small id="contact-first-name-error" class="contact__error" data-error-for="contact-first-name"></small>
         </div>
 
         <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-last-name">{contact.labels.lastName}</label>
           <input id="contact-last-name" type="text" name="lastName" autocomplete="family-name" required />
-          <small class="contact__error" data-error-for="contact-last-name"></small>
+          <small id="contact-last-name-error" class="contact__error" data-error-for="contact-last-name"></small>
         </div>
 
         <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-email">{contact.labels.email}</label>
           <input id="contact-email" type="email" name="email" inputmode="email" autocomplete="email" required />
-          <small class="contact__error" data-error-for="contact-email"></small>
+          <small id="contact-email-error" class="contact__error" data-error-for="contact-email"></small>
         </div>
 
         <div class="contact__field" data-field-state data-reveal="up">
           <label for="contact-phone">{contact.labels.phone}</label>
           <input id="contact-phone" type="tel" name="phone" inputmode="tel" autocomplete="tel" required />
-          <small class="contact__error" data-error-for="contact-phone"></small>
+          <small id="contact-phone-error" class="contact__error" data-error-for="contact-phone"></small>
         </div>
       </div>
 
       <div class="contact__field" data-field-state data-reveal="up">
         <label for="contact-subject">{contact.labels.subject}</label>
         <input id="contact-subject" type="text" name="subject" required />
-        <small class="contact__error" data-error-for="contact-subject"></small>
+        <small id="contact-subject-error" class="contact__error" data-error-for="contact-subject"></small>
       </div>
 
       <div class="contact__field" data-field-state data-reveal="up">
         <label for="contact-message">{contact.labels.message}</label>
         <textarea id="contact-message" name="message" rows="6" required></textarea>
-        <small class="contact__error" data-error-for="contact-message"></small>
+        <small id="contact-message-error" class="contact__error" data-error-for="contact-message"></small>
       </div>
 
       <div class="contact__cta" data-reveal="up">
@@ -148,7 +148,7 @@ const { contact } = Astro.props;
 
   .contact__icon {
     align-items: center;
-    color: var(--color-accent);
+    color: var(--color-accent-text);
     display: flex;
     flex-shrink: 0;
     height: 1.35rem;
