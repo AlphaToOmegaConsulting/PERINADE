@@ -4,6 +4,7 @@ const API_BASE = import.meta.env.VITE_API_BASE ?? "https://perinade.alpha2omegac
 // when the user is authenticated via the Access login page.
 // The browser passes it as a cookie; we read it for API calls.
 function getCfJwt(): string {
+  // CF Access JWTs are base64url-encoded (no ';'), so this simple regex is reliable
   const match = document.cookie.match(/CF_Authorization=([^;]+)/);
   return match?.[1] ?? "";
 }
@@ -69,7 +70,13 @@ export const api = {
   },
   orders: {
     list: (params?: { status?: string; from?: string; to?: string }) => {
-      const qs = new URLSearchParams(params as Record<string, string>).toString();
+      const qs = params
+        ? new URLSearchParams(
+            Object.fromEntries(
+              Object.entries(params).filter(([, v]) => v !== undefined)
+            ) as Record<string, string>
+          ).toString()
+        : "";
       return apiFetch<Order[]>(`/api/admin/orders${qs ? `?${qs}` : ""}`);
     },
   },
