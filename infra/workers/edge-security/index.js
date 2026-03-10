@@ -27,6 +27,8 @@ export default {
           "connect-src 'self' https://api.stripe.com https://perinade.alpha2omegaconsulting.com",
           "frame-ancestors 'none'",
           "form-action 'self'",
+          "object-src 'none'",
+          "base-uri 'self'",
         ]
       : [
           "default-src 'self'",
