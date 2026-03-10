@@ -11,7 +11,7 @@
  * Local:
  *   npx tsx scripts/seed-products-d1.ts --local
  */
-import { readFileSync, readdirSync, writeFileSync, unlinkSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, writeFileSync, unlinkSync } from "node:fs";
 import { join } from "node:path";
 import { execFileSync } from "node:child_process";
 import { parse as parseYaml } from "yaml";
@@ -23,7 +23,7 @@ const VINS_DIR = join(process.cwd(), "src/content/vins");
 const baseArgs = isLocal ? ["--local"] : [];
 
 interface VinYaml {
-  nom: string;
+  nom?: string;
   prix: number;         // EUR (float)
   stock: string;        // "En stock" | "Stock limité" | "Rupture de stock"
 }
@@ -46,6 +46,12 @@ function readVin(slug: string, locale: string): VinYaml | null {
 // Escape single quotes for SQL string literals
 function sqlStr(s: string): string {
   return s.replace(/'/g, "''");
+}
+
+if (!existsSync(VINS_DIR)) {
+  console.error(`ERROR: VINS_DIR not found: ${VINS_DIR}`);
+  console.error("Run this script from the project root.");
+  process.exit(1);
 }
 
 // Collect all slugs from .fr.yaml files
@@ -86,7 +92,7 @@ for (const slug of slugs) {
     ");",
   ].join("\n");
 
-  const tmpFile = join(tmpdir(), `perinade-seed-${slug}.sql`);
+  const tmpFile = join(tmpdir(), `perinade-seed-${process.pid}-${slug}.sql`);
   writeFileSync(tmpFile, sql, "utf8");
 
   try {
