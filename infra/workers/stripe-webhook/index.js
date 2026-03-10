@@ -157,6 +157,22 @@ async function handleCheckoutCompleted(session, env, eventId) {
   ).bind(eventId).run();
 
   console.log(`Checkout ${sessionId}: stock decremented for ${items.length} items`);
+
+  // Provision Supabase user account + credit loyalty points (best-effort, non-blocking)
+  const customerEmail = session.customer_details?.email ?? "";
+  if (customerEmail) {
+    const supabaseUserId = await provisionSupabaseUser(
+      customerEmail,
+      session.amount_total ?? 0,
+      sessionId,
+      env
+    );
+    if (supabaseUserId) {
+      await env.DB.prepare(
+        "UPDATE orders SET supabase_user_id = ? WHERE stripe_session_id = ?"
+      ).bind(supabaseUserId, sessionId).run();
+    }
+  }
 }
 
 async function handleChargeRefunded(charge, env) {
@@ -223,6 +239,112 @@ async function handlePaymentCanceled(paymentIntent, env) {
     "UPDATE orders SET status = 'canceled' WHERE payment_intent_id = ?"
   ).bind(paymentIntent.id).run();
   console.log(`Payment canceled: ${paymentIntent.id}`);
+}
+
+// ─── Supabase Integration ────────────────────────────────────────────────────
+
+/**
+ * Provision a Supabase user after a successful payment.
+ * - First purchase: creates user in Supabase, caches email→id in D1, sends welcome magic link
+ * - Repeat purchase: fetches cached user_id from D1, skips creation + welcome email
+ * - Credits loyalty points via atomic Postgres RPC (1 point per € spent)
+ * Idempotent: safe to call multiple times for the same session.
+ *
+ * @returns {Promise<string|null>} supabase_user_id or null if Supabase unavailable
+ */
+async function provisionSupabaseUser(email, amountTotal, sessionId, env) {
+  if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
+    console.warn("Supabase env vars not set — skipping user provisioning");
+    return null;
+  }
+
+  const supabaseHeaders = {
+    "Content-Type": "application/json",
+    "apikey": env.SUPABASE_SERVICE_ROLE_KEY,
+    "Authorization": `Bearer ${env.SUPABASE_SERVICE_ROLE_KEY}`,
+  };
+
+  // 1. Check D1 cache (repeat buyer — avoids redundant Admin API calls)
+  let userId = null;
+  const cached = await env.DB.prepare(
+    "SELECT supabase_user_id FROM user_email_map WHERE email = ?"
+  ).bind(email).first();
+
+  if (cached?.supabase_user_id) {
+    userId = cached.supabase_user_id;
+  } else {
+    // 2. Create user in Supabase (first purchase)
+    const createRes = await fetch(`${env.SUPABASE_URL}/auth/v1/admin/users`, {
+      method: "POST",
+      headers: supabaseHeaders,
+      body: JSON.stringify({ email, email_confirm: true }),
+    });
+
+    if (!createRes.ok) {
+      const errText = await createRes.text();
+      console.error(`Supabase createUser failed (${createRes.status}): ${errText}`);
+      return null;
+    }
+
+    const user = await createRes.json();
+    userId = user.id;
+
+    // 3. Cache email → user_id in D1
+    await env.DB.prepare(
+      "INSERT OR IGNORE INTO user_email_map (email, supabase_user_id) VALUES (?, ?)"
+    ).bind(email, userId).run();
+
+    // 4. Send welcome magic link (first account creation only)
+    await sendWelcomeMagicLink(email, env, supabaseHeaders);
+  }
+
+  // 5. Credit loyalty points via atomic Postgres RPC (upsert with increment)
+  const points = Math.max(1, Math.floor(amountTotal / 100));
+  const rpcRes = await fetch(`${env.SUPABASE_URL}/rest/v1/rpc/upsert_loyalty`, {
+    method: "POST",
+    headers: { ...supabaseHeaders, "Prefer": "return=minimal" },
+    body: JSON.stringify({
+      p_user_id: userId,
+      p_points: points,
+      p_amount_cts: amountTotal,
+      p_session_id: sessionId,
+    }),
+  });
+
+  if (!rpcRes.ok) {
+    const errText = await rpcRes.text();
+    console.error(`upsert_loyalty RPC failed (${rpcRes.status}): ${errText}`);
+    // Non-fatal: user_id is still valid, D1 link update below will still run
+  }
+
+  return userId;
+}
+
+/**
+ * Generate a Supabase magic link and dispatch it via the configured SMTP (Resend).
+ * Called only on first account creation.
+ */
+async function sendWelcomeMagicLink(email, env, supabaseHeaders) {
+  const siteBase = env.SITE_BASE_URL ?? "https://perinade.fr";
+  const linkRes = await fetch(`${env.SUPABASE_URL}/auth/v1/admin/generate_link`, {
+    method: "POST",
+    headers: supabaseHeaders,
+    body: JSON.stringify({
+      type: "magiclink",
+      email,
+      options: { redirect_to: `${siteBase}/compte` },
+    }),
+  });
+
+  if (!linkRes.ok) {
+    const errText = await linkRes.text();
+    // Non-fatal: user can still request a link manually from /compte
+    console.warn(`generate_link failed (${linkRes.status}): ${errText}`);
+    return;
+  }
+
+  // Supabase sends the email via the configured SMTP (Resend) automatically
+  console.log(`Welcome magic link dispatched to ${email}`);
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
