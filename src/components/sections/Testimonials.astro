@@ -16,7 +16,7 @@ const { testimonials } = Astro.props;
     <div class=”testimonials__grid” data-reveal-group data-reveal-stagger=”75”>
       {testimonials.items.map((item) => (
         <article class=”testimonials__card” data-reveal=”up”>
-          <div class=”testimonials__stars” aria-hidden=”true”>
+          <div class=”testimonials__stars” aria-hidden={true}>
             {Array.from({ length: item.rating }).map(() => <span>★</span>)}
           </div>
           <p class=”testimonials__quote”>”{item.quote}”</p>
