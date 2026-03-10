@@ -128,6 +128,7 @@ export default {
     }
 
     // 2. Envoi email via Resend
+    let emailSent = false;
     try {
       const emailRes = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -155,13 +156,22 @@ export default {
         }),
       });
 
-      if (!emailRes.ok) {
+      if (emailRes.ok) {
+        emailSent = true;
+      } else {
         const errBody = await emailRes.text();
         console.error("Resend error:", errBody);
       }
     } catch (err) {
       console.error("Resend fetch error:", err);
-      // On retourne quand même success si D1 a bien reçu le message
+    }
+
+    if (!emailSent) {
+      return json(
+        { error: "Failed to send notification email. Please try again or call us directly." },
+        500,
+        corsHeaders
+      );
     }
 
     return json({ success: true, id }, 200, corsHeaders);

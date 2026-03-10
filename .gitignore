@@ -34,6 +34,12 @@ tmp/
 ownership-map-out/
 products/
 
+# Tooling & internal artifacts (never ship to client)
+.superpowers/
+docs/diagrams/
+docs/webadapt-pricing-benchmark.csv
+docs/webadapt-pricing-study.md
+
 # Terraform
 infra/.terraform/
 infra/.terraform.lock.hcl
