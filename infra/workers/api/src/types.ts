@@ -7,4 +7,5 @@ export interface Env {
   CF_ACCESS_TEAM: string;
   CF_ACCESS_AUD: string;  // Application Audience tag from CF Access dashboard
   DEV_BYPASS_AUTH?: string; // Set in .dev.vars only — never in wrangler.toml
+  SUPABASE_URL: string;
 }
