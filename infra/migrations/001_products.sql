@@ -8,15 +8,16 @@ CREATE TABLE IF NOT EXISTS products (
   name_es TEXT NOT NULL,
   prix_cents INTEGER NOT NULL,
   stock_qty INTEGER NOT NULL DEFAULT 0,
-  stock_status TEXT NOT NULL DEFAULT 'en_stock',
+  stock_status TEXT NOT NULL DEFAULT 'en_stock' CHECK (stock_status IN ('en_stock', 'limite', 'rupture')),
   stripe_price_id TEXT,
-  updated_at TEXT NOT NULL
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
 CREATE TABLE IF NOT EXISTS stock_movements (
   id TEXT PRIMARY KEY,
-  product_id TEXT NOT NULL REFERENCES products(id),
-  type TEXT NOT NULL,
+  product_id TEXT NOT NULL, -- NOTE: D1 does not enforce FK constraints; app-layer validation required
+  type TEXT NOT NULL CHECK (type IN ('order', 'refund', 'manual')),
   qty_delta INTEGER NOT NULL,
   reference_id TEXT,
   note TEXT,
@@ -32,3 +33,7 @@ CREATE TABLE IF NOT EXISTS webhook_logs (
   error TEXT,
   created_at TEXT NOT NULL
 );
+
+CREATE INDEX IF NOT EXISTS idx_products_stripe_price_id ON products(stripe_price_id);
+CREATE INDEX IF NOT EXISTS idx_stock_movements_product_id ON stock_movements(product_id);
+CREATE INDEX IF NOT EXISTS idx_webhook_logs_status ON webhook_logs(status);
